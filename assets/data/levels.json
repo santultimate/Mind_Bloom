@@ -1,0 +1,50 @@
+{
+  "levels": [
+    {
+      "id": 1,
+      "name": "Premiers Pas",
+      "description": "Collectez 10 fleurs",
+      "difficulty": "easy",
+      "gridSize": 7,
+      "maxMoves": 20,
+      "targetScore": 1000,
+      "objectives": [
+        {
+          "type": "collectTiles",
+          "tileType": "flower",
+          "target": 10
+        }
+      ],
+      "energyCost": 1,
+      "rewards": [
+        "coins:10"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Jardin en Fleurs",
+      "description": "Collectez 15 feuilles et 8 graines",
+      "difficulty": "easy",
+      "gridSize": 7,
+      "maxMoves": 25,
+      "targetScore": 1500,
+      "objectives": [
+        {
+          "type": "collectTiles",
+          "tileType": "leaf",
+          "target": 15
+        },
+        {
+          "type": "collectTiles",
+          "tileType": "seed",
+          "target": 8
+        }
+      ],
+      "energyCost": 1,
+      "rewards": [
+        "coins:15",
+        "gems:1"
+      ]
+    }
+  ]
+}
