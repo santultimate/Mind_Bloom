@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:mind_bloom/providers/user_provider.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
 import 'package:mind_bloom/providers/ad_provider.dart';
+import 'package:mind_bloom/providers/language_provider.dart';
 import 'package:mind_bloom/screens/home_screen.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
 
@@ -26,11 +27,14 @@ class _SplashScreenState extends State<SplashScreen> {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     final audioProvider = Provider.of<AudioProvider>(context, listen: false);
     final adProvider = Provider.of<AdProvider>(context, listen: false);
+    final languageProvider =
+        Provider.of<LanguageProvider>(context, listen: false);
 
     await Future.wait([
       userProvider.initializeUser(),
       audioProvider.initialize(),
       adProvider.initialize(),
+      languageProvider.initialize(),
     ]);
 
     // Attendre un peu pour l'animation

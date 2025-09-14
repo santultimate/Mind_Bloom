@@ -218,7 +218,7 @@ class AudioProvider extends ChangeNotifier {
   }
 
   Future<void> playGameOver() async {
-    await playSfx('audio/sfx/level_failed.wav');
+    await playSfx('audio/sfx/level_fail.wav');
   }
 
   // Musiques spécifiques

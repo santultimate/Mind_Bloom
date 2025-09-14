@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/screens/terms_of_service_screen.dart';
 import 'package:mind_bloom/screens/privacy_policy_screen.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -10,18 +11,19 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text(
-          'À propos',
+        title: Text(
+          AppLocalizations.of(context)!.about,
           style: TextStyle(
-            color: AppColors.textPrimary,
+            color: Theme.of(context).colorScheme.onSurface,
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: AppColors.surface,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
-        iconTheme: const IconThemeData(color: AppColors.textPrimary),
+        iconTheme:
+            IconThemeData(color: Theme.of(context).colorScheme.onSurface),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
@@ -36,11 +38,14 @@ class AboutScreen extends StatelessWidget {
                     width: 120,
                     height: 120,
                     decoration: BoxDecoration(
-                      color: AppColors.primary,
+                      color: Theme.of(context).colorScheme.primary,
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.primary.withValues(alpha: 0.3),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.3),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),
@@ -53,12 +58,12 @@ class AboutScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Text(
+                  Text(
                     'Mind Bloom',
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -66,7 +71,10 @@ class AboutScreen extends StatelessWidget {
                     'Version 1.0.0',
                     style: TextStyle(
                       fontSize: 16,
-                      color: AppColors.textSecondary,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.6),
                     ),
                   ),
                 ],
@@ -76,12 +84,12 @@ class AboutScreen extends StatelessWidget {
             const SizedBox(height: 40),
 
             // Description
-            const Text(
-              'À propos du jeu',
+            Text(
+              AppLocalizations.of(context)!.aboutTheGame,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             const SizedBox(height: 12),
@@ -89,7 +97,7 @@ class AboutScreen extends StatelessWidget {
               'Mind Bloom est un jeu de puzzle magique qui combine les mécaniques classiques du match-3 avec des éléments RPG. Cultivez votre jardin enchanté en alignant des tuiles colorées et découvrez un univers unique de progression et de collection.',
               style: TextStyle(
                 fontSize: 16,
-                color: AppColors.textSecondary,
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                 height: 1.5,
               ),
             ),
@@ -97,12 +105,12 @@ class AboutScreen extends StatelessWidget {
             const SizedBox(height: 32),
 
             // Développeur
-            const Text(
-              'Développeur',
+            Text(
+              AppLocalizations.of(context)!.developer,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             const SizedBox(height: 16),
@@ -111,11 +119,11 @@ class AboutScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.shadow.withValues(alpha: 0.1),
+                    color: Theme.of(context).shadowColor,
                     blurRadius: 10,
                     offset: const Offset(0, 5),
                   ),
@@ -128,11 +136,14 @@ class AboutScreen extends StatelessWidget {
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
-                      color: AppColors.primary,
+                      color: Theme.of(context).colorScheme.primary,
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.primary.withValues(alpha: 0.3),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.3),
                           blurRadius: 15,
                           offset: const Offset(0, 5),
                         ),
@@ -146,26 +157,30 @@ class AboutScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
 
-                  const Text(
+                  Text(
                     'YACOUBA SANTARA',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Développeur Flutter',
+                    AppLocalizations.of(context)!.flutterDeveloper,
                     style: TextStyle(
                       fontSize: 16,
-                      color: AppColors.textSecondary,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.6),
                     ),
                   ),
                   const SizedBox(height: 16),
 
                   // Informations de contact
                   _buildContactInfo(
+                    context,
                     icon: Icons.email,
                     label: 'Email',
                     value: 'papysantara@gmail.com',
@@ -173,6 +188,7 @@ class AboutScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   _buildContactInfo(
+                    context,
                     icon: Icons.link,
                     label: 'GitHub',
                     value: '@Santultimate',
@@ -180,6 +196,7 @@ class AboutScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   _buildContactInfo(
+                    context,
                     icon: Icons.web,
                     label: 'Portfolio',
                     value: 'yacouba-santara.dev',
@@ -192,12 +209,12 @@ class AboutScreen extends StatelessWidget {
             const SizedBox(height: 32),
 
             // Technologies utilisées
-            const Text(
-              'Technologies',
+            Text(
+              AppLocalizations.of(context)!.technologies,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             const SizedBox(height: 16),
@@ -206,51 +223,57 @@ class AboutScreen extends StatelessWidget {
               spacing: 12,
               runSpacing: 12,
               children: [
-                _buildTechChip('Flutter', AppColors.primary),
-                _buildTechChip('Dart', AppColors.secondary),
-                _buildTechChip('Provider', AppColors.accent),
-                _buildTechChip('AudioPlayers', AppColors.success),
-                _buildTechChip('SharedPreferences', AppColors.warning),
+                _buildTechChip(
+                    context, 'Flutter', Theme.of(context).colorScheme.primary),
+                _buildTechChip(
+                    context, 'Dart', Theme.of(context).colorScheme.secondary),
+                _buildTechChip(context, 'Provider',
+                    Theme.of(context).colorScheme.tertiary),
+                _buildTechChip(context, 'AudioPlayers', AppColors.success),
+                _buildTechChip(context, 'SharedPreferences', AppColors.warning),
               ],
             ),
 
             const SizedBox(height: 32),
 
             // Liens légaux
-            const Text(
-              'Informations légales',
+            Text(
+              AppLocalizations.of(context)!.legalInformation,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             const SizedBox(height: 16),
 
             // Boutons pour les pages légales
             _buildLegalButton(
+              context,
               icon: Icons.description,
-              title: 'Conditions d\'utilisation',
-              subtitle: 'Lisez nos conditions d\'utilisation',
+              title: AppLocalizations.of(context)!.termsOfService,
+              subtitle: AppLocalizations.of(context)!.readOurTermsOfService,
               onTap: () => _navigateToTerms(context),
             ),
             const SizedBox(height: 12),
             _buildLegalButton(
+              context,
               icon: Icons.privacy_tip,
-              title: 'Politique de confidentialité',
-              subtitle: 'Découvrez comment nous protégeons vos données',
+              title: AppLocalizations.of(context)!.privacyPolicy,
+              subtitle:
+                  AppLocalizations.of(context)!.discoverHowWeProtectYourData,
               onTap: () => _navigateToPrivacy(context),
             ),
 
             const SizedBox(height: 24),
 
             // Licence
-            const Text(
-              'Licence',
+            Text(
+              AppLocalizations.of(context)!.license,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             const SizedBox(height: 12),
@@ -258,7 +281,7 @@ class AboutScreen extends StatelessWidget {
               'Ce projet est sous licence MIT. Vous êtes libre de l\'utiliser, le modifier et le distribuer selon les termes de cette licence.',
               style: TextStyle(
                 fontSize: 16,
-                color: AppColors.textSecondary,
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                 height: 1.5,
               ),
             ),
@@ -266,12 +289,12 @@ class AboutScreen extends StatelessWidget {
             const SizedBox(height: 32),
 
             // Remerciements
-            const Text(
-              'Remerciements',
+            Text(
+              AppLocalizations.of(context)!.acknowledgments,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             const SizedBox(height: 12),
@@ -279,7 +302,7 @@ class AboutScreen extends StatelessWidget {
               'Un grand merci à la communauté Flutter, aux contributeurs des packages utilisés, et à tous ceux qui ont soutenu ce projet.',
               style: TextStyle(
                 fontSize: 16,
-                color: AppColors.textSecondary,
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                 height: 1.5,
               ),
             ),
@@ -291,19 +314,22 @@ class AboutScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Développé avec ❤️ par',
+                    AppLocalizations.of(context)!.developedWithLove,
                     style: TextStyle(
                       fontSize: 14,
-                      color: AppColors.textSecondary,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.6),
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
+                  Text(
                     'YACOUBA SANTARA',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.primary,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -312,7 +338,10 @@ class AboutScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 14,
                       fontStyle: FontStyle.italic,
-                      color: AppColors.textSecondary,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.6),
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -325,7 +354,8 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildContactInfo({
+  Widget _buildContactInfo(
+    BuildContext context, {
     required IconData icon,
     required String label,
     required String value,
@@ -337,7 +367,7 @@ class AboutScreen extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-          color: AppColors.background,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -356,15 +386,18 @@ class AboutScreen extends StatelessWidget {
                     label,
                     style: TextStyle(
                       fontSize: 12,
-                      color: AppColors.textSecondary,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.6),
                     ),
                   ),
                   Text(
                     value,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                 ],
@@ -381,7 +414,7 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTechChip(String label, Color color) {
+  Widget _buildTechChip(BuildContext context, String label, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
@@ -428,7 +461,8 @@ class AboutScreen extends StatelessWidget {
     }
   }
 
-  Widget _buildLegalButton({
+  Widget _buildLegalButton(
+    BuildContext context, {
     required IconData icon,
     required String title,
     required String subtitle,
@@ -442,10 +476,11 @@ class AboutScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
+          border: Border.all(
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.2)),
           boxShadow: [
             BoxShadow(
-              color: AppColors.shadow.withValues(alpha: 0.1),
+              color: Theme.of(context).shadowColor,
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -457,12 +492,12 @@ class AboutScreen extends StatelessWidget {
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                color: AppColors.primary.withValues(alpha: 0.1),
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
                 icon,
-                color: AppColors.primary,
+                color: Theme.of(context).colorScheme.primary,
                 size: 24,
               ),
             ),
@@ -473,10 +508,10 @@ class AboutScreen extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -484,7 +519,10 @@ class AboutScreen extends StatelessWidget {
                     subtitle,
                     style: TextStyle(
                       fontSize: 14,
-                      color: AppColors.textSecondary,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.6),
                     ),
                   ),
                 ],

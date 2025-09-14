@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:mind_bloom/providers/game_provider.dart';
 import 'package:mind_bloom/providers/user_provider.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class LivesWidget extends StatefulWidget {
   final VoidCallback? onShuffle;

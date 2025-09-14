@@ -2,20 +2,13 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../constants/admob_config.dart';
 
 class AdProvider extends ChangeNotifier {
-  // IDs des publicités (à remplacer par vos vrais IDs AdMob)
-  static String get _bannerAdUnitId => Platform.isAndroid
-      ? 'ca-app-pub-3940256099942544/6300978111' // Test ID Android
-      : 'ca-app-pub-3940256099942544/2934735716'; // Test ID iOS
-
-  static String get _interstitialAdUnitId => Platform.isAndroid
-      ? 'ca-app-pub-3940256099942544/1033173712' // Test ID Android
-      : 'ca-app-pub-3940256099942544/4411468910'; // Test ID iOS
-
-  static String get _rewardedAdUnitId => Platform.isAndroid
-      ? 'ca-app-pub-3940256099942544/5224354917' // Test ID Android
-      : 'ca-app-pub-3940256099942544/1712485313'; // Test ID iOS
+  // IDs des publicités (utilise la configuration centralisée)
+  static String get _bannerAdUnitId => AdMobConfig.bannerAdUnitId;
+  static String get _interstitialAdUnitId => AdMobConfig.interstitialAdUnitId;
+  static String get _rewardedAdUnitId => AdMobConfig.rewardedAdUnitId;
 
   // Variables d'état
   bool _isInitialized = false;
@@ -23,6 +16,11 @@ class AdProvider extends ChangeNotifier {
   int _adFreePurchased = 0; // 0 = pas acheté, 1 = acheté
   int _interstitialCounter = 0;
   int _lastAdShownLevel = 0;
+
+  // Constructeur avec initialisation automatique
+  AdProvider() {
+    initialize();
+  }
 
   // Getters
   bool get isInitialized => _isInitialized;
@@ -41,7 +39,11 @@ class AdProvider extends ChangeNotifier {
       _isInitialized = true;
 
       if (kDebugMode) {
-        print('AdProvider initialized successfully (ads enabled)');
+        print('🚀 AdProvider initialized successfully (ads enabled)');
+        print('📱 Platform: ${Platform.isAndroid ? 'Android' : 'iOS'}');
+        print('🎯 Banner Ad Unit ID: $_bannerAdUnitId');
+        print('🎯 Interstitial Ad Unit ID: $_interstitialAdUnitId');
+        print('🎯 Rewarded Ad Unit ID: $_rewardedAdUnitId');
       }
     } catch (e) {
       if (kDebugMode) {
@@ -77,12 +79,16 @@ class AdProvider extends ChangeNotifier {
       listener: BannerAdListener(
         onAdLoaded: (ad) {
           if (kDebugMode) {
-            print('Banner ad loaded');
+            print(
+                '✅ Banner ad loaded successfully - Unit ID: $_bannerAdUnitId');
           }
         },
         onAdFailedToLoad: (ad, error) {
           if (kDebugMode) {
-            print('Banner ad failed to load: $error');
+            print('❌ Banner ad failed to load - Unit ID: $_bannerAdUnitId');
+            print('   Error code: ${error.code}');
+            print('   Error message: ${error.message}');
+            print('   Error domain: ${error.domain}');
           }
           ad.dispose();
         },
@@ -113,12 +119,17 @@ class AdProvider extends ChangeNotifier {
           onAdLoaded: (ad) {
             interstitialAd = ad;
             if (kDebugMode) {
-              print('Interstitial ad loaded');
+              print(
+                  '✅ Interstitial ad loaded successfully - Unit ID: $_interstitialAdUnitId');
             }
           },
           onAdFailedToLoad: (error) {
             if (kDebugMode) {
-              print('Interstitial ad failed to load: $error');
+              print(
+                  '❌ Interstitial ad failed to load - Unit ID: $_interstitialAdUnitId');
+              print('   Error code: ${error.code}');
+              print('   Error message: ${error.message}');
+              print('   Error domain: ${error.domain}');
             }
           },
         ),
@@ -187,12 +198,17 @@ class AdProvider extends ChangeNotifier {
           onAdLoaded: (ad) {
             rewardedAd = ad;
             if (kDebugMode) {
-              print('Rewarded ad loaded');
+              print(
+                  '✅ Rewarded ad loaded successfully - Unit ID: $_rewardedAdUnitId');
             }
           },
           onAdFailedToLoad: (error) {
             if (kDebugMode) {
-              print('Rewarded ad failed to load: $error');
+              print(
+                  '❌ Rewarded ad failed to load - Unit ID: $_rewardedAdUnitId');
+              print('   Error code: ${error.code}');
+              print('   Error message: ${error.message}');
+              print('   Error domain: ${error.domain}');
             }
           },
         ),
@@ -254,8 +270,9 @@ class AdProvider extends ChangeNotifier {
   bool shouldShowInterstitialAd(int currentLevel) {
     if (!adsEnabled) return false;
 
-    // Afficher une pub tous les 2 niveaux pour plus de revenus
-    if (currentLevel > _lastAdShownLevel + 1) {
+    // Afficher une pub selon la fréquence configurée
+    if (currentLevel >
+        _lastAdShownLevel + (AdMobConfig.interstitialFrequency - 1)) {
       _lastAdShownLevel = currentLevel;
       _saveUserPreferences();
       return true;

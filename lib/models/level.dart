@@ -125,12 +125,39 @@ class Level {
     return currentObjectives.every((objective) => objective.isCompleted);
   }
 
-  // Calculer le nombre d'étoiles
-  int calculateStars(int score, int movesUsed) {
-    if (score >= targetScore * 1.5) return 3;
-    if (score >= targetScore * 1.2) return 2;
-    if (score >= targetScore) return 1;
-    return 0;
+  // Calculer le nombre d'étoiles avec un système plus intelligent
+  int calculateStars(
+      int score, int movesUsed, List<LevelObjective> objectives) {
+    // Calculer le score basé sur les objectifs
+    double objectiveScore = 0.0;
+    for (final objective in objectives) {
+      if (objective.isCompleted) {
+        objectiveScore += 1.0;
+        // Bonus pour dépasser l'objectif
+        if (objective.current > objective.target) {
+          objectiveScore +=
+              (objective.current - objective.target) / objective.target * 0.5;
+        }
+      }
+    }
+
+    // Score basé sur l'efficacité des mouvements
+    final movesEfficiency =
+        maxMoves > 0 ? (maxMoves - movesUsed) / maxMoves : 0.0;
+
+    // Score basé sur le score total
+    final scoreRatio = targetScore > 0 ? score / targetScore : 0.0;
+
+    // Calcul du score final (0.0 à 1.0)
+    final finalScore =
+        (objectiveScore * 0.5 + movesEfficiency * 0.3 + scoreRatio * 0.2)
+            .clamp(0.0, 1.0);
+
+    // Attribution des étoiles basée sur le score final
+    if (finalScore >= 0.9) return 3; // Excellent
+    if (finalScore >= 0.7) return 2; // Bon
+    if (finalScore >= 0.5) return 1; // Passable
+    return 0; // Échec
   }
 
   // Obtenir la couleur de difficulté

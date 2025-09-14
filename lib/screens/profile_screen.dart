@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/providers/user_provider.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
 import 'package:mind_bloom/screens/tutorial_screen.dart';
+import 'package:mind_bloom/screens/settings_screen.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -18,9 +21,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text(
-          'Profil',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context)!.profile,
+          style: const TextStyle(
             color: AppColors.textPrimary,
             fontWeight: FontWeight.bold,
           ),
@@ -138,7 +141,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(width: 8),
               Text(
-                'Niveau ${userProvider.level}',
+                AppLocalizations.of(context)!.userLevel(userProvider.level),
                 style: TextStyle(
                   color: Colors.white.withValues(alpha: 0.8),
                   fontSize: 16,
@@ -189,7 +192,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       children: [
         Expanded(
           child: _buildStatCard(
-            'Niveaux terminés',
+            AppLocalizations.of(context)!.completedLevels,
             userProvider.completedLevels.length.toString(),
             Icons.flag,
             AppColors.success,
@@ -198,7 +201,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         const SizedBox(width: 12),
         Expanded(
           child: _buildStatCard(
-            'Meilleure série',
+            AppLocalizations.of(context)!.bestStreak,
             userProvider.bestStreak.toString(),
             Icons.local_fire_department,
             AppColors.accent,
@@ -207,7 +210,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         const SizedBox(width: 12),
         Expanded(
           child: _buildStatCard(
-            'Vies',
+            AppLocalizations.of(context)!.lives,
             '${userProvider.lives}/${userProvider.maxLives}',
             Icons.favorite,
             AppColors.error,
@@ -235,23 +238,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Statistiques détaillées',
+            AppLocalizations.of(context)!.detailedStats,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
                 ),
           ),
           const SizedBox(height: 16),
-          _buildStatRow('Pièces totales', '${userProvider.coins}',
-              Icons.monetization_on, AppColors.coins),
+          _buildStatRow(AppLocalizations.of(context)!.totalCoins,
+              '${userProvider.coins}', Icons.monetization_on, AppColors.coins),
           _buildStatRow(
-              'Gemmes', '${userProvider.gems}', Icons.diamond, AppColors.gold),
-          _buildStatRow('Série actuelle', '${userProvider.currentStreak}',
-              Icons.local_fire_department, AppColors.accent),
-          _buildStatRow('Étoiles gagnées', _getTotalStars(userProvider),
-              Icons.star, AppColors.gold),
-          _buildStatRow('Niveau le plus élevé', _getHighestLevel(userProvider),
-              Icons.trending_up, AppColors.success),
+              AppLocalizations.of(context)!.gems(0).replaceAll('0 ', ''),
+              '${userProvider.gems}',
+              Icons.diamond,
+              AppColors.gold),
+          _buildStatRow(
+              AppLocalizations.of(context)!.currentStreak,
+              '${userProvider.currentStreak}',
+              Icons.local_fire_department,
+              AppColors.accent),
+          _buildStatRow(AppLocalizations.of(context)!.starsEarned,
+              _getTotalStars(userProvider), Icons.star, AppColors.gold),
+          _buildStatRow(
+              AppLocalizations.of(context)!.highestLevel,
+              _getHighestLevel(userProvider),
+              Icons.trending_up,
+              AppColors.success),
         ],
       ),
     );
@@ -275,7 +287,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Actions rapides',
+            AppLocalizations.of(context)!.quickActions,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
@@ -283,19 +295,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           const SizedBox(height: 16),
           _buildActionButton(
-            'Revoir le tutoriel',
+            AppLocalizations.of(context)!.reviewTutorial,
             Icons.school,
             AppColors.primary,
             _showTutorial,
           ),
           _buildActionButton(
-            'Réinitialiser les données',
+            AppLocalizations.of(context)!.resetData,
             Icons.refresh,
             AppColors.warning,
             _showResetDialog,
           ),
           _buildActionButton(
-            'Partager le profil',
+            AppLocalizations.of(context)!.shareProfile,
             Icons.share,
             AppColors.secondary,
             _shareProfile,
@@ -323,7 +335,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Réalisations récentes',
+            AppLocalizations.of(context)!.recentAchievements,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
@@ -331,20 +343,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           const SizedBox(height: 16),
           _buildAchievementItem(
-            'Premier niveau terminé',
-            'Il y a 2 jours',
+            AppLocalizations.of(context)!.firstLevelCompleted,
+            AppLocalizations.of(context)!.daysAgo(2),
             Icons.flag,
             AppColors.success,
           ),
           _buildAchievementItem(
-            '3 étoiles obtenues',
-            'Il y a 1 jour',
+            AppLocalizations.of(context)!.threeStarsObtained,
+            AppLocalizations.of(context)!.dayAgo,
             Icons.star,
             AppColors.gold,
           ),
           _buildAchievementItem(
-            'Série de 5 niveaux',
-            'Aujourd\'hui',
+            AppLocalizations.of(context)!.streakOfFive,
+            AppLocalizations.of(context)!.today,
             Icons.local_fire_department,
             AppColors.accent,
           ),
@@ -534,11 +546,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final audioProvider = Provider.of<AudioProvider>(context, listen: false);
     audioProvider.playSfx('audio/sfx/button_click.wav');
 
-    // TODO: Implémenter l'écran des paramètres
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Paramètres à venir...'),
-        backgroundColor: AppColors.primary,
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const SettingsScreen(),
       ),
     );
   }
@@ -561,14 +571,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Réinitialiser les données ?'),
-        content: const Text(
-          'Cette action supprimera toutes vos données de progression. Cette action est irréversible.',
-        ),
+        title: Text(AppLocalizations.of(context)!.resetDataTitle),
+        content: Text(AppLocalizations.of(context)!.resetDataMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Annuler'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () {
@@ -578,7 +586,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.error,
             ),
-            child: const Text('Réinitialiser'),
+            child: Text(AppLocalizations.of(context)!.reset),
           ),
         ],
       ),
@@ -590,8 +598,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     userProvider.resetUserData();
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Données réinitialisées'),
+      SnackBar(
+        content: Text(AppLocalizations.of(context)!.dataReset),
         backgroundColor: AppColors.success,
       ),
     );
@@ -599,15 +607,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void _shareProfile() {
     final audioProvider = Provider.of<AudioProvider>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final l10n = AppLocalizations.of(context)!;
+
     audioProvider.playSfx('audio/sfx/button_click.wav');
 
-    // TODO: Implémenter le partage de profil
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Partage à venir...'),
-        backgroundColor: AppColors.primary,
-      ),
+    // Créer le texte de partage
+    final shareText = '''
+🌟 ${l10n.profile} - Mind Bloom
+
+👤 ${l10n.username}: ${userProvider.username}
+⭐ ${l10n.level}: ${userProvider.level}
+🎯 ${l10n.levelsCompleted}: ${userProvider.levelsCompleted}
+🏆 ${l10n.bestStreak}: ${userProvider.bestStreak}
+💎 ${l10n.totalCoins}: ${userProvider.coins}
+💜 ${l10n.lives}: ${userProvider.lives}
+
+${l10n.shareProfileMessage}
+
+#MindBloom #PuzzleGame #Match3
+''';
+
+    // Partager le profil
+    Share.share(
+      shareText,
+      subject: '${l10n.profile} - Mind Bloom',
     );
   }
 }
-

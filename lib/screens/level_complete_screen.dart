@@ -5,10 +5,13 @@ import 'package:mind_bloom/providers/user_provider.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
 import 'package:mind_bloom/providers/ad_provider.dart';
 import 'package:mind_bloom/providers/collection_provider.dart';
+import 'package:mind_bloom/providers/game_provider.dart';
+import 'package:mind_bloom/constants/admob_config.dart';
 import 'package:mind_bloom/widgets/banner_ad_widget.dart';
 import 'package:mind_bloom/screens/home_screen.dart';
 import 'package:mind_bloom/screens/game_screen.dart';
 import 'package:mind_bloom/models/level.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class LevelCompleteScreen extends StatefulWidget {
   final bool won;
@@ -120,258 +123,284 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
 
   Widget _buildVictoryContent() {
     return Container(
-      margin: const EdgeInsets.all(32),
-      padding: const EdgeInsets.all(24),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: AppColors.background,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.3),
+            color: Theme.of(context).shadowColor,
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
         ],
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Icône de victoire
-          Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              color: AppColors.success,
-              shape: BoxShape.circle,
-            ),
-            child: const Icon(
-              Icons.star,
-              color: Colors.white,
-              size: 40,
-            ),
-          ),
-
-          const SizedBox(height: 20),
-
-          // Titre
-          Text(
-            'Niveau ${widget.currentLevel.id} Terminé !',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
-                ),
-            textAlign: TextAlign.center,
-          ),
-
-          const SizedBox(height: 16),
-
-          // Étoiles
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(3, (index) {
-              return Icon(
-                index < widget.stars ? Icons.star : Icons.star_border,
-                color: index < widget.stars
-                    ? AppColors.gold
-                    : AppColors.textSecondary,
-                size: 32,
-              );
-            }),
-          ),
-
-          const SizedBox(height: 20),
-
-          // Statistiques
-          _buildStatistic('Score', widget.score.toString()),
-          _buildStatistic('Coups utilisés',
-              '${widget.movesUsed}/${widget.currentLevel.maxMoves}'),
-
-          const SizedBox(height: 24),
-
-          // Récompenses
-          if (widget.stars > 0) ...[
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Icône de victoire
             Container(
-              padding: const EdgeInsets.all(12),
+              width: 80,
+              height: 80,
               decoration: BoxDecoration(
-                color: AppColors.primary.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(12),
+                color: AppColors.success,
+                shape: BoxShape.circle,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.monetization_on,
-                    color: AppColors.coins,
-                    size: 20,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    '+${widget.stars * 10} pièces',
-                    style: TextStyle(
-                      color: AppColors.coins,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
+              child: const Icon(
+                Icons.star,
+                color: Colors.white,
+                size: 40,
               ),
             ),
+
+            const SizedBox(height: 20),
+
+            // Titre
+            Text(
+              AppLocalizations.of(context)!
+                  .levelCompleted(widget.currentLevel.id),
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+              textAlign: TextAlign.center,
+            ),
+
             const SizedBox(height: 16),
-          ],
 
-          // Boutons
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: _retryLevel,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.secondary,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text('Recommencer'),
+            // Étoiles avec critères
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(3, (index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: Icon(
+                        index < widget.stars ? Icons.star : Icons.star_border,
+                        color: index < widget.stars
+                            ? AppColors.gold
+                            : AppColors.textSecondary,
+                        size: 32,
+                      ),
+                    );
+                  }),
                 ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: _nextLevel,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                const SizedBox(height: 8),
+                Text(
+                  _getStarRatingText(widget.stars),
+                  style: TextStyle(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withOpacity(0.7),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                   ),
-                  child: const Text('Niveau suivant'),
                 ),
-              ),
-            ],
-          ),
-
-          const SizedBox(height: 12),
-
-          TextButton(
-            onPressed: _goToHome,
-            child: Text(
-              'Retour au menu',
-              style: TextStyle(color: AppColors.textSecondary),
+              ],
             ),
-          ),
 
-          const SizedBox(height: 16),
+            const SizedBox(height: 20),
 
-          // Bannière publicitaire
-          const LevelCompleteBannerAd(),
-        ],
+            // Statistiques
+            _buildStatistic(
+                AppLocalizations.of(context)!.score, widget.score.toString()),
+            _buildStatistic(AppLocalizations.of(context)!.movesUsed,
+                '${widget.movesUsed}/${widget.currentLevel.maxMoves}'),
+
+            const SizedBox(height: 24),
+
+            // Récompenses
+            if (widget.stars > 0) ...[
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.monetization_on,
+                      color: AppColors.coins,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      '+${widget.stars * 10} ${AppLocalizations.of(context)!.coins}',
+                      style: TextStyle(
+                        color: AppColors.coins,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
+
+            // Boutons
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _retryLevel,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.secondary,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(AppLocalizations.of(context)!.restart),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _nextLevel,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(AppLocalizations.of(context)!.nextLevel),
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 12),
+
+            TextButton(
+              onPressed: _goToHome,
+              child: Text(
+                AppLocalizations.of(context)!.backToMenu,
+                style: TextStyle(color: AppColors.textSecondary),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            // Bannière publicitaire
+            const LevelCompleteBannerAd(),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildDefeatContent() {
     return Container(
-      margin: const EdgeInsets.all(32),
-      padding: const EdgeInsets.all(24),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: AppColors.background,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.3),
+            color: Theme.of(context).shadowColor,
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
         ],
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Icône d'échec
-          Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              color: AppColors.error,
-              shape: BoxShape.circle,
-            ),
-            child: const Icon(
-              Icons.close,
-              color: Colors.white,
-              size: 40,
-            ),
-          ),
-
-          const SizedBox(height: 20),
-
-          // Titre
-          Text(
-            'Niveau ${widget.currentLevel.id} Échoué',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
-                ),
-            textAlign: TextAlign.center,
-          ),
-
-          const SizedBox(height: 16),
-
-          Text(
-            'Vous avez utilisé tous vos coups !',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: AppColors.textSecondary,
-                ),
-            textAlign: TextAlign.center,
-          ),
-
-          const SizedBox(height: 20),
-
-          // Statistiques
-          _buildStatistic('Score', widget.score.toString()),
-          _buildStatistic('Coups utilisés',
-              '${widget.movesUsed}/${widget.currentLevel.maxMoves}'),
-
-          const SizedBox(height: 24),
-
-          // Boutons
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: _retryLevel,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text('Recommencer'),
-                ),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Icône d'échec
+            Container(
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                color: AppColors.error,
+                shape: BoxShape.circle,
               ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: _goToHome,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.secondary,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text('Menu'),
-                ),
+              child: const Icon(
+                Icons.close,
+                color: Colors.white,
+                size: 40,
               ),
-            ],
-          ),
-        ],
+            ),
+
+            const SizedBox(height: 20),
+
+            // Titre
+            Text(
+              AppLocalizations.of(context)!.levelFailed(widget.currentLevel.id),
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textPrimary,
+                  ),
+              textAlign: TextAlign.center,
+            ),
+
+            const SizedBox(height: 16),
+
+            Text(
+              AppLocalizations.of(context)!.youHaveUsedAllMoves,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: AppColors.textSecondary,
+                  ),
+              textAlign: TextAlign.center,
+            ),
+
+            const SizedBox(height: 20),
+
+            // Statistiques
+            _buildStatistic(
+                AppLocalizations.of(context)!.score, widget.score.toString()),
+            _buildStatistic(AppLocalizations.of(context)!.movesUsed,
+                '${widget.movesUsed}/${widget.currentLevel.maxMoves}'),
+
+            const SizedBox(height: 24),
+
+            // Boutons
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _retryLevel,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(AppLocalizations.of(context)!.restart),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _goToHome,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.secondary,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(AppLocalizations.of(context)!.menu),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -385,14 +414,14 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
           Text(
             label,
             style: TextStyle(
-              color: AppColors.textSecondary,
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
               fontSize: 16,
             ),
           ),
           Text(
             value,
             style: TextStyle(
-              color: AppColors.textPrimary,
+              color: Theme.of(context).colorScheme.onSurface,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -402,15 +431,199 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
     );
   }
 
-  void _retryLevel() {
+  /// Retourne le texte descriptif pour le nombre d'étoiles obtenues
+  String _getStarRatingText(int stars) {
+    switch (stars) {
+      case 3:
+        return 'Excellent ! Performance parfaite';
+      case 2:
+        return 'Très bien ! Bonne performance';
+      case 1:
+        return 'Bien ! Niveau terminé';
+      case 0:
+        return 'À améliorer';
+      default:
+        return '';
+    }
+  }
+
+  void _retryLevel() async {
     final audioProvider = Provider.of<AudioProvider>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final adProvider = Provider.of<AdProvider>(context, listen: false);
+
     audioProvider.playSfx('audio/sfx/button_click.wav');
 
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const GameScreen(),
-      ),
+    // Vérifier si le joueur a des vies
+    if (userProvider.lives > 0) {
+      // Le joueur a des vies, utiliser une vie et rejouer
+      await userProvider.useLife();
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const GameScreen(),
+        ),
+      );
+    } else {
+      // Le joueur n'a pas de vies, proposer de regarder une vidéo
+      _showWatchAdForLifeDialog();
+    }
+  }
+
+  void _showWatchAdForLifeDialog() {
+    final l10n = AppLocalizations.of(context)!;
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.surface,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: Row(
+            children: [
+              Icon(
+                Icons.play_circle_outline,
+                color: Theme.of(context).colorScheme.primary,
+                size: 28,
+              ),
+              const SizedBox(width: 12),
+              Text(
+                l10n.watchAdForLife,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                l10n.watchAdForLifeDescription,
+                style: TextStyle(
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+                  fontSize: 16,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.favorite,
+                      color: Theme.of(context).colorScheme.primary,
+                      size: 24,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      l10n.earnOneLife,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                _goToHome();
+              },
+              child: Text(
+                l10n.cancel,
+                style: TextStyle(
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: _watchAdForLife,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: Text(l10n.watchAd),
+            ),
+          ],
+        );
+      },
     );
+  }
+
+  void _watchAdForLife() async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final adProvider = Provider.of<AdProvider>(context, listen: false);
+    final audioProvider = Provider.of<AudioProvider>(context, listen: false);
+    final l10n = AppLocalizations.of(context)!;
+
+    Navigator.of(context).pop(); // Fermer le dialog
+
+    try {
+      // Afficher une pub récompensée
+      final rewarded = await adProvider.loadRewardedAd();
+      if (rewarded != null) {
+        await rewarded.show(
+          onUserEarnedReward: (ad, reward) async {
+            // L'utilisateur a regardé la pub, lui donner une vie
+            await userProvider.addLives(1);
+
+            // Rejouer le niveau
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => const GameScreen(),
+              ),
+            );
+
+            // Afficher un message de succès
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(l10n.lifeEarned),
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                duration: const Duration(seconds: 2),
+              ),
+            );
+          },
+        );
+      } else {
+        // Pas de pub disponible, afficher un message
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.noAdAvailable),
+            backgroundColor: Theme.of(context).colorScheme.error,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (e) {
+      // Erreur lors du chargement de la pub
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.adError),
+          backgroundColor: Theme.of(context).colorScheme.error,
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
   }
 
   void _nextLevel() async {
@@ -465,8 +678,8 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
 
   // Nouvelle méthode pour afficher les publicités interstitielles après un délai
   void _showInterstitialAdAfterDelay() async {
-    // Attendre 3 secondes après la fin du niveau pour laisser le temps à l'utilisateur de voir le résultat
-    await Future.delayed(const Duration(seconds: 3));
+    // Attendre le délai configuré après la fin du niveau pour laisser le temps à l'utilisateur de voir le résultat
+    await Future.delayed(Duration(seconds: AdMobConfig.interstitialDelay));
 
     if (mounted) {
       final adProvider = Provider.of<AdProvider>(context, listen: false);

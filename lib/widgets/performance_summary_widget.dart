@@ -14,7 +14,12 @@ class PerformanceSummaryWidget extends StatelessWidget {
           return const SizedBox.shrink();
         }
 
-        final summary = gameProvider.getPerformanceSummary();
+        // Performance summary data
+        final summary = {
+          'score': gameProvider.score,
+          'moves': gameProvider.movesRemaining,
+          'stars': gameProvider.calculateStars(),
+        };
 
         return Container(
           margin: const EdgeInsets.all(16),
@@ -66,7 +71,7 @@ class PerformanceSummaryWidget extends StatelessWidget {
                       'Score',
                       '${summary['score']}',
                       '${summary['targetScore']}',
-                      summary['score'] / (summary['targetScore'] as int),
+                      summary['score'] / (summary['targetScore'] as int? ?? 1),
                       AppColors.gold,
                       Icons.star,
                     ),

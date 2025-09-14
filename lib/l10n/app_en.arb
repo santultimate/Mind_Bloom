@@ -1,0 +1,2657 @@
+{
+  "@@locale": "en",
+  "appTitle": "Mind Bloom",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  
+  "home": "Home",
+  "@home": {
+    "description": "Home screen title"
+  },
+  
+  "profile": "Profile",
+  "@profile": {
+    "description": "Profile screen title"
+  },
+  
+  "collection": "Collection",
+  "@collection": {
+    "description": "Collection screen title"
+  },
+  
+  "shop": "Shop",
+  "@shop": {
+    "description": "Shop screen title"
+  },
+  
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  
+  "about": "About",
+  "@about": {
+    "description": "About screen title"
+  },
+  
+  "level": "Level",
+  "@level": {
+    "description": "Level text"
+  },
+  
+  "score": "Score",
+  "@score": {
+    "description": "Score text"
+  },
+  
+  "moves": "Moves",
+  "@moves": {
+    "description": "Moves text"
+  },
+  
+  "lives": "Lives",
+  "@lives": {
+    "description": "Lives text"
+  },
+  
+  "coins": "Coins",
+  "@coins": {
+    "description": "Coins text"
+  },
+  
+  "gems": "Gems",
+  "@gems": {
+    "description": "Gems text"
+  },
+  
+  "play": "Play",
+  "@play": {
+    "description": "Play button text"
+  },
+  
+  "pause": "Pause",
+  "@pause": {
+    "description": "Pause button text"
+  },
+  
+  "resume": "Resume",
+  "@resume": {
+    "description": "Resume button text"
+  },
+  
+  "restart": "Restart",
+  "@restart": {
+    "description": "Restart button text"
+  },
+  
+  "menu": "Menu",
+  "@menu": {
+    "description": "Menu button text"
+  },
+  
+  "hint": "Hint",
+  "@hint": {
+    "description": "Hint button text"
+  },
+  
+  "shuffle": "Shuffle",
+  "@shuffle": {
+    "description": "Shuffle button text"
+  },
+  
+  "next": "Next",
+  "@next": {
+    "description": "Next button text"
+  },
+  
+  "back": "Back",
+  "@back": {
+    "description": "Back button text"
+  },
+  
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  
+  "confirm": "Confirm",
+  "@confirm": {
+    "description": "Confirm button text"
+  },
+  
+  "save": "Save",
+  "@save": {
+    "description": "Save button text"
+  },
+  
+  "load": "Load",
+  "@load": {
+    "description": "Load button text"
+  },
+  
+  "reset": "Reset",
+  "@reset": {
+    "description": "Reset button text"
+  },
+  
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button text"
+  },
+  
+  "edit": "Edit",
+  "@edit": {
+    "description": "Edit button text"
+  },
+  
+  "close": "Close",
+  "@close": {
+    "description": "Close button text"
+  },
+  
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button text"
+  },
+  
+  "yes": "Yes",
+  "@yes": {
+    "description": "Yes button text"
+  },
+  
+  "no": "No",
+  "@no": {
+    "description": "No button text"
+  },
+  
+  "loading": "Loading...",
+  "@loading": {
+    "description": "Loading text"
+  },
+  
+  "error": "Error",
+  "@error": {
+    "description": "Error text"
+  },
+  
+  "success": "Success",
+  "@success": {
+    "description": "Success text"
+  },
+  
+  "warning": "Warning",
+  "@warning": {
+    "description": "Warning text"
+  },
+  
+  "info": "Information",
+  "@info": {
+    "description": "Information text"
+  },
+  
+  "noMovesAvailable": "No moves available. Use the shuffle button!",
+  "@noMovesAvailable": {
+    "description": "Message when no moves are available"
+  },
+  
+  "levelComplete": "Level Complete!",
+  "@levelComplete": {
+    "description": "Level complete message"
+  },
+  
+  "levelFailed": "Level Failed",
+  "@levelFailed": {
+    "description": "Level failed message"
+  },
+  
+  "gamePaused": "Game Paused",
+  "@gamePaused": {
+    "description": "Game paused message"
+  },
+  
+  "whatWouldYouLikeToDo": "What would you like to do?",
+  "@whatWouldYouLikeToDo": {
+    "description": "Question in pause dialog"
+  },
+  
+  "freeLife": "Free Life",
+  "@freeLife": {
+    "description": "Free life text"
+  },
+  
+  "watchAdForLife": "Watch an ad to get a free life!",
+  "@watchAdForLife": {
+    "description": "Message for watching ad for life"
+  },
+  
+  "watchAd": "Watch Ad",
+  "@watchAd": {
+    "description": "Watch ad button text"
+  },
+  
+  "adInProgress": "Ad in progress...",
+  "@adInProgress": {
+    "description": "Ad in progress message"
+  },
+  
+  "lifeObtained": "Life obtained! You can continue playing.",
+  "@lifeObtained": {
+    "description": "Life obtained message"
+  },
+  
+  "music": "Music",
+  "@music": {
+    "description": "Music setting"
+  },
+  
+  "soundEffects": "Sound Effects",
+  "@soundEffects": {
+    "description": "Sound effects setting"
+  },
+  
+  "animations": "Animations",
+  "@animations": {
+    "description": "Animations setting"
+  },
+  
+  "vibrations": "Vibrations",
+  "@vibrations": {
+    "description": "Vibrations setting"
+  },
+  
+  "autoHints": "Auto Hints",
+  "@autoHints": {
+    "description": "Auto hints setting"
+  },
+  
+  "language": "Language",
+  "@language": {
+    "description": "Language setting"
+  },
+  
+  "english": "English",
+  "@english": {
+    "description": "English language"
+  },
+  
+  "french": "Français",
+  "@french": {
+    "description": "French language"
+  },
+  
+  "version": "Version",
+  "@version": {
+    "description": "Version text"
+  },
+  
+  "developer": "Developer",
+  "@developer": {
+    "description": "Developer text"
+  },
+  
+  "termsOfService": "Terms of Service",
+  "@termsOfService": {
+    "description": "Terms of service text"
+  },
+  
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "Privacy policy text"
+  },
+  
+  "readTermsOfService": "Read the terms of service",
+  "@readTermsOfService": {
+    "description": "Read terms of service text"
+  },
+  
+  "readPrivacyPolicy": "Read the privacy policy",
+  "@readPrivacyPolicy": {
+    "description": "Read privacy policy text"
+  },
+  
+  "aboutGame": "About the game",
+  "@aboutGame": {
+    "description": "About game text"
+  },
+  
+  "gameDescription": "Mind Bloom is a magical puzzle game that combines classic match-3 mechanics with RPG elements. Cultivate your enchanted garden by aligning colored tiles and discover a unique universe of progression and collection.",
+  "@gameDescription": {
+    "description": "Game description"
+  },
+  
+  "technologies": "Technologies",
+  "@technologies": {
+    "description": "Technologies text"
+  },
+  
+  "legalInformation": "Legal Information",
+  "@legalInformation": {
+    "description": "Legal information text"
+  },
+  
+  "license": "License",
+  "@license": {
+    "description": "License text"
+  },
+  
+  "licenseText": "This project is under MIT license. You are free to use, modify and distribute it according to the terms of this license.",
+  "@licenseText": {
+    "description": "License text"
+  },
+  
+  "acknowledgments": "Acknowledgments",
+  "@acknowledgments": {
+    "description": "Acknowledgments text"
+  },
+  
+  "acknowledgmentsText": "A big thank you to the Flutter community, the contributors of the packages used, and everyone who supported this project.",
+  "@acknowledgmentsText": {
+    "description": "Acknowledgments text"
+  },
+  
+  "developedWithLove": "Developed with ❤️ by",
+  "@developedWithLove": {
+    "description": "Developed with love text"
+  },
+  
+  "quote": "\"Cultivate your inner garden, one match at a time\"",
+  "@quote": {
+    "description": "Developer quote"
+  },
+  
+  "username": "Username",
+  "@username": {
+    "description": "Username text"
+  },
+  
+  "editUsername": "Edit username",
+  "@editUsername": {
+    "description": "Edit username text"
+  },
+  
+  "currentStreak": "Current streak",
+  "@currentStreak": {
+    "description": "Current streak text"
+  },
+  
+  "bestStreak": "Best streak",
+  "@bestStreak": {
+    "description": "Best streak text"
+  },
+  
+  "days": "days",
+  "@days": {
+    "description": "Days text"
+  },
+  
+  "saveData": "Save data",
+  "@saveData": {
+    "description": "Save data text"
+  },
+  
+  "restoreData": "Restore data",
+  "@restoreData": {
+    "description": "Restore data text"
+  },
+  
+  "resetData": "Reset data",
+  "@resetData": {
+    "description": "Reset data text"
+  },
+  
+  "saveProgress": "Save your progress",
+  "@saveProgress": {
+    "description": "Save progress text"
+  },
+  
+  "restoreProgress": "Restore your progress",
+  "@restoreProgress": {
+    "description": "Restore progress text"
+  },
+  
+  "deleteAllData": "Delete all data (irreversible)",
+  "@deleteAllData": {
+    "description": "Delete all data text"
+  },
+  
+  "resetDataConfirmation": "Are you sure you want to delete all your data? This action is irreversible.",
+  "@resetDataConfirmation": {
+    "description": "Reset data confirmation"
+  },
+  
+  "dataReset": "Data reset",
+  "@dataReset": {
+    "description": "Data reset text"
+  },
+  
+  "dataSaved": "Data saved successfully",
+  "@dataSaved": {
+    "description": "Data saved message"
+  },
+  
+  "dataRestored": "Data restored successfully",
+  "@dataRestored": {
+    "description": "Data restored message"
+  },
+  
+  "saveError": "Error saving data",
+  "@saveError": {
+    "description": "Save error message"
+  },
+  
+  "restoreError": "Error restoring data",
+  "@restoreError": {
+    "description": "Restore error message"
+  },
+  
+  "usernameUpdated": "Username updated",
+  "@usernameUpdated": {
+    "description": "Username updated message"
+  },
+  
+  "world": "World",
+  "@world": {
+    "description": "World text"
+  },
+  
+  "levelCompleted": "Level Completed!",
+  "@levelCompleted": {
+    "description": "Level completed message"
+  },
+  
+  "levelFailed": "Level Failed",
+  "@levelFailed": {
+    "description": "Level failed message"
+  },
+  
+  "stars": "Stars",
+  "@stars": {
+    "description": "Stars text"
+  },
+  
+  "movesUsed": "Moves Used",
+  "@movesUsed": {
+    "description": "Moves used text"
+  },
+  
+  "nextLevel": "Next Level",
+  "@nextLevel": {
+    "description": "Next level button"
+  },
+  
+  "retry": "Retry",
+  "@retry": {
+    "description": "Retry button"
+  },
+  
+  "home": "Home",
+  "@home": {
+    "description": "Home button"
+  },
+  
+  "objectives": "Objectives",
+  "@objectives": {
+    "description": "Objectives text"
+  },
+  
+  "collectTiles": "Collect {count} {type}",
+  "@collectTiles": {
+    "description": "Collect tiles objective",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "reachScore": "Reach {score} points",
+  "@reachScore": {
+    "description": "Reach score objective",
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "completeInMoves": "Complete in {moves} moves",
+  "@completeInMoves": {
+    "description": "Complete in moves objective",
+    "placeholders": {
+      "moves": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "tileTypeFlower": "Flower",
+  "@tileTypeFlower": {
+    "description": "Flower tile type"
+  },
+  "tileTypeLeaf": "Leaf",
+  "@tileTypeLeaf": {
+    "description": "Leaf tile type"
+  },
+  "tileTypeCrystal": "Crystal",
+  "@tileTypeCrystal": {
+    "description": "Crystal tile type"
+  },
+  "tileTypeSeed": "Seed",
+  "@tileTypeSeed": {
+    "description": "Seed tile type"
+  },
+  "tileTypeDew": "Dew",
+  "@tileTypeDew": {
+    "description": "Dew tile type"
+  },
+  "tileTypeSun": "Sun",
+  "@tileTypeSun": {
+    "description": "Sun tile type"
+  },
+  "tileTypeMoon": "Moon",
+  "@tileTypeMoon": {
+    "description": "Moon tile type"
+  },
+  "tileTypeGem": "Gem",
+  "@tileTypeGem": {
+    "description": "Gem tile type"
+  },
+  
+  "achievements": "Achievements",
+  "@achievements": {
+    "description": "Achievements text"
+  },
+  
+  "events": "Events",
+  "@events": {
+    "description": "Events text"
+  },
+  
+  "tutorial": "Tutorial",
+  "@tutorial": {
+    "description": "Tutorial text"
+  },
+  
+  "shop": "Shop",
+  "@shop": {
+    "description": "Shop text"
+  },
+  
+  "buy": "Buy",
+  "@buy": {
+    "description": "Buy button"
+  },
+  
+  "price": "Price",
+  "@price": {
+    "description": "Price text"
+  },
+  
+  "owned": "Owned",
+  "@owned": {
+    "description": "Owned text"
+  },
+  
+  "plants": "Plants",
+  "@plants": {
+    "description": "Plants text"
+  },
+  
+  "unlocked": "Unlocked",
+  "@unlocked": {
+    "description": "Unlocked text"
+  },
+  
+  "locked": "Locked",
+  "@locked": {
+    "description": "Locked text"
+  },
+  
+  "upgrade": "Upgrade",
+  "@upgrade": {
+    "description": "Upgrade button"
+  },
+  
+  "level": "Level",
+  "@level": {
+    "description": "Level text"
+  },
+  
+  "bonus": "Bonus",
+  "@bonus": {
+    "description": "Bonus text"
+  },
+  
+  "active": "Active",
+  "@active": {
+    "description": "Active text"
+  },
+  
+  "inactive": "Inactive",
+  "@inactive": {
+    "description": "Inactive text"
+  },
+  
+  "filter": "Filter",
+  "@filter": {
+    "description": "Filter text"
+  },
+  
+  "all": "All",
+  "@all": {
+    "description": "All text"
+  },
+  
+  "unlockedOnly": "Unlocked Only",
+  "@unlockedOnly": {
+    "description": "Unlocked only text"
+  },
+  
+  "lockedOnly": "Locked Only",
+  "@lockedOnly": {
+    "description": "Locked only text"
+  },
+  
+  "noPlantsFound": "No plants found",
+  "@noPlantsFound": {
+    "description": "No plants found message"
+  },
+  
+  "plantDetails": "Plant Details",
+  "@plantDetails": {
+    "description": "Plant details title"
+  },
+  
+  "description": "Description",
+  "@description": {
+    "description": "Description text"
+  },
+  
+  "rarity": "Rarity",
+  "@rarity": {
+    "description": "Rarity text"
+  },
+  
+  "common": "Common",
+  "@common": {
+    "description": "Common rarity"
+  },
+  
+  "rare": "Rare",
+  "@rare": {
+    "description": "Rare rarity"
+  },
+  
+  "epic": "Epic",
+  "@epic": {
+    "description": "Epic rarity"
+  },
+  
+  "legendary": "Legendary",
+  "@legendary": {
+    "description": "Legendary rarity"
+  },
+  
+  "upgradeCost": "Upgrade Cost",
+  "@upgradeCost": {
+    "description": "Upgrade cost text"
+  },
+  
+  "insufficientCoins": "Insufficient coins",
+  "@insufficientCoins": {
+    "description": "Insufficient coins message"
+  },
+  
+  "upgradeSuccess": "Upgrade successful!",
+  "@upgradeSuccess": {
+    "description": "Upgrade success message"
+  },
+  
+  "noLives": "No Lives",
+  "@noLives": {
+    "description": "No lives message"
+  },
+  
+  "noLivesMessage": "You don't have any lives left. Watch an ad to get a free life or wait for lives to regenerate.",
+  "@noLivesMessage": {
+    "description": "No lives message content"
+  },
+  
+  "levelLocked": "Level Locked",
+  "@levelLocked": {
+    "description": "Level locked message"
+  },
+  
+  "levelLockedMessage": "Complete the previous levels to unlock this one.",
+  "@levelLockedMessage": {
+    "description": "Level locked message content"
+  },
+  
+  "about": "About",
+  "@about": {
+    "description": "About text"
+  },
+  
+  "termsOfService": "Terms of Service",
+  "@termsOfService": {
+    "description": "Terms of service text"
+  },
+  
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "Privacy policy text"
+  },
+  
+  "success": "Success",
+  "@success": {
+    "description": "Success text"
+  },
+  
+  "firstSteps": "First Steps",
+  "@firstSteps": {
+    "description": "First steps achievement"
+  },
+  
+  "firstStepsDescription": "Complete your first level",
+  "@firstStepsDescription": {
+    "description": "First steps achievement description"
+  },
+  
+  "levelMaster": "Level Master",
+  "@levelMaster": {
+    "description": "Level master achievement"
+  },
+  
+  "levelMasterDescription": "Complete 10 levels",
+  "@levelMasterDescription": {
+    "description": "Level master achievement description"
+  },
+  
+  "scoreHunter": "Score Hunter",
+  "@scoreHunter": {
+    "description": "Score hunter achievement"
+  },
+  
+  "scoreHunterDescription": "Reach 10,000 points in a single level",
+  "@scoreHunterDescription": {
+    "description": "Score hunter achievement description"
+  },
+  
+  "comboKing": "Combo King",
+  "@comboKing": {
+    "description": "Combo king achievement"
+  },
+  
+  "comboKingDescription": "Make a 5-combo match",
+  "@comboKingDescription": {
+    "description": "Combo king achievement description"
+  },
+  
+  "plantCollector": "Plant Collector",
+  "@plantCollector": {
+    "description": "Plant collector achievement"
+  },
+  
+  "plantCollectorDescription": "Unlock 5 plants",
+  "@plantCollectorDescription": {
+    "description": "Plant collector achievement description"
+  },
+  
+  "perfectPlayer": "Perfect Player",
+  "@perfectPlayer": {
+    "description": "Perfect player achievement"
+  },
+  
+  "perfectPlayerDescription": "Complete a level with 3 stars",
+  "@perfectPlayerDescription": {
+    "description": "Perfect player achievement description"
+  },
+  
+  "dailyChallenge": "Daily Challenge",
+  "@dailyChallenge": {
+    "description": "Daily challenge text"
+  },
+  
+  "weeklyEvent": "Weekly Event",
+  "@weeklyEvent": {
+    "description": "Weekly event text"
+  },
+  
+  "specialOffer": "Special Offer",
+  "@specialOffer": {
+    "description": "Special offer text"
+  },
+  
+  "limitedTime": "Limited Time",
+  "@limitedTime": {
+    "description": "Limited time text"
+  },
+  
+  "newEvent": "New Event",
+  "@newEvent": {
+    "description": "New event text"
+  },
+  
+  "eventDescription": "Complete special objectives to earn exclusive rewards!",
+  "@eventDescription": {
+    "description": "Event description text"
+  },
+  
+  "participate": "Participate",
+  "@participate": {
+    "description": "Participate button"
+  },
+  
+  "rewards": "Rewards",
+  "@rewards": {
+    "description": "Rewards text"
+  },
+  
+  "coins": "Coins",
+  "@coins": {
+    "description": "Coins text"
+  },
+  
+  "lives": "Lives",
+  "@lives": {
+    "description": "Lives text"
+  },
+  
+  "powerUps": "Power-ups",
+  "@powerUps": {
+    "description": "Power-ups text"
+  },
+  
+  "bomb": "Bomb",
+  "@bomb": {
+    "description": "Bomb power-up"
+  },
+  
+  "lightning": "Lightning",
+  "@lightning": {
+    "description": "Lightning power-up"
+  },
+  
+  "rainbow": "Rainbow",
+  "@rainbow": {
+    "description": "Rainbow power-up"
+  },
+  
+  "hammer": "Hammer",
+  "@hammer": {
+    "description": "Hammer power-up"
+  },
+  
+  "shuffle": "Shuffle",
+  "@shuffle": {
+    "description": "Shuffle power-up"
+  },
+  
+  "hint": "Hint",
+  "@hint": {
+    "description": "Hint power-up"
+  },
+  
+  "gameplay": "Gameplay",
+  "@gameplay": {
+    "description": "Gameplay text"
+  },
+  
+  "matchThree": "Match 3 or more tiles of the same type to clear them",
+  "@matchThree": {
+    "description": "Match three instruction"
+  },
+  
+  "combos": "Create combos for bonus points",
+  "@combos": {
+    "description": "Combos instruction"
+  },
+  
+  "objectives": "Complete objectives to win the level",
+  "@objectives": {
+    "description": "Objectives instruction"
+  },
+  
+  "powerUpsUsage": "Use power-ups to help you in difficult situations",
+  "@powerUpsUsage": {
+    "description": "Power-ups usage instruction"
+  },
+  
+  "livesSystem": "You have limited lives. Watch ads to get more!",
+  "@livesSystem": {
+    "description": "Lives system instruction"
+  },
+  
+  "noMovesAvailable": "No moves available. Use the shuffle button!",
+  "@noMovesAvailable": {
+    "description": "No moves available message"
+  },
+  
+  "version": "Version",
+  "@version": {
+    "description": "Version text"
+  },
+  
+  "developer": "Developer",
+  "@developer": {
+    "description": "Developer text"
+  },
+  
+  "readTermsOfUse": "Read the terms of use",
+  "@readTermsOfUse": {
+    "description": "Read terms of use text"
+  },
+  
+  "readPrivacyPolicy": "Read the privacy policy",
+  "@readPrivacyPolicy": {
+    "description": "Read privacy policy text"
+  },
+  
+  "lastUpdated": "Last updated",
+  "@lastUpdated": {
+    "description": "Last updated text"
+  },
+  
+  "privacyPolicyIntroduction": "This privacy policy describes how Mind Bloom collects, uses, and protects your personal information when you use our mobile application. We are committed to protecting your privacy and treating your data with the utmost respect.",
+  "@privacyPolicyIntroduction": {
+    "description": "Privacy policy introduction"
+  },
+  
+  "informationWeCollect": "Information we collect",
+  "@informationWeCollect": {
+    "description": "Information we collect heading"
+  },
+  
+  "weCollectFollowing": "We collect the following information:",
+  "@weCollectFollowing": {
+    "description": "We collect following information text"
+  },
+  
+  "gameData": "Game Data",
+  "@gameData": {
+    "description": "Game data text"
+  },
+  
+  "gameDataDescription": "Progress, scores, game preferences",
+  "@gameDataDescription": {
+    "description": "Game data description"
+  },
+  
+  "technicalData": "Technical Data",
+  "@technicalData": {
+    "description": "Technical data text"
+  },
+  
+  "technicalDataDescription": "Application version, device type, operating system",
+  "@technicalDataDescription": {
+    "description": "Technical data description"
+  },
+  
+  "usageData": "Usage Data",
+  "@usageData": {
+    "description": "Usage data text"
+  },
+  
+  "usageDataDescription": "Playtime, features used, performance metrics",
+  "@usageDataDescription": {
+    "description": "Usage data description"
+  },
+  
+  "howWeUseData": "How we use your data",
+  "@howWeUseData": {
+    "description": "How we use data heading"
+  },
+  
+  "dataUsageDescription": "We use your data to:",
+  "@dataUsageDescription": {
+    "description": "Data usage description"
+  },
+  
+  "improveGameplay": "Improve gameplay experience",
+  "@improveGameplay": {
+    "description": "Improve gameplay text"
+  },
+  
+  "provideSupport": "Provide customer support",
+  "@provideSupport": {
+    "description": "Provide support text"
+  },
+  
+  "analyzeUsage": "Analyze usage patterns",
+  "@analyzeUsage": {
+    "description": "Analyze usage text"
+  },
+  
+  "dataProtection": "Data Protection",
+  "@dataProtection": {
+    "description": "Data protection heading"
+  },
+  
+  "dataProtectionDescription": "We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.",
+  "@dataProtectionDescription": {
+    "description": "Data protection description"
+  },
+  
+  "contactUs": "Contact Us",
+  "@contactUs": {
+    "description": "Contact us heading"
+  },
+  
+  "contactUsDescription": "If you have any questions about this privacy policy, please contact us at:",
+  "@contactUsDescription": {
+    "description": "Contact us description"
+  },
+  
+  "email": "Email",
+  "@email": {
+    "description": "Email text"
+  },
+  
+  "emailAddress": "privacy@mindbloom.com",
+  "@emailAddress": {
+    "description": "Email address"
+  },
+  
+  "howWeUseInformation": "How we use your information",
+  "@howWeUseInformation": {
+    "description": "How we use information heading"
+  },
+  
+  "weUseInformationFor": "We use your information for:",
+  "@weUseInformationFor": {
+    "description": "We use information for text"
+  },
+  
+  "provideService": "Provide and improve the game service",
+  "@provideService": {
+    "description": "Provide service text"
+  },
+  
+  "personalizeExperience": "Personalize your game experience",
+  "@personalizeExperience": {
+    "description": "Personalize experience text"
+  },
+  
+  "analyzeUsage": "Analyze application usage",
+  "@analyzeUsage": {
+    "description": "Analyze usage text"
+  },
+  
+  "displayAds": "Display personalized advertisements (with your consent)",
+  "@displayAds": {
+    "description": "Display ads text"
+  },
+  
+  "ensureSecurity": "Ensure security and prevent fraud",
+  "@ensureSecurity": {
+    "description": "Ensure security text"
+  },
+  
+  "communicateService": "Communicate with you regarding the service",
+  "@communicateService": {
+    "description": "Communicate service text"
+  },
+  
+  "dataSharing": "Data sharing",
+  "@dataSharing": {
+    "description": "Data sharing heading"
+  },
+  
+  "dataSharingDescription": "We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy.",
+  "@dataSharingDescription": {
+    "description": "Data sharing description"
+  },
+  
+  "yourRights": "Your rights",
+  "@yourRights": {
+    "description": "Your rights heading"
+  },
+  
+  "yourRightsDescription": "You have the right to:",
+  "@yourRightsDescription": {
+    "description": "Your rights description"
+  },
+  
+  "accessData": "Access your personal data",
+  "@accessData": {
+    "description": "Access data text"
+  },
+  
+  "correctData": "Correct inaccurate data",
+  "@correctData": {
+    "description": "Correct data text"
+  },
+  
+  "deleteData": "Delete your data",
+  "@deleteData": {
+    "description": "Delete data text"
+  },
+  
+  "withdrawConsent": "Withdraw consent for data processing",
+  "@withdrawConsent": {
+    "description": "Withdraw consent text"
+  },
+  
+  "data": "Data",
+  "@data": {
+    "description": "Data text"
+  },
+  
+  "saveData": "Save data",
+  "@saveData": {
+    "description": "Save data text"
+  },
+  
+  "saveProgress": "Save your progress",
+  "@saveProgress": {
+    "description": "Save progress text"
+  },
+  
+  "restoreData": "Restore data",
+  "@restoreData": {
+    "description": "Restore data text"
+  },
+  
+  "restoreProgress": "Restore your progress",
+  "@restoreProgress": {
+    "description": "Restore progress text"
+  },
+  
+  "resetData": "Reset data",
+  "@resetData": {
+    "description": "Reset data text"
+  },
+  
+  "deleteAllData": "Delete all data (irreversible)",
+  "@deleteAllData": {
+    "description": "Delete all data text"
+  },
+  
+  "bestStreak": "Best Streak",
+  "@bestStreak": {
+    "description": "Best streak text"
+  },
+  
+  "days": "days",
+  "@days": {
+    "description": "Days text"
+  },
+  
+  "audio": "Audio",
+  "@audio": {
+    "description": "Audio text"
+  },
+  
+  "music": "Music",
+  "@music": {
+    "description": "Music text"
+  },
+  
+  "enableDisableMusic": "Enable/disable background music",
+  "@enableDisableMusic": {
+    "description": "Enable disable music text"
+  },
+  
+  "soundEffects": "Sound Effects",
+  "@soundEffects": {
+    "description": "Sound effects text"
+  },
+  
+  "enableDisableSfx": "Enable/disable sound effects",
+  "@enableDisableSfx": {
+    "description": "Enable disable sound effects text"
+  },
+  
+  "game": "Game",
+  "@game": {
+    "description": "Game text"
+  },
+  
+  "animations": "Animations",
+  "@animations": {
+    "description": "Animations text"
+  },
+  
+  "enableDisableAnimations": "Enable/disable animations",
+  "@enableDisableAnimations": {
+    "description": "Enable disable animations text"
+  },
+  
+  "vibrations": "Vibrations",
+  "@vibrations": {
+    "description": "Vibrations text"
+  },
+  
+  "enableDisableVibrations": "Enable/disable vibrations",
+  "@enableDisableVibrations": {
+    "description": "Enable disable vibrations text"
+  },
+  
+  "musicVolume": "Music volume",
+  "@musicVolume": {
+    "description": "Music volume text"
+  },
+  
+  "effectsVolume": "Effects volume",
+  "@effectsVolume": {
+    "description": "Effects volume text"
+  },
+  
+  "experience": "Experience",
+  "@experience": {
+    "description": "Experience text"
+  },
+  
+  "currentStreak": "Current Streak",
+  "@currentStreak": {
+    "description": "Current streak text"
+  },
+  
+  "level": "Level",
+  "@level": {
+    "description": "Level text"
+  },
+  
+  "noMoreLives": "No more lives!",
+  "@noMoreLives": {
+    "description": "No more lives message"
+  },
+  
+  "noMoreLivesMessage": "You have no more lives. Watch an ad to get a free life, wait for them to recharge or buy more.",
+  "@noMoreLivesMessage": {
+    "description": "No more lives detailed message"
+  },
+  
+  "wait": "Wait",
+  "@wait": {
+    "description": "Wait button text"
+  },
+  
+  "buy": "Buy",
+  "@buy": {
+    "description": "Buy button text"
+  },
+  
+  "levelLocked": "Level locked",
+  "@levelLocked": {
+    "description": "Level locked message"
+  },
+  
+  "levelLockedMessage": "You must complete the previous level to unlock this one.",
+  "@levelLockedMessage": {
+    "description": "Level locked detailed message"
+  },
+  
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button text"
+  },
+  
+  "noLevelLoaded": "No level loaded",
+  "@noLevelLoaded": {
+    "description": "No level loaded message"
+  },
+  
+  "gamePaused": "Game paused",
+  "@gamePaused": {
+    "description": "Game paused message"
+  },
+  
+  "whatWouldYouLikeToDo": "What would you like to do?",
+  "@whatWouldYouLikeToDo": {
+    "description": "What would you like to do message"
+  },
+  
+  "resume": "Resume",
+  "@resume": {
+    "description": "Resume button text"
+  },
+  
+  "restart": "Restart",
+  "@restart": {
+    "description": "Restart button text"
+  },
+  
+  "menu": "Menu",
+  "@menu": {
+    "description": "Menu button text"
+  },
+  
+  "levelCompleted": "Level {id} Completed!",
+  "@levelCompleted": {
+    "description": "Level completed message",
+    "placeholders": {
+      "id": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  
+  "score": "Score",
+  "@score": {
+    "description": "Score text"
+  },
+  
+  "movesUsed": "Moves used",
+  "@movesUsed": {
+    "description": "Moves used text"
+  },
+  
+  "coins": "coins",
+  "@coins": {
+    "description": "Coins text"
+  },
+  
+  "nextLevel": "Next level",
+  "@nextLevel": {
+    "description": "Next level button text"
+  },
+  
+  "backToMenu": "Back to menu",
+  "@backToMenu": {
+    "description": "Back to menu button text"
+  },
+  
+  "levelFailed": "Level {id} Failed",
+  "@levelFailed": {
+    "description": "Level failed message",
+    "placeholders": {
+      "id": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  
+  "youHaveUsedAllMoves": "You have used all your moves!",
+  "@youHaveUsedAllMoves": {
+    "description": "You have used all moves message"
+  },
+  
+  "aboutTheGame": "About the game",
+  "@aboutTheGame": {
+    "description": "About the game text"
+  },
+  
+  "developer": "Developer",
+  "@developer": {
+    "description": "Developer text"
+  },
+  
+  "flutterDeveloper": "Flutter Developer",
+  "@flutterDeveloper": {
+    "description": "Flutter Developer text"
+  },
+  
+  "technologies": "Technologies",
+  "@technologies": {
+    "description": "Technologies text"
+  },
+  
+  "legalInformation": "Legal information",
+  "@legalInformation": {
+    "description": "Legal information text"
+  },
+  
+  "readOurTermsOfService": "Read our terms of service",
+  "@readOurTermsOfService": {
+    "description": "Read our terms of service text"
+  },
+  
+  "discoverHowWeProtectYourData": "Discover how we protect your data",
+  "@discoverHowWeProtectYourData": {
+    "description": "Discover how we protect your data text"
+  },
+  
+  "license": "License",
+  "@license": {
+    "description": "License text"
+  },
+  
+  "acknowledgments": "Acknowledgments",
+  "@acknowledgments": {
+    "description": "Acknowledgments text"
+  },
+  
+  "developedWithLove": "Developed with ❤️ by",
+  "@developedWithLove": {
+    "description": "Developed with love text"
+  },
+  
+  "objectives": "Objectives",
+  "@objectives": {
+    "description": "Objectives text"
+  },
+  
+  "movesRemaining": "Moves remaining",
+  "@movesRemaining": {
+    "description": "Moves remaining text"
+  },
+  
+  "shuffle": "Shuffle",
+  "@shuffle": {
+    "description": "Shuffle text"
+  },
+  
+  "hint": "Hint",
+  "@hint": {
+    "description": "Hint text"
+  },
+  
+  "noMovesPossible": "No moves possible. Use the shuffle button!",
+  "@noMovesPossible": {
+    "description": "No moves possible text"
+  },
+
+  "events": "Events",
+  "@events": {
+    "description": "Events screen title"
+  },
+
+  "activeEvent": "ACTIVE EVENT",
+  "@activeEvent": {
+    "description": "Active event banner title"
+  },
+
+  "daysRemaining": "{days} days remaining",
+  "@daysRemaining": {
+    "description": "Days remaining for event",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+
+  "participate": "Participate",
+  "@participate": {
+    "description": "Participate button text"
+  },
+
+  "startsIn": "Starts in {days} days",
+  "@startsIn": {
+    "description": "Event starts in X days",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+
+  "active": "ACTIVE",
+  "@active": {
+    "description": "Active status badge"
+  },
+
+  "rewards": "Rewards",
+  "@rewards": {
+    "description": "Rewards section title"
+  },
+
+  "others": "+{count} others",
+  "@others": {
+    "description": "Additional items count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "progress": "Progress",
+  "@progress": {
+    "description": "Progress section title"
+  },
+
+  "coins": "{quantity} coins",
+  "@coins": {
+    "description": "Coins reward text",
+    "placeholders": {
+      "quantity": {
+        "type": "int"
+      }
+    }
+  },
+
+  "gems": "{quantity} gems",
+  "@gems": {
+    "description": "Gems reward text",
+    "placeholders": {
+      "quantity": {
+        "type": "int"
+      }
+    }
+  },
+
+  "plant": "{rarity}★ Plant",
+  "@plant": {
+    "description": "Plant reward text",
+    "placeholders": {
+      "rarity": {
+        "type": "int"
+      }
+    }
+  },
+
+  "boosters": "{quantity} boosters",
+  "@boosters": {
+    "description": "Boosters reward text",
+    "placeholders": {
+      "quantity": {
+        "type": "int"
+      }
+    }
+  },
+
+  "completed": "COMPLETED",
+  "@completed": {
+    "description": "Completed status badge"
+  },
+
+  "description": "Description",
+  "@description": {
+    "description": "Description section title"
+  },
+
+  "challenges": "Challenges",
+  "@challenges": {
+    "description": "Challenges section title"
+  },
+
+  "comingSoon": "Coming soon",
+  "@comingSoon": {
+    "description": "Coming soon button text"
+  },
+
+  "rarePlant": "Rare {rarity} star plant",
+  "@rarePlant": {
+    "description": "Rare plant description",
+    "placeholders": {
+      "rarity": {
+        "type": "int"
+      }
+    }
+  },
+
+  "participationInProgress": "Participation in {eventName} in progress...",
+  "@participationInProgress": {
+    "description": "Participation message",
+    "placeholders": {
+      "eventName": {
+        "type": "String"
+      }
+    }
+  },
+
+  "springBloom": "Spring Bloom",
+  "@springBloom": {
+    "description": "Spring event name"
+  },
+
+  "springBloomDescription": "Celebrate renewal with magical flowers",
+  "@springBloomDescription": {
+    "description": "Spring event description"
+  },
+
+  "summerSolstice": "Summer Solstice",
+  "@summerSolstice": {
+    "description": "Summer event name"
+  },
+
+  "summerSolsticeDescription": "Enjoy the sun with sunny plants",
+  "@summerSolsticeDescription": {
+    "description": "Summer event description"
+  },
+
+  "autumnHarvest": "Autumn Harvest",
+  "@autumnHarvest": {
+    "description": "Autumn event name"
+  },
+
+  "autumnHarvestDescription": "Harvest the fruits of your efforts",
+  "@autumnHarvestDescription": {
+    "description": "Autumn event description"
+  },
+
+  "completeLevels": "Complete {target} levels",
+  "@completeLevels": {
+    "description": "Complete levels challenge",
+    "placeholders": {
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+
+  "earnStars": "Earn {target} stars",
+  "@earnStars": {
+    "description": "Earn stars challenge",
+    "placeholders": {
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+
+  "useBoosters": "Use {target} boosters",
+  "@useBoosters": {
+    "description": "Use boosters challenge",
+    "placeholders": {
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+
+  "scorePoints": "Score {target} points",
+  "@scorePoints": {
+    "description": "Score points challenge",
+    "placeholders": {
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+
+  "shop": "Shop",
+  "@shop": {
+    "description": "Shop screen title"
+  },
+
+  "popularItems": "Popular Items",
+  "@popularItems": {
+    "description": "Popular items section title"
+  },
+
+  "all": "All",
+  "@all": {
+    "description": "All category filter"
+  },
+
+  "lives": "Lives",
+  "@lives": {
+    "description": "Lives category filter"
+  },
+
+  "currency": "Currency",
+  "@currency": {
+    "description": "Currency category filter"
+  },
+
+  "boosters": "Boosters",
+  "@boosters": {
+    "description": "Boosters category filter"
+  },
+
+  "premium": "Premium",
+  "@premium": {
+    "description": "Premium category filter"
+  },
+
+  "buy": "Buy",
+  "@buy": {
+    "description": "Buy button text"
+  },
+
+  "pop": "POP",
+  "@pop": {
+    "description": "Popular badge text"
+  },
+
+  "notEnoughCurrency": "You don't have enough {currency}",
+  "@notEnoughCurrency": {
+    "description": "Not enough currency message",
+    "placeholders": {
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+
+  "purchaseSuccess": "{item} purchased successfully!",
+  "@purchaseSuccess": {
+    "description": "Purchase success message",
+    "placeholders": {
+      "item": {
+        "type": "String"
+      }
+    }
+  },
+
+  "lives5": "5 Lives",
+  "@lives5": {
+    "description": "5 lives item title"
+  },
+
+  "lives5Description": "Recharge your lives to keep playing",
+  "@lives5Description": {
+    "description": "5 lives item description"
+  },
+
+  "lives10": "10 Lives",
+  "@lives10": {
+    "description": "10 lives item title"
+  },
+
+  "lives10Description": "Larger life pack",
+  "@lives10Description": {
+    "description": "10 lives item description"
+  },
+
+  "coins100": "100 Coins",
+  "@coins100": {
+    "description": "100 coins item title"
+  },
+
+  "coins100Description": "Small coin pack",
+  "@coins100Description": {
+    "description": "100 coins item description"
+  },
+
+  "coins500": "500 Coins",
+  "@coins500": {
+    "description": "500 coins item title"
+  },
+
+  "coins500Description": "Medium coin pack",
+  "@coins500Description": {
+    "description": "500 coins item description"
+  },
+
+  "coins1000": "1000 Coins",
+  "@coins1000": {
+    "description": "1000 coins item title"
+  },
+
+  "coins1000Description": "Large coin pack",
+  "@coins1000Description": {
+    "description": "1000 coins item description"
+  },
+
+  "gems50": "50 Gems",
+  "@gems50": {
+    "description": "50 gems item title"
+  },
+
+  "gems50Description": "Premium gem pack",
+  "@gems50Description": {
+    "description": "50 gems item description"
+  },
+
+  "shuffler": "Shuffler",
+  "@shuffler": {
+    "description": "Shuffler booster title"
+  },
+
+  "shufflerDescription": "Automatically shuffles the board",
+  "@shufflerDescription": {
+    "description": "Shuffler booster description"
+  },
+
+  "hint": "Hint",
+  "@hint": {
+    "description": "Hint booster title"
+  },
+
+  "hintDescription": "Shows a possible move",
+  "@hintDescription": {
+    "description": "Hint booster description"
+  },
+
+  "removeAds": "No Ads",
+  "@removeAds": {
+    "description": "Remove ads item title"
+  },
+
+  "removeAdsDescription": "Removes all advertisements",
+  "@removeAdsDescription": {
+    "description": "Remove ads item description"
+  },
+
+  "collection": "Collection",
+  "@collection": {
+    "description": "Collection screen title"
+  },
+
+  "plants": "Plants",
+  "@plants": {
+    "description": "Plants statistic label"
+  },
+
+  "rarity": "Rarity",
+  "@rarity": {
+    "description": "Rarity statistic label"
+  },
+
+  "level": "Level",
+  "@level": {
+    "description": "Level statistic label"
+  },
+
+  "all": "All",
+  "@all": {
+    "description": "All rarity filter"
+  },
+
+  "plantLevel": "Level {level}",
+  "@plantLevel": {
+    "description": "Plant level text",
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+
+  "bonus": "+{count} bonus",
+  "@bonus": {
+    "description": "Bonus count text",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "description": "Description",
+  "@description": {
+    "description": "Description section title"
+  },
+
+  "unlockCondition": "Unlock Condition",
+  "@unlockCondition": {
+    "description": "Unlock condition section title"
+  },
+
+  "bonuses": "Bonuses",
+  "@bonuses": {
+    "description": "Bonuses section title"
+  },
+
+  "upgrade": "Upgrade",
+  "@upgrade": {
+    "description": "Upgrade button text"
+  },
+
+  "locked": "Locked",
+  "@locked": {
+    "description": "Locked button text"
+  },
+
+  "extraMoves": "+{value} extra moves",
+  "@extraMoves": {
+    "description": "Extra moves bonus description",
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+
+  "scoreMultiplier": "Score x{value}",
+  "@scoreMultiplier": {
+    "description": "Score multiplier bonus description",
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+
+  "coinMultiplier": "Coins x{value}",
+  "@coinMultiplier": {
+    "description": "Coin multiplier bonus description",
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+
+  "extraLives": "+{value} life(s)",
+  "@extraLives": {
+    "description": "Extra lives bonus description",
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+
+  "plantUpgraded": "{plantName} upgraded to level {level}!",
+  "@plantUpgraded": {
+    "description": "Plant upgrade success message",
+    "placeholders": {
+      "plantName": {
+        "type": "String"
+      },
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+
+  "success": "Achievements",
+  "@success": {
+    "description": "Achievements screen title"
+  },
+
+  "rewards": "Rewards",
+  "@rewards": {
+    "description": "Rewards statistic label"
+  },
+
+  "progress": "Progress",
+  "@progress": {
+    "description": "Progress statistic label"
+  },
+
+  "all": "All",
+  "@all": {
+    "description": "All category filter"
+  },
+
+  "progression": "Progression",
+  "@progression": {
+    "description": "Progression category filter"
+  },
+
+  "score": "Score",
+  "@score": {
+    "description": "Score category filter"
+  },
+
+  "collection": "Collection",
+  "@collection": {
+    "description": "Collection category filter"
+  },
+
+  "game": "Game",
+  "@game": {
+    "description": "Game category filter"
+  },
+
+  "social": "Social",
+  "@social": {
+    "description": "Social category filter"
+  },
+
+  "completed": "COMPLETED",
+  "@completed": {
+    "description": "Completed achievement badge"
+  },
+
+  "description": "Description",
+  "@description": {
+    "description": "Description section title"
+  },
+
+  "progress": "Progress",
+  "@progress": {
+    "description": "Progress section title"
+  },
+
+  "reward": "Reward",
+  "@reward": {
+    "description": "Reward section title"
+  },
+
+  "rewardClaimed": "Reward claimed",
+  "@rewardClaimed": {
+    "description": "Reward claimed button text"
+  },
+
+  "inProgress": "In progress...",
+  "@inProgress": {
+    "description": "In progress button text"
+  },
+
+  "rewardClaimedMessage": "Reward for {achievementTitle} claimed!",
+  "@rewardClaimedMessage": {
+    "description": "Reward claimed success message",
+    "placeholders": {
+      "achievementTitle": {
+        "type": "String"
+      }
+    }
+  },
+
+  "firstSteps": "First Steps",
+  "@firstSteps": {
+    "description": "First steps achievement title"
+  },
+
+  "firstStepsDescription": "Complete your first level",
+  "@firstStepsDescription": {
+    "description": "First steps achievement description"
+  },
+
+  "confirmedBeginner": "Confirmed Beginner",
+  "@confirmedBeginner": {
+    "description": "Confirmed beginner achievement title"
+  },
+
+  "confirmedBeginnerDescription": "Complete 10 levels",
+  "@confirmedBeginnerDescription": {
+    "description": "Confirmed beginner achievement description"
+  },
+
+  "expertInTheMaking": "Expert in the Making",
+  "@expertInTheMaking": {
+    "description": "Expert in the making achievement title"
+  },
+
+  "expertInTheMakingDescription": "Complete 50 levels",
+  "@expertInTheMakingDescription": {
+    "description": "Expert in the making achievement description"
+  },
+
+  "perfectionist": "Perfectionist",
+  "@perfectionist": {
+    "description": "Perfectionist achievement title"
+  },
+
+  "perfectionistDescription": "Get 3 stars on a level",
+  "@perfectionistDescription": {
+    "description": "Perfectionist achievement description"
+  },
+
+  "scorer": "Scorer",
+  "@scorer": {
+    "description": "Scorer achievement title"
+  },
+
+  "scorerDescription": "Score 1,000 points in one level",
+  "@scorerDescription": {
+    "description": "Scorer achievement description"
+  },
+
+  "scoreMaster": "Score Master",
+  "@scoreMaster": {
+    "description": "Score master achievement title"
+  },
+
+  "scoreMasterDescription": "Score 5,000 points in one level",
+  "@scoreMasterDescription": {
+    "description": "Score master achievement description"
+  },
+
+  "accumulator": "Accumulator",
+  "@accumulator": {
+    "description": "Accumulator achievement title"
+  },
+
+  "accumulatorDescription": "Score a total of 100,000 points",
+  "@accumulatorDescription": {
+    "description": "Accumulator achievement description"
+  },
+
+  "beginnerBotanist": "Beginner Botanist",
+  "@beginnerBotanist": {
+    "description": "Beginner botanist achievement title"
+  },
+
+  "beginnerBotanistDescription": "Unlock your first plant",
+  "@beginnerBotanistDescription": {
+    "description": "Beginner botanist achievement description"
+  },
+
+  "collector": "Collector",
+  "@collector": {
+    "description": "Collector achievement title"
+  },
+
+  "collectorDescription": "Unlock 5 plants",
+  "@collectorDescription": {
+    "description": "Collector achievement description"
+  },
+
+  "rarityHunter": "Rarity Hunter",
+  "@rarityHunter": {
+    "description": "Rarity hunter achievement title"
+  },
+
+  "rarityHunterDescription": "Unlock a 4-star or higher plant",
+  "@rarityHunterDescription": {
+    "description": "Rarity hunter achievement description"
+  },
+
+  "comboMaster": "Combo Master",
+  "@comboMaster": {
+    "description": "Combo master achievement title"
+  },
+
+  "comboMasterDescription": "Make a 5-tile combo",
+  "@comboMasterDescription": {
+    "description": "Combo master achievement description"
+  },
+
+  "legendaryCombo": "Legendary Combo",
+  "@legendaryCombo": {
+    "description": "Legendary combo achievement title"
+  },
+
+  "legendaryComboDescription": "Make a 10-tile combo",
+  "@legendaryComboDescription": {
+    "description": "Legendary combo achievement description"
+  },
+
+  "saver": "Saver",
+  "@saver": {
+    "description": "Saver achievement title"
+  },
+
+  "saverDescription": "Complete a level with more than 5 moves remaining",
+  "@saverDescription": {
+    "description": "Saver achievement description"
+  },
+
+  "loyal": "Loyal",
+  "@loyal": {
+    "description": "Loyal achievement title"
+  },
+
+  "loyalDescription": "Log in 7 days in a row",
+  "@loyalDescription": {
+    "description": "Loyal achievement description"
+  },
+
+  "sharer": "Sharer",
+  "@sharer": {
+    "description": "Sharer achievement title"
+  },
+
+  "sharerDescription": "Share your score 3 times",
+  "@sharerDescription": {
+    "description": "Sharer achievement description"
+  },
+
+  "profile": "Profile",
+  "@profile": {
+    "description": "Profile screen title"
+  },
+
+  "userLevel": "Level {level}",
+  "@userLevel": {
+    "description": "User level text",
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+
+  "completedLevels": "Completed Levels",
+  "@completedLevels": {
+    "description": "Completed levels statistic"
+  },
+
+  "bestStreak": "Best Streak",
+  "@bestStreak": {
+    "description": "Best streak statistic"
+  },
+
+  "lives": "Lives",
+  "@lives": {
+    "description": "Lives statistic"
+  },
+
+  "detailedStats": "Detailed Statistics",
+  "@detailedStats": {
+    "description": "Detailed statistics section title"
+  },
+
+  "totalCoins": "Total Coins",
+  "@totalCoins": {
+    "description": "Total coins statistic"
+  },
+
+  "gems": "Gems",
+  "@gems": {
+    "description": "Gems statistic"
+  },
+
+  "currentStreak": "Current Streak",
+  "@currentStreak": {
+    "description": "Current streak statistic"
+  },
+
+  "starsEarned": "Stars Earned",
+  "@starsEarned": {
+    "description": "Stars earned statistic"
+  },
+
+  "highestLevel": "Highest Level",
+  "@highestLevel": {
+    "description": "Highest level statistic"
+  },
+
+  "quickActions": "Quick Actions",
+  "@quickActions": {
+    "description": "Quick actions section title"
+  },
+
+  "reviewTutorial": "Review Tutorial",
+  "@reviewTutorial": {
+    "description": "Review tutorial action"
+  },
+
+  "resetData": "Reset Data",
+  "@resetData": {
+    "description": "Reset data action"
+  },
+
+  "shareProfile": "Share Profile",
+  "@shareProfile": {
+    "description": "Share profile action"
+  },
+
+  "recentAchievements": "Recent Achievements",
+  "@recentAchievements": {
+    "description": "Recent achievements section title"
+  },
+
+  "firstLevelCompleted": "First level completed",
+  "@firstLevelCompleted": {
+    "description": "First level completed achievement"
+  },
+
+  "threeStarsObtained": "3 stars obtained",
+  "@threeStarsObtained": {
+    "description": "Three stars obtained achievement"
+  },
+
+  "streakOfFive": "Streak of 5 levels",
+  "@streakOfFive": {
+    "description": "Streak of five levels achievement"
+  },
+
+  "daysAgo": "{days} days ago",
+  "@daysAgo": {
+    "description": "Days ago text",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+
+  "dayAgo": "1 day ago",
+  "@dayAgo": {
+    "description": "One day ago text"
+  },
+
+  "today": "Today",
+  "@today": {
+    "description": "Today text"
+  },
+
+  "resetDataTitle": "Reset data?",
+  "@resetDataTitle": {
+    "description": "Reset data dialog title"
+  },
+
+  "resetDataMessage": "This action will delete all your progress data. This action is irreversible.",
+  "@resetDataMessage": {
+    "description": "Reset data dialog message"
+  },
+
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+
+  "reset": "Reset",
+  "@reset": {
+    "description": "Reset button text"
+  },
+
+  "dataReset": "Data reset",
+  "@dataReset": {
+    "description": "Data reset success message"
+  },
+
+  "shareComingSoon": "Sharing coming soon...",
+  "@shareComingSoon": {
+    "description": "Share coming soon message"
+  },
+
+  "gems": "{count} gems",
+  "@gems": {
+    "description": "Gems count text",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "boosters": "{count} boosters",
+  "@boosters": {
+    "description": "Boosters count text",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "termsOfService": "Terms of Service",
+  "@termsOfService": {
+    "description": "Terms of service screen title"
+  },
+
+  "lastUpdated": "Last updated: {date}",
+  "@lastUpdated": {
+    "description": "Last updated date text",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+
+  "acceptanceOfTerms": "1. Acceptance of Terms",
+  "@acceptanceOfTerms": {
+    "description": "Acceptance of terms section title"
+  },
+
+  "acceptanceOfTermsContent": "By using the Mind Bloom application, you agree to be bound by these terms of use. If you do not accept these terms, please do not use our application.",
+  "@acceptanceOfTermsContent": {
+    "description": "Acceptance of terms section content"
+  },
+
+  "serviceDescription": "2. Service Description",
+  "@serviceDescription": {
+    "description": "Service description section title"
+  },
+
+  "serviceDescriptionContent": "Mind Bloom is a mobile puzzle game developed by YACOUBA SANTARA. The application offers match-3 mechanics with RPG progression elements in a magical garden universe.",
+  "@serviceDescriptionContent": {
+    "description": "Service description section content"
+  },
+
+  "authorizedUse": "3. Authorized Use",
+  "@authorizedUse": {
+    "description": "Authorized use section title"
+  },
+
+  "authorizedUseContent": "You may use Mind Bloom for personal and non-commercial purposes only. It is prohibited to:\n\n• Copy, modify or distribute the application\n• Use the application for commercial purposes without authorization\n• Attempt to bypass security measures\n• Use the application in a way that harms other users",
+  "@authorizedUseContent": {
+    "description": "Authorized use section content"
+  },
+
+  "intellectualProperty": "4. Content and Intellectual Property",
+  "@intellectualProperty": {
+    "description": "Intellectual property section title"
+  },
+
+  "intellectualPropertyContent": "All elements of Mind Bloom, including but not limited to graphics, sounds, source code, and design, are the exclusive property of YACOUBA SANTARA and are protected by copyright laws.",
+  "@intellectualPropertyContent": {
+    "description": "Intellectual property section content"
+  },
+
+  "inAppPurchases": "5. In-App Purchases",
+  "@inAppPurchases": {
+    "description": "In-app purchases section title"
+  },
+
+  "inAppPurchasesContent": "The application may contain in-app purchases for additional lives, boosters, or other game elements. All purchases are final and non-refundable, except as required by applicable law.",
+  "@inAppPurchasesContent": {
+    "description": "In-app purchases section content"
+  },
+
+  "advertisements": "6. Advertisements",
+  "@advertisements": {
+    "description": "Advertisements section title"
+  },
+
+  "advertisementsContent": "Mind Bloom may display third-party advertisements. These advertisements are managed by advertising partners and we are not responsible for the content of these advertisements.",
+  "@advertisementsContent": {
+    "description": "Advertisements section content"
+  },
+
+  "liabilityLimitation": "7. Limitation of Liability",
+  "@liabilityLimitation": {
+    "description": "Liability limitation section title"
+  },
+
+  "liabilityLimitationContent": "The application is provided 'as is' without warranty of any kind. We will not be liable for direct, indirect, incidental or consequential damages resulting from the use of the application.",
+  "@liabilityLimitationContent": {
+    "description": "Liability limitation section content"
+  },
+
+  "termsModifications": "8. Terms Modifications",
+  "@termsModifications": {
+    "description": "Terms modifications section title"
+  },
+
+  "termsModificationsContent": "We reserve the right to modify these terms of use at any time. Modifications will take effect upon their publication in the application. Your continued use of the application constitutes your acceptance of the modified terms.",
+  "@termsModificationsContent": {
+    "description": "Terms modifications section content"
+  },
+
+  "termination": "9. Termination",
+  "@termination": {
+    "description": "Termination section title"
+  },
+
+  "terminationContent": "We reserve the right to suspend or terminate your access to the application at any time, without notice, for violation of these terms of use.",
+  "@terminationContent": {
+    "description": "Termination section content"
+  },
+
+  "applicableLaw": "10. Applicable Law",
+  "@applicableLaw": {
+    "description": "Applicable law section title"
+  },
+
+  "applicableLawContent": "These terms of use are governed by French law. Any dispute will be subject to the exclusive jurisdiction of French courts.",
+  "@applicableLawContent": {
+    "description": "Applicable law section content"
+  },
+
+  "contact": "Contact",
+  "@contact": {
+    "description": "Contact section title"
+  },
+
+  "contactContent": "For any questions regarding these terms of use, you can contact us at:",
+  "@contactContent": {
+    "description": "Contact section content"
+  },
+
+  "developedWithLove": "Developed with ❤️ by",
+  "@developedWithLove": {
+    "description": "Developer signature text"
+  },
+
+  "dataStorage": "4. Data Storage and Security",
+  "@dataStorage": {
+    "description": "Data storage section title"
+  },
+
+  "dataStorageContent": "Your data is stored securely:\n\n• **Encryption**: Sensitive data is encrypted\n• **Limited Access**: Only authorized personnel can access data\n• **Backup**: Regular backups are performed\n• **Duration**: Data is kept only as long as necessary",
+  "@dataStorageContent": {
+    "description": "Data storage section content"
+  },
+
+  "cookies": "5. Cookies and Similar Technologies",
+  "@cookies": {
+    "description": "Cookies section title"
+  },
+
+  "cookiesContent": "The application may use:\n\n• **Local Cookies**: To save your game preferences\n• **Advertising Identifiers**: To personalize advertisements\n• **Analytics**: To understand application usage\n\nYou can disable these features in your device settings.",
+  "@cookiesContent": {
+    "description": "Cookies section content"
+  },
+
+  "thirdPartyAds": "7. Third-Party Advertisements and Partners",
+  "@thirdPartyAds": {
+    "description": "Third-party ads section title"
+  },
+
+  "thirdPartyAdsContent": "The application may display advertisements through third-party partners like Google AdMob. These partners may collect information to personalize advertisements. You can:\n\n• Disable ad personalization in settings\n• Use your device's privacy settings\n• Contact advertising partners directly",
+  "@thirdPartyAdsContent": {
+    "description": "Third-party ads section content"
+  },
+
+  "minorsData": "8. Minors' Data",
+  "@minorsData": {
+    "description": "Minors data section title"
+  },
+
+  "minorsDataContent": "Mind Bloom does not knowingly collect personal information from children under 13. If we discover that a child under 13 has provided us with personal information, we will delete it immediately.",
+  "@minorsDataContent": {
+    "description": "Minors data section content"
+  },
+
+  "policyChanges": "9. Changes to This Policy",
+  "@policyChanges": {
+    "description": "Policy changes section title"
+  },
+
+  "policyChangesContent": "We may modify this privacy policy at any time. Important changes will be communicated via the application or by email. We encourage you to regularly review this policy.",
+  "@policyChangesContent": {
+    "description": "Policy changes section content"
+  },
+
+  "legalBasis": "10. Legal Basis for Processing",
+  "@legalBasis": {
+    "description": "Legal basis section title"
+  },
+
+  "legalBasisContent": "We process your personal data on the basis of:\n\n• **Contract Performance**: To provide the gaming service\n• **Legitimate Interest**: To improve the application and prevent fraud\n• **Consent**: For personalized advertisements and marketing communications",
+  "@legalBasisContent": {
+    "description": "Legal basis section content"
+  },
+
+  "contactDPO": "Contact and DPO",
+  "@contactDPO": {
+    "description": "Contact and DPO section title"
+  },
+
+  "contactDPOContent": "For any questions regarding this privacy policy or to exercise your rights, contact us:",
+  "@contactDPOContent": {
+    "description": "Contact and DPO section content"
+  },
+
+  "responseTime": "We commit to responding to your request within 30 days.",
+  "@responseTime": {
+    "description": "Response time commitment text"
+  },
+
+  "introduction": "Introduction",
+  "@introduction": {
+    "description": "Introduction section title"
+  },
+
+  "account": "Account",
+  "@account": {
+    "description": "Account section title"
+  },
+
+  "username": "Username",
+  "@username": {
+    "description": "Username label"
+  },
+
+  "experience": "Experience",
+  "@experience": {
+    "description": "Experience label"
+  },
+
+  "currentStreak": "Current Streak",
+  "@currentStreak": {
+    "description": "Current streak label"
+  },
+
+  "editUsername": "Edit Username",
+  "@editUsername": {
+    "description": "Edit username dialog title"
+  },
+
+  "enterNewUsername": "Enter new username",
+  "@enterNewUsername": {
+    "description": "Enter new username hint"
+  },
+
+  "save": "Save",
+  "@save": {
+    "description": "Save button text"
+  },
+
+  "usernameUpdated": "Username updated successfully",
+  "@usernameUpdated": {
+    "description": "Username updated success message"
+  },
+
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme section title"
+  },
+
+  "lightTheme": "Light",
+  "@lightTheme": {
+    "description": "Light theme option"
+  },
+
+  "darkTheme": "Dark",
+  "@darkTheme": {
+    "description": "Dark theme option"
+  },
+
+  "systemTheme": "System",
+  "@systemTheme": {
+    "description": "System theme option"
+  },
+
+  "themeDescription": "Choose your preferred theme",
+  "@themeDescription": {
+    "description": "Theme section description"
+  },
+
+  "shareProfileMessage": "Check out my progress in Mind Bloom! Can you beat my score?",
+  "@shareProfileMessage": {
+    "description": "Message shown when sharing profile"
+  },
+
+  "levelsCompleted": "Levels Completed",
+  "@levelsCompleted": {
+    "description": "Label for completed levels count"
+  },
+
+  "watchAdForLife": "Watch Ad for Life",
+  "@watchAdForLife": {
+    "description": "Title for watch ad dialog"
+  },
+  "watchAdForLifeDescription": "Watch a short video to earn one life and continue playing!",
+  "@watchAdForLifeDescription": {
+    "description": "Description for watch ad dialog"
+  },
+  "earnOneLife": "Earn 1 Life",
+  "@earnOneLife": {
+    "description": "Text showing what user will earn"
+  },
+  "watchAd": "Watch Ad",
+  "@watchAd": {
+    "description": "Button text to watch ad"
+  },
+  "lifeEarned": "Life earned! You can continue playing.",
+  "@lifeEarned": {
+    "description": "Message when life is earned"
+  },
+  "noAdAvailable": "No ad available at the moment. Please try again later.",
+  "@noAdAvailable": {
+    "description": "Message when no ad is available"
+  },
+  "adError": "Error loading ad. Please try again.",
+  "@adError": {
+    "description": "Message when ad fails to load"
+  }
+}

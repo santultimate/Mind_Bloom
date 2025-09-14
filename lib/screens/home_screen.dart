@@ -14,10 +14,10 @@ import 'package:mind_bloom/screens/collection_screen.dart';
 import 'package:mind_bloom/screens/achievements_screen.dart';
 import 'package:mind_bloom/screens/profile_screen.dart';
 import 'package:mind_bloom/screens/about_screen.dart';
-import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/widgets/level_card.dart';
 import 'package:mind_bloom/widgets/status_bar.dart';
 import 'package:mind_bloom/widgets/banner_ad_widget.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -34,23 +34,103 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _generateLevels();
     _playBackgroundMusic();
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_levels.isEmpty) {
+      _generateLevels();
+    }
+  }
+
   void _generateLevels() {
-    // Générer 50 niveaux pour commencer
+    // Générer 50 niveaux avec difficulté progressive
     for (int i = 1; i <= 50; i++) {
       const tileTypes = TileType.values;
       final randomTile = tileTypes[i % tileTypes.length];
 
+      // Calculer la difficulté progressive
+      final difficulty = _calculateLevelDifficulty(i);
+      final targetCount = _calculateTargetCount(i, difficulty);
+      final maxMoves = _calculateMaxMoves(i, difficulty);
+      final gridSize = _calculateGridSize(i, difficulty);
+
       _levels.add(Level.simple(
         id: i,
-        name: 'Niveau $i',
+        name: '${AppLocalizations.of(context)!.level} $i',
         targetTile: randomTile,
-        targetCount: 10 + (i * 2),
-        maxMoves: 20 + (i * 2),
+        targetCount: targetCount,
+        maxMoves: maxMoves,
+        gridSize: gridSize,
       ));
+    }
+  }
+
+  /// Calcule la difficulté d'un niveau basée sur son ID
+  LevelDifficulty _calculateLevelDifficulty(int levelId) {
+    if (levelId <= 10) return LevelDifficulty.easy;
+    if (levelId <= 25) return LevelDifficulty.medium;
+    if (levelId <= 40) return LevelDifficulty.hard;
+    return LevelDifficulty.expert;
+  }
+
+  /// Calcule le nombre de tuiles à collecter basé sur le niveau et la difficulté
+  int _calculateTargetCount(int levelId, LevelDifficulty difficulty) {
+    int baseCount = 8;
+
+    switch (difficulty) {
+      case LevelDifficulty.easy:
+        baseCount = 8 + (levelId * 1);
+        break;
+      case LevelDifficulty.medium:
+        baseCount = 12 + (levelId * 1.5).round();
+        break;
+      case LevelDifficulty.hard:
+        baseCount = 18 + (levelId * 2).round();
+        break;
+      case LevelDifficulty.expert:
+        baseCount = 25 + (levelId * 2.5).round();
+        break;
+    }
+
+    return baseCount.clamp(8, 50);
+  }
+
+  /// Calcule le nombre maximum de mouvements basé sur le niveau et la difficulté
+  int _calculateMaxMoves(int levelId, LevelDifficulty difficulty) {
+    int baseMoves = 20;
+
+    switch (difficulty) {
+      case LevelDifficulty.easy:
+        baseMoves = 25 + (levelId * 1);
+        break;
+      case LevelDifficulty.medium:
+        baseMoves = 20 + (levelId * 0.8).round();
+        break;
+      case LevelDifficulty.hard:
+        baseMoves = 18 + (levelId * 0.6).round();
+        break;
+      case LevelDifficulty.expert:
+        baseMoves = 15 + (levelId * 0.5).round();
+        break;
+    }
+
+    return baseMoves.clamp(15, 40);
+  }
+
+  /// Calcule la taille de la grille basée sur le niveau et la difficulté
+  int _calculateGridSize(int levelId, LevelDifficulty difficulty) {
+    switch (difficulty) {
+      case LevelDifficulty.easy:
+        return 6; // Grille 6x6 pour les débutants
+      case LevelDifficulty.medium:
+        return levelId <= 20 ? 6 : 7; // Transition vers 7x7
+      case LevelDifficulty.hard:
+        return 7; // Grille 7x7 pour les niveaux difficiles
+      case LevelDifficulty.expert:
+        return levelId <= 45 ? 7 : 8; // Transition vers 8x8 pour les experts
     }
   }
 
@@ -62,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -75,9 +155,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: [
                   Text(
-                    'Monde $_currentWorld',
+                    '${AppLocalizations.of(context)!.world} $_currentWorld',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: AppColors.textPrimary,
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontWeight: FontWeight.bold,
                         ),
                   ),
@@ -90,8 +170,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     },
-                    icon: const Icon(Icons.info_outline,
-                        color: AppColors.textSecondary),
+                    icon: Icon(Icons.info_outline,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onSurface
+                            .withOpacity(0.6)),
                   ),
                   IconButton(
                     onPressed: () {
@@ -101,8 +184,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     },
-                    icon: const Icon(Icons.settings,
-                        color: AppColors.textSecondary),
+                    icon: Icon(Icons.settings,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onSurface
+                            .withOpacity(0.6)),
                   ),
                 ],
               ),
@@ -141,11 +227,11 @@ class _HomeScreenState extends State<HomeScreen> {
             // Barre de navigation
             Container(
               padding: const EdgeInsets.all(20),
-              decoration: const BoxDecoration(
-                color: AppColors.surface,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.shadow,
+                    color: Theme.of(context).shadowColor,
                     blurRadius: 10,
                     offset: Offset(0, -2),
                   ),
@@ -156,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   _buildNavButton(
                     icon: Icons.home,
-                    label: 'Accueil',
+                    label: AppLocalizations.of(context)!.home,
                     isSelected: _currentIndex == 0,
                     onTap: () {
                       setState(() {
@@ -166,7 +252,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   _buildNavButton(
                     icon: Icons.event,
-                    label: 'Événements',
+                    label: AppLocalizations.of(context)!.events,
                     isSelected: _currentIndex == 1,
                     onTap: () {
                       setState(() {
@@ -181,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   _buildNavButton(
                     icon: Icons.shopping_bag,
-                    label: 'Boutique',
+                    label: AppLocalizations.of(context)!.shop,
                     isSelected: _currentIndex == 2,
                     onTap: () {
                       setState(() {
@@ -196,7 +282,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   _buildNavButton(
                     icon: Icons.collections,
-                    label: 'Collection',
+                    label: AppLocalizations.of(context)!.collection,
                     isSelected: _currentIndex == 3,
                     onTap: () {
                       setState(() {
@@ -211,7 +297,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   _buildNavButton(
                     icon: Icons.emoji_events,
-                    label: 'Succès',
+                    label: AppLocalizations.of(context)!.achievements,
                     isSelected: _currentIndex == 4,
                     onTap: () {
                       setState(() {
@@ -226,7 +312,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   _buildNavButton(
                     icon: Icons.person,
-                    label: 'Profil',
+                    label: AppLocalizations.of(context)!.profile,
                     isSelected: _currentIndex == 5,
                     onTap: () {
                       setState(() {
@@ -262,12 +348,16 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: isSelected ? AppColors.primary : Colors.transparent,
+              color: isSelected
+                  ? Theme.of(context).colorScheme.primary
+                  : Colors.transparent,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(
               icon,
-              color: isSelected ? Colors.white : AppColors.textSecondary,
+              color: isSelected
+                  ? Colors.white
+                  : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
               size: 24,
             ),
           ),
@@ -275,8 +365,12 @@ class _HomeScreenState extends State<HomeScreen> {
           Text(
             label,
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color:
-                      isSelected ? AppColors.primary : AppColors.textSecondary,
+                  color: isSelected
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.6),
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                 ),
           ),
@@ -325,13 +419,12 @@ class _HomeScreenState extends State<HomeScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Plus de vies !'),
-        content: const Text(
-            'Vous n\'avez plus de vies. Regardez une publicité pour en obtenir une gratuite, attendez qu\'elles se rechargent ou achetez-en plus.'),
+        title: Text(AppLocalizations.of(context)!.noMoreLives),
+        content: Text(AppLocalizations.of(context)!.noMoreLivesMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Attendre'),
+            child: Text(AppLocalizations.of(context)!.wait),
           ),
           ElevatedButton(
             onPressed: () {
@@ -343,7 +436,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
             },
-            child: const Text('Acheter'),
+            child: Text(AppLocalizations.of(context)!.buy),
           ),
         ],
       ),
@@ -354,13 +447,12 @@ class _HomeScreenState extends State<HomeScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Niveau verrouillé'),
-        content: const Text(
-            'Vous devez compléter le niveau précédent pour débloquer celui-ci.'),
+        title: Text(AppLocalizations.of(context)!.levelLocked),
+        content: Text(AppLocalizations.of(context)!.levelLockedMessage),
         actions: [
           ElevatedButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('OK'),
+            child: Text(AppLocalizations.of(context)!.ok),
           ),
         ],
       ),

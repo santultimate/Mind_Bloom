@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
 import 'package:mind_bloom/providers/user_provider.dart';
+import 'package:mind_bloom/providers/language_provider.dart';
+import 'package:mind_bloom/providers/theme_provider.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
+import 'package:mind_bloom/screens/terms_of_service_screen.dart';
+import 'package:mind_bloom/screens/privacy_policy_screen.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -14,10 +19,12 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('Paramètres'),
+        title: Text(l10n.settings),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
@@ -28,7 +35,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         children: [
           // Section Audio
           _buildSection(
-            title: 'Audio',
+            title: l10n.audio,
             icon: Icons.volume_up,
             children: [
               Consumer<AudioProvider>(
@@ -36,8 +43,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   return Column(
                     children: [
                       _buildSwitchTile(
-                        title: 'Musique',
-                        subtitle: 'Activer/désactiver la musique de fond',
+                        title: l10n.music,
+                        subtitle: l10n.enableDisableMusic,
                         value: audioProvider.isMusicEnabled,
                         onChanged: (value) {
                           audioProvider.toggleMusicEnabled();
@@ -45,7 +52,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       if (audioProvider.isMusicEnabled)
                         _buildSliderTile(
-                          title: 'Volume de la musique',
+                          title: l10n.musicVolume,
                           value: audioProvider.musicVolume,
                           onChanged: (value) {
                             audioProvider.setMusicVolume(value);
@@ -53,8 +60,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                       const SizedBox(height: 16),
                       _buildSwitchTile(
-                        title: 'Effets sonores',
-                        subtitle: 'Activer/désactiver les effets sonores',
+                        title: l10n.soundEffects,
+                        subtitle: l10n.enableDisableSfx,
                         value: audioProvider.isSfxEnabled,
                         onChanged: (value) {
                           audioProvider.toggleSfxEnabled();
@@ -62,7 +69,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       if (audioProvider.isSfxEnabled)
                         _buildSliderTile(
-                          title: 'Volume des effets',
+                          title: l10n.effectsVolume,
                           value: audioProvider.sfxVolume,
                           onChanged: (value) {
                             audioProvider.setSfxVolume(value);
@@ -79,7 +86,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           // Section Jeu
           _buildSection(
-            title: 'Jeu',
+            title: l10n.game,
             icon: Icons.games,
             children: [
               Consumer<UserProvider>(
@@ -87,16 +94,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   return Column(
                     children: [
                       _buildSwitchTile(
-                        title: 'Animations',
-                        subtitle: 'Activer/désactiver les animations',
+                        title: l10n.animations,
+                        subtitle: l10n.enableDisableAnimations,
                         value: userProvider.animationsEnabled,
                         onChanged: (value) {
                           userProvider.setAnimationsEnabled(value);
                         },
                       ),
                       _buildSwitchTile(
-                        title: 'Vibrations',
-                        subtitle: 'Activer/désactiver les vibrations',
+                        title: l10n.vibrations,
+                        subtitle: l10n.enableDisableVibrations,
                         value: userProvider.vibrationsEnabled,
                         onChanged: (value) {
                           userProvider.setVibrationsEnabled(value);
@@ -121,7 +128,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           // Section Compte
           _buildSection(
-            title: 'Compte',
+            title: l10n.account,
             icon: Icons.person,
             children: [
               Consumer<UserProvider>(
@@ -129,27 +136,50 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   return Column(
                     children: [
                       _buildInfoTile(
-                        title: 'Nom d\'utilisateur',
+                        title: l10n.username,
                         subtitle: userProvider.username,
                         onTap: () =>
                             _showEditUsernameDialog(context, userProvider),
                       ),
                       _buildInfoTile(
-                        title: 'Niveau',
-                        subtitle: 'Niveau ${userProvider.level}',
+                        title: l10n.level,
+                        subtitle: '${l10n.level} ${userProvider.level}',
                       ),
                       _buildInfoTile(
-                        title: 'Expérience',
+                        title: l10n.experience,
                         subtitle:
                             '${userProvider.experience} / ${userProvider.level * 100} XP',
                       ),
                       _buildInfoTile(
-                        title: 'Série actuelle',
-                        subtitle: '${userProvider.currentStreak} jours',
+                        title: l10n.currentStreak,
+                        subtitle: '${userProvider.currentStreak} ${l10n.days}',
                       ),
                       _buildInfoTile(
-                        title: 'Meilleure série',
-                        subtitle: '${userProvider.bestStreak} jours',
+                        title: l10n.bestStreak,
+                        subtitle: '${userProvider.bestStreak} ${l10n.days}',
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 20),
+
+          // Section Thème
+          _buildSection(
+            title: l10n.theme,
+            icon: Icons.palette,
+            children: [
+              Consumer<ThemeProvider>(
+                builder: (context, themeProvider, child) {
+                  return Column(
+                    children: [
+                      _buildInfoTile(
+                        title: l10n.themeDescription,
+                        subtitle: _getThemeName(themeProvider.themeMode, l10n),
+                        onTap: () => _showThemeDialog(context, themeProvider),
                       ),
                     ],
                   );
@@ -162,24 +192,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           // Section Données
           _buildSection(
-            title: 'Données',
+            title: l10n.data,
             icon: Icons.storage,
             children: [
               _buildButtonTile(
-                title: 'Sauvegarder les données',
-                subtitle: 'Sauvegarder vos progrès',
+                title: l10n.saveData,
+                subtitle: l10n.saveProgress,
                 icon: Icons.save,
                 onTap: () => _saveUserData(context),
               ),
               _buildButtonTile(
-                title: 'Restaurer les données',
-                subtitle: 'Restaurer vos progrès',
+                title: l10n.restoreData,
+                subtitle: l10n.restoreProgress,
                 icon: Icons.restore,
                 onTap: () => _restoreUserData(context),
               ),
               _buildButtonTile(
-                title: 'Réinitialiser les données',
-                subtitle: 'Supprimer toutes les données (irréversible)',
+                title: l10n.resetData,
+                subtitle: l10n.deleteAllData,
                 icon: Icons.delete_forever,
                 onTap: () => _showResetDataDialog(context),
                 isDestructive: true,
@@ -189,34 +219,45 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           const SizedBox(height: 20),
 
+          // Section Langue
+          _buildSection(
+            title: l10n.language,
+            icon: Icons.language,
+            children: [
+              Consumer<LanguageProvider>(
+                builder: (context, languageProvider, child) {
+                  return _buildLanguageSelector(languageProvider);
+                },
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 20),
+
           // Section À propos
           _buildSection(
-            title: 'À propos',
+            title: l10n.about,
             icon: Icons.info,
             children: [
               _buildInfoTile(
-                title: 'Version',
+                title: l10n.version,
                 subtitle: '1.0.0',
               ),
               _buildInfoTile(
-                title: 'Développeur',
+                title: l10n.developer,
                 subtitle: 'Mind Bloom Team',
               ),
               _buildButtonTile(
-                title: 'Conditions d\'utilisation',
-                subtitle: 'Lire les conditions d\'utilisation',
+                title: l10n.termsOfService,
+                subtitle: l10n.readTermsOfUse,
                 icon: Icons.description,
-                onTap: () {
-                  // TODO: Ouvrir les conditions d'utilisation
-                },
+                onTap: () => _navigateToTerms(context),
               ),
               _buildButtonTile(
-                title: 'Politique de confidentialité',
-                subtitle: 'Lire la politique de confidentialité',
+                title: l10n.privacyPolicy,
+                subtitle: l10n.readPrivacyPolicy,
                 icon: Icons.privacy_tip,
-                onTap: () {
-                  // TODO: Ouvrir la politique de confidentialité
-                },
+                onTap: () => _navigateToPrivacy(context),
               ),
             ],
           ),
@@ -244,7 +285,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   title,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: AppColors.textPrimary,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                 ),
               ],
@@ -315,13 +356,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
       title: Text(
         title,
         style: TextStyle(
-          color: isDestructive ? AppColors.error : AppColors.textPrimary,
+          color: isDestructive
+              ? AppColors.error
+              : Theme.of(context).colorScheme.onSurface,
         ),
       ),
       subtitle: Text(subtitle),
       leading: Icon(
         icon,
-        color: isDestructive ? AppColors.error : AppColors.primary,
+        color: isDestructive
+            ? AppColors.error
+            : Theme.of(context).colorScheme.primary,
       ),
       onTap: onTap,
     );
@@ -330,22 +375,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void _showEditUsernameDialog(
       BuildContext context, UserProvider userProvider) {
     final controller = TextEditingController(text: userProvider.username);
+    final l10n = AppLocalizations.of(context)!;
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Modifier le nom d\'utilisateur'),
+        title: Text(l10n.editUsername),
         content: TextField(
           controller: controller,
-          decoration: const InputDecoration(
-            labelText: 'Nom d\'utilisateur',
-            border: OutlineInputBorder(),
+          decoration: InputDecoration(
+            labelText: l10n.username,
+            hintText: l10n.enterNewUsername,
+            border: const OutlineInputBorder(),
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Annuler'),
+            child: Text(l10n.cancel),
           ),
           ElevatedButton(
             onPressed: () {
@@ -354,12 +401,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 userProvider.updateUsername(newUsername);
                 Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      content: Text('Nom d\'utilisateur mis à jour')),
+                  SnackBar(content: Text(l10n.usernameUpdated)),
                 );
               }
             },
-            child: const Text('Sauvegarder'),
+            child: Text(l10n.save),
           ),
         ],
       ),
@@ -449,5 +495,113 @@ class _SettingsScreenState extends State<SettingsScreen> {
         );
       }
     }
+  }
+
+  void _navigateToTerms(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const TermsOfServiceScreen(),
+      ),
+    );
+  }
+
+  void _navigateToPrivacy(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const PrivacyPolicyScreen(),
+      ),
+    );
+  }
+
+  Widget _buildLanguageSelector(LanguageProvider languageProvider) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return Column(
+      children: languageProvider.getSupportedLanguages().map((language) {
+        final isSelected =
+            languageProvider.currentLanguageCode == language['code'];
+
+        return ListTile(
+          title: Text(language['name']!),
+          leading: Icon(
+            isSelected
+                ? Icons.radio_button_checked
+                : Icons.radio_button_unchecked,
+            color: isSelected
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+          ),
+          onTap: () {
+            languageProvider.setLanguage(language['code']!);
+          },
+        );
+      }).toList(),
+    );
+  }
+
+  String _getThemeName(ThemeMode themeMode, AppLocalizations l10n) {
+    switch (themeMode) {
+      case ThemeMode.light:
+        return l10n.lightTheme;
+      case ThemeMode.dark:
+        return l10n.darkTheme;
+      case ThemeMode.system:
+        return l10n.systemTheme;
+    }
+  }
+
+  void _showThemeDialog(BuildContext context, ThemeProvider themeProvider) {
+    final l10n = AppLocalizations.of(context)!;
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.theme),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            RadioListTile<ThemeMode>(
+              title: Text(l10n.lightTheme),
+              value: ThemeMode.light,
+              groupValue: themeProvider.themeMode,
+              onChanged: (value) {
+                if (value != null) {
+                  themeProvider.setThemeMode(value);
+                  Navigator.of(context).pop();
+                }
+              },
+            ),
+            RadioListTile<ThemeMode>(
+              title: Text(l10n.darkTheme),
+              value: ThemeMode.dark,
+              groupValue: themeProvider.themeMode,
+              onChanged: (value) {
+                if (value != null) {
+                  themeProvider.setThemeMode(value);
+                  Navigator.of(context).pop();
+                }
+              },
+            ),
+            RadioListTile<ThemeMode>(
+              title: Text(l10n.systemTheme),
+              value: ThemeMode.system,
+              groupValue: themeProvider.themeMode,
+              onChanged: (value) {
+                if (value != null) {
+                  themeProvider.setThemeMode(value);
+                  Navigator.of(context).pop();
+                }
+              },
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(l10n.cancel),
+          ),
+        ],
+      ),
+    );
   }
 }

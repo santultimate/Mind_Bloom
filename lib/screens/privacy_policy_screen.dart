@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
   const PrivacyPolicyScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text(
-          'Politique de confidentialité',
-          style: TextStyle(
+        title: Text(
+          l10n.privacyPolicy,
+          style: const TextStyle(
             color: AppColors.textPrimary,
             fontWeight: FontWeight.bold,
           ),
@@ -50,9 +53,9 @@ class PrivacyPolicyScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    'Politique de confidentialité',
-                    style: TextStyle(
+                  Text(
+                    l10n.privacyPolicy,
+                    style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
@@ -60,8 +63,8 @@ class PrivacyPolicyScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Dernière mise à jour : ${_getCurrentDate()}',
-                    style: TextStyle(
+                    l10n.lastUpdated(_getCurrentDate()),
+                    style: const TextStyle(
                       fontSize: 14,
                       color: AppColors.textSecondary,
                     ),
@@ -74,79 +77,71 @@ class PrivacyPolicyScreen extends StatelessWidget {
 
             // Introduction
             _buildSection(
-              title: 'Introduction',
-              content:
-                  'Cette politique de confidentialité décrit comment Mind Bloom collecte, utilise et protège vos informations personnelles lorsque vous utilisez notre application mobile. Nous nous engageons à protéger votre vie privée et à traiter vos données avec le plus grand respect.',
+              title: l10n.introduction,
+              content: l10n.privacyPolicyIntroduction,
             ),
 
             // Section 1
             _buildSection(
-              title: '1. Informations que nous collectons',
+              title: '1. ${l10n.informationWeCollect}',
               content:
-                  'Nous collectons les informations suivantes :\n\n• **Données de jeu** : Progression, scores, préférences de jeu\n• **Données techniques** : Version de l\'application, type d\'appareil, système d\'exploitation\n• **Données d\'utilisation** : Temps de jeu, fonctionnalités utilisées\n• **Données de publicité** : Identifiants publicitaires (si vous consentez aux publicités)',
+                  '${l10n.weCollectFollowing}\n\n• **${l10n.gameData}** : ${l10n.gameDataDescription}\n• **${l10n.technicalData}** : ${l10n.technicalDataDescription}\n• **${l10n.usageData}** : ${l10n.usageDataDescription}',
             ),
 
             // Section 2
             _buildSection(
-              title: '2. Comment nous utilisons vos informations',
+              title: '2. ${l10n.howWeUseInformation}',
               content:
-                  'Nous utilisons vos informations pour :\n\n• Fournir et améliorer le service de jeu\n• Personnaliser votre expérience de jeu\n• Analyser l\'utilisation de l\'application\n• Afficher des publicités personnalisées (avec votre consentement)\n• Assurer la sécurité et prévenir la fraude\n• Communiquer avec vous concernant le service',
+                  '${l10n.weUseInformationFor}\n\n• ${l10n.provideService}\n• ${l10n.personalizeExperience}\n• ${l10n.analyzeUsage}\n• ${l10n.displayAds}\n• ${l10n.ensureSecurity}\n• ${l10n.communicateService}',
             ),
 
             // Section 3
             _buildSection(
-              title: '3. Partage d\'informations',
-              content:
-                  'Nous ne vendons jamais vos informations personnelles. Nous pouvons partager vos informations uniquement dans les cas suivants :\n\n• **Partenaires de service** : Avec des tiers qui nous aident à fournir le service (hébergement, analytics)\n• **Obligations légales** : Lorsque requis par la loi\n• **Protection** : Pour protéger nos droits, votre sécurité ou celle d\'autrui\n• **Consentement** : Avec votre consentement explicite',
+              title: '3. ${l10n.dataSharing}',
+              content: l10n.dataSharingDescription,
             ),
 
             // Section 4
             _buildSection(
-              title: '4. Stockage et sécurité',
-              content:
-                  'Vos données sont stockées de manière sécurisée :\n\n• **Chiffrement** : Les données sensibles sont chiffrées\n• **Accès limité** : Seul le personnel autorisé peut accéder aux données\n• **Sauvegarde** : Des sauvegardes régulières sont effectuées\n• **Durée** : Les données sont conservées uniquement le temps nécessaire',
+              title: l10n.dataStorage,
+              content: l10n.dataStorageContent,
             ),
 
             // Section 5
             _buildSection(
-              title: '5. Cookies et technologies similaires',
-              content:
-                  'L\'application peut utiliser :\n\n• **Cookies locaux** : Pour sauvegarder vos préférences de jeu\n• **Identifiants publicitaires** : Pour personnaliser les publicités\n• **Analytics** : Pour comprendre l\'utilisation de l\'application\n\nVous pouvez désactiver ces fonctionnalités dans les paramètres de votre appareil.',
+              title: l10n.cookies,
+              content: l10n.cookiesContent,
             ),
 
             // Section 6
             _buildSection(
-              title: '6. Vos droits (RGPD)',
+              title: '6. ${l10n.yourRights}',
               content:
-                  'Conformément au RGPD, vous avez le droit de :\n\n• **Accès** : Demander une copie de vos données personnelles\n• **Rectification** : Corriger des données inexactes\n• **Effacement** : Demander la suppression de vos données\n• **Portabilité** : Recevoir vos données dans un format structuré\n• **Opposition** : Vous opposer au traitement de vos données\n• **Limitation** : Demander la limitation du traitement',
+                  '${l10n.yourRightsDescription}\n\n• ${l10n.accessData}\n• ${l10n.correctData}\n• ${l10n.deleteData}\n• ${l10n.withdrawConsent}',
             ),
 
             // Section 7
             _buildSection(
-              title: '7. Publicités et partenaires tiers',
-              content:
-                  'L\'application peut afficher des publicités via des partenaires tiers comme Google AdMob. Ces partenaires peuvent collecter des informations pour personnaliser les publicités. Vous pouvez :\n\n• Désactiver la personnalisation des publicités dans les paramètres\n• Utiliser les paramètres de confidentialité de votre appareil\n• Contacter directement les partenaires publicitaires',
+              title: l10n.thirdPartyAds,
+              content: l10n.thirdPartyAdsContent,
             ),
 
             // Section 8
             _buildSection(
-              title: '8. Données des mineurs',
-              content:
-                  'Mind Bloom ne collecte pas sciemment d\'informations personnelles d\'enfants de moins de 13 ans. Si nous découvrons qu\'un enfant de moins de 13 ans nous a fourni des informations personnelles, nous les supprimerons immédiatement.',
+              title: l10n.minorsData,
+              content: l10n.minorsDataContent,
             ),
 
             // Section 9
             _buildSection(
-              title: '9. Modifications de cette politique',
-              content:
-                  'Nous pouvons modifier cette politique de confidentialité à tout moment. Les modifications importantes seront communiquées via l\'application ou par email. Nous vous encourageons à consulter régulièrement cette politique.',
+              title: l10n.policyChanges,
+              content: l10n.policyChangesContent,
             ),
 
             // Section 10
             _buildSection(
-              title: '10. Base légale du traitement',
-              content:
-                  'Nous traitons vos données personnelles sur la base de :\n\n• **Exécution du contrat** : Pour fournir le service de jeu\n• **Intérêt légitime** : Pour améliorer l\'application et prévenir la fraude\n• **Consentement** : Pour les publicités personnalisées et les communications marketing',
+              title: l10n.legalBasis,
+              content: l10n.legalBasisContent,
             ),
 
             const SizedBox(height: 32),
@@ -168,9 +163,9 @@ class PrivacyPolicyScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Contact et DPO',
-                    style: TextStyle(
+                  Text(
+                    l10n.contactDPO,
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
@@ -178,7 +173,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    'Pour toute question concernant cette politique de confidentialité ou pour exercer vos droits, contactez-nous :',
+                    l10n.contactDPOContent,
                     style: TextStyle(
                       fontSize: 16,
                       color: AppColors.textSecondary,
@@ -195,7 +190,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Nous nous engageons à répondre à votre demande dans un délai de 30 jours.',
+                    l10n.responseTime,
                     style: TextStyle(
                       fontSize: 14,
                       color: AppColors.textSecondary,
@@ -213,7 +208,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Développé avec ❤️ par',
+                    l10n.developedWithLove,
                     style: TextStyle(
                       fontSize: 14,
                       color: AppColors.textSecondary,

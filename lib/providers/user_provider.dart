@@ -40,6 +40,7 @@ class UserProvider extends ChangeNotifier {
   int get currentStreak => _currentStreak;
   int get bestStreak => _bestStreak;
   List<int> get completedLevels => _completedLevels;
+  int get levelsCompleted => _completedLevels.length;
   Map<int, int> get levelStars => _levelStars;
 
   // Getters pour les paramètres

@@ -61,15 +61,249 @@ class GameProvider extends ChangeNotifier {
 
     _grid = List.generate(size, (row) => List.filled(size, null));
 
-    // Remplir la grille ligne par ligne
+    // Calculer la distribution des tuiles basée sur les objectifs
+    final tileDistribution = _calculateTileDistribution(size * size);
+
+    // Remplir la grille ligne par ligne avec la distribution optimisée
     for (int row = 0; row < size; row++) {
       for (int col = 0; col < size; col++) {
-        _grid[row][col] = _createSafeTile(row, col);
+        _grid[row][col] =
+            _createSafeTileWithDistribution(row, col, tileDistribution);
       }
     }
   }
 
-  /// Crée une tuile qui ne génère pas de match
+  /// Calcule la distribution optimale des tuiles basée sur les objectifs et la difficulté
+  Map<TileType, int> _calculateTileDistribution(int totalTiles) {
+    final distribution = <TileType, int>{};
+
+    // Calculer le facteur de difficulté basé sur le niveau
+    final difficultyFactor = _calculateDifficultyFactor();
+
+    // Initialiser toutes les tuiles avec une distribution équitable
+    final baseCount = (totalTiles / TileType.values.length).floor();
+    final remainder = totalTiles % TileType.values.length;
+
+    for (int i = 0; i < TileType.values.length; i++) {
+      final tileType = TileType.values[i];
+      distribution[tileType] = baseCount + (i < remainder ? 1 : 0);
+    }
+
+    // Ajuster la distribution en fonction des objectifs et de la difficulté
+    for (final objective in _currentObjectives) {
+      if (objective.type == LevelObjectiveType.collectTiles &&
+          objective.tileType != null) {
+        final requiredTiles = objective.target;
+        final currentCount = distribution[objective.tileType!] ?? 0;
+
+        // Calculer le ratio minimum basé sur la difficulté
+        // Plus le niveau est élevé, moins il y a de tuiles du type requis
+        final baseRatio =
+            3.0 - (difficultyFactor * 0.5); // 3.0 → 2.0 selon la difficulté
+        final minRequired = (requiredTiles * baseRatio)
+            .clamp(requiredTiles + (5 - difficultyFactor * 2).clamp(1, 5),
+                totalTiles ~/ 2)
+            .round();
+
+        if (currentCount < minRequired) {
+          // Réduire d'autres types pour augmenter le type requis
+          final needed = minRequired - currentCount;
+          final otherTypes =
+              TileType.values.where((t) => t != objective.tileType).toList();
+
+          // Réduire équitablement les autres types
+          for (int i = 0; i < needed && otherTypes.isNotEmpty; i++) {
+            final typeToReduce = otherTypes[i % otherTypes.length];
+            if (distribution[typeToReduce]! > 1) {
+              distribution[typeToReduce] = distribution[typeToReduce]! - 1;
+              distribution[objective.tileType!] =
+                  distribution[objective.tileType!]! + 1;
+            }
+          }
+        }
+      }
+    }
+
+    return distribution;
+  }
+
+  /// Calcule le facteur de difficulté basé sur le niveau actuel
+  double _calculateDifficultyFactor() {
+    if (_currentLevel == null) return 0.0;
+
+    // Facteur de difficulté basé sur l'ID du niveau (0.0 à 2.0)
+    final levelId = _currentLevel!.id;
+    final difficultyFactor = (levelId / 50.0).clamp(0.0, 2.0);
+
+    // Ajustement basé sur la difficulté du niveau
+    double difficultyMultiplier = 1.0;
+    switch (_currentLevel!.difficulty) {
+      case LevelDifficulty.easy:
+        difficultyMultiplier = 0.5;
+        break;
+      case LevelDifficulty.medium:
+        difficultyMultiplier = 1.0;
+        break;
+      case LevelDifficulty.hard:
+        difficultyMultiplier = 1.5;
+        break;
+      case LevelDifficulty.expert:
+        difficultyMultiplier = 2.0;
+        break;
+    }
+
+    return difficultyFactor * difficultyMultiplier;
+  }
+
+  /// Crée une tuile qui ne génère pas de match avec distribution optimisée
+  Tile _createSafeTileWithDistribution(
+      int row, int col, Map<TileType, int> distribution) {
+    // Créer une liste des types disponibles basée sur la distribution
+    final availableTypes = <TileType>[];
+    for (final entry in distribution.entries) {
+      for (int i = 0; i < entry.value; i++) {
+        availableTypes.add(entry.key);
+      }
+    }
+
+    // Mélanger pour éviter les patterns prévisibles
+    availableTypes.shuffle(_random);
+
+    // Calculer le facteur de difficulté pour ajuster la stratégie
+    final difficultyFactor = _calculateDifficultyFactor();
+
+    while (availableTypes.isNotEmpty) {
+      final type = availableTypes.removeAt(0);
+      final newTile = Tile(id: _nextTileId++, type: type, row: row, col: col);
+
+      // Vérifications de base pour éviter les matches directs
+      if (_wouldCreateMatch(type, row, col)) {
+        continue;
+      }
+
+      // Pour les niveaux difficiles, vérifier aussi les patterns complexes
+      if (difficultyFactor > 1.0 &&
+          _wouldCreateComplexPattern(type, row, col)) {
+        continue;
+      }
+
+      return newTile;
+    }
+
+    // Fallback si tous les types ont été essayés
+    return _createSafeTile(row, col);
+  }
+
+  /// Vérifie si un type de tuile créerait un match direct
+  bool _wouldCreateMatch(TileType type, int row, int col) {
+    // Vérifie si ce choix crée un match horizontal
+    if (col >= 2 &&
+        _grid[row][col - 1] != null &&
+        _grid[row][col - 2] != null &&
+        _grid[row][col - 1]!.type == type &&
+        _grid[row][col - 2]!.type == type) {
+      return true;
+    }
+
+    // Vérifie si ce choix crée un match vertical
+    if (row >= 2 &&
+        _grid[row - 1][col] != null &&
+        _grid[row - 2][col] != null &&
+        _grid[row - 1][col]!.type == type &&
+        _grid[row - 2][col]!.type == type) {
+      return true;
+    }
+
+    return false;
+  }
+
+  /// Vérifie si un type de tuile créerait un pattern complexe (pour niveaux difficiles)
+  bool _wouldCreateComplexPattern(TileType type, int row, int col) {
+    // Vérifier les patterns en L
+    if (_wouldCreateLPattern(type, row, col)) return true;
+
+    // Vérifier les patterns en T
+    if (_wouldCreateTPattern(type, row, col)) return true;
+
+    // Vérifier les patterns en ligne de 4
+    if (_wouldCreateLineOf4(type, row, col)) return true;
+
+    return false;
+  }
+
+  /// Vérifie si un type créerait un pattern en L
+  bool _wouldCreateLPattern(TileType type, int row, int col) {
+    // Pattern L vers le bas-droite
+    if (row >= 1 &&
+        col >= 1 &&
+        _grid[row - 1][col] != null &&
+        _grid[row][col - 1] != null &&
+        _grid[row - 1][col]!.type == type &&
+        _grid[row][col - 1]!.type == type) {
+      return true;
+    }
+
+    // Pattern L vers le bas-gauche
+    if (row >= 1 &&
+        col + 1 < _grid.length &&
+        _grid[row - 1][col] != null &&
+        _grid[row][col + 1] != null &&
+        _grid[row - 1][col]!.type == type &&
+        _grid[row][col + 1]!.type == type) {
+      return true;
+    }
+
+    return false;
+  }
+
+  /// Vérifie si un type créerait un pattern en T
+  bool _wouldCreateTPattern(TileType type, int row, int col) {
+    // Pattern T vers le bas
+    if (row >= 1 &&
+        col >= 1 &&
+        col + 1 < _grid.length &&
+        _grid[row - 1][col] != null &&
+        _grid[row][col - 1] != null &&
+        _grid[row][col + 1] != null &&
+        _grid[row - 1][col]!.type == type &&
+        _grid[row][col - 1]!.type == type &&
+        _grid[row][col + 1]!.type == type) {
+      return true;
+    }
+
+    return false;
+  }
+
+  /// Vérifie si un type créerait une ligne de 4
+  bool _wouldCreateLineOf4(TileType type, int row, int col) {
+    // Vérifier horizontalement
+    int horizontalCount = 1;
+    for (int c = col - 1; c >= 0 && _grid[row][c]?.type == type; c--) {
+      horizontalCount++;
+    }
+    for (int c = col + 1;
+        c < _grid.length && _grid[row][c]?.type == type;
+        c++) {
+      horizontalCount++;
+    }
+    if (horizontalCount >= 4) return true;
+
+    // Vérifier verticalement
+    int verticalCount = 1;
+    for (int r = row - 1; r >= 0 && _grid[r][col]?.type == type; r--) {
+      verticalCount++;
+    }
+    for (int r = row + 1;
+        r < _grid.length && _grid[r][col]?.type == type;
+        r++) {
+      verticalCount++;
+    }
+    if (verticalCount >= 4) return true;
+
+    return false;
+  }
+
+  /// Crée une tuile qui ne génère pas de match (méthode de fallback)
   Tile _createSafeTile(int row, int col) {
     while (true) {
       final type = TileType.values[_random.nextInt(TileType.values.length)];
@@ -280,25 +514,28 @@ class GameProvider extends ChangeNotifier {
 
   /// Vérifie si le jeu est terminé et déclenche le callback
   void _checkGameEnd() {
-    if (isGameOver() && _gameEndCallback != null) {
+    // Protection contre les états invalides
+    if (_currentLevel == null || _gameEndCallback == null) return;
+
+    if (isGameOver()) {
       final won = isLevelCompleted();
       final stars = _calculateStars();
-      _gameEndCallback!(
-          won, stars, _score, _currentLevel!.maxMoves - _movesLeft);
+      final movesUsed = _currentLevel!.maxMoves - _movesLeft;
+      _gameEndCallback!(won, stars, _score, movesUsed);
     }
   }
 
-  /// Calcule le nombre d'étoiles basé sur le score
+  /// Calcule le nombre d'étoiles avec le nouveau système intelligent
   int _calculateStars() {
     if (_currentLevel == null) return 0;
 
-    final targetScore = _currentLevel!.targetScore;
-    final scoreRatio = _score / targetScore;
+    final movesUsed = _currentLevel!.maxMoves - _movesLeft;
+    return _currentLevel!.calculateStars(_score, movesUsed, _currentObjectives);
+  }
 
-    if (scoreRatio >= 1.0) return 3;
-    if (scoreRatio >= 0.7) return 2;
-    if (scoreRatio >= 0.5) return 1;
-    return 0;
+  /// Calcule le nombre d'étoiles (méthode publique pour l'interface)
+  int calculateStars() {
+    return _calculateStars();
   }
 
   /// Applique la gravité
@@ -324,16 +561,69 @@ class GameProvider extends ChangeNotifier {
   /// Remplit les cases vides en haut
   void _fillEmpty() {
     final size = _grid.length;
+
+    // Calculer la distribution des tuiles pour le remplissage
+    final tileDistribution = _calculateTileDistribution(size * size);
+
     for (int r = 0; r < size; r++) {
       for (int c = 0; c < size; c++) {
         if (_grid[r][c] == null) {
-          _grid[r][c] = _createSmartTile(r, c);
+          _grid[r][c] =
+              _createSmartTileWithDistribution(r, c, tileDistribution);
         }
       }
     }
   }
 
-  /// Crée une tuile intelligente qui évite les matches directs
+  /// Crée une tuile intelligente qui évite les matches directs avec distribution optimisée
+  Tile _createSmartTileWithDistribution(
+      int row, int col, Map<TileType, int> distribution) {
+    // Créer une liste des types disponibles basée sur la distribution
+    final availableTypes = <TileType>[];
+    for (final entry in distribution.entries) {
+      for (int i = 0; i < entry.value; i++) {
+        availableTypes.add(entry.key);
+      }
+    }
+
+    // Mélanger pour éviter les patterns prévisibles
+    availableTypes.shuffle(_random);
+
+    // Essayer de trouver un type qui ne crée pas de match
+    for (int attempt = 0; attempt < availableTypes.length; attempt++) {
+      final type = availableTypes[attempt];
+
+      // Vérifier si ce type crée un match horizontal
+      bool createsHorizontalMatch = false;
+      if (col >= 2 &&
+          _grid[row][col - 1] != null &&
+          _grid[row][col - 2] != null &&
+          _grid[row][col - 1]!.type == type &&
+          _grid[row][col - 2]!.type == type) {
+        createsHorizontalMatch = true;
+      }
+
+      // Vérifier si ce type crée un match vertical
+      bool createsVerticalMatch = false;
+      if (row >= 2 &&
+          _grid[row - 1][col] != null &&
+          _grid[row - 2][col] != null &&
+          _grid[row - 1][col]!.type == type &&
+          _grid[row - 2][col]!.type == type) {
+        createsVerticalMatch = true;
+      }
+
+      // Si ce type ne crée pas de match, l'utiliser
+      if (!createsHorizontalMatch && !createsVerticalMatch) {
+        return Tile(id: _nextTileId++, type: type, row: row, col: col);
+      }
+    }
+
+    // Si aucun type "sûr" n'est trouvé, utiliser la méthode de fallback
+    return _createSmartTile(row, col);
+  }
+
+  /// Crée une tuile intelligente qui évite les matches directs (méthode de fallback)
   Tile _createSmartTile(int row, int col) {
     final availableTypes = TileType.values.toList();
 
@@ -406,26 +696,37 @@ class GameProvider extends ChangeNotifier {
 
   /// Vérifie s'il reste des mouvements possibles
   bool hasValidMoves() {
-    if (_grid.isEmpty) return false;
+    // Protection contre les états invalides
+    if (_grid.isEmpty || _isAnimating) return false;
 
     final size = _grid.length;
+    if (size <= 0) return false;
+
     for (int r = 0; r < size; r++) {
       for (int c = 0; c < size; c++) {
         final tile = _grid[r][c];
         if (tile == null) continue;
 
-        if (r + 1 < size && _grid[r + 1][c] != null) {
-          _swapTiles(tile, _grid[r + 1][c]!);
-          final valid = _hasMatches();
-          _swapTiles(tile, _grid[r + 1][c]!);
-          if (valid) return true;
+        // Vérifier mouvement vers le bas
+        if (r + 1 < size) {
+          final belowTile = _grid[r + 1][c];
+          if (belowTile != null) {
+            _swapTiles(tile, belowTile);
+            final valid = _hasMatches();
+            _swapTiles(tile, belowTile);
+            if (valid) return true;
+          }
         }
 
-        if (c + 1 < size && _grid[r][c + 1] != null) {
-          _swapTiles(tile, _grid[r][c + 1]!);
-          final valid = _hasMatches();
-          _swapTiles(tile, _grid[r][c + 1]!);
-          if (valid) return true;
+        // Vérifier mouvement vers la droite
+        if (c + 1 < size) {
+          final rightTile = _grid[r][c + 1];
+          if (rightTile != null) {
+            _swapTiles(tile, rightTile);
+            final valid = _hasMatches();
+            _swapTiles(tile, rightTile);
+            if (valid) return true;
+          }
         }
       }
     }
@@ -500,26 +801,54 @@ class GameProvider extends ChangeNotifier {
 
         // Vérifier mouvement vers le bas
         if (r + 1 < size) {
-          _swapTiles(tile, _grid[r + 1][c]!);
-          if (_hasMatches()) {
-            _swapTiles(tile, _grid[r + 1][c]!);
-            return [tile, _grid[r + 1][c]!];
+          final belowTile = _grid[r + 1][c];
+          if (belowTile != null) {
+            _swapTiles(tile, belowTile);
+            if (_hasMatches()) {
+              _swapTiles(tile, belowTile);
+              return [tile, belowTile];
+            }
+            _swapTiles(tile, belowTile);
           }
-          _swapTiles(tile, _grid[r + 1][c]!);
         }
 
         // Vérifier mouvement vers la droite
         if (c + 1 < size) {
-          _swapTiles(tile, _grid[r][c + 1]!);
-          if (_hasMatches()) {
-            _swapTiles(tile, _grid[r][c + 1]!);
-            return [tile, _grid[r][c + 1]!];
+          final rightTile = _grid[r][c + 1];
+          if (rightTile != null) {
+            _swapTiles(tile, rightTile);
+            if (_hasMatches()) {
+              _swapTiles(tile, rightTile);
+              return [tile, rightTile];
+            }
+            _swapTiles(tile, rightTile);
           }
-          _swapTiles(tile, _grid[r][c + 1]!);
         }
       }
     }
     return null;
+  }
+
+  /// État de l'indice actuel
+  List<Tile>? _currentHint;
+  List<Tile>? get currentHint => _currentHint;
+
+  /// Affiche un indice visuel
+  void showHint() {
+    _currentHint = findHint();
+    notifyListeners();
+
+    // Masquer l'indice après 3 secondes
+    Timer(const Duration(seconds: 3), () {
+      _currentHint = null;
+      notifyListeners();
+    });
+  }
+
+  /// Masque l'indice actuel
+  void hideHint() {
+    _currentHint = null;
+    notifyListeners();
   }
 
   /// État de pause

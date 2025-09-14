@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class TermsOfServiceScreen extends StatelessWidget {
   const TermsOfServiceScreen({Key? key}) : super(key: key);
@@ -9,9 +10,9 @@ class TermsOfServiceScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text(
-          'Conditions d\'utilisation',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context)!.termsOfService,
+          style: const TextStyle(
             color: AppColors.textPrimary,
             fontWeight: FontWeight.bold,
           ),
@@ -50,9 +51,9 @@ class TermsOfServiceScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    'Conditions d\'utilisation',
-                    style: TextStyle(
+                  Text(
+                    AppLocalizations.of(context)!.termsOfService,
+                    style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
@@ -60,7 +61,8 @@ class TermsOfServiceScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Dernière mise à jour : ${_getCurrentDate()}',
+                    AppLocalizations.of(context)!
+                        .lastUpdated(_getCurrentDate()),
                     style: TextStyle(
                       fontSize: 14,
                       color: AppColors.textSecondary,
@@ -74,72 +76,63 @@ class TermsOfServiceScreen extends StatelessWidget {
 
             // Section 1
             _buildSection(
-              title: '1. Acceptation des conditions',
-              content:
-                  'En utilisant l\'application Mind Bloom, vous acceptez d\'être lié par ces conditions d\'utilisation. Si vous n\'acceptez pas ces conditions, veuillez ne pas utiliser notre application.',
+              title: AppLocalizations.of(context)!.acceptanceOfTerms,
+              content: AppLocalizations.of(context)!.acceptanceOfTermsContent,
             ),
 
             // Section 2
             _buildSection(
-              title: '2. Description du service',
-              content:
-                  'Mind Bloom est un jeu de puzzle mobile développé par YACOUBA SANTARA. L\'application propose des mécaniques de match-3 avec des éléments de progression RPG dans un univers de jardin magique.',
+              title: AppLocalizations.of(context)!.serviceDescription,
+              content: AppLocalizations.of(context)!.serviceDescriptionContent,
             ),
 
             // Section 3
             _buildSection(
-              title: '3. Utilisation autorisée',
-              content:
-                  'Vous pouvez utiliser Mind Bloom à des fins personnelles et non commerciales uniquement. Il est interdit de :\n\n• Copier, modifier ou distribuer l\'application\n• Utiliser l\'application à des fins commerciales sans autorisation\n• Tenter de contourner les mesures de sécurité\n• Utiliser l\'application de manière à nuire à d\'autres utilisateurs',
+              title: AppLocalizations.of(context)!.authorizedUse,
+              content: AppLocalizations.of(context)!.authorizedUseContent,
             ),
 
             // Section 4
             _buildSection(
-              title: '4. Contenu et propriété intellectuelle',
+              title: AppLocalizations.of(context)!.intellectualProperty,
               content:
-                  'Tous les éléments de Mind Bloom, incluant mais non limités aux graphismes, sons, code source, et design, sont la propriété exclusive de YACOUBA SANTARA et sont protégés par les lois sur le droit d\'auteur.',
+                  AppLocalizations.of(context)!.intellectualPropertyContent,
             ),
 
             // Section 5
             _buildSection(
-              title: '5. Achats intégrés',
-              content:
-                  'L\'application peut contenir des achats intégrés pour des vies supplémentaires, des boosters, ou d\'autres éléments de jeu. Tous les achats sont finaux et non remboursables, sauf disposition contraire de la loi applicable.',
+              title: AppLocalizations.of(context)!.inAppPurchases,
+              content: AppLocalizations.of(context)!.inAppPurchasesContent,
             ),
 
             // Section 6
             _buildSection(
-              title: '6. Publicités',
-              content:
-                  'Mind Bloom peut afficher des publicités tierces. Ces publicités sont gérées par des partenaires publicitaires et nous ne sommes pas responsables du contenu de ces publicités.',
+              title: AppLocalizations.of(context)!.advertisements,
+              content: AppLocalizations.of(context)!.advertisementsContent,
             ),
 
             // Section 7
             _buildSection(
-              title: '7. Limitation de responsabilité',
-              content:
-                  'L\'application est fournie "en l\'état" sans garantie d\'aucune sorte. Nous ne serons pas responsables des dommages directs, indirects, accessoires ou consécutifs résultant de l\'utilisation de l\'application.',
+              title: AppLocalizations.of(context)!.liabilityLimitation,
+              content: AppLocalizations.of(context)!.liabilityLimitationContent,
             ),
 
             // Section 8
             _buildSection(
-              title: '8. Modifications des conditions',
-              content:
-                  'Nous nous réservons le droit de modifier ces conditions d\'utilisation à tout moment. Les modifications prendront effet dès leur publication dans l\'application. Votre utilisation continue de l\'application constitue votre acceptation des conditions modifiées.',
+              title: AppLocalizations.of(context)!.termsModifications,
+              content: AppLocalizations.of(context)!.termsModificationsContent,
             ),
 
             // Section 9
             _buildSection(
-              title: '9. Résiliation',
-              content:
-                  'Nous nous réservons le droit de suspendre ou de résilier votre accès à l\'application à tout moment, sans préavis, pour violation de ces conditions d\'utilisation.',
+              title: AppLocalizations.of(context)!.termination,
+              content: AppLocalizations.of(context)!.terminationContent,
             ),
 
             // Section 10
             _buildSection(
-              title: '10. Droit applicable',
-              content:
-                  'Ces conditions d\'utilisation sont régies par le droit français. Tout litige sera soumis à la juridiction exclusive des tribunaux français.',
+              title: AppLocalizations.of(context)!.applicableLaw,
+              content: AppLocalizations.of(context)!.applicableLawContent,
             ),
 
             const SizedBox(height: 32),
@@ -161,9 +154,9 @@ class TermsOfServiceScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Contact',
-                    style: TextStyle(
+                  Text(
+                    AppLocalizations.of(context)!.contact,
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
@@ -171,7 +164,7 @@ class TermsOfServiceScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    'Pour toute question concernant ces conditions d\'utilisation, vous pouvez nous contacter à :',
+                    AppLocalizations.of(context)!.contactContent,
                     style: TextStyle(
                       fontSize: 16,
                       color: AppColors.textSecondary,
@@ -197,7 +190,7 @@ class TermsOfServiceScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Développé avec ❤️ par',
+                    AppLocalizations.of(context)!.developedWithLove,
                     style: TextStyle(
                       fontSize: 14,
                       color: AppColors.textSecondary,

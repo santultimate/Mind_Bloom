@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:mind_bloom/models/tile.dart';
 import 'package:mind_bloom/utils/game_animations.dart';
 import 'package:mind_bloom/utils/app_colors.dart';
+import 'package:mind_bloom/providers/game_provider.dart';
 
 class AnimatedTileWidget extends StatefulWidget {
   final Tile tile;
@@ -26,11 +28,13 @@ class AnimatedTileWidget extends StatefulWidget {
 class _AnimatedTileWidgetState extends State<AnimatedTileWidget>
     with TickerProviderStateMixin {
   late AnimationController _controller;
+  late AnimationController _hintController;
   late Animation<double> _scaleAnimation;
   late Animation<double> _rotationAnimation;
   late Animation<double> _opacityAnimation;
   late Animation<Offset> _fallAnimation;
   late Animation<double> _glowAnimation;
+  late Animation<double> _hintAnimation;
 
   @override
   void initState() {
@@ -42,6 +46,11 @@ class _AnimatedTileWidgetState extends State<AnimatedTileWidget>
   void _initializeAnimations() {
     _controller = AnimationController(
       duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+
+    _hintController = AnimationController(
+      duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
 
@@ -82,6 +91,14 @@ class _AnimatedTileWidgetState extends State<AnimatedTileWidget>
       end: 1.0,
     ).animate(CurvedAnimation(
       parent: _controller,
+      curve: Curves.easeInOut,
+    ));
+
+    _hintAnimation = Tween<double>(
+      begin: 0.3,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _hintController,
       curve: Curves.easeInOut,
     ));
   }
@@ -210,84 +227,129 @@ class _AnimatedTileWidgetState extends State<AnimatedTileWidget>
   @override
   void dispose() {
     _controller.dispose();
+    _hintController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        return Transform.translate(
-          offset: _fallAnimation.value,
-          child: Transform.scale(
-            scale: _scaleAnimation.value,
-            child: Transform.rotate(
-              angle: _rotationAnimation.value * 2 * 3.14159,
-              child: Opacity(
-                opacity: _opacityAnimation.value.clamp(0.0, 1.0),
-                child: GestureDetector(
-                  onTap: widget.onTap,
-                  child: Container(
-                    width: widget.size,
-                    height: widget.size,
-                    margin: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: _getTileColor(),
-                      boxShadow: _getTileShadows(),
-                      border: _getTileBorder(),
-                    ),
-                    child: Stack(
-                      children: [
-                        // Contenu principal de la tuile
-                        Center(
-                          child: _buildTileContent(),
+    return Consumer<GameProvider>(
+      builder: (context, gameProvider, child) {
+        final isHintTile =
+            gameProvider.currentHint?.contains(widget.tile) ?? false;
+
+        // Démarrer l'animation d'indice si c'est une tuile d'indice
+        if (isHintTile && !_hintController.isAnimating) {
+          _hintController.repeat(reverse: true);
+        } else if (!isHintTile && _hintController.isAnimating) {
+          _hintController.stop();
+          _hintController.reset();
+        }
+
+        return AnimatedBuilder(
+          animation: Listenable.merge([_controller, _hintController]),
+          builder: (context, child) {
+            return Transform.translate(
+              offset: _fallAnimation.value,
+              child: Transform.scale(
+                scale: _scaleAnimation.value,
+                child: Transform.rotate(
+                  angle: _rotationAnimation.value * 2 * 3.14159,
+                  child: Opacity(
+                    opacity: _opacityAnimation.value.clamp(0.0, 1.0),
+                    child: GestureDetector(
+                      onTap: widget.onTap,
+                      child: Container(
+                        width: widget.size,
+                        height: widget.size,
+                        margin: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: _getTileColor(),
+                          boxShadow: _getTileShadows(),
+                          border: _getTileBorder(),
                         ),
-
-                        // Effet de glow pour les matches
-                        if (widget.isMatched ||
-                            GameAnimations.getTileState(widget.tile.id) ==
-                                TileAnimationState.highlighting)
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: _getTileColor().withValues(
-                                      alpha: 0.6 * _glowAnimation.value),
-                                  blurRadius: 10 * _glowAnimation.value,
-                                  spreadRadius: 2 * _glowAnimation.value,
-                                ),
-                              ],
+                        child: Stack(
+                          children: [
+                            // Contenu principal de la tuile
+                            Center(
+                              child: _buildTileContent(),
                             ),
-                          ),
 
-                        // Effet de sélection
-                        if (widget.isSelected)
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: Colors.white,
-                                width: 3,
+                            // Effet de glow pour les matches
+                            if (widget.isMatched ||
+                                GameAnimations.getTileState(widget.tile.id) ==
+                                    TileAnimationState.highlighting)
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: _getTileColor().withValues(
+                                          alpha: 0.6 * _glowAnimation.value),
+                                      blurRadius: 10 * _glowAnimation.value,
+                                      spreadRadius: 2 * _glowAnimation.value,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.white.withValues(alpha: 0.5),
-                                  blurRadius: 8,
-                                  spreadRadius: 1,
+
+                            // Effet de sélection
+                            if (widget.isSelected)
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 3,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color:
+                                          Colors.white.withValues(alpha: 0.5),
+                                      blurRadius: 8,
+                                      spreadRadius: 1,
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          ),
-                      ],
+                              ),
+
+                            // Effet d'indice
+                            if (isHintTile)
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: Colors.yellow,
+                                    width: 3,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.yellow.withValues(
+                                          alpha: 0.8 * _hintAnimation.value),
+                                      blurRadius: 12 * _hintAnimation.value,
+                                      spreadRadius: 2 * _hintAnimation.value,
+                                    ),
+                                  ],
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.lightbulb,
+                                    color: Colors.yellow.withValues(
+                                        alpha: _hintAnimation.value),
+                                    size: widget.size * 0.3,
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ),
+            );
+          },
         );
       },
     );

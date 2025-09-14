@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/providers/user_provider.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class ShopScreen extends StatefulWidget {
   const ShopScreen({super.key});
@@ -13,117 +14,128 @@ class ShopScreen extends StatefulWidget {
 
 class _ShopScreenState extends State<ShopScreen> {
   ShopCategory _selectedCategory = ShopCategory.all;
+  List<ShopItem> _items = [];
 
-  final List<ShopItem> _items = [
-    // Vies
-    ShopItem(
-      id: 'lives_5',
-      title: '5 Vies',
-      description: 'Rechargez vos vies pour continuer à jouer',
-      price: 50,
-      currency: Currency.coins,
-      icon: Icons.favorite,
-      color: AppColors.error,
-      category: ShopCategory.lives,
-      isPopular: true,
-    ),
-    ShopItem(
-      id: 'lives_10',
-      title: '10 Vies',
-      description: 'Pack de vies plus important',
-      price: 90,
-      currency: Currency.coins,
-      icon: Icons.favorite,
-      color: AppColors.error,
-      category: ShopCategory.lives,
-    ),
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_items.isEmpty) {
+      _generateItems();
+    }
+  }
 
-    // Monnaie
-    ShopItem(
-      id: 'coins_100',
-      title: '100 Pièces',
-      description: 'Petit pack de pièces',
-      price: 10,
-      currency: Currency.gems,
-      icon: Icons.monetization_on,
-      color: AppColors.coins,
-      category: ShopCategory.currency,
-    ),
-    ShopItem(
-      id: 'coins_500',
-      title: '500 Pièces',
-      description: 'Pack de pièces moyen',
-      price: 45,
-      currency: Currency.gems,
-      icon: Icons.monetization_on,
-      color: AppColors.coins,
-      category: ShopCategory.currency,
-      isPopular: true,
-    ),
-    ShopItem(
-      id: 'coins_1000',
-      title: '1000 Pièces',
-      description: 'Gros pack de pièces',
-      price: 80,
-      currency: Currency.gems,
-      icon: Icons.monetization_on,
-      color: AppColors.coins,
-      category: ShopCategory.currency,
-    ),
-    ShopItem(
-      id: 'gems_50',
-      title: '50 Gemmes',
-      description: 'Pack de gemmes premium',
-      price: 500,
-      currency: Currency.coins,
-      icon: Icons.diamond,
-      color: AppColors.gold,
-      category: ShopCategory.currency,
-    ),
+  void _generateItems() {
+    _items = [
+      // Vies
+      ShopItem(
+        id: 'lives_5',
+        title: AppLocalizations.of(context)!.lives5,
+        description: AppLocalizations.of(context)!.lives5Description,
+        price: 50,
+        currency: Currency.coins,
+        icon: Icons.favorite,
+        color: AppColors.error,
+        category: ShopCategory.lives,
+        isPopular: true,
+      ),
+      ShopItem(
+        id: 'lives_10',
+        title: AppLocalizations.of(context)!.lives10,
+        description: AppLocalizations.of(context)!.lives10Description,
+        price: 90,
+        currency: Currency.coins,
+        icon: Icons.favorite,
+        color: AppColors.error,
+        category: ShopCategory.lives,
+      ),
 
-    // Boosters
-    ShopItem(
-      id: 'booster_shuffle',
-      title: 'Mélangeur',
-      description: 'Mélange automatiquement le plateau',
-      price: 30,
-      currency: Currency.coins,
-      icon: Icons.shuffle,
-      color: AppColors.secondary,
-      category: ShopCategory.boosters,
-    ),
-    ShopItem(
-      id: 'booster_hint',
-      title: 'Indice',
-      description: 'Montre un coup possible',
-      price: 20,
-      currency: Currency.coins,
-      icon: Icons.lightbulb,
-      color: AppColors.warning,
-      category: ShopCategory.boosters,
-    ),
+      // Monnaie
+      ShopItem(
+        id: 'coins_100',
+        title: AppLocalizations.of(context)!.coins100,
+        description: AppLocalizations.of(context)!.coins100Description,
+        price: 10,
+        currency: Currency.gems,
+        icon: Icons.monetization_on,
+        color: AppColors.coins,
+        category: ShopCategory.currency,
+      ),
+      ShopItem(
+        id: 'coins_500',
+        title: AppLocalizations.of(context)!.coins500,
+        description: AppLocalizations.of(context)!.coins500Description,
+        price: 45,
+        currency: Currency.gems,
+        icon: Icons.monetization_on,
+        color: AppColors.coins,
+        category: ShopCategory.currency,
+        isPopular: true,
+      ),
+      ShopItem(
+        id: 'coins_1000',
+        title: AppLocalizations.of(context)!.coins1000,
+        description: AppLocalizations.of(context)!.coins1000Description,
+        price: 80,
+        currency: Currency.gems,
+        icon: Icons.monetization_on,
+        color: AppColors.coins,
+        category: ShopCategory.currency,
+      ),
+      ShopItem(
+        id: 'gems_50',
+        title: AppLocalizations.of(context)!.gems50,
+        description: AppLocalizations.of(context)!.gems50Description,
+        price: 500,
+        currency: Currency.coins,
+        icon: Icons.diamond,
+        color: AppColors.gold,
+        category: ShopCategory.currency,
+      ),
 
-    // Premium
-    ShopItem(
-      id: 'remove_ads',
-      title: 'Sans Publicités',
-      description: 'Supprime toutes les publicités',
-      price: 100,
-      currency: Currency.gems,
-      icon: Icons.block,
-      color: AppColors.primary,
-      category: ShopCategory.premium,
-    ),
-  ];
+      // Boosters
+      ShopItem(
+        id: 'booster_shuffle',
+        title: AppLocalizations.of(context)!.shuffler,
+        description: AppLocalizations.of(context)!.shufflerDescription,
+        price: 30,
+        currency: Currency.coins,
+        icon: Icons.shuffle,
+        color: AppColors.secondary,
+        category: ShopCategory.boosters,
+      ),
+      ShopItem(
+        id: 'booster_hint',
+        title: AppLocalizations.of(context)!.hint,
+        description: AppLocalizations.of(context)!.hintDescription,
+        price: 20,
+        currency: Currency.coins,
+        icon: Icons.lightbulb,
+        color: AppColors.warning,
+        category: ShopCategory.boosters,
+      ),
+
+      // Premium
+      ShopItem(
+        id: 'remove_ads',
+        title: AppLocalizations.of(context)!.removeAds,
+        description: AppLocalizations.of(context)!.removeAdsDescription,
+        price: 100,
+        currency: Currency.gems,
+        icon: Icons.block,
+        color: AppColors.primary,
+        category: ShopCategory.premium,
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text(
-          'Boutique',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context)!.shop,
+          style: const TextStyle(
             color: AppColors.textPrimary,
             fontWeight: FontWeight.bold,
           ),
@@ -262,7 +274,7 @@ class _ShopScreenState extends State<ShopScreen> {
         Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: Text(
-            'Articles Populaires',
+            AppLocalizations.of(context)!.popularItems,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
@@ -334,9 +346,9 @@ class _ShopScreenState extends State<ShopScreen> {
                         color: AppColors.accent,
                         borderRadius: BorderRadius.circular(6),
                       ),
-                      child: const Text(
-                        'POP',
-                        style: TextStyle(
+                      child: Text(
+                        AppLocalizations.of(context)!.pop,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 7,
                           fontWeight: FontWeight.bold,
@@ -411,9 +423,9 @@ class _ShopScreenState extends State<ShopScreen> {
                       borderRadius: BorderRadius.circular(6),
                     ),
                   ),
-                  child: const Text(
-                    'Acheter',
-                    style: TextStyle(
+                  child: Text(
+                    AppLocalizations.of(context)!.buy,
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),
@@ -448,15 +460,15 @@ class _ShopScreenState extends State<ShopScreen> {
   String _getCategoryName(ShopCategory category) {
     switch (category) {
       case ShopCategory.all:
-        return 'Tout';
+        return AppLocalizations.of(context)!.all;
       case ShopCategory.lives:
-        return 'Vies';
+        return AppLocalizations.of(context)!.lives;
       case ShopCategory.currency:
-        return 'Monnaie';
+        return AppLocalizations.of(context)!.currency;
       case ShopCategory.boosters:
-        return 'Boosters';
+        return AppLocalizations.of(context)!.boosters(0).replaceAll('0 ', '');
       case ShopCategory.premium:
-        return 'Premium';
+        return AppLocalizations.of(context)!.premium;
     }
   }
 
@@ -475,8 +487,12 @@ class _ShopScreenState extends State<ShopScreen> {
     if (!canAfford) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-              'Vous n\'avez pas assez de ${_getCategoryName(item.currency == Currency.coins ? ShopCategory.currency : ShopCategory.currency)}'),
+          content: Text(AppLocalizations.of(context)!.notEnoughCurrency(
+              item.currency == Currency.coins
+                  ? AppLocalizations.of(context)!.coins(0).replaceAll('0 ', '')
+                  : AppLocalizations.of(context)!
+                      .gems(0)
+                      .replaceAll('0 ', ''))),
           backgroundColor: AppColors.error,
         ),
       );
@@ -498,7 +514,8 @@ class _ShopScreenState extends State<ShopScreen> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('${item.title} acheté avec succès !'),
+        content:
+            Text(AppLocalizations.of(context)!.purchaseSuccess(item.title)),
         backgroundColor: AppColors.success,
       ),
     );

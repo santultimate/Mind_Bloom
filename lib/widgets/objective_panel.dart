@@ -4,6 +4,7 @@ import 'package:mind_bloom/providers/game_provider.dart';
 import 'package:mind_bloom/models/level.dart';
 import 'package:mind_bloom/models/tile.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class ObjectivePanel extends StatelessWidget {
   const ObjectivePanel({Key? key}) : super(key: key);
@@ -51,7 +52,7 @@ class ObjectivePanel extends StatelessWidget {
                     ),
                     const SizedBox(width: 6),
                     Text(
-                      'Objectifs',
+                      AppLocalizations.of(context)!.objectives,
                       style: TextStyle(
                         color: AppColors.textPrimary,
                         fontSize: 16,

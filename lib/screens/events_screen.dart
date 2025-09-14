@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class EventsScreen extends StatefulWidget {
   const EventsScreen({super.key});
@@ -11,113 +12,125 @@ class EventsScreen extends StatefulWidget {
 }
 
 class _EventsScreenState extends State<EventsScreen> {
-  final List<SeasonalEvent> _events = [
-    SeasonalEvent(
-      id: 'spring_bloom',
-      name: 'Floraison de Printemps',
-      description: 'Célébrez le renouveau avec des fleurs magiques',
-      startDate: DateTime.now().subtract(const Duration(days: 5)),
-      endDate: DateTime.now().add(const Duration(days: 10)),
-      theme: 'spring',
-      rewards: [
-        EventReward(
-          type: RewardType.plant,
-          itemId: 'rose_magique',
-          quantity: 1,
-          rarity: 5,
-        ),
-        EventReward(
-          type: RewardType.coins,
-          quantity: 500,
-        ),
-        EventReward(
-          type: RewardType.gems,
-          quantity: 50,
-        ),
-      ],
-      challenges: [
-        EventChallenge(
-          id: 'complete_levels',
-          description: 'Terminez 10 niveaux',
-          target: 10,
-          progress: 7,
-          reward: 100,
-        ),
-        EventChallenge(
-          id: 'earn_stars',
-          description: 'Gagnez 30 étoiles',
-          target: 30,
-          progress: 18,
-          reward: 200,
-        ),
-        EventChallenge(
-          id: 'use_boosters',
-          description: 'Utilisez 5 boosters',
-          target: 5,
-          progress: 3,
-          reward: 150,
-        ),
-      ],
-      isActive: true,
-    ),
-    SeasonalEvent(
-      id: 'summer_solstice',
-      name: 'Solstice d\'Été',
-      description: 'Profitez du soleil avec des plantes ensoleillées',
-      startDate: DateTime.now().add(const Duration(days: 15)),
-      endDate: DateTime.now().add(const Duration(days: 30)),
-      theme: 'summer',
-      rewards: [
-        EventReward(
-          type: RewardType.plant,
-          itemId: 'tournesol_or',
-          quantity: 1,
-          rarity: 4,
-        ),
-        EventReward(
-          type: RewardType.coins,
-          quantity: 300,
-        ),
-      ],
-      challenges: [
-        EventChallenge(
-          id: 'score_points',
-          description: 'Marquez 50,000 points',
-          target: 50000,
-          progress: 0,
-          reward: 250,
-        ),
-      ],
-      isActive: false,
-    ),
-    SeasonalEvent(
-      id: 'autumn_harvest',
-      name: 'Récolte d\'Automne',
-      description: 'Récoltez les fruits de vos efforts',
-      startDate: DateTime.now().add(const Duration(days: 45)),
-      endDate: DateTime.now().add(const Duration(days: 60)),
-      theme: 'autumn',
-      rewards: [
-        EventReward(
-          type: RewardType.plant,
-          itemId: 'lotus_cristal',
-          quantity: 1,
-          rarity: 5,
-        ),
-      ],
-      challenges: [],
-      isActive: false,
-    ),
-  ];
+  List<SeasonalEvent> _events = [];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_events.isEmpty) {
+      _generateEvents();
+    }
+  }
+
+  void _generateEvents() {
+    _events = [
+      SeasonalEvent(
+        id: 'spring_bloom',
+        name: AppLocalizations.of(context)!.springBloom,
+        description: AppLocalizations.of(context)!.springBloomDescription,
+        startDate: DateTime.now().subtract(const Duration(days: 5)),
+        endDate: DateTime.now().add(const Duration(days: 10)),
+        theme: 'spring',
+        rewards: [
+          EventReward(
+            type: RewardType.plant,
+            itemId: 'rose_magique',
+            quantity: 1,
+            rarity: 5,
+          ),
+          EventReward(
+            type: RewardType.coins,
+            quantity: 500,
+          ),
+          EventReward(
+            type: RewardType.gems,
+            quantity: 50,
+          ),
+        ],
+        challenges: [
+          EventChallenge(
+            id: 'complete_levels',
+            description: AppLocalizations.of(context)!.completeLevels(10),
+            target: 10,
+            progress: 7,
+            reward: 100,
+          ),
+          EventChallenge(
+            id: 'earn_stars',
+            description: AppLocalizations.of(context)!.earnStars(30),
+            target: 30,
+            progress: 18,
+            reward: 200,
+          ),
+          EventChallenge(
+            id: 'use_boosters',
+            description: AppLocalizations.of(context)!.useBoosters(5),
+            target: 5,
+            progress: 3,
+            reward: 150,
+          ),
+        ],
+        isActive: true,
+      ),
+      SeasonalEvent(
+        id: 'summer_solstice',
+        name: AppLocalizations.of(context)!.summerSolstice,
+        description: AppLocalizations.of(context)!.summerSolsticeDescription,
+        startDate: DateTime.now().add(const Duration(days: 15)),
+        endDate: DateTime.now().add(const Duration(days: 30)),
+        theme: 'summer',
+        rewards: [
+          EventReward(
+            type: RewardType.plant,
+            itemId: 'tournesol_or',
+            quantity: 1,
+            rarity: 4,
+          ),
+          EventReward(
+            type: RewardType.coins,
+            quantity: 300,
+          ),
+        ],
+        challenges: [
+          EventChallenge(
+            id: 'score_points',
+            description: AppLocalizations.of(context)!.scorePoints(50000),
+            target: 50000,
+            progress: 0,
+            reward: 250,
+          ),
+        ],
+        isActive: false,
+      ),
+      SeasonalEvent(
+        id: 'autumn_harvest',
+        name: AppLocalizations.of(context)!.autumnHarvest,
+        description: AppLocalizations.of(context)!.autumnHarvestDescription,
+        startDate: DateTime.now().add(const Duration(days: 45)),
+        endDate: DateTime.now().add(const Duration(days: 60)),
+        theme: 'autumn',
+        rewards: [
+          EventReward(
+            type: RewardType.plant,
+            itemId: 'lotus_cristal',
+            quantity: 1,
+            rarity: 5,
+          ),
+        ],
+        challenges: [],
+        isActive: false,
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text(
-          'Événements',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context)!.events,
+          style: const TextStyle(
             color: AppColors.textPrimary,
             fontWeight: FontWeight.bold,
           ),
@@ -194,7 +207,7 @@ class _EventsScreenState extends State<EventsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'ÉVÉNEMENT ACTIF',
+                      AppLocalizations.of(context)!.activeEvent,
                       style: TextStyle(
                         color: Colors.white.withValues(alpha: 0.8),
                         fontSize: 12,
@@ -233,7 +246,7 @@ class _EventsScreenState extends State<EventsScreen> {
               ),
               const SizedBox(width: 4),
               Text(
-                '$daysLeft jours restants',
+                AppLocalizations.of(context)!.daysRemaining(daysLeft),
                 style: TextStyle(
                   color: Colors.white.withValues(alpha: 0.8),
                   fontSize: 14,
@@ -252,9 +265,9 @@ class _EventsScreenState extends State<EventsScreen> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                child: const Text(
-                  'Participer',
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.participate,
+                  style: const TextStyle(
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -331,8 +344,8 @@ class _EventsScreenState extends State<EventsScreen> {
                           ),
                           Text(
                             isActive
-                                ? '$daysLeft jours restants'
-                                : 'Commence dans $daysUntilStart jours',
+                                ? AppLocalizations.of(context)!.daysRemaining(daysLeft)
+                                : AppLocalizations.of(context)!.startsIn(daysUntilStart),
                             style: TextStyle(
                               color: isActive
                                   ? AppColors.primary
@@ -352,9 +365,9 @@ class _EventsScreenState extends State<EventsScreen> {
                           color: AppColors.success,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const Text(
-                          'ACTIF',
-                          style: TextStyle(
+                        child: Text(
+                          AppLocalizations.of(context)!.active,
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
@@ -380,7 +393,7 @@ class _EventsScreenState extends State<EventsScreen> {
                 // Récompenses
                 if (event.rewards.isNotEmpty) ...[
                   Text(
-                    'Récompenses',
+                    AppLocalizations.of(context)!.rewards,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: AppColors.textPrimary,
@@ -398,7 +411,7 @@ class _EventsScreenState extends State<EventsScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 4),
                       child: Text(
-                        '+${event.rewards.length - 3} autres',
+                        AppLocalizations.of(context)!.others(event.rewards.length - 3),
                         style: TextStyle(
                           color: AppColors.textSecondary,
                           fontSize: 12,
@@ -412,7 +425,7 @@ class _EventsScreenState extends State<EventsScreen> {
                 // Progression des défis
                 if (isActive && event.challenges.isNotEmpty) ...[
                   Text(
-                    'Progression',
+                    AppLocalizations.of(context)!.progress,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: AppColors.textPrimary,
@@ -526,9 +539,9 @@ class _EventsScreenState extends State<EventsScreen> {
                     color: AppColors.success,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Text(
-                    'TERMINÉ',
-                    style: TextStyle(
+                  child: Text(
+                    AppLocalizations.of(context)!.completed,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 8,
                       fontWeight: FontWeight.bold,
@@ -587,13 +600,13 @@ class _EventsScreenState extends State<EventsScreen> {
   String _getRewardText(EventReward reward) {
     switch (reward.type) {
       case RewardType.coins:
-        return '${reward.quantity} pièces';
+        return AppLocalizations.of(context)!.coins(reward.quantity);
       case RewardType.gems:
-        return '${reward.quantity} gemmes';
+        return AppLocalizations.of(context)!.gems(reward.quantity);
       case RewardType.plant:
-        return 'Plante ${reward.rarity}★';
+        return AppLocalizations.of(context)!.plant(reward.rarity ?? 1);
       case RewardType.booster:
-        return '${reward.quantity} boosters';
+        return AppLocalizations.of(context)!.boosters(reward.quantity);
     }
   }
 
@@ -677,7 +690,7 @@ class _EventsScreenState extends State<EventsScreen> {
 
               // Description
               Text(
-                'Description',
+                AppLocalizations.of(context)!.description,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
@@ -696,7 +709,7 @@ class _EventsScreenState extends State<EventsScreen> {
 
               // Récompenses
               Text(
-                'Récompenses',
+                AppLocalizations.of(context)!.rewards,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
@@ -715,7 +728,7 @@ class _EventsScreenState extends State<EventsScreen> {
               // Défis
               if (event.challenges.isNotEmpty) ...[
                 Text(
-                  'Défis',
+                  AppLocalizations.of(context)!.challenges,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: AppColors.textPrimary,
@@ -751,7 +764,7 @@ class _EventsScreenState extends State<EventsScreen> {
                     ),
                   ),
                   child: Text(
-                    event.isActive ? 'Participer' : 'Bientôt disponible',
+                    event.isActive ? AppLocalizations.of(context)!.participate : AppLocalizations.of(context)!.comingSoon,
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
                     ),
@@ -805,7 +818,7 @@ class _EventsScreenState extends State<EventsScreen> {
                 ),
                 if (reward.type == RewardType.plant)
                   Text(
-                    'Plante rare ${reward.rarity} étoiles',
+                    AppLocalizations.of(context)!.rarePlant(reward.rarity ?? 1),
                     style: TextStyle(
                       color: AppColors.textSecondary,
                       fontSize: 14,
@@ -885,7 +898,7 @@ class _EventsScreenState extends State<EventsScreen> {
               ),
               const SizedBox(width: 4),
               Text(
-                '+${challenge.reward} pièces',
+                AppLocalizations.of(context)!.coins(challenge.reward),
                 style: TextStyle(
                   color: AppColors.coins,
                   fontWeight: FontWeight.w600,
@@ -900,9 +913,9 @@ class _EventsScreenState extends State<EventsScreen> {
                     color: AppColors.success,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Text(
-                    'TERMINÉ',
-                    style: TextStyle(
+                  child: Text(
+                    AppLocalizations.of(context)!.completed,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
@@ -920,7 +933,7 @@ class _EventsScreenState extends State<EventsScreen> {
     // TODO: Implémenter la participation aux événements
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Participation à ${event.name} en cours...'),
+        content: Text(AppLocalizations.of(context)!.participationInProgress(event.name)),
         backgroundColor: AppColors.primary,
       ),
     );

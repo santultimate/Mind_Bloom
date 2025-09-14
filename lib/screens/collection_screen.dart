@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
 import 'package:mind_bloom/providers/collection_provider.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class CollectionScreen extends StatefulWidget {
   const CollectionScreen({super.key});
@@ -12,7 +13,7 @@ class CollectionScreen extends StatefulWidget {
 }
 
 class _CollectionScreenState extends State<CollectionScreen> {
-  String _selectedRarity = 'Toutes';
+  String _selectedRarity = 'all';
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +22,9 @@ class _CollectionScreenState extends State<CollectionScreen> {
         return Scaffold(
           backgroundColor: AppColors.background,
           appBar: AppBar(
-            title: const Text(
-              'Collection',
-              style: TextStyle(
+            title: Text(
+              AppLocalizations.of(context)!.collection,
+              style: const TextStyle(
                 color: AppColors.textPrimary,
                 fontWeight: FontWeight.bold,
               ),
@@ -53,19 +54,19 @@ class _CollectionScreenState extends State<CollectionScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     _buildStatistic(
-                      'Plantes',
+                      AppLocalizations.of(context)!.plants,
                       '${collectionProvider.unlockedPlants}/${collectionProvider.totalPlants}',
                       Icons.eco,
                       AppColors.primary,
                     ),
                     _buildStatistic(
-                      'Rareté',
+                      AppLocalizations.of(context)!.rarity,
                       '${collectionProvider.totalRarity}',
                       Icons.star,
                       AppColors.gold,
                     ),
                     _buildStatistic(
-                      'Niveau',
+                      AppLocalizations.of(context)!.level,
                       '${collectionProvider.totalLevels}',
                       Icons.trending_up,
                       AppColors.success,
@@ -81,12 +82,12 @@ class _CollectionScreenState extends State<CollectionScreen> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      'Toutes',
-                      '1★',
-                      '2★',
-                      '3★',
-                      '4★',
-                      '5★',
+                      'all',
+                      '1',
+                      '2',
+                      '3',
+                      '4',
+                      '5',
                     ].map((rarity) {
                       final isSelected = _selectedRarity == rarity;
                       return Padding(
@@ -98,7 +99,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                               _selectedRarity = rarity;
                             });
                           },
-                          label: Text(rarity),
+                          label: Text(_getRarityLabel(rarity)),
                           backgroundColor: AppColors.surface,
                           selectedColor:
                               AppColors.primary.withValues(alpha: 0.2),
@@ -144,20 +145,19 @@ class _CollectionScreenState extends State<CollectionScreen> {
     );
   }
 
+  String _getRarityLabel(String rarity) {
+    if (rarity == 'all') {
+      return AppLocalizations.of(context)!.all;
+    }
+    return '$rarity★';
+  }
+
   List<Plant> _getFilteredPlants(CollectionProvider collectionProvider) {
-    if (_selectedRarity == 'Toutes') {
+    if (_selectedRarity == 'all') {
       return collectionProvider.plants;
     }
 
-    final rarity = _selectedRarity == '1★'
-        ? 1
-        : _selectedRarity == '2★'
-            ? 2
-            : _selectedRarity == '3★'
-                ? 3
-                : _selectedRarity == '4★'
-                    ? 4
-                    : 5;
+    final rarity = int.parse(_selectedRarity);
 
     return collectionProvider.plants
         .where((plant) => plant.rarity == rarity)
@@ -273,7 +273,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
 
                 if (plant.isUnlocked) ...[
                   Text(
-                    'Niveau ${plant.level}',
+                    AppLocalizations.of(context)!.plantLevel(plant.level),
                     style: TextStyle(
                       color: AppColors.textSecondary,
                       fontSize: 12,
@@ -327,7 +327,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      '+${plant.bonuses.length} bonus',
+                      AppLocalizations.of(context)!.bonus(plant.bonuses.length),
                       style: TextStyle(
                         color: AppColors.success,
                         fontSize: 10,
@@ -440,7 +440,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
 
               // Description
               Text(
-                'Description',
+                AppLocalizations.of(context)!.description,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
@@ -460,7 +460,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
               // Condition de déblocage ou Bonus
               if (!plant.isUnlocked) ...[
                 Text(
-                  'Condition de déblocage',
+                  AppLocalizations.of(context)!.unlockCondition,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: AppColors.textPrimary,
@@ -495,7 +495,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                 ),
               ] else if (plant.bonuses.isNotEmpty) ...[
                 Text(
-                  'Bonus',
+                  AppLocalizations.of(context)!.bonuses,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: AppColors.textPrimary,
@@ -525,7 +525,9 @@ class _CollectionScreenState extends State<CollectionScreen> {
                     ),
                   ),
                   child: Text(
-                    plant.isUnlocked ? 'Améliorer' : 'Verrouillé',
+                    plant.isUnlocked
+                        ? AppLocalizations.of(context)!.upgrade
+                        : AppLocalizations.of(context)!.locked,
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
                     ),
@@ -585,13 +587,15 @@ class _CollectionScreenState extends State<CollectionScreen> {
   String _getBonusDescription(PlantBonus bonus) {
     switch (bonus.type) {
       case BonusType.extraMoves:
-        return '+${bonus.value} coups supplémentaires';
+        return AppLocalizations.of(context)!.extraMoves(bonus.value.toInt());
       case BonusType.scoreMultiplier:
-        return 'Score x${bonus.value}';
+        return AppLocalizations.of(context)!
+            .scoreMultiplier(bonus.value.toInt());
       case BonusType.coinMultiplier:
-        return 'Pièces x${bonus.value}';
+        return AppLocalizations.of(context)!
+            .coinMultiplier(bonus.value.toInt());
       case BonusType.extraLives:
-        return '+${bonus.value} vie(s)';
+        return AppLocalizations.of(context)!.extraLives(bonus.value.toInt());
     }
   }
 
@@ -600,7 +604,8 @@ class _CollectionScreenState extends State<CollectionScreen> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('${plant.name} améliorée au niveau ${plant.level + 1} !'),
+        content: Text(AppLocalizations.of(context)!
+            .plantUpgraded(plant.name, plant.level + 1)),
         backgroundColor: AppColors.primary,
       ),
     );

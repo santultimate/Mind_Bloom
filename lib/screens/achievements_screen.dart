@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class AchievementsScreen extends StatefulWidget {
   const AchievementsScreen({super.key});
@@ -11,199 +12,210 @@ class AchievementsScreen extends StatefulWidget {
 }
 
 class _AchievementsScreenState extends State<AchievementsScreen> {
-  String _selectedCategory = 'Tous';
+  String _selectedCategory = 'all';
+  List<Achievement> _achievements = [];
 
-  final List<Achievement> _achievements = [
-    // Succès de progression
-    Achievement(
-      id: 'first_level',
-      title: 'Premier Pas',
-      description: 'Terminez votre premier niveau',
-      progress: 1,
-      target: 1,
-      isUnlocked: true,
-      reward: 50,
-      category: 'Progression',
-      icon: Icons.flag,
-      color: AppColors.primary,
-    ),
-    Achievement(
-      id: 'level_10',
-      title: 'Débutant Confirmé',
-      description: 'Terminez 10 niveaux',
-      progress: 7,
-      target: 10,
-      isUnlocked: false,
-      reward: 100,
-      category: 'Progression',
-      icon: Icons.trending_up,
-      color: AppColors.primary,
-    ),
-    Achievement(
-      id: 'level_50',
-      title: 'Expert en Herbe',
-      description: 'Terminez 50 niveaux',
-      progress: 7,
-      target: 50,
-      isUnlocked: false,
-      reward: 500,
-      category: 'Progression',
-      icon: Icons.emoji_events,
-      color: AppColors.gold,
-    ),
-    Achievement(
-      id: 'perfect_level',
-      title: 'Perfectionniste',
-      description: 'Obtenez 3 étoiles sur un niveau',
-      progress: 1,
-      target: 1,
-      isUnlocked: true,
-      reward: 75,
-      category: 'Progression',
-      icon: Icons.star,
-      color: AppColors.gold,
-    ),
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_achievements.isEmpty) {
+      _generateAchievements();
+    }
+  }
 
-    // Succès de score
-    Achievement(
-      id: 'score_1000',
-      title: 'Scoreur',
-      description: 'Marquez 1,000 points en un niveau',
-      progress: 1,
-      target: 1,
-      isUnlocked: true,
-      reward: 50,
-      category: 'Score',
-      icon: Icons.score,
-      color: AppColors.success,
-    ),
-    Achievement(
-      id: 'score_5000',
-      title: 'Maître du Score',
-      description: 'Marquez 5,000 points en un niveau',
-      progress: 0,
-      target: 1,
-      isUnlocked: false,
-      reward: 200,
-      category: 'Score',
-      icon: Icons.score,
-      color: AppColors.success,
-    ),
-    Achievement(
-      id: 'total_score_100k',
-      title: 'Accumulateur',
-      description: 'Marquez un total de 100,000 points',
-      progress: 25000,
-      target: 100000,
-      isUnlocked: false,
-      reward: 300,
-      category: 'Score',
-      icon: Icons.analytics,
-      color: AppColors.success,
-    ),
+  void _generateAchievements() {
+    _achievements = [
+      // Succès de progression
+      Achievement(
+        id: 'first_level',
+        title: AppLocalizations.of(context)!.firstSteps,
+        description: AppLocalizations.of(context)!.firstStepsDescription,
+        progress: 1,
+        target: 1,
+        isUnlocked: true,
+        reward: 50,
+        category: 'progression',
+        icon: Icons.flag,
+        color: AppColors.primary,
+      ),
+      Achievement(
+        id: 'level_10',
+        title: AppLocalizations.of(context)!.confirmedBeginner,
+        description: AppLocalizations.of(context)!.confirmedBeginnerDescription,
+        progress: 7,
+        target: 10,
+        isUnlocked: false,
+        reward: 100,
+        category: 'progression',
+        icon: Icons.trending_up,
+        color: AppColors.primary,
+      ),
+      Achievement(
+        id: 'level_50',
+        title: AppLocalizations.of(context)!.expertInTheMaking,
+        description: AppLocalizations.of(context)!.expertInTheMakingDescription,
+        progress: 7,
+        target: 50,
+        isUnlocked: false,
+        reward: 500,
+        category: 'progression',
+        icon: Icons.emoji_events,
+        color: AppColors.gold,
+      ),
+      Achievement(
+        id: 'perfect_level',
+        title: AppLocalizations.of(context)!.perfectionist,
+        description: AppLocalizations.of(context)!.perfectionistDescription,
+        progress: 1,
+        target: 1,
+        isUnlocked: true,
+        reward: 75,
+        category: 'progression',
+        icon: Icons.star,
+        color: AppColors.gold,
+      ),
 
-    // Succès de collection
-    Achievement(
-      id: 'first_plant',
-      title: 'Botaniste Débutant',
-      description: 'Débloquez votre première plante',
-      progress: 1,
-      target: 1,
-      isUnlocked: true,
-      reward: 100,
-      category: 'Collection',
-      icon: Icons.eco,
-      color: AppColors.primary,
-    ),
-    Achievement(
-      id: 'plant_collector',
-      title: 'Collectionneur',
-      description: 'Débloquez 5 plantes',
-      progress: 3,
-      target: 5,
-      isUnlocked: false,
-      reward: 250,
-      category: 'Collection',
-      icon: Icons.collections,
-      color: AppColors.primary,
-    ),
-    Achievement(
-      id: 'rare_plant',
-      title: 'Chasseur de Raretés',
-      description: 'Débloquez une plante 4 étoiles ou plus',
-      progress: 0,
-      target: 1,
-      isUnlocked: false,
-      reward: 500,
-      category: 'Collection',
-      icon: Icons.diamond,
-      color: AppColors.gold,
-    ),
+      // Succès de score
+      Achievement(
+        id: 'score_1000',
+        title: AppLocalizations.of(context)!.scorer,
+        description: AppLocalizations.of(context)!.scorerDescription,
+        progress: 1,
+        target: 1,
+        isUnlocked: true,
+        reward: 50,
+        category: 'score',
+        icon: Icons.score,
+        color: AppColors.success,
+      ),
+      Achievement(
+        id: 'score_5000',
+        title: AppLocalizations.of(context)!.scoreMaster,
+        description: AppLocalizations.of(context)!.scoreMasterDescription,
+        progress: 0,
+        target: 1,
+        isUnlocked: false,
+        reward: 200,
+        category: 'score',
+        icon: Icons.score,
+        color: AppColors.success,
+      ),
+      Achievement(
+        id: 'total_score_100k',
+        title: AppLocalizations.of(context)!.accumulator,
+        description: AppLocalizations.of(context)!.accumulatorDescription,
+        progress: 25000,
+        target: 100000,
+        isUnlocked: false,
+        reward: 300,
+        category: 'score',
+        icon: Icons.analytics,
+        color: AppColors.success,
+      ),
 
-    // Succès de jeu
-    Achievement(
-      id: 'combo_5',
-      title: 'Combo Master',
-      description: 'Faites un combo de 5 tuiles',
-      progress: 1,
-      target: 1,
-      isUnlocked: true,
-      reward: 75,
-      category: 'Jeu',
-      icon: Icons.flash_on,
-      color: AppColors.accent,
-    ),
-    Achievement(
-      id: 'combo_10',
-      title: 'Combo Légendaire',
-      description: 'Faites un combo de 10 tuiles',
-      progress: 0,
-      target: 1,
-      isUnlocked: false,
-      reward: 300,
-      category: 'Jeu',
-      icon: Icons.flash_on,
-      color: AppColors.accent,
-    ),
-    Achievement(
-      id: 'no_moves_left',
-      title: 'Économiseur',
-      description: 'Terminez un niveau avec plus de 5 coups restants',
-      progress: 0,
-      target: 1,
-      isUnlocked: false,
-      reward: 150,
-      category: 'Jeu',
-      icon: Icons.save,
-      color: AppColors.secondary,
-    ),
+      // Succès de collection
+      Achievement(
+        id: 'first_plant',
+        title: AppLocalizations.of(context)!.beginnerBotanist,
+        description: AppLocalizations.of(context)!.beginnerBotanistDescription,
+        progress: 1,
+        target: 1,
+        isUnlocked: true,
+        reward: 100,
+        category: 'collection',
+        icon: Icons.eco,
+        color: AppColors.primary,
+      ),
+      Achievement(
+        id: 'plant_collector',
+        title: AppLocalizations.of(context)!.collector,
+        description: AppLocalizations.of(context)!.collectorDescription,
+        progress: 3,
+        target: 5,
+        isUnlocked: false,
+        reward: 250,
+        category: 'collection',
+        icon: Icons.collections,
+        color: AppColors.primary,
+      ),
+      Achievement(
+        id: 'rare_plant',
+        title: AppLocalizations.of(context)!.rarityHunter,
+        description: AppLocalizations.of(context)!.rarityHunterDescription,
+        progress: 0,
+        target: 1,
+        isUnlocked: false,
+        reward: 500,
+        category: 'collection',
+        icon: Icons.diamond,
+        color: AppColors.gold,
+      ),
 
-    // Succès sociaux
-    Achievement(
-      id: 'daily_login',
-      title: 'Fidèle',
-      description: 'Connectez-vous 7 jours de suite',
-      progress: 3,
-      target: 7,
-      isUnlocked: false,
-      reward: 200,
-      category: 'Social',
-      icon: Icons.calendar_today,
-      color: AppColors.primary,
-    ),
-    Achievement(
-      id: 'share_score',
-      title: 'Partageur',
-      description: 'Partagez votre score 3 fois',
-      progress: 0,
-      target: 3,
-      isUnlocked: false,
-      reward: 100,
-      category: 'Social',
-      icon: Icons.share,
-      color: AppColors.secondary,
-    ),
-  ];
+      // Succès de jeu
+      Achievement(
+        id: 'combo_5',
+        title: AppLocalizations.of(context)!.comboMaster,
+        description: AppLocalizations.of(context)!.comboMasterDescription,
+        progress: 1,
+        target: 1,
+        isUnlocked: true,
+        reward: 75,
+        category: 'game',
+        icon: Icons.flash_on,
+        color: AppColors.accent,
+      ),
+      Achievement(
+        id: 'combo_10',
+        title: AppLocalizations.of(context)!.legendaryCombo,
+        description: AppLocalizations.of(context)!.legendaryComboDescription,
+        progress: 0,
+        target: 1,
+        isUnlocked: false,
+        reward: 300,
+        category: 'game',
+        icon: Icons.flash_on,
+        color: AppColors.accent,
+      ),
+      Achievement(
+        id: 'no_moves_left',
+        title: AppLocalizations.of(context)!.saver,
+        description: AppLocalizations.of(context)!.saverDescription,
+        progress: 0,
+        target: 1,
+        isUnlocked: false,
+        reward: 150,
+        category: 'game',
+        icon: Icons.save,
+        color: AppColors.secondary,
+      ),
+
+      // Succès sociaux
+      Achievement(
+        id: 'daily_login',
+        title: AppLocalizations.of(context)!.loyal,
+        description: AppLocalizations.of(context)!.loyalDescription,
+        progress: 3,
+        target: 7,
+        isUnlocked: false,
+        reward: 200,
+        category: 'social',
+        icon: Icons.calendar_today,
+        color: AppColors.primary,
+      ),
+      Achievement(
+        id: 'share_score',
+        title: AppLocalizations.of(context)!.sharer,
+        description: AppLocalizations.of(context)!.sharerDescription,
+        progress: 0,
+        target: 3,
+        isUnlocked: false,
+        reward: 100,
+        category: 'social',
+        icon: Icons.share,
+        color: AppColors.secondary,
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -215,9 +227,9 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text(
-          'Succès',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context)!.success,
+          style: const TextStyle(
             color: AppColors.textPrimary,
             fontWeight: FontWeight.bold,
           ),
@@ -247,19 +259,19 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _buildStatistic(
-                  'Succès',
+                  AppLocalizations.of(context)!.success,
                   '$unlockedCount/${_achievements.length}',
                   Icons.emoji_events,
                   AppColors.gold,
                 ),
                 _buildStatistic(
-                  'Récompenses',
-                  '$totalRewards pièces',
+                  AppLocalizations.of(context)!.rewards,
+                  '$totalRewards ${AppLocalizations.of(context)!.coins(0).replaceAll('0 ', '')}',
                   Icons.monetization_on,
                   AppColors.coins,
                 ),
                 _buildStatistic(
-                  'Progression',
+                  AppLocalizations.of(context)!.progress,
                   '${((unlockedCount / _achievements.length) * 100).toInt()}%',
                   Icons.trending_up,
                   AppColors.success,
@@ -275,12 +287,12 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  'Tous',
-                  'Progression',
-                  'Score',
-                  'Collection',
-                  'Jeu',
-                  'Social',
+                  'all',
+                  'progression',
+                  'score',
+                  'collection',
+                  'game',
+                  'social',
                 ].map((category) {
                   final isSelected = _selectedCategory == category;
                   return Padding(
@@ -292,7 +304,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                           _selectedCategory = category;
                         });
                       },
-                      label: Text(category),
+                      label: Text(_getCategoryLabel(category)),
                       backgroundColor: AppColors.surface,
                       selectedColor: AppColors.primary.withValues(alpha: 0.2),
                       labelStyle: TextStyle(
@@ -326,8 +338,27 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
     );
   }
 
+  String _getCategoryLabel(String category) {
+    switch (category) {
+      case 'all':
+        return AppLocalizations.of(context)!.all;
+      case 'progression':
+        return AppLocalizations.of(context)!.progression;
+      case 'score':
+        return AppLocalizations.of(context)!.score;
+      case 'collection':
+        return AppLocalizations.of(context)!.collection;
+      case 'game':
+        return AppLocalizations.of(context)!.game;
+      case 'social':
+        return AppLocalizations.of(context)!.social;
+      default:
+        return category;
+    }
+  }
+
   List<Achievement> _getFilteredAchievements() {
-    if (_selectedCategory == 'Tous') {
+    if (_selectedCategory == 'all') {
       return _achievements;
     }
     return _achievements
@@ -435,9 +466,9 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                                 color: AppColors.success,
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: const Text(
-                                'TERMINÉ',
-                                style: TextStyle(
+                              child: Text(
+                                AppLocalizations.of(context)!.completed,
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 10,
                                   fontWeight: FontWeight.bold,
@@ -495,7 +526,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            '+${achievement.reward} pièces',
+                            '+${achievement.reward} ${AppLocalizations.of(context)!.coins(0).replaceAll('0 ', '')}',
                             style: TextStyle(
                               color: AppColors.coins,
                               fontWeight: FontWeight.w600,
@@ -504,7 +535,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                           ),
                           const Spacer(),
                           Text(
-                            achievement.category,
+                            _getCategoryLabel(achievement.category),
                             style: TextStyle(
                               color: AppColors.textSecondary,
                               fontSize: 12,
@@ -600,7 +631,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
-                            achievement.category,
+                            _getCategoryLabel(achievement.category),
                             style: TextStyle(
                               color: achievement.color,
                               fontSize: 12,
@@ -618,7 +649,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
 
               // Description
               Text(
-                'Description',
+                AppLocalizations.of(context)!.description,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
@@ -638,7 +669,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
               // Progression
               if (!achievement.isUnlocked) ...[
                 Text(
-                  'Progression',
+                  AppLocalizations.of(context)!.progress,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: AppColors.textPrimary,
@@ -700,14 +731,14 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Récompense',
+                            AppLocalizations.of(context)!.reward,
                             style: TextStyle(
                               color: AppColors.textSecondary,
                               fontSize: 12,
                             ),
                           ),
                           Text(
-                            '+${achievement.reward} pièces',
+                            '+${achievement.reward} ${AppLocalizations.of(context)!.coins(0).replaceAll('0 ', '')}',
                             style: TextStyle(
                               color: AppColors.coins,
                               fontWeight: FontWeight.bold,
@@ -748,8 +779,8 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                   ),
                   child: Text(
                     achievement.isUnlocked
-                        ? 'Récompense réclamée'
-                        : 'En cours...',
+                        ? AppLocalizations.of(context)!.rewardClaimed
+                        : AppLocalizations.of(context)!.inProgress,
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
                     ),
@@ -767,7 +798,8 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
     // TODO: Implémenter la réclamation des récompenses
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Récompense de ${achievement.title} réclamée !'),
+        content: Text(AppLocalizations.of(context)!
+            .rewardClaimedMessage(achievement.title)),
         backgroundColor: AppColors.success,
       ),
     );

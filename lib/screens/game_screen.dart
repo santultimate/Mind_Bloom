@@ -1,17 +1,16 @@
 import 'dart:math' as math;
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_bloom/providers/game_provider.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
 
 import 'package:mind_bloom/models/tile.dart';
-import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/widgets/animated_tile_widget.dart';
 import 'package:mind_bloom/widgets/objective_panel.dart';
 import 'package:mind_bloom/widgets/game_header.dart';
 import 'package:mind_bloom/widgets/lives_widget.dart';
 import 'package:mind_bloom/screens/level_complete_screen.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -65,14 +64,14 @@ class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Consumer<GameProvider>(
           builder: (context, gameProvider, child) {
             final level = gameProvider.currentLevel;
             if (level == null) {
-              return const Center(
-                child: Text('Aucun niveau chargé'),
+              return Center(
+                child: Text(AppLocalizations.of(context)!.noLevelLoaded),
               );
             }
 
@@ -105,11 +104,11 @@ class _GameScreenState extends State<GameScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 16),
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: AppColors.surface,
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(20),
-                      boxShadow: const [
+                      boxShadow: [
                         BoxShadow(
-                          color: AppColors.shadow,
+                          color: Theme.of(context).shadowColor,
                           blurRadius: 10,
                           offset: Offset(0, 5),
                         ),
@@ -166,7 +165,9 @@ class _GameScreenState extends State<GameScreen> {
                                 if (tile == null) {
                                   return Container(
                                     decoration: BoxDecoration(
-                                      color: AppColors.surfaceVariant,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .surfaceVariant,
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                   );
@@ -207,13 +208,20 @@ class _GameScreenState extends State<GameScreen> {
     final gameProvider = Provider.of<GameProvider>(context, listen: false);
     final audioProvider = Provider.of<AudioProvider>(context, listen: false);
 
-    final hint = gameProvider.findHint();
-    if (hint != null) {
-      // TODO: Implémenter l'affichage de l'indice
-      if (kDebugMode) {
-        print('Indice trouvé: ${hint.length} tuiles');
-      }
+    // Vérifier s'il y a des mouvements possibles
+    if (!gameProvider.hasValidMoves()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.noMovesAvailable),
+          backgroundColor: Colors.orange,
+          duration: const Duration(seconds: 2),
+        ),
+      );
+      return;
     }
+
+    // Afficher l'indice visuel
+    gameProvider.showHint();
     audioProvider.playHint();
   }
 
@@ -225,29 +233,29 @@ class _GameScreenState extends State<GameScreen> {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: const Text('Jeu en pause'),
-        content: const Text('Que souhaitez-vous faire ?'),
+        title: Text(AppLocalizations.of(context)!.gamePaused),
+        content: Text(AppLocalizations.of(context)!.whatWouldYouLikeToDo),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
               _resumeGame();
             },
-            child: const Text('Reprendre'),
+            child: Text(AppLocalizations.of(context)!.resume),
           ),
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
               _restartLevel();
             },
-            child: const Text('Recommencer'),
+            child: Text(AppLocalizations.of(context)!.restart),
           ),
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
               _exitToMenu();
             },
-            child: const Text('Menu'),
+            child: Text(AppLocalizations.of(context)!.menu),
           ),
         ],
       ),
