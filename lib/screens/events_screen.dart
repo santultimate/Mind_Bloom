@@ -344,8 +344,10 @@ class _EventsScreenState extends State<EventsScreen> {
                           ),
                           Text(
                             isActive
-                                ? AppLocalizations.of(context)!.daysRemaining(daysLeft)
-                                : AppLocalizations.of(context)!.startsIn(daysUntilStart),
+                                ? AppLocalizations.of(context)!
+                                    .daysRemaining(daysLeft)
+                                : AppLocalizations.of(context)!
+                                    .startsIn(daysUntilStart),
                             style: TextStyle(
                               color: isActive
                                   ? AppColors.primary
@@ -411,7 +413,8 @@ class _EventsScreenState extends State<EventsScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 4),
                       child: Text(
-                        AppLocalizations.of(context)!.others(event.rewards.length - 3),
+                        AppLocalizations.of(context)!
+                            .others(event.rewards.length - 3),
                         style: TextStyle(
                           color: AppColors.textSecondary,
                           fontSize: 12,
@@ -764,7 +767,9 @@ class _EventsScreenState extends State<EventsScreen> {
                     ),
                   ),
                   child: Text(
-                    event.isActive ? AppLocalizations.of(context)!.participate : AppLocalizations.of(context)!.comingSoon,
+                    event.isActive
+                        ? AppLocalizations.of(context)!.participate
+                        : AppLocalizations.of(context)!.comingSoon,
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
                     ),
@@ -933,7 +938,8 @@ class _EventsScreenState extends State<EventsScreen> {
     // TODO: Implémenter la participation aux événements
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(AppLocalizations.of(context)!.participationInProgress(event.name)),
+        content: Text(
+            AppLocalizations.of(context)!.participationInProgress(event.name)),
         backgroundColor: AppColors.primary,
       ),
     );

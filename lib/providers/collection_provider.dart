@@ -30,37 +30,41 @@ class CollectionProvider extends ChangeNotifier {
       Plant(
         id: 'rose_magique',
         name: 'Rose Magique',
-        description: 'Une rose qui brille dans l\'obscurité',
+        description:
+            'Une rose qui brille dans l\'obscurité et accorde des pouvoirs mystiques',
         rarity: 5,
         bonuses: [
-          PlantBonus(type: BonusType.extraMoves, value: 2),
-          PlantBonus(type: BonusType.scoreMultiplier, value: 1.2),
+          PlantBonus(type: BonusType.extraMoves, value: 3), // Augmenté
+          PlantBonus(type: BonusType.scoreMultiplier, value: 1.5), // Augmenté
+          PlantBonus(
+              type: BonusType.coinMultiplier, value: 1.3), // Nouveau bonus
         ],
         isUnlocked: _plantLevels.containsKey('rose_magique'),
         level: _plantLevels['rose_magique'] ?? 0,
         imagePath: 'assets/images/plants/rose_magique.png',
         unlockCondition: PlantUnlockCondition(
-          type: UnlockType.score,
-          value: 10000,
-          description: 'Atteignez 10 000 points',
+          type: UnlockType.levelsCompleted,
+          value: 20,
+          description: 'Complétez 20 niveaux',
         ),
       ),
       Plant(
         id: 'lotus_cristal',
         name: 'Lotus de Cristal',
-        description: 'Un lotus qui purifie l\'eau',
+        description: 'Un lotus qui purifie l\'eau et augmente la fortune',
         rarity: 4,
         bonuses: [
-          PlantBonus(type: BonusType.extraMoves, value: 1),
-          PlantBonus(type: BonusType.coinMultiplier, value: 1.1),
+          PlantBonus(type: BonusType.extraMoves, value: 2), // Augmenté
+          PlantBonus(type: BonusType.coinMultiplier, value: 1.25), // Augmenté
+          PlantBonus(type: BonusType.extraLives, value: 1), // Nouveau bonus
         ],
         isUnlocked: _plantLevels.containsKey('lotus_cristal'),
         level: _plantLevels['lotus_cristal'] ?? 0,
         imagePath: 'assets/images/plants/lotus_cristal.png',
         unlockCondition: PlantUnlockCondition(
           type: UnlockType.levelsCompleted,
-          value: 5,
-          description: 'Complétez 5 niveaux',
+          value: 10,
+          description: 'Complétez 10 niveaux',
         ),
       ),
       Plant(
@@ -117,9 +121,14 @@ class CollectionProvider extends ChangeNotifier {
       Plant(
         id: 'marguerite_etoile',
         name: 'Marguerite Étoilée',
-        description: 'Une marguerite qui brille comme une étoile',
+        description:
+            'Une marguerite qui brille comme une étoile et guide les débutants',
         rarity: 1,
-        bonuses: [],
+        bonuses: [
+          PlantBonus(
+              type: BonusType.coinMultiplier,
+              value: 1.05), // Petit bonus pour commencer
+        ],
         isUnlocked: true, // Toujours débloquée
         level: _plantLevels['marguerite_etoile'] ?? 1,
         imagePath: 'assets/images/plants/marguerite_etoile.png',
@@ -127,6 +136,108 @@ class CollectionProvider extends ChangeNotifier {
           type: UnlockType.none,
           value: 0,
           description: 'Débloquée dès le début',
+        ),
+      ),
+
+      // Nouvelles plantes pour enrichir le gameplay
+      Plant(
+        id: 'violette_mystique',
+        name: 'Violette Mystique',
+        description: 'Une violette qui révèle les secrets cachés du jardin',
+        rarity: 2,
+        bonuses: [
+          PlantBonus(type: BonusType.extraMoves, value: 1),
+          PlantBonus(type: BonusType.scoreMultiplier, value: 1.1),
+        ],
+        isUnlocked: _plantLevels.containsKey('violette_mystique'),
+        level: _plantLevels['violette_mystique'] ?? 0,
+        imagePath: 'assets/images/plants/violette_mystique.png',
+        unlockCondition: PlantUnlockCondition(
+          type: UnlockType.levelsCompleted,
+          value: 3,
+          description: 'Complétez 3 niveaux',
+        ),
+      ),
+
+      Plant(
+        id: 'jasmin_eternel',
+        name: 'Jasmin Éternel',
+        description:
+            'Un jasmin dont le parfum traverse les dimensions temporelles',
+        rarity: 3,
+        bonuses: [
+          PlantBonus(type: BonusType.extraLives, value: 1),
+          PlantBonus(type: BonusType.coinMultiplier, value: 1.15),
+        ],
+        isUnlocked: _plantLevels.containsKey('jasmin_eternel'),
+        level: _plantLevels['jasmin_eternel'] ?? 0,
+        imagePath: 'assets/images/plants/jasmin_eternel.png',
+        unlockCondition: PlantUnlockCondition(
+          type: UnlockType.perfectLevels,
+          value: 5,
+          description: 'Obtenez 3 étoiles sur 5 niveaux',
+        ),
+      ),
+
+      Plant(
+        id: 'petunia_cosmique',
+        name: 'Pétunia Cosmique',
+        description: 'Un pétunia qui puise son énergie dans les étoiles',
+        rarity: 4,
+        bonuses: [
+          PlantBonus(type: BonusType.extraMoves, value: 2),
+          PlantBonus(type: BonusType.scoreMultiplier, value: 1.3),
+          PlantBonus(type: BonusType.coinMultiplier, value: 1.2),
+        ],
+        isUnlocked: _plantLevels.containsKey('petunia_cosmique'),
+        level: _plantLevels['petunia_cosmique'] ?? 0,
+        imagePath: 'assets/images/plants/petunia_cosmique.png',
+        unlockCondition: PlantUnlockCondition(
+          type: UnlockType.score,
+          value: 50000,
+          description: 'Atteignez 50 000 points au total',
+        ),
+      ),
+
+      Plant(
+        id: 'lys_phoenix',
+        name: 'Lys du Phénix',
+        description:
+            'Un lys légendaire qui renaît de ses cendres et accorde une seconde chance',
+        rarity: 5,
+        bonuses: [
+          PlantBonus(type: BonusType.extraMoves, value: 4),
+          PlantBonus(type: BonusType.scoreMultiplier, value: 1.6),
+          PlantBonus(type: BonusType.extraLives, value: 2),
+          PlantBonus(type: BonusType.coinMultiplier, value: 1.4),
+        ],
+        isUnlocked: _plantLevels.containsKey('lys_phoenix'),
+        level: _plantLevels['lys_phoenix'] ?? 0,
+        imagePath: 'assets/images/plants/lys_phoenix.png',
+        unlockCondition: PlantUnlockCondition(
+          type: UnlockType.levelsCompleted,
+          value: 30,
+          description: 'Complétez 30 niveaux',
+        ),
+      ),
+
+      Plant(
+        id: 'cactus_temporel',
+        name: 'Cactus Temporel',
+        description:
+            'Un cactus rare qui manipule le temps et prolonge les sessions de jeu',
+        rarity: 4,
+        bonuses: [
+          PlantBonus(type: BonusType.extraLives, value: 3),
+          PlantBonus(type: BonusType.extraMoves, value: 2),
+        ],
+        isUnlocked: _plantLevels.containsKey('cactus_temporel'),
+        level: _plantLevels['cactus_temporel'] ?? 0,
+        imagePath: 'assets/images/plants/cactus_temporel.png',
+        unlockCondition: PlantUnlockCondition(
+          type: UnlockType.matches,
+          value: 500,
+          description: 'Faites 500 matches au total',
         ),
       ),
     ];

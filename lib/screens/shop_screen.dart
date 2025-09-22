@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/providers/user_provider.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
+import 'package:mind_bloom/widgets/banner_ad_widget.dart';
+import 'package:mind_bloom/widgets/rewarded_ad_button.dart';
 import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class ShopScreen extends StatefulWidget {
@@ -253,6 +255,30 @@ class _ShopScreenState extends State<ShopScreen> {
               ),
             ),
           ),
+
+          // 🚀 BOUTONS DE PUBLICITÉS RÉCOMPENSÉES DANS LA BOUTIQUE
+          Container(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                const Text(
+                  '🎁 Récompenses Gratuites',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const CoinsRewardedAdButton(),
+                const SizedBox(height: 8),
+                const GemsRewardedAdButton(),
+              ],
+            ),
+          ),
+
+          // 🚀 BANNIÈRE PUBLICITAIRE DANS LA BOUTIQUE
+          const ShopBannerAd(),
         ],
       ),
     );

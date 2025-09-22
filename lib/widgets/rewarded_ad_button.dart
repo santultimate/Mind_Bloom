@@ -247,3 +247,52 @@ class FreeGemsButton extends StatelessWidget {
     );
   }
 }
+
+// Widgets spécialisés pour différents types de récompenses
+class LifeRewardedAdButton extends StatelessWidget {
+  const LifeRewardedAdButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const RewardedAdButton(
+      rewardType: 'lives',
+      rewardAmount: 1,
+      title: 'Vie Gratuite',
+      description: 'Regardez une pub pour obtenir une vie',
+      icon: Icons.favorite,
+      color: Colors.red,
+    );
+  }
+}
+
+class CoinsRewardedAdButton extends StatelessWidget {
+  const CoinsRewardedAdButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const RewardedAdButton(
+      rewardType: 'coins',
+      rewardAmount: 100,
+      title: '100 Pièces Gratuites',
+      description: 'Regardez une pub pour obtenir 100 pièces',
+      icon: Icons.monetization_on,
+      color: AppColors.coins,
+    );
+  }
+}
+
+class GemsRewardedAdButton extends StatelessWidget {
+  const GemsRewardedAdButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const RewardedAdButton(
+      rewardType: 'gems',
+      rewardAmount: 5,
+      title: '5 Gemmes Gratuites',
+      description: 'Regardez une pub pour obtenir 5 gemmes',
+      icon: Icons.diamond,
+      color: AppColors.gems,
+    );
+  }
+}

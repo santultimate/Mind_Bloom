@@ -23,74 +23,78 @@ class ObjectivePanel extends StatelessWidget {
         }
 
         return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-          padding: const EdgeInsets.all(6),
+          margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 1),
+          padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: AppColors.background,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(8),
             border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.1),
-                blurRadius: 8,
-                offset: const Offset(0, 2),
+                blurRadius: 4,
+                offset: const Offset(0, 1),
               ),
             ],
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // En-tête avec progression globale
-                Row(
-                  children: [
-                    Icon(
-                      Icons.flag,
-                      color: AppColors.primary,
-                      size: 20,
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      AppLocalizations.of(context)!.objectives,
-                      style: TextStyle(
-                        color: AppColors.textPrimary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 120),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // En-tête avec progression globale
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.flag,
+                        color: AppColors.primary,
+                        size: 16,
                       ),
-                    ),
-                    const Spacer(),
-                    // Indicateur de progression globale
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: AppColors.primary.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        '${(gameProvider.getOverallProgress() * 100).toInt()}%',
+                      const SizedBox(width: 4),
+                      Text(
+                        AppLocalizations.of(context)!.objectives,
                         style: TextStyle(
-                          color: AppColors.primary,
-                          fontSize: 12,
+                          color: AppColors.textPrimary,
+                          fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
-                  ],
-                ),
+                      const Spacer(),
+                      // Indicateur de progression globale
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          '${(gameProvider.getOverallProgress() * 100).toInt()}%',
+                          style: TextStyle(
+                            color: AppColors.primary,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
 
-                const SizedBox(height: 6),
+                  const SizedBox(height: 2),
 
-                // Liste des objectifs
-                ...objectives
-                    .map((objective) => _buildObjectiveItem(objective)),
+                  // Liste des objectifs
+                  ...objectives.map(
+                      (objective) => _buildObjectiveItem(context, objective)),
 
-                const SizedBox(height: 4),
+                  const SizedBox(height: 2),
 
-                // Barre de progression globale
-                _buildOverallProgressBar(gameProvider.getOverallProgress()),
-              ],
+                  // Barre de progression globale
+                  _buildOverallProgressBar(
+                      context, gameProvider.getOverallProgress()),
+                ],
+              ),
             ),
           ),
         );
@@ -98,18 +102,18 @@ class ObjectivePanel extends StatelessWidget {
     );
   }
 
-  Widget _buildObjectiveItem(LevelObjective objective) {
+  Widget _buildObjectiveItem(BuildContext context, LevelObjective objective) {
     final isCompleted = objective.isCompleted;
     final progress = objective.progress;
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 2),
-      padding: const EdgeInsets.all(4),
+      margin: const EdgeInsets.only(bottom: 1),
+      padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
         color: isCompleted
             ? AppColors.success.withValues(alpha: 0.1)
             : AppColors.background,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(6),
         border: Border.all(
           color: isCompleted
               ? AppColors.success
@@ -121,8 +125,8 @@ class ObjectivePanel extends StatelessWidget {
         children: [
           // Icône de l'objectif
           Container(
-            width: 24,
-            height: 24,
+            width: 20,
+            height: 20,
             decoration: BoxDecoration(
               color: isCompleted
                   ? AppColors.success
@@ -132,11 +136,11 @@ class ObjectivePanel extends StatelessWidget {
             child: Icon(
               _getObjectiveIcon(objective),
               color: isCompleted ? Colors.white : AppColors.primary,
-              size: 12,
+              size: 10,
             ),
           ),
 
-          const SizedBox(width: 6),
+          const SizedBox(width: 4),
 
           // Description et progression
           Expanded(
@@ -144,16 +148,18 @@ class ObjectivePanel extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  _getObjectiveDescription(objective),
+                  _getObjectiveDescription(context, objective),
                   style: TextStyle(
                     color: AppColors.textPrimary,
-                    fontSize: 12,
+                    fontSize: 10,
                     fontWeight: FontWeight.w500,
                     decoration: isCompleted ? TextDecoration.lineThrough : null,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
 
-                const SizedBox(height: 2),
+                const SizedBox(height: 1),
 
                 // Barre de progression
                 Row(
@@ -166,17 +172,17 @@ class ObjectivePanel extends StatelessWidget {
                         valueColor: AlwaysStoppedAnimation<Color>(
                           isCompleted ? AppColors.success : AppColors.primary,
                         ),
-                        minHeight: 4,
+                        minHeight: 3,
                       ),
                     ),
-                    const SizedBox(width: 6),
+                    const SizedBox(width: 4),
                     Text(
                       '${objective.current}/${objective.target}',
                       style: TextStyle(
                         color: isCompleted
                             ? AppColors.success
                             : AppColors.textSecondary,
-                        fontSize: 12,
+                        fontSize: 10,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -189,8 +195,8 @@ class ObjectivePanel extends StatelessWidget {
           // Indicateur de complétion
           if (isCompleted)
             Container(
-              width: 20,
-              height: 20,
+              width: 16,
+              height: 16,
               decoration: const BoxDecoration(
                 color: AppColors.success,
                 shape: BoxShape.circle,
@@ -198,7 +204,7 @@ class ObjectivePanel extends StatelessWidget {
               child: const Icon(
                 Icons.check,
                 color: Colors.white,
-                size: 12,
+                size: 10,
               ),
             ),
         ],
@@ -206,7 +212,7 @@ class ObjectivePanel extends StatelessWidget {
     );
   }
 
-  Widget _buildOverallProgressBar(double progress) {
+  Widget _buildOverallProgressBar(BuildContext context, double progress) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -214,7 +220,7 @@ class ObjectivePanel extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Progression globale',
+              AppLocalizations.of(context)!.globalProgress,
               style: TextStyle(
                 color: AppColors.textSecondary,
                 fontSize: 12,
@@ -280,19 +286,25 @@ class ObjectivePanel extends StatelessWidget {
     }
   }
 
-  String _getObjectiveDescription(LevelObjective objective) {
+  String _getObjectiveDescription(
+      BuildContext context, LevelObjective objective) {
     switch (objective.type) {
       case LevelObjectiveType.collectTiles:
         final tileName = _getTileName(objective.tileType);
-        return 'Collectez ${objective.target} ${tileName}s';
+        return AppLocalizations.of(context)!
+            .collectTilesObjective(objective.target, tileName);
       case LevelObjectiveType.clearBlockers:
-        return 'Détruisez ${objective.target} bloqueurs';
+        return AppLocalizations.of(context)!
+            .clearBlockersObjective(objective.target);
       case LevelObjectiveType.reachScore:
-        return 'Atteignez ${objective.target} points';
+        return AppLocalizations.of(context)!
+            .reachScoreObjective(objective.target);
       case LevelObjectiveType.freeCreature:
-        return 'Libérez ${objective.target} créatures';
+        return AppLocalizations.of(context)!
+            .freeCreatureObjective(objective.target);
       case LevelObjectiveType.clearJelly:
-        return 'Nettoyez ${objective.target} gelées';
+        return AppLocalizations.of(context)!
+            .clearJellyObjective(objective.target);
     }
   }
 

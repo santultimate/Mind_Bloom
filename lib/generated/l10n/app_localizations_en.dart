@@ -1282,4 +1282,138 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adError => 'Error loading ad. Please try again.';
+
+  @override
+  String get timeRemaining => 'Time';
+
+  @override
+  String get nextLife => 'Next life';
+
+  @override
+  String get watchAdForFreeLife => 'Watch an ad to get a free life!';
+
+  @override
+  String get dailyRewards => 'Daily Rewards';
+
+  @override
+  String get claimReward => 'Claim!';
+
+  @override
+  String get rewardAlreadyClaimed => 'Reward already claimed';
+
+  @override
+  String get nextRewardIn => 'Next reward in:';
+
+  @override
+  String get howItWorks => 'How it works?';
+
+  @override
+  String get dailyRewardInfo1 => 'Log in every day to claim your reward';
+
+  @override
+  String get dailyRewardInfo2 =>
+      'The longer your streak, the better the rewards';
+
+  @override
+  String get dailyRewardInfo3 => 'The 7th day offers a legendary reward';
+
+  @override
+  String get dailyRewardInfo4 => 'Rewards reset at midnight';
+
+  @override
+  String rewardOfDay(int day) {
+    return 'Day $day Reward';
+  }
+
+  @override
+  String get legendaryStreak => 'Legendary Streak!';
+
+  @override
+  String get perfectPerformance => 'Perfect Performance! Bonus x2';
+
+  @override
+  String get milestoneLevel => 'Milestone Level! Special bonus';
+
+  @override
+  String get rewardsClaimed => 'Rewards Obtained';
+
+  @override
+  String comboBonus(int multiplier) {
+    return 'Combo Bonus x$multiplier';
+  }
+
+  @override
+  String get spectacularCombo => 'Spectacular Combo!';
+
+  @override
+  String megaMatch(int count) {
+    return 'Mega Match of $count tiles!';
+  }
+
+  @override
+  String get globalProgress => 'Global Progress';
+
+  @override
+  String collectTilesObjective(int count, String tileName) {
+    return 'Collect $count ${tileName}s';
+  }
+
+  @override
+  String clearBlockersObjective(int count) {
+    return 'Destroy $count blockers';
+  }
+
+  @override
+  String reachScoreObjective(int count) {
+    return 'Reach $count points';
+  }
+
+  @override
+  String freeCreatureObjective(int count) {
+    return 'Free $count creatures';
+  }
+
+  @override
+  String clearJellyObjective(int count) {
+    return 'Destroy $count jellies';
+  }
+
+  @override
+  String get coinsBonus => 'Coins Bonus';
+
+  @override
+  String get gemsGratuits => 'Free Gems';
+
+  @override
+  String get watchAdForCoins => 'Watch an ad to get coins';
+
+  @override
+  String get watchAdForGems => 'Watch an ad to get gems';
+
+  @override
+  String get watchButton => 'WATCH';
+
+  @override
+  String get debugUnlockAllLevels => 'Unlock All Levels (DEBUG)';
+
+  @override
+  String get debugUnlockAllLevelsDescription =>
+      'Test function to unlock all levels';
+
+  @override
+  String get shareScore => 'Share Score';
+
+  @override
+  String get shareScoreTitle => 'Share My Score';
+
+  @override
+  String shareScoreMessage(int score, int level) {
+    return 'I got $score points on level $level in Mind Bloom! Can you do better? 🌱';
+  }
+
+  @override
+  String get shareScoreSuccess => 'Score shared successfully!';
+
+  @override
+  String get shareScoreError => 'Error sharing score';
 }

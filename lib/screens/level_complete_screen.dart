@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/providers/user_provider.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
 import 'package:mind_bloom/providers/ad_provider.dart';
-import 'package:mind_bloom/providers/collection_provider.dart';
 import 'package:mind_bloom/providers/game_provider.dart';
 import 'package:mind_bloom/constants/admob_config.dart';
 import 'package:mind_bloom/widgets/banner_ad_widget.dart';
+import 'package:mind_bloom/widgets/rewarded_ad_button.dart';
 import 'package:mind_bloom/screens/home_screen.dart';
 import 'package:mind_bloom/screens/game_screen.dart';
 import 'package:mind_bloom/models/level.dart';
@@ -213,31 +214,103 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
 
             const SizedBox(height: 24),
 
-            // Récompenses
+            // Récompenses améliorées
             if (widget.stars > 0) ...[
               Container(
-                padding: const EdgeInsets.all(12),
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(12),
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.primary.withValues(alpha: 0.1),
+                      AppColors.primary.withValues(alpha: 0.05),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: AppColors.primary.withValues(alpha: 0.3),
+                    width: 1,
+                  ),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Column(
                   children: [
-                    Icon(
-                      Icons.monetization_on,
-                      color: AppColors.coins,
-                      size: 20,
-                    ),
-                    const SizedBox(width: 8),
                     Text(
-                      '+${widget.stars * 10} ${AppLocalizations.of(context)!.coins}',
+                      'Récompenses obtenues',
                       style: TextStyle(
-                        color: AppColors.coins,
+                        color: AppColors.primary,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: 18,
                       ),
                     ),
+                    const SizedBox(height: 12),
+
+                    // Calcul des récompenses basé sur la logique du UserProvider
+                    ...(_calculateRewards().map((reward) => Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                reward['icon'] as IconData,
+                                color: reward['color'] as Color,
+                                size: 24,
+                              ),
+                              const SizedBox(width: 12),
+                              Text(
+                                reward['text'] as String,
+                                style: TextStyle(
+                                  color: reward['color'] as Color,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ))).toList(),
+
+                    // Bonus spéciaux
+                    if (widget.stars == 3) ...[
+                      const SizedBox(height: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: AppColors.gold.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          '🌟 Performance Parfaite! Bonus x2',
+                          style: TextStyle(
+                            color: AppColors.gold,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ],
+
+                    // Milestone bonus
+                    if (widget.currentLevel.id % 5 == 0) ...[
+                      const SizedBox(height: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: Colors.purple.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          '🎯 Niveau Milestone! Bonus spécial',
+                          style: TextStyle(
+                            color: Colors.purple,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ),
@@ -281,6 +354,26 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
 
             const SizedBox(height: 12),
 
+            // Bouton de partage de score
+            if (widget.won)
+              Container(
+                width: double.infinity,
+                margin: const EdgeInsets.only(bottom: 12),
+                child: ElevatedButton.icon(
+                  onPressed: _shareScore,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.gems,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  icon: const Icon(Icons.share, size: 20),
+                  label: Text(AppLocalizations.of(context)!.shareScore),
+                ),
+              ),
+
             TextButton(
               onPressed: _goToHome,
               child: Text(
@@ -288,6 +381,13 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                 style: TextStyle(color: AppColors.textSecondary),
               ),
             ),
+
+            const SizedBox(height: 16),
+
+            // 🚀 BOUTONS DE PUBLICITÉS RÉCOMPENSÉES - REVENUS MAXIMAUX
+            const CoinsRewardedAdButton(),
+            const SizedBox(height: 8),
+            const GemsRewardedAdButton(),
 
             const SizedBox(height: 16),
 
@@ -411,19 +511,29 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
-              fontSize: 16,
+          Expanded(
+            flex: 2,
+            child: Text(
+              label,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                fontSize: 16,
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
           ),
-          Text(
-            value,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onSurface,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+          const SizedBox(width: 8),
+          Expanded(
+            flex: 1,
+            child: Text(
+              value,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurface,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.end,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
@@ -439,7 +549,7 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
       case 2:
         return 'Très bien ! Bonne performance';
       case 1:
-        return 'Bien ! Niveau terminé';
+        return 'Bien ! ${AppLocalizations.of(context)?.levelComplete ?? 'Level Complete'}';
       case 0:
         return 'À améliorer';
       default:
@@ -447,17 +557,79 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
     }
   }
 
+  /// Calcule les récompenses obtenues pour l'affichage
+  List<Map<String, dynamic>> _calculateRewards() {
+    final rewards = <Map<String, dynamic>>[];
+
+    // Calcul basé sur la logique du UserProvider
+    int baseReward = 30 + (widget.currentLevel.id * 5);
+    int starBonus = widget.stars * 20;
+    int scoreBonus = (widget.score / 500).floor();
+    int performanceBonus = 0;
+
+    if (widget.stars == 3) {
+      performanceBonus = widget.currentLevel.id * 15;
+    } else if (widget.stars == 2) {
+      performanceBonus = widget.currentLevel.id * 8;
+    } else if (widget.stars == 1) {
+      performanceBonus = widget.currentLevel.id * 3;
+    }
+
+    int totalCoins = baseReward + starBonus + scoreBonus + performanceBonus;
+
+    // Bonus de milestone
+    if (widget.currentLevel.id % 5 == 0) {
+      totalCoins += widget.currentLevel.id * 10;
+    }
+    if (widget.currentLevel.id % 10 == 0) {
+      totalCoins +=
+          100; // Bonus supplémentaire pour les niveaux multiples de 10
+    }
+
+    // Pièces
+    rewards.add({
+      'icon': Icons.monetization_on,
+      'color': AppColors.coins,
+      'text': '+$totalCoins Pièces',
+    });
+
+    // Gemmes
+    int gems = 0;
+    if (widget.stars == 3) gems += 2;
+    if (widget.stars >= 2) gems += 1;
+    if (widget.currentLevel.id % 5 == 0) gems += widget.currentLevel.id ~/ 5;
+    if (widget.currentLevel.id % 10 == 0) gems += 5;
+
+    if (gems > 0) {
+      rewards.add({
+        'icon': Icons.diamond,
+        'color': AppColors.gems,
+        'text': '+$gems Gemmes',
+      });
+    }
+
+    // Expérience
+    int experience = (widget.currentLevel.id * 2) +
+        (widget.stars * 10) +
+        (widget.score / 1000).floor();
+    rewards.add({
+      'icon': Icons.star_outline,
+      'color': Colors.purple,
+      'text': '+$experience XP',
+    });
+
+    return rewards;
+  }
+
   void _retryLevel() async {
     final audioProvider = Provider.of<AudioProvider>(context, listen: false);
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    final adProvider = Provider.of<AdProvider>(context, listen: false);
 
     audioProvider.playSfx('audio/sfx/button_click.wav');
 
     // Vérifier si le joueur a des vies
     if (userProvider.lives > 0) {
-      // Le joueur a des vies, utiliser une vie et rejouer
-      await userProvider.useLife();
+      // Le joueur a des vies, rejouer (vie déjà utilisée au début)
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const GameScreen(),
@@ -573,7 +745,6 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
   void _watchAdForLife() async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     final adProvider = Provider.of<AdProvider>(context, listen: false);
-    final audioProvider = Provider.of<AudioProvider>(context, listen: false);
     final l10n = AppLocalizations.of(context)!;
 
     Navigator.of(context).pop(); // Fermer le dialog
@@ -644,8 +815,6 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
     userProvider.updateStreak(true);
 
     // Mettre à jour les collections
-    final collectionProvider =
-        Provider.of<CollectionProvider>(context, listen: false);
     final gameProvider = Provider.of<GameProvider>(context, listen: false);
 
     // Calculer le nombre de matches (approximation basée sur le score)
@@ -702,5 +871,44 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
       ),
       (route) => false,
     );
+  }
+
+  void _shareScore() async {
+    final l10n = AppLocalizations.of(context)!;
+    final audioProvider = Provider.of<AudioProvider>(context, listen: false);
+    audioProvider.playSfx('audio/sfx/button_click.wav');
+
+    try {
+      // Créer le message de partage
+      final shareMessage = l10n.shareScoreMessage(
+        widget.score,
+        widget.currentLevel.id,
+      );
+
+      // Copier le message dans le presse-papier
+      await Clipboard.setData(ClipboardData(text: shareMessage));
+
+      // Afficher un message de succès
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.shareScoreSuccess),
+            backgroundColor: Colors.green,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (e) {
+      // En cas d'erreur, afficher un message d'erreur
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.shareScoreError),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    }
   }
 }

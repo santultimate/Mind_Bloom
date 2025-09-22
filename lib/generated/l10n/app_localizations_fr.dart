@@ -43,12 +43,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String coins(int quantity) {
-    return '$quantity pièces';
+    return 'Pièces';
   }
 
   @override
   String gems(int count) {
-    return '$count gemmes';
+    return 'Gemmes';
   }
 
   @override
@@ -85,7 +85,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get confirm => 'Confirmer';
 
   @override
-  String get save => 'Enregistrer';
+  String get save => 'Sauvegarder';
 
   @override
   String get load => 'Charger';
@@ -140,7 +140,7 @@ class AppLocalizationsFr extends AppLocalizations {
     );
     final String idString = idNumberFormat.format(id);
 
-    return 'Niveau $idString Échoué';
+    return 'Niveau $idString échoué';
   }
 
   @override
@@ -153,7 +153,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get freeLife => 'Vie gratuite';
 
   @override
-  String get watchAdForLife => 'Regarder une Pub pour une Vie';
+  String get watchAdForLife =>
+      'Regardez une publicité pour obtenir une vie gratuite !';
 
   @override
   String get watchAd => 'Regarder la Pub';
@@ -246,7 +247,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get editUsername => 'Modifier le nom d\'utilisateur';
 
   @override
-  String get currentStreak => 'Série actuelle';
+  String get currentStreak => 'Série Actuelle';
 
   @override
   String get bestStreak => 'Meilleure série';
@@ -292,7 +293,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get restoreError => 'Erreur lors de la restauration';
 
   @override
-  String get usernameUpdated => 'Nom d\'utilisateur mis à jour avec succès';
+  String get usernameUpdated => 'Nom d\'utilisateur mis à jour';
 
   @override
   String get world => 'Monde';
@@ -304,7 +305,7 @@ class AppLocalizationsFr extends AppLocalizations {
     );
     final String idString = idNumberFormat.format(id);
 
-    return 'Niveau $idString Terminé !';
+    return 'Niveau $idString terminé !';
   }
 
   @override
@@ -393,11 +394,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String bonus(int count) {
-    return '+$count bonus';
+    return 'Bonus';
   }
 
   @override
-  String get active => 'ACTIF';
+  String get active => 'Actif';
 
   @override
   String get inactive => 'Inactif';
@@ -459,7 +460,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get levelLockedMessage =>
-      'Vous devez compléter le niveau précédent pour débloquer celui-ci.';
+      'Terminez les niveaux précédents pour débloquer celui-ci.';
 
   @override
   String get firstSteps => 'Premiers Pas';
@@ -608,7 +609,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get provideSupport => 'Fournir un support client';
 
   @override
-  String get analyzeUsage => 'Analyser l\'utilisation de l\'application';
+  String get analyzeUsage => 'Analyser les habitudes d\'utilisation';
 
   @override
   String get dataProtection => 'Protection des données';
@@ -654,11 +655,11 @@ class AppLocalizationsFr extends AppLocalizations {
       'Communiquer avec vous concernant le service';
 
   @override
-  String get dataSharing => 'Partage des données';
+  String get dataSharing => 'Partage de données';
 
   @override
   String get dataSharingDescription =>
-      'Nous ne vendons, n\'échangeons ni ne transférons vos informations personnelles à des tiers sans votre consentement, sauf comme décrit dans cette politique.';
+      'Nous ne vendons, n\'échangeons ou ne transférons pas vos informations personnelles à des tiers sans votre consentement, sauf comme décrit dans cette politique.';
 
   @override
   String get yourRights => 'Vos droits';
@@ -677,7 +678,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get withdrawConsent =>
-      'Retirer le consentement pour le traitement des données';
+      'Retirer votre consentement au traitement des données';
 
   @override
   String get data => 'Données';
@@ -714,7 +715,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get noMoreLivesMessage =>
-      'Vous n\'avez plus de vies. Regardez une publicité pour en obtenir une gratuite, attendez qu\'elles se rechargent ou achetez-en plus.';
+      'Vous n\'avez plus de vies. Regardez une publicité pour obtenir une vie gratuite, attendez qu\'elles se rechargent ou achetez-en plus.';
 
   @override
   String get wait => 'Attendre';
@@ -726,7 +727,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get backToMenu => 'Retour au menu';
 
   @override
-  String get youHaveUsedAllMoves => 'Vous avez utilisé tous vos coups !';
+  String get youHaveUsedAllMoves => 'Vous avez utilisé tous vos coups';
 
   @override
   String get aboutTheGame => 'À propos du jeu';
@@ -735,7 +736,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get flutterDeveloper => 'Développeur Flutter';
 
   @override
-  String get readOurTermsOfService => 'Lisez nos conditions d\'utilisation';
+  String get readOurTermsOfService => 'Lire nos conditions d\'utilisation';
 
   @override
   String get discoverHowWeProtectYourData =>
@@ -746,7 +747,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get noMovesPossible =>
-      'Aucun mouvement possible. Utilisez le bouton mélanger !';
+      'Aucun coup possible. Utilisez le bouton mélanger !';
 
   @override
   String get activeEvent => 'ÉVÉNEMENT ACTIF';
@@ -771,7 +772,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String plant(int rarity) {
-    return 'Plante $rarity★';
+    return 'Plante';
   }
 
   @override
@@ -848,29 +849,29 @@ class AppLocalizationsFr extends AppLocalizations {
   String get premium => 'Premium';
 
   @override
-  String get pop => 'POP';
+  String get pop => 'Éclater';
 
   @override
   String notEnoughCurrency(String currency) {
-    return 'Vous n\'avez pas assez de $currency';
+    return 'Pas assez de $currency';
   }
 
   @override
   String purchaseSuccess(String item) {
-    return '$item acheté avec succès !';
+    return 'Achat réussi : $item';
   }
 
   @override
   String get lives5 => '5 Vies';
 
   @override
-  String get lives5Description => 'Rechargez vos vies pour continuer à jouer';
+  String get lives5Description => 'Pack de vies';
 
   @override
   String get lives10 => '10 Vies';
 
   @override
-  String get lives10Description => 'Pack de vies plus important';
+  String get lives10Description => 'Pack de vies';
 
   @override
   String get coins100 => '100 Pièces';
@@ -882,34 +883,35 @@ class AppLocalizationsFr extends AppLocalizations {
   String get coins500 => '500 Pièces';
 
   @override
-  String get coins500Description => 'Pack de pièces moyen';
+  String get coins500Description => 'Pack moyen de pièces';
 
   @override
   String get coins1000 => '1000 Pièces';
 
   @override
-  String get coins1000Description => 'Gros pack de pièces';
+  String get coins1000Description => 'Grand pack de pièces';
 
   @override
   String get gems50 => '50 Gemmes';
 
   @override
-  String get gems50Description => 'Pack de gemmes premium';
+  String get gems50Description => 'Pack de gemmes';
 
   @override
   String get shuffler => 'Mélangeur';
 
   @override
-  String get shufflerDescription => 'Mélange automatiquement le plateau';
+  String get shufflerDescription => 'Mélange les tuiles sur la grille';
 
   @override
-  String get hintDescription => 'Montre un coup possible';
+  String get hintDescription => 'Révèle un coup possible';
 
   @override
-  String get removeAds => 'Sans Publicités';
+  String get removeAds => 'Supprimer les Publicités';
 
   @override
-  String get removeAdsDescription => 'Supprime toutes les publicités';
+  String get removeAdsDescription =>
+      'Supprime toutes les publicités de l\'application';
 
   @override
   String plantLevel(int level) {
@@ -917,7 +919,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get unlockCondition => 'Condition de déblocage';
+  String get unlockCondition => 'Condition de déverrouillage';
 
   @override
   String get bonuses => 'Bonus';
@@ -960,11 +962,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get rewardClaimed => 'Récompense réclamée';
 
   @override
-  String get inProgress => 'En cours...';
+  String get inProgress => 'EN COURS';
 
   @override
   String rewardClaimedMessage(String achievementTitle) {
-    return 'Récompense de $achievementTitle réclamée !';
+    return 'Récompense pour $achievementTitle réclamée !';
   }
 
   @override
@@ -974,7 +976,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get confirmedBeginnerDescription => 'Terminez 10 niveaux';
 
   @override
-  String get expertInTheMaking => 'Expert en Herbe';
+  String get expertInTheMaking => 'Expert en Formation';
 
   @override
   String get expertInTheMakingDescription => 'Terminez 50 niveaux';
@@ -983,25 +985,25 @@ class AppLocalizationsFr extends AppLocalizations {
   String get perfectionist => 'Perfectionniste';
 
   @override
-  String get perfectionistDescription => 'Obtenez 3 étoiles sur un niveau';
+  String get perfectionistDescription => 'Terminez un niveau avec 3 étoiles';
 
   @override
-  String get scorer => 'Scoreur';
+  String get scorer => 'Marqueur';
 
   @override
-  String get scorerDescription => 'Marquez 1,000 points en un niveau';
+  String get scorerDescription => 'Marquez 1 000 points en un niveau';
 
   @override
   String get scoreMaster => 'Maître du Score';
 
   @override
-  String get scoreMasterDescription => 'Marquez 5,000 points en un niveau';
+  String get scoreMasterDescription => 'Marquez 5 000 points en un niveau';
 
   @override
   String get accumulator => 'Accumulateur';
 
   @override
-  String get accumulatorDescription => 'Marquez un total de 100,000 points';
+  String get accumulatorDescription => 'Marquez un total de 100 000 points';
 
   @override
   String get beginnerBotanist => 'Botaniste Débutant';
@@ -1016,14 +1018,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String get collectorDescription => 'Débloquez 5 plantes';
 
   @override
-  String get rarityHunter => 'Chasseur de Raretés';
+  String get rarityHunter => 'Chasseur de Rareté';
 
   @override
   String get rarityHunterDescription =>
       'Débloquez une plante 4 étoiles ou plus';
 
   @override
-  String get comboMaster => 'Maître du Combo';
+  String get comboMaster => 'Maître des Combos';
 
   @override
   String get comboMasterDescription => 'Faites un combo de 5 tuiles';
@@ -1045,7 +1047,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get loyal => 'Fidèle';
 
   @override
-  String get loyalDescription => 'Connectez-vous 7 jours de suite';
+  String get loyalDescription => 'Connectez-vous 7 jours d\'affilée';
 
   @override
   String get sharer => 'Partageur';
@@ -1059,31 +1061,31 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get completedLevels => 'Niveaux terminés';
+  String get completedLevels => 'Niveaux Terminés';
 
   @override
-  String get detailedStats => 'Statistiques détaillées';
+  String get detailedStats => 'Statistiques Détaillées';
 
   @override
-  String get totalCoins => 'Pièces totales';
+  String get totalCoins => 'Pièces Totales';
 
   @override
-  String get starsEarned => 'Étoiles gagnées';
+  String get starsEarned => 'Étoiles Gagnées';
 
   @override
-  String get highestLevel => 'Niveau le plus élevé';
+  String get highestLevel => 'Niveau le Plus Élevé';
 
   @override
-  String get quickActions => 'Actions rapides';
+  String get quickActions => 'Actions Rapides';
 
   @override
-  String get reviewTutorial => 'Revoir le tutoriel';
+  String get reviewTutorial => 'Revoir le Tutoriel';
 
   @override
-  String get shareProfile => 'Partager le profil';
+  String get shareProfile => 'Partager le Profil';
 
   @override
-  String get recentAchievements => 'Réalisations récentes';
+  String get recentAchievements => 'Réalisations Récentes';
 
   @override
   String get firstLevelCompleted => 'Premier niveau terminé';
@@ -1113,59 +1115,59 @@ class AppLocalizationsFr extends AppLocalizations {
       'Cette action supprimera toutes vos données de progression. Cette action est irréversible.';
 
   @override
-  String get shareComingSoon => 'Partage à venir...';
+  String get shareComingSoon => 'Le partage arrive bientôt...';
 
   @override
-  String get acceptanceOfTerms => '1. Acceptation des conditions';
+  String get acceptanceOfTerms => '1. Acceptation des Conditions';
 
   @override
   String get acceptanceOfTermsContent =>
       'En utilisant l\'application Mind Bloom, vous acceptez d\'être lié par ces conditions d\'utilisation. Si vous n\'acceptez pas ces conditions, veuillez ne pas utiliser notre application.';
 
   @override
-  String get serviceDescription => '2. Description du service';
+  String get serviceDescription => '2. Description du Service';
 
   @override
   String get serviceDescriptionContent =>
       'Mind Bloom est un jeu de puzzle mobile développé par YACOUBA SANTARA. L\'application propose des mécaniques de match-3 avec des éléments de progression RPG dans un univers de jardin magique.';
 
   @override
-  String get authorizedUse => '3. Utilisation autorisée';
+  String get authorizedUse => '3. Usage Autorisé';
 
   @override
   String get authorizedUseContent =>
-      'Vous pouvez utiliser Mind Bloom à des fins personnelles et non commerciales uniquement. Il est interdit de :\n\n• Copier, modifier ou distribuer l\'application\n• Utiliser l\'application à des fins commerciales sans autorisation\n• Tenter de contourner les mesures de sécurité\n• Utiliser l\'application de manière à nuire à d\'autres utilisateurs';
+      'Vous pouvez utiliser Mind Bloom uniquement à des fins personnelles et non commerciales. Il est interdit de :\n\n• Copier, modifier ou distribuer l\'application\n• Utiliser l\'application à des fins commerciales sans autorisation\n• Tenter de contourner les mesures de sécurité\n• Utiliser l\'application d\'une manière qui nuit aux autres utilisateurs';
 
   @override
-  String get intellectualProperty => '4. Contenu et propriété intellectuelle';
+  String get intellectualProperty => '4. Contenu et Propriété Intellectuelle';
 
   @override
   String get intellectualPropertyContent =>
-      'Tous les éléments de Mind Bloom, incluant mais non limités aux graphismes, sons, code source, et design, sont la propriété exclusive de YACOUBA SANTARA et sont protégés par les lois sur le droit d\'auteur.';
+      'Tous les éléments de Mind Bloom, y compris mais sans s\'y limiter aux graphismes, sons, code source et design, sont la propriété exclusive de YACOUBA SANTARA et sont protégés par les lois sur le droit d\'auteur.';
 
   @override
-  String get inAppPurchases => '5. Achats intégrés';
+  String get inAppPurchases => '5. Achats In-App';
 
   @override
   String get inAppPurchasesContent =>
-      'L\'application peut contenir des achats intégrés pour des vies supplémentaires, des boosters, ou d\'autres éléments de jeu. Tous les achats sont finaux et non remboursables, sauf disposition contraire de la loi applicable.';
+      'L\'application peut contenir des achats in-app pour des vies supplémentaires, des boosters ou d\'autres éléments de jeu. Tous les achats sont finaux et non remboursables, sauf si la loi applicable l\'exige.';
 
   @override
   String get advertisements => '6. Publicités';
 
   @override
   String get advertisementsContent =>
-      'Mind Bloom peut afficher des publicités tierces. Ces publicités sont gérées par des partenaires publicitaires et nous ne sommes pas responsables du contenu de ces publicités.';
+      'Mind Bloom peut afficher des publicités de tiers. Ces publicités sont gérées par des partenaires publicitaires et nous ne sommes pas responsables du contenu de ces publicités.';
 
   @override
-  String get liabilityLimitation => '7. Limitation de responsabilité';
+  String get liabilityLimitation => '7. Limitation de Responsabilité';
 
   @override
   String get liabilityLimitationContent =>
-      'L\'application est fournie \"en l\'état\" sans garantie d\'aucune sorte. Nous ne serons pas responsables des dommages directs, indirects, accessoires ou consécutifs résultant de l\'utilisation de l\'application.';
+      'L\'application est fournie \'en l\'état\' sans garantie d\'aucune sorte. Nous ne serons pas responsables des dommages directs, indirects, accessoires ou consécutifs résultant de l\'utilisation de l\'application.';
 
   @override
-  String get termsModifications => '8. Modifications des conditions';
+  String get termsModifications => '8. Modifications des Conditions';
 
   @override
   String get termsModificationsContent =>
@@ -1176,10 +1178,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get terminationContent =>
-      'Nous nous réservons le droit de suspendre ou de résilier votre accès à l\'application à tout moment, sans préavis, pour violation de ces conditions d\'utilisation.';
+      'Nous nous réservons le droit de suspendre ou de résilier votre accès à l\'application à tout moment, sans préavis, en cas de violation de ces conditions d\'utilisation.';
 
   @override
-  String get applicableLaw => '10. Droit applicable';
+  String get applicableLaw => '10. Droit Applicable';
 
   @override
   String get applicableLawContent =>
@@ -1193,46 +1195,46 @@ class AppLocalizationsFr extends AppLocalizations {
       'Pour toute question concernant ces conditions d\'utilisation, vous pouvez nous contacter à :';
 
   @override
-  String get dataStorage => '4. Stockage et sécurité';
+  String get dataStorage => '4. Stockage et Sécurité des Données';
 
   @override
   String get dataStorageContent =>
-      'Vos données sont stockées de manière sécurisée :\n\n• **Chiffrement** : Les données sensibles sont chiffrées\n• **Accès limité** : Seul le personnel autorisé peut accéder aux données\n• **Sauvegarde** : Des sauvegardes régulières sont effectuées\n• **Durée** : Les données sont conservées uniquement le temps nécessaire';
+      'Vos données sont stockées en sécurité :\\n\\n• Chiffrement : Les données sensibles sont chiffrées\\n• Accès Limité : Seul le personnel autorisé peut accéder aux données\\n• Sauvegarde : Des sauvegardes régulières sont effectuées\\n• Durée : Les données ne sont conservées que le temps nécessaire';
 
   @override
-  String get cookies => '5. Cookies et technologies similaires';
+  String get cookies => '5. Cookies et Technologies Similaires';
 
   @override
   String get cookiesContent =>
-      'L\'application peut utiliser :\n\n• **Cookies locaux** : Pour sauvegarder vos préférences de jeu\n• **Identifiants publicitaires** : Pour personnaliser les publicités\n• **Analytics** : Pour comprendre l\'utilisation de l\'application\n\nVous pouvez désactiver ces fonctionnalités dans les paramètres de votre appareil.';
+      'L\'application peut utiliser :\n\n• Cookies Locaux : Pour sauvegarder vos préférences de jeu\n• Identifiants Publicitaires : Pour personnaliser les publicités\n• Analyses : Pour comprendre l\'utilisation de l\'application\n\nVous pouvez désactiver ces fonctionnalités dans les paramètres de votre appareil.';
 
   @override
-  String get thirdPartyAds => '7. Publicités et partenaires tiers';
+  String get thirdPartyAds => '7. Publicités et Partenaires Tiers';
 
   @override
   String get thirdPartyAdsContent =>
       'L\'application peut afficher des publicités via des partenaires tiers comme Google AdMob. Ces partenaires peuvent collecter des informations pour personnaliser les publicités. Vous pouvez :\n\n• Désactiver la personnalisation des publicités dans les paramètres\n• Utiliser les paramètres de confidentialité de votre appareil\n• Contacter directement les partenaires publicitaires';
 
   @override
-  String get minorsData => '8. Données des mineurs';
+  String get minorsData => '8. Données des Mineurs';
 
   @override
   String get minorsDataContent =>
       'Mind Bloom ne collecte pas sciemment d\'informations personnelles d\'enfants de moins de 13 ans. Si nous découvrons qu\'un enfant de moins de 13 ans nous a fourni des informations personnelles, nous les supprimerons immédiatement.';
 
   @override
-  String get policyChanges => '9. Modifications de cette politique';
+  String get policyChanges => '9. Modifications de cette Politique';
 
   @override
   String get policyChangesContent =>
-      'Nous pouvons modifier cette politique de confidentialité à tout moment. Les modifications importantes seront communiquées via l\'application ou par email. Nous vous encourageons à consulter régulièrement cette politique.';
+      'Nous pouvons modifier cette politique de confidentialité à tout moment. Les modifications importantes seront communiquées via l\'application ou par e-mail. Nous vous encourageons à consulter régulièrement cette politique.';
 
   @override
-  String get legalBasis => '10. Base légale du traitement';
+  String get legalBasis => '10. Base Légale du Traitement';
 
   @override
   String get legalBasisContent =>
-      'Nous traitons vos données personnelles sur la base de :\n\n• **Exécution du contrat** : Pour fournir le service de jeu\n• **Intérêt légitime** : Pour améliorer l\'application et prévenir la fraude\n• **Consentement** : Pour les publicités personnalisées et les communications marketing';
+      'Nous traitons vos données personnelles sur la base de :\n\n• Exécution du Contrat : Pour fournir le service de jeu\n• Intérêt Légitime : Pour améliorer l\'application et prévenir la fraude\n• Consentement : Pour les publicités personnalisées et les communications marketing';
 
   @override
   String get contactDPO => 'Contact et DPO';
@@ -1243,7 +1245,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get responseTime =>
-      'Nous nous engageons à répondre à votre demande dans un délai de 30 jours.';
+      'Nous nous engageons à répondre à votre demande dans les 30 jours.';
 
   @override
   String get introduction => 'Introduction';
@@ -1252,7 +1254,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get account => 'Compte';
 
   @override
-  String get enterNewUsername => 'Entrez le nouveau nom d\'utilisateur';
+  String get enterNewUsername => 'Entrez un nouveau nom d\'utilisateur';
 
   @override
   String get theme => 'Thème';
@@ -1267,7 +1269,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get systemTheme => 'Système';
 
   @override
-  String get themeDescription => 'Choisissez votre thème préféré';
+  String get themeDescription => 'Choisissez entre thème clair et sombre';
 
   @override
   String get shareProfileMessage =>
@@ -1281,7 +1283,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Regardez une courte vidéo pour gagner une vie et continuer à jouer !';
 
   @override
-  String get earnOneLife => 'Gagner 1 Vie';
+  String get earnOneLife => 'Gagnez 1 Vie';
 
   @override
   String get lifeEarned => 'Vie gagnée ! Vous pouvez continuer à jouer.';
@@ -1293,4 +1295,140 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get adError =>
       'Erreur lors du chargement de la pub. Veuillez réessayer.';
+
+  @override
+  String get timeRemaining => 'Temps';
+
+  @override
+  String get nextLife => 'Prochaine vie';
+
+  @override
+  String get watchAdForFreeLife =>
+      'Regardez une pub pour obtenir une vie gratuite !';
+
+  @override
+  String get dailyRewards => 'Récompenses Quotidiennes';
+
+  @override
+  String get claimReward => 'Réclamer !';
+
+  @override
+  String get rewardAlreadyClaimed => 'Récompense déjà réclamée';
+
+  @override
+  String get nextRewardIn => 'Prochaine récompense dans :';
+
+  @override
+  String get howItWorks => 'Comment ça marche ?';
+
+  @override
+  String get dailyRewardInfo1 =>
+      'Connectez-vous chaque jour pour réclamer votre récompense';
+
+  @override
+  String get dailyRewardInfo2 =>
+      'Plus votre série est longue, meilleures sont les récompenses';
+
+  @override
+  String get dailyRewardInfo3 => 'Le 7ème jour offre une récompense légendaire';
+
+  @override
+  String get dailyRewardInfo4 => 'Les récompenses se réinitialisent à minuit';
+
+  @override
+  String rewardOfDay(int day) {
+    return 'Récompense du Jour $day';
+  }
+
+  @override
+  String get legendaryStreak => 'Série Légendaire !';
+
+  @override
+  String get perfectPerformance => 'Performance Parfaite! Bonus x2';
+
+  @override
+  String get milestoneLevel => 'Niveau Milestone! Bonus spécial';
+
+  @override
+  String get rewardsClaimed => 'Récompenses obtenues';
+
+  @override
+  String comboBonus(int multiplier) {
+    return 'Bonus Combo x$multiplier';
+  }
+
+  @override
+  String get spectacularCombo => 'Combo Spectaculaire !';
+
+  @override
+  String megaMatch(int count) {
+    return 'Méga Match de $count tuiles !';
+  }
+
+  @override
+  String get globalProgress => 'Progression globale';
+
+  @override
+  String collectTilesObjective(int count, String tileName) {
+    return 'Collectez $count ${tileName}s';
+  }
+
+  @override
+  String clearBlockersObjective(int count) {
+    return 'Détruisez $count bloqueurs';
+  }
+
+  @override
+  String reachScoreObjective(int count) {
+    return 'Atteignez $count points';
+  }
+
+  @override
+  String freeCreatureObjective(int count) {
+    return 'Libérez $count créatures';
+  }
+
+  @override
+  String clearJellyObjective(int count) {
+    return 'Détruisez $count gelées';
+  }
+
+  @override
+  String get coinsBonus => 'Bonus Pièces';
+
+  @override
+  String get gemsGratuits => 'Gemmes Gratuites';
+
+  @override
+  String get watchAdForCoins => 'Regardez une pub pour obtenir des pièces';
+
+  @override
+  String get watchAdForGems => 'Regardez une pub pour obtenir des gemmes';
+
+  @override
+  String get watchButton => 'REGARDER';
+
+  @override
+  String get debugUnlockAllLevels => 'Déverrouiller tous les niveaux (DEBUG)';
+
+  @override
+  String get debugUnlockAllLevelsDescription =>
+      'Fonction de test pour déverrouiller tous les niveaux';
+
+  @override
+  String get shareScore => 'Partager le score';
+
+  @override
+  String get shareScoreTitle => 'Partager mon score';
+
+  @override
+  String shareScoreMessage(int score, int level) {
+    return 'J\'ai obtenu $score points au niveau $level dans Mind Bloom ! Peux-tu faire mieux ? 🌱';
+  }
+
+  @override
+  String get shareScoreSuccess => 'Score partagé avec succès !';
+
+  @override
+  String get shareScoreError => 'Erreur lors du partage du score';
 }

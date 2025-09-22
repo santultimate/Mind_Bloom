@@ -1,10 +1,36 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_bloom/providers/user_provider.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
-class StatusBar extends StatelessWidget {
+class StatusBar extends StatefulWidget {
   const StatusBar({super.key});
+
+  @override
+  State<StatusBar> createState() => _StatusBarState();
+}
+
+class _StatusBarState extends State<StatusBar> {
+  Timer? _updateTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    // Mettre à jour l'interface toutes les secondes pour le timer
+    _updateTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (mounted) {
+        setState(() {});
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _updateTimer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +79,7 @@ class StatusBar extends StatelessWidget {
                                 ),
                       ),
                       Text(
-                        'Niveau ${userProvider.level}',
+                        '${AppLocalizations.of(context)?.level ?? 'Level'} ${userProvider.level}',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: AppColors.textSecondary,
                             ),
@@ -65,12 +91,8 @@ class StatusBar extends StatelessWidget {
 
               const Spacer(),
 
-              // Vies
-              _buildStatusItem(
-                icon: Icons.favorite,
-                value: '${userProvider.lives}/${userProvider.maxLives}',
-                color: AppColors.lives,
-              ),
+              // Vies avec timer si nécessaire
+              _buildLivesStatus(userProvider),
 
               const SizedBox(width: 15),
 
@@ -93,6 +115,58 @@ class StatusBar extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildLivesStatus(UserProvider userProvider) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(
+          Icons.favorite,
+          color: AppColors.lives,
+          size: 20,
+        ),
+        const SizedBox(width: 4),
+        Text(
+          '${userProvider.lives}/${userProvider.maxLives}',
+          style: TextStyle(
+            color: AppColors.lives,
+            fontWeight: FontWeight.w600,
+            fontSize: 14,
+          ),
+        ),
+        // Afficher le timer si les vies ne sont pas au maximum
+        if (userProvider.lives < userProvider.maxLives) ...[
+          const SizedBox(width: 8),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+            decoration: BoxDecoration(
+              color: Colors.red.withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.timer,
+                  color: Colors.red,
+                  size: 12,
+                ),
+                const SizedBox(width: 2),
+                Text(
+                  _formatTime(userProvider.timeUntilNextLife),
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ],
     );
   }
 
@@ -120,5 +194,15 @@ class StatusBar extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  // Formater le temps restant
+  String _formatTime(int seconds) {
+    if (seconds <= 0) return '00:00';
+
+    final minutes = seconds ~/ 60;
+    final remainingSeconds = seconds % 60;
+
+    return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 }

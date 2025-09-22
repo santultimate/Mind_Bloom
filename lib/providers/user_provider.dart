@@ -22,8 +22,10 @@ class UserProvider extends ChangeNotifier {
   bool _animationsEnabled = true;
   bool _vibrationsEnabled = true;
   bool _autoHintsEnabled = false;
+  bool _debugModeEnabled = false;
 
-  // Timer pour la régénération des vies
+  // Timer pour la régénération des vies (en secondes)
+  // Ce minuteur compte le temps jusqu'à la prochaine régénération de vie
   Timer? _lifeTimer;
   int _timeUntilNextLife = 0; // en secondes
 
@@ -47,6 +49,7 @@ class UserProvider extends ChangeNotifier {
   bool get animationsEnabled => _animationsEnabled;
   bool get vibrationsEnabled => _vibrationsEnabled;
   bool get autoHintsEnabled => _autoHintsEnabled;
+  bool get debugModeEnabled => _debugModeEnabled;
   int get timeUntilNextLife => _timeUntilNextLife;
 
   // Initialiser l'utilisateur
@@ -69,6 +72,7 @@ class UserProvider extends ChangeNotifier {
     _animationsEnabled = prefs.getBool('animationsEnabled') ?? true;
     _vibrationsEnabled = prefs.getBool('vibrationsEnabled') ?? true;
     _autoHintsEnabled = prefs.getBool('autoHintsEnabled') ?? false;
+    _debugModeEnabled = prefs.getBool('debugModeEnabled') ?? false;
 
     _currentStreak = prefs.getInt('currentStreak') ?? 0;
     _bestStreak = prefs.getInt('bestStreak') ?? 0;
@@ -233,7 +237,8 @@ class UserProvider extends ChangeNotifier {
 
     final now = DateTime.now();
     final timeSinceLastRefill = now.difference(_lastLifeRefill!);
-    const refillTime = Duration(minutes: 30); // 30 minutes par vie
+    const refillTime = Duration(
+        minutes: 15); // Réduit à 15 minutes par vie pour plus d'engagement
 
     final livesToAdd = timeSinceLastRefill.inMinutes ~/ refillTime.inMinutes;
     if (livesToAdd > 0) {
@@ -278,13 +283,19 @@ class UserProvider extends ChangeNotifier {
 
     final now = DateTime.now();
     final timeSinceLastRefill = now.difference(_lastLifeRefill!);
-    const refillTime = Duration(minutes: 30); // 30 minutes par vie
+    const refillTime = Duration(minutes: 15); // 15 minutes par vie
 
     final totalSeconds = refillTime.inSeconds;
     final elapsedSeconds = timeSinceLastRefill.inSeconds;
 
-    _timeUntilNextLife =
-        (totalSeconds - (elapsedSeconds % totalSeconds)).clamp(0, totalSeconds);
+    // Calculer le temps restant pour la prochaine vie
+    final remainingSeconds = totalSeconds - (elapsedSeconds % totalSeconds);
+    _timeUntilNextLife = remainingSeconds.clamp(0, totalSeconds);
+
+    if (kDebugMode) {
+      print(
+          'DEBUG VIE: elapsedSeconds=$elapsedSeconds, remainingSeconds=$remainingSeconds, timeUntilNextLife=$_timeUntilNextLife');
+    }
   }
 
   // Ajouter une vie depuis le timer
@@ -292,10 +303,16 @@ class UserProvider extends ChangeNotifier {
     if (_lives < _maxLives) {
       _lives++;
       _lastLifeRefill = DateTime.now();
+      _timeUntilNextLife = 0;
       _saveUserData();
 
       if (kDebugMode) {
         print('Vie ajoutée automatiquement. Vies actuelles: $_lives');
+      }
+
+      // Si on a atteint le maximum, arrêter le timer
+      if (_lives >= _maxLives) {
+        _stopLifeTimer();
       }
     }
   }
@@ -332,6 +349,16 @@ class UserProvider extends ChangeNotifier {
   Future<void> completeLevel(int levelId, int stars, int score) async {
     if (!_completedLevels.contains(levelId)) {
       _completedLevels.add(levelId);
+
+      // Debug: Afficher les informations de débogage
+      if (kDebugMode) {
+        print('=== DEBUG LEVEL COMPLETION ===');
+        print('Level $levelId completed!');
+        print('Updated completed levels: $_completedLevels');
+        print(
+            'Next level ($levelId + 1) should be unlocked: ${_completedLevels.contains(levelId)}');
+        print('=============================');
+      }
     }
 
     // Mettre à jour les étoiles si meilleur score
@@ -340,38 +367,83 @@ class UserProvider extends ChangeNotifier {
       _levelStars[levelId] = stars;
     }
 
-    // Récompenses basées sur les étoiles (augmentées)
-    int baseReward = 20 + (levelId * 2); // Progression avec le niveau
-    int starBonus = stars * 10; // Doublé
-    int scoreBonus = (score / 1000).floor(); // Bonus de score
+    // Système de récompenses amélioré et plus généreux
+    int baseReward = 30 + (levelId * 5); // Augmenté significativement
+    int starBonus = stars * 20; // Doublé pour encourager la perfection
+    int scoreBonus = (score / 500).floor(); // Plus généreux
 
-    // Bonus de série (augmenté)
+    // Bonus de série considérablement augmenté
     int streakBonus =
-        _currentStreak > 0 ? (_currentStreak * 5).clamp(0, 50) : 0;
+        _currentStreak > 0 ? (_currentStreak * 10).clamp(0, 100) : 0;
 
-    // Bonus de niveau
-    int levelBonus = _level * 3;
+    // Bonus de niveau du joueur
+    int levelBonus = _level * 5;
 
-    // Bonus de difficulté
+    // Bonus de difficulté augmenté
     int difficultyBonus = _calculateDifficultyBonus(levelId);
+
+    // Bonus de première completion (très généreux)
+    int firstTimeBonus =
+        !_completedLevels.contains(levelId) ? (levelId * 10) : 0;
+
+    // Bonus de performance (nouveau)
+    int performanceBonus = 0;
+    if (stars == 3) {
+      performanceBonus = levelId * 15; // Bonus important pour 3 étoiles
+    } else if (stars == 2) {
+      performanceBonus = levelId * 8;
+    } else if (stars == 1) {
+      performanceBonus = levelId * 3;
+    }
 
     int totalReward = baseReward +
         starBonus +
         scoreBonus +
         streakBonus +
         levelBonus +
-        difficultyBonus;
+        difficultyBonus +
+        firstTimeBonus +
+        performanceBonus;
 
     _coins += totalReward;
 
-    // Récompenses spéciales
+    // Récompenses spéciales améliorées
     if (stars == 3) {
-      _gems += 1; // Gemme pour 3 étoiles
+      _gems += 2; // Augmenté de 1 à 2 gemmes pour 3 étoiles
+      // Pas de bonus de vies pour éviter la confusion
     }
 
-    if (_currentStreak >= 5) {
-      _gems += 1; // Gemme pour série de 5
+    if (stars >= 2) {
+      _gems += 1; // Gemme pour 2+ étoiles
     }
+
+    // Bonus de série généreux
+    if (_currentStreak >= 3) {
+      _gems += 1;
+    }
+    if (_currentStreak >= 5) {
+      _gems += 2;
+      // Pas de bonus de vies pour éviter la confusion
+    }
+    if (_currentStreak >= 10) {
+      _gems += 5;
+      // Pas de bonus de vies pour éviter la confusion
+    }
+
+    // Bonus de milestone de niveau
+    if (levelId % 5 == 0) {
+      _gems += levelId ~/ 5; // Plus de gemmes pour les niveaux multiples de 5
+      _coins += levelId * 10; // Bonus de pièces pour les milestones
+    }
+
+    if (levelId % 10 == 0) {
+      _gems += 5; // Gros bonus pour les niveaux multiples de 10
+      // Pas de bonus de vies pour éviter la confusion
+    }
+
+    // Ajouter de l'expérience pour la progression
+    int experienceGain = (levelId * 2) + (stars * 10) + (score / 1000).floor();
+    await addExperience(experienceGain);
 
     await _saveUserData();
     notifyListeners();
@@ -379,15 +451,22 @@ class UserProvider extends ChangeNotifier {
 
   // Calculer le bonus de difficulté
   int _calculateDifficultyBonus(int levelId) {
-    if (levelId <= 10) return 0; // Niveaux faciles
-    if (levelId <= 25) return 5; // Niveaux moyens
-    if (levelId <= 50) return 10; // Niveaux difficiles
-    return 15; // Niveaux experts
+    if (levelId <= 5) return 10; // Bonus d'encouragement pour débutants
+    if (levelId <= 10) return 20; // Niveaux faciles
+    if (levelId <= 15) return 35; // Transition vers moyen
+    if (levelId <= 20) return 50; // Niveaux moyens
+    if (levelId <= 30) return 75; // Niveaux difficiles
+    if (levelId <= 40) return 100; // Niveaux très difficiles
+    return 150; // Niveaux experts - bonus maximum
   }
 
   // Vérifier si un niveau est débloqué
   bool isLevelUnlocked(int levelId) {
     if (levelId == 1) return true;
+
+    // Mode debug : déverrouiller tous les niveaux
+    if (_debugModeEnabled) return true;
+
     return _completedLevels.contains(levelId - 1);
   }
 
@@ -456,5 +535,49 @@ class UserProvider extends ChangeNotifier {
 
     await _saveUserData();
     notifyListeners();
+  }
+
+  // Méthode de débogage pour vérifier l'état des niveaux
+  void debugLevelStatus() {
+    if (kDebugMode) {
+      print('=== LEVEL STATUS DEBUG ===');
+      print('Completed levels: $_completedLevels');
+      print('Level stars: $_levelStars');
+
+      // Vérifier les premiers 10 niveaux
+      for (int i = 1; i <= 10; i++) {
+        final isUnlocked = isLevelUnlocked(i);
+        final stars = getLevelStars(i);
+        print('Level $i: Unlocked=$isUnlocked, Stars=$stars');
+      }
+      print('========================');
+    }
+  }
+
+  // Méthode pour débloquer manuellement un niveau (pour les tests)
+  Future<void> unlockLevel(int levelId) async {
+    if (!_completedLevels.contains(levelId)) {
+      _completedLevels.add(levelId);
+      await _saveUserData();
+      notifyListeners();
+
+      if (kDebugMode) {
+        print('Level $levelId manually unlocked');
+      }
+    }
+  }
+
+  // 🚀 FONCTIONNALITÉS DEBUG (à supprimer avant publication)
+
+  /// Active ou désactive le mode debug pour déverrouiller tous les niveaux
+  Future<void> toggleDebugMode() async {
+    _debugModeEnabled = !_debugModeEnabled;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('debugModeEnabled', _debugModeEnabled);
+    notifyListeners();
+
+    if (kDebugMode) {
+      print('Debug mode ${_debugModeEnabled ? "enabled" : "disabled"}');
+    }
   }
 }

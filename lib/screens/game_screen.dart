@@ -6,9 +6,11 @@ import 'package:mind_bloom/providers/audio_provider.dart';
 
 import 'package:mind_bloom/models/tile.dart';
 import 'package:mind_bloom/widgets/animated_tile_widget.dart';
+import 'package:mind_bloom/widgets/tile_swap_animation.dart';
 import 'package:mind_bloom/widgets/objective_panel.dart';
 import 'package:mind_bloom/widgets/game_header.dart';
 import 'package:mind_bloom/widgets/lives_widget.dart';
+import 'package:mind_bloom/widgets/banner_ad_widget.dart';
 import 'package:mind_bloom/screens/level_complete_screen.dart';
 import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
@@ -34,10 +36,8 @@ class _GameScreenState extends State<GameScreen> {
 
   void _setupGameEndCallback() {
     final gameProvider = Provider.of<GameProvider>(context, listen: false);
-    final audioProvider = Provider.of<AudioProvider>(context, listen: false);
 
     gameProvider.setGameEndCallback(_onGameEnd);
-    gameProvider.setAudioProvider(audioProvider);
   }
 
   void _onGameEnd(bool won, int stars, int score, int movesUsed) {
@@ -82,6 +82,7 @@ class _GameScreenState extends State<GameScreen> {
                   level: level,
                   score: gameProvider.score,
                   movesRemaining: gameProvider.movesRemaining,
+                  timeLeft: 0, // Timer supprimé
                   onPause: () => _showPauseDialog(),
                 ),
 
@@ -91,18 +92,14 @@ class _GameScreenState extends State<GameScreen> {
                   onHint: _showHint,
                 ),
 
-                const SizedBox(height: 2),
-
-                // Panneau des objectifs (compact)
+                // Panneau des objectifs (compact et scrollable)
                 const ObjectivePanel(),
 
-                const SizedBox(height: 4),
-
-                // Grille de jeu (optimisée pour l'espace disponible)
+                // Grille de jeu (optimisée pour afficher la grille complète)
                 Expanded(
                   child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16),
-                    padding: const EdgeInsets.all(16),
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(20),
@@ -122,12 +119,13 @@ class _GameScreenState extends State<GameScreen> {
                           return const SizedBox.shrink();
                         }
 
-                        // Calculer la taille optimale des tuiles
+                        // Calculer la taille optimale des tuiles pour afficher la grille complète
                         final availableWidth =
-                            constraints.maxWidth - 32; // Padding
+                            constraints.maxWidth - 16; // Padding minimal
                         final availableHeight =
-                            constraints.maxHeight - 32; // Padding
-                        final spacing = 4.0; // Espacement optimal
+                            constraints.maxHeight - 16; // Padding minimal
+                        final spacing =
+                            2.0; // Espacement minimal pour maximiser l'espace
 
                         // Calculer la taille maximale possible pour les tuiles
                         final tileSize = math.min(
@@ -137,8 +135,8 @@ class _GameScreenState extends State<GameScreen> {
                               level.gridSize,
                         );
 
-                        // S'assurer que les tuiles ne sont pas trop petites
-                        final minTileSize = 40.0;
+                        // Taille minimale adaptée selon la taille de la grille (réduite pour éviter l'overflow)
+                        final minTileSize = level.gridSize >= 8 ? 20.0 : 25.0;
                         final finalTileSize = math.max(tileSize, minTileSize);
 
                         return Center(
@@ -147,44 +145,110 @@ class _GameScreenState extends State<GameScreen> {
                                 (level.gridSize - 1) * spacing,
                             height: finalTileSize * level.gridSize +
                                 (level.gridSize - 1) * spacing,
-                            child: GridView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: level.gridSize,
-                                childAspectRatio: 1,
-                                crossAxisSpacing: spacing,
-                                mainAxisSpacing: spacing,
-                              ),
-                              itemCount: level.gridSize * level.gridSize,
-                              itemBuilder: (context, index) {
-                                final row = index ~/ level.gridSize;
-                                final col = index % level.gridSize;
-                                final tile = gameProvider.grid[row][col];
+                            child: Stack(
+                              children: [
+                                // Grille de base
+                                GridView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: level.gridSize,
+                                    childAspectRatio: 1,
+                                    crossAxisSpacing: spacing,
+                                    mainAxisSpacing: spacing,
+                                  ),
+                                  itemCount: level.gridSize * level.gridSize,
+                                  itemBuilder: (context, index) {
+                                    final row = index ~/ level.gridSize;
+                                    final col = index % level.gridSize;
+                                    final tile = gameProvider.grid[row][col];
 
-                                if (tile == null) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .surfaceVariant,
-                                      borderRadius: BorderRadius.circular(12),
+                                    if (tile == null) {
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .surfaceVariant,
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                      );
+                                    }
+
+                                    // Vérifier si cette tuile est en cours de permutation
+                                    final isSwapping = (gameProvider
+                                            .isSwapping &&
+                                        (gameProvider.swappingTile1 == tile ||
+                                            gameProvider.swappingTile2 ==
+                                                tile));
+
+                                    // Vérifier si cette tuile est sélectionnée
+                                    final isSelected =
+                                        gameProvider.selectedTile == tile;
+
+                                    // Si la tuile est en cours de permutation, la masquer dans la grille
+                                    if (isSwapping) {
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .surfaceVariant,
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                      );
+                                    }
+
+                                    return TileSelectionEffect(
+                                      isSelected: isSelected,
+                                      onTap: () => _onTileTap(tile),
+                                      child: AnimatedTileWidget(
+                                        tile: tile,
+                                        size: finalTileSize,
+                                        isSelected: isSelected,
+                                      ),
+                                    );
+                                  },
+                                ),
+
+                                // Animation de permutation par-dessus la grille
+                                if (gameProvider.isSwapping &&
+                                    gameProvider.swappingTile1 != null &&
+                                    gameProvider.swappingTile2 != null)
+                                  TileSwapAnimation(
+                                    tile1: gameProvider.swappingTile1!,
+                                    tile2: gameProvider.swappingTile2!,
+                                    tileSize: finalTileSize,
+                                    spacing: spacing,
+                                    isVisible: true,
+                                    onComplete: () {
+                                      // L'animation est terminée, le GameProvider gère le reste
+                                    },
+                                    child1: AnimatedTileWidget(
+                                      tile: gameProvider.swappingTile1!,
+                                      size: finalTileSize,
+                                      isSelected: true,
                                     ),
-                                  );
-                                }
-
-                                return AnimatedTileWidget(
-                                  tile: tile,
-                                  size: finalTileSize,
-                                  onTap: () => _onTileTap(tile),
-                                );
-                              },
+                                    child2: AnimatedTileWidget(
+                                      tile: gameProvider.swappingTile2!,
+                                      size: finalTileSize,
+                                      isSelected: true,
+                                    ),
+                                  ),
+                              ],
                             ),
                           ),
                         );
                       },
                     ),
                   ),
+                ),
+
+                // 🚀 BANNIÈRE PUBLICITAIRE PENDANT LE JEU (plus compacte)
+                const BannerAdWidget(
+                  placement: 'game',
+                  height: 40,
+                  margin: EdgeInsets.fromLTRB(8, 4, 8, 8),
                 ),
               ],
             );

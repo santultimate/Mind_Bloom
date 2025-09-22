@@ -71,7 +71,8 @@ class PerformanceSummaryWidget extends StatelessWidget {
                       'Score',
                       '${summary['score']}',
                       '${summary['targetScore']}',
-                      summary['score'] / (summary['targetScore'] as int? ?? 1),
+                      (summary['score'] as int) /
+                          (gameProvider.currentLevel?.targetScore ?? 1),
                       AppColors.gold,
                       Icons.star,
                     ),

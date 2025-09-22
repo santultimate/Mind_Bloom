@@ -1,512 +1,1924 @@
 {
   "@@locale": "fr",
   "appTitle": "Mind Bloom",
+  "@appTitle": {
+    "description": "Le titre de l'application"
+  },
   "home": "Accueil",
+  "@home": {
+    "description": "Titre de l'écran d'accueil"
+  },
   "profile": "Profil",
+  "@profile": {
+    "description": "Titre de l'écran de profil"
+  },
   "collection": "Collection",
+  "@collection": {
+    "description": "Titre de l'écran de collection"
+  },
   "shop": "Boutique",
+  "@shop": {
+    "description": "Titre de l'écran de boutique"
+  },
   "settings": "Paramètres",
+  "@settings": {
+    "description": "Titre de l'écran des paramètres"
+  },
   "about": "À propos",
+  "@about": {
+    "description": "Titre de l'écran à propos"
+  },
   "level": "Niveau",
+  "@level": {
+    "description": "Texte niveau"
+  },
   "score": "Score",
+  "@score": {
+    "description": "Texte score"
+  },
   "moves": "Coups",
+  "@moves": {
+    "description": "Texte coups"
+  },
   "lives": "Vies",
+  "@lives": {
+    "description": "Texte vies"
+  },
   "coins": "Pièces",
+  "@coins": {
+    "description": "Texte pièces"
+  },
   "gems": "Gemmes",
+  "@gems": {
+    "description": "Texte gemmes"
+  },
   "play": "Jouer",
+  "@play": {
+    "description": "Texte du bouton jouer"
+  },
   "pause": "Pause",
+  "@pause": {
+    "description": "Texte du bouton pause"
+  },
   "resume": "Reprendre",
+  "@resume": {
+    "description": "Texte du bouton reprendre"
+  },
   "restart": "Recommencer",
+  "@restart": {
+    "description": "Texte du bouton recommencer"
+  },
   "menu": "Menu",
+  "@menu": {
+    "description": "Texte du bouton menu"
+  },
   "hint": "Indice",
+  "@hint": {
+    "description": "Texte du bouton indice"
+  },
   "shuffle": "Mélanger",
+  "@shuffle": {
+    "description": "Texte du bouton mélanger"
+  },
   "next": "Suivant",
+  "@next": {
+    "description": "Texte du bouton suivant"
+  },
   "back": "Retour",
+  "@back": {
+    "description": "Texte du bouton retour"
+  },
   "cancel": "Annuler",
+  "@cancel": {
+    "description": "Texte du bouton annuler"
+  },
   "confirm": "Confirmer",
+  "@confirm": {
+    "description": "Texte du bouton confirmer"
+  },
   "save": "Sauvegarder",
+  "@save": {
+    "description": "Texte du bouton sauvegarder"
+  },
   "load": "Charger",
+  "@load": {
+    "description": "Texte du bouton charger"
+  },
   "reset": "Réinitialiser",
+  "@reset": {
+    "description": "Texte du bouton réinitialiser"
+  },
   "delete": "Supprimer",
+  "@delete": {
+    "description": "Texte du bouton supprimer"
+  },
   "edit": "Modifier",
+  "@edit": {
+    "description": "Texte du bouton modifier"
+  },
   "close": "Fermer",
+  "@close": {
+    "description": "Texte du bouton fermer"
+  },
   "ok": "OK",
+  "@ok": {
+    "description": "Texte du bouton OK"
+  },
   "yes": "Oui",
+  "@yes": {
+    "description": "Texte du bouton oui"
+  },
   "no": "Non",
+  "@no": {
+    "description": "Texte du bouton non"
+  },
   "loading": "Chargement...",
+  "@loading": {
+    "description": "Texte de chargement"
+  },
   "error": "Erreur",
+  "@error": {
+    "description": "Texte d'erreur"
+  },
   "success": "Succès",
+  "@success": {
+    "description": "Texte de succès"
+  },
   "warning": "Attention",
+  "@warning": {
+    "description": "Texte d'attention"
+  },
   "info": "Information",
+  "@info": {
+    "description": "Texte d'information"
+  },
   "noMovesAvailable": "Aucun mouvement possible. Utilisez le bouton mélanger !",
+  "@noMovesAvailable": {
+    "description": "Message quand aucun mouvement n'est disponible"
+  },
   "levelComplete": "Niveau terminé !",
-  "levelFailed": "Niveau échoué",
+  "@levelComplete": {
+    "description": "Message de niveau terminé"
+  },
+  "levelFailed": "Niveau {id} échoué",
+  "@levelFailed": {
+    "description": "Message de niveau échoué avec ID",
+    "placeholders": {
+      "id": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
   "gamePaused": "Jeu en pause",
+  "@gamePaused": {
+    "description": "Message de jeu en pause"
+  },
   "whatWouldYouLikeToDo": "Que souhaitez-vous faire ?",
+  "@whatWouldYouLikeToDo": {
+    "description": "Question dans la boîte de dialogue de pause"
+  },
   "freeLife": "Vie gratuite",
+  "@freeLife": {
+    "description": "Texte vie gratuite"
+  },
   "watchAdForLife": "Regardez une publicité pour obtenir une vie gratuite !",
+  "@watchAdForLife": {
+    "description": "Message pour regarder une pub pour une vie"
+  },
   "watchAd": "Regarder la Pub",
+  "@watchAd": {
+    "description": "Texte du bouton regarder la pub"
+  },
   "adInProgress": "Publicité en cours...",
+  "@adInProgress": {
+    "description": "Message de publicité en cours"
+  },
   "lifeObtained": "Vie obtenue ! Vous pouvez continuer à jouer.",
+  "@lifeObtained": {
+    "description": "Message de vie obtenue"
+  },
   "music": "Musique",
+  "@music": {
+    "description": "Paramètre musique"
+  },
   "soundEffects": "Effets sonores",
+  "@soundEffects": {
+    "description": "Paramètre effets sonores"
+  },
   "animations": "Animations",
+  "@animations": {
+    "description": "Paramètre animations"
+  },
   "vibrations": "Vibrations",
+  "@vibrations": {
+    "description": "Paramètre vibrations"
+  },
   "autoHints": "Indices automatiques",
+  "@autoHints": {
+    "description": "Paramètre indices automatiques"
+  },
   "language": "Langue",
+  "@language": {
+    "description": "Paramètre langue"
+  },
   "english": "English",
+  "@english": {
+    "description": "Langue anglaise"
+  },
   "french": "Français",
+  "@french": {
+    "description": "Langue française"
+  },
   "version": "Version",
+  "@version": {
+    "description": "Texte version"
+  },
   "developer": "Développeur",
+  "@developer": {
+    "description": "Texte développeur"
+  },
   "termsOfService": "Conditions d'utilisation",
+  "@termsOfService": {
+    "description": "Texte conditions d'utilisation"
+  },
   "privacyPolicy": "Politique de confidentialité",
+  "@privacyPolicy": {
+    "description": "Texte politique de confidentialité"
+  },
   "readTermsOfService": "Lire les conditions d'utilisation",
-  "readPrivacyPolicy": "Lire la politique de confidentialité",
-  "aboutGame": "À propos du jeu",
-  "gameDescription": "Mind Bloom est un jeu de puzzle magique qui combine les mécaniques classiques du match-3 avec des éléments RPG. Cultivez votre jardin enchanté en alignant des tuiles colorées et découvrez un univers unique de progression et de collection.",
-  "technologies": "Technologies",
-  "legalInformation": "Informations légales",
-  "license": "Licence",
-  "licenseText": "Ce projet est sous licence MIT. Vous êtes libre de l'utiliser, le modifier et le distribuer selon les termes de cette licence.",
-  "acknowledgments": "Remerciements",
-  "acknowledgmentsText": "Un grand merci à la communauté Flutter, aux contributeurs des packages utilisés, et à tous ceux qui ont soutenu ce projet.",
-  "developedWithLove": "Développé avec ❤️ par",
-  "quote": "\"Cultivez votre jardin intérieur, un match à la fois\"",
-  "username": "Nom d'utilisateur",
-  "editUsername": "Modifier le nom d'utilisateur",
-  "currentStreak": "Série actuelle",
-  "bestStreak": "Meilleure série",
-  "days": "jours",
-  "saveData": "Sauvegarder les données",
-  "restoreData": "Restaurer les données",
-  "resetData": "Réinitialiser les données",
-  "saveProgress": "Sauvegarder vos progrès",
-  "restoreProgress": "Restaurer vos progrès",
-  "deleteAllData": "Supprimer toutes les données (irréversible)",
-  "resetDataConfirmation": "Êtes-vous sûr de vouloir supprimer toutes vos données ? Cette action est irréversible.",
-  "dataReset": "Données réinitialisées",
-  "dataSaved": "Données sauvegardées avec succès",
-  "dataRestored": "Données restaurées avec succès",
-  "saveError": "Erreur lors de la sauvegarde",
-  "restoreError": "Erreur lors de la restauration",
-  "usernameUpdated": "Nom d'utilisateur mis à jour",
-  "world": "Monde",
-  "levelCompleted": "Niveau terminé !",
-  "levelFailed": "Niveau échoué",
-  "stars": "Étoiles",
-  "movesUsed": "Coups utilisés",
-  "nextLevel": "Niveau suivant",
-  "retry": "Réessayer",
-  "home": "Accueil",
-  "objectives": "Objectifs",
-  "collectTiles": "Collecter {count} {type}",
-  "reachScore": "Atteindre {score} points",
-  "completeInMoves": "Terminer en {moves} coups",
-  "tileTypeFlower": "Fleur",
-  "tileTypeLeaf": "Feuille",
-  "tileTypeCrystal": "Cristal",
-  "tileTypeSeed": "Graine",
-  "tileTypeDew": "Rosée",
-  "tileTypeSun": "Soleil",
-  "tileTypeMoon": "Lune",
-  "tileTypeGem": "Gemme",
-  "achievements": "Réalisations",
-  "events": "Événements",
-  "tutorial": "Tutoriel",
-  "shop": "Boutique",
-  "buy": "Acheter",
-  "price": "Prix",
-  "owned": "Possédé",
-  "plants": "Plantes",
-  "unlocked": "Débloqué",
-  "locked": "Verrouillé",
-  "upgrade": "Améliorer",
-  "level": "Niveau",
-  "bonus": "Bonus",
-  "active": "Actif",
-  "inactive": "Inactif",
-  "filter": "Filtrer",
-  "all": "Tous",
-  "unlockedOnly": "Débloqués seulement",
-  "lockedOnly": "Verrouillés seulement",
-  "noPlantsFound": "Aucune plante trouvée",
-  "plantDetails": "Détails de la plante",
-  "description": "Description",
-  "rarity": "Rareté",
-  "common": "Commun",
-  "rare": "Rare",
-  "epic": "Épique",
-  "legendary": "Légendaire",
-  "upgradeCost": "Coût d'amélioration",
-  "insufficientCoins": "Pièces insuffisantes",
-  "upgradeSuccess": "Amélioration réussie !",
-  "noLives": "Aucune vie",
-  "noLivesMessage": "Vous n'avez plus de vies. Regardez une publicité pour obtenir une vie gratuite ou attendez que les vies se régénèrent.",
-  "levelLocked": "Niveau verrouillé",
-  "levelLockedMessage": "Terminez les niveaux précédents pour débloquer celui-ci.",
-  "about": "À propos",
-  "termsOfService": "Conditions d'utilisation",
-  "privacyPolicy": "Politique de confidentialité",
-  "success": "Succès",
-  "firstSteps": "Premiers Pas",
-  "firstStepsDescription": "Terminez votre premier niveau",
-  "levelMaster": "Maître des Niveaux",
-  "levelMasterDescription": "Terminez 10 niveaux",
-  "scoreHunter": "Chasseur de Scores",
-  "scoreHunterDescription": "Atteignez 10 000 points en un seul niveau",
-  "comboKing": "Roi des Combos",
-  "comboKingDescription": "Faites un combo de 5",
-  "plantCollector": "Collectionneur de Plantes",
-  "plantCollectorDescription": "Débloquez 5 plantes",
-  "perfectPlayer": "Joueur Parfait",
-  "perfectPlayerDescription": "Terminez un niveau avec 3 étoiles",
-  "dailyChallenge": "Défi Quotidien",
-  "weeklyEvent": "Événement Hebdomadaire",
-  "specialOffer": "Offre Spéciale",
-  "limitedTime": "Temps Limité",
-  "newEvent": "Nouvel Événement",
-  "eventDescription": "Terminez des objectifs spéciaux pour gagner des récompenses exclusives !",
-  "participate": "Participer",
-  "rewards": "Récompenses",
-  "coins": "Pièces",
-  "lives": "Vies",
-  "powerUps": "Power-ups",
-  "bomb": "Bombe",
-  "lightning": "Éclair",
-  "rainbow": "Arc-en-ciel",
-  "hammer": "Marteau",
-  "shuffle": "Mélanger",
-  "hint": "Indice",
-  "gameplay": "Gameplay",
-  "matchThree": "Associez 3 tuiles ou plus du même type pour les effacer",
-  "combos": "Créez des combos pour des points bonus",
-  "objectives": "Terminez les objectifs pour gagner le niveau",
-  "powerUpsUsage": "Utilisez les power-ups pour vous aider dans les situations difficiles",
-  "livesSystem": "Vous avez un nombre limité de vies. Regardez des publicités pour en obtenir plus !",
-  "noMovesAvailable": "Aucun mouvement possible. Utilisez le bouton mélanger !",
-  "version": "Version",
-  "developer": "Développeur",
+  "@readTermsOfService": {
+    "description": "Texte lire les conditions d'utilisation"
+  },
   "readTermsOfUse": "Lire les conditions d'utilisation",
+  "@readTermsOfUse": {
+    "description": "Texte lire les conditions d'utilisation"
+  },
+
   "readPrivacyPolicy": "Lire la politique de confidentialité",
-  "lastUpdated": "Dernière mise à jour",
-  "privacyPolicyIntroduction": "Cette politique de confidentialité décrit comment Mind Bloom collecte, utilise et protège vos informations personnelles lorsque vous utilisez notre application mobile. Nous nous engageons à protéger votre vie privée et à traiter vos données avec le plus grand respect.",
-  "informationWeCollect": "Informations que nous collectons",
-  "weCollectFollowing": "Nous collectons les informations suivantes :",
-  "gameData": "Données de jeu",
-  "gameDataDescription": "Progression, scores, préférences de jeu",
-  "technicalData": "Données techniques",
-  "technicalDataDescription": "Version de l'application, type d'appareil, système d'exploitation",
-  "usageData": "Données d'utilisation",
-  "usageDataDescription": "Temps de jeu, fonctionnalités utilisées, métriques de performance",
-  "howWeUseData": "Comment nous utilisons vos données",
-  "dataUsageDescription": "Nous utilisons vos données pour :",
-  "improveGameplay": "Améliorer l'expérience de jeu",
-  "provideSupport": "Fournir un support client",
-  "analyzeUsage": "Analyser les habitudes d'utilisation",
-  "dataProtection": "Protection des données",
-  "dataProtectionDescription": "Nous mettons en place des mesures de sécurité appropriées pour protéger vos informations personnelles contre l'accès non autorisé, la modification, la divulgation ou la destruction.",
-  "contactUs": "Nous contacter",
-  "contactUsDescription": "Si vous avez des questions concernant cette politique de confidentialité, veuillez nous contacter à :",
-  "email": "Email",
-  "emailAddress": "privacy@mindbloom.com",
-  "howWeUseInformation": "Comment nous utilisons vos informations",
-  "weUseInformationFor": "Nous utilisons vos informations pour :",
-  "provideService": "Fournir et améliorer le service de jeu",
-  "personalizeExperience": "Personnaliser votre expérience de jeu",
-  "analyzeUsage": "Analyser l'utilisation de l'application",
-  "displayAds": "Afficher des publicités personnalisées (avec votre consentement)",
-  "ensureSecurity": "Assurer la sécurité et prévenir la fraude",
-  "communicateService": "Communiquer avec vous concernant le service",
-  "dataSharing": "Partage des données",
-  "dataSharingDescription": "Nous ne vendons, n'échangeons ni ne transférons vos informations personnelles à des tiers sans votre consentement, sauf comme décrit dans cette politique.",
-  "yourRights": "Vos droits",
-  "yourRightsDescription": "Vous avez le droit de :",
-  "accessData": "Accéder à vos données personnelles",
-  "correctData": "Corriger les données inexactes",
-  "deleteData": "Supprimer vos données",
-  "withdrawConsent": "Retirer le consentement pour le traitement des données",
-  "data": "Données",
-  "saveData": "Sauvegarder les données",
-  "saveProgress": "Sauvegarder vos progrès",
-  "restoreData": "Restaurer les données",
-  "restoreProgress": "Restaurer vos progrès",
-  "resetData": "Réinitialiser les données",
-  "deleteAllData": "Supprimer toutes les données (irréversible)",
-  "bestStreak": "Meilleure série",
-  "days": "jours",
-  "audio": "Audio",
-  "music": "Musique",
-  "enableDisableMusic": "Activer/désactiver la musique de fond",
-  "soundEffects": "Effets sonores",
-  "enableDisableSfx": "Activer/désactiver les effets sonores",
-  "game": "Jeu",
-  "animations": "Animations",
-  "enableDisableAnimations": "Activer/désactiver les animations",
-  "vibrations": "Vibrations",
-  "enableDisableVibrations": "Activer/désactiver les vibrations",
-  "musicVolume": "Volume de la musique",
-  "effectsVolume": "Volume des effets",
-  "experience": "Expérience",
-  "currentStreak": "Série actuelle",
-  "level": "Niveau",
-  "noMoreLives": "Plus de vies !",
-  "noMoreLivesMessage": "Vous n'avez plus de vies. Regardez une publicité pour en obtenir une gratuite, attendez qu'elles se rechargent ou achetez-en plus.",
-  "wait": "Attendre",
-  "buy": "Acheter",
-  "levelLocked": "Niveau verrouillé",
-  "levelLockedMessage": "Vous devez compléter le niveau précédent pour débloquer celui-ci.",
-  "ok": "OK",
-  "noLevelLoaded": "Aucun niveau chargé",
-  "gamePaused": "Jeu en pause",
-  "whatWouldYouLikeToDo": "Que souhaitez-vous faire ?",
-  "resume": "Reprendre",
-  "restart": "Recommencer",
-  "menu": "Menu",
-  "levelCompleted": "Niveau {id} Terminé !",
-  "score": "Score",
-  "movesUsed": "Coups utilisés",
-  "coins": "pièces",
-  "nextLevel": "Niveau suivant",
-  "backToMenu": "Retour au menu",
-  "levelFailed": "Niveau {id} Échoué",
-  "youHaveUsedAllMoves": "Vous avez utilisé tous vos coups !",
-  "aboutTheGame": "À propos du jeu",
-  "developer": "Développeur",
-  "flutterDeveloper": "Développeur Flutter",
+  "@readPrivacyPolicy": {
+    "description": "Texte lire la politique de confidentialité"
+  },
+  "aboutGame": "À propos du jeu",
+  "@aboutGame": {
+    "description": "Texte à propos du jeu"
+  },
+  "gameDescription": "Mind Bloom est un jeu de puzzle magique qui combine les mécaniques classiques du match-3 avec des éléments RPG. Cultivez votre jardin enchanté en alignant des tuiles colorées et découvrez un univers unique de progression et de collection.",
+  "@gameDescription": {
+    "description": "Description du jeu"
+  },
   "technologies": "Technologies",
+  "@technologies": {
+    "description": "Texte technologies"
+  },
   "legalInformation": "Informations légales",
-  "readOurTermsOfService": "Lisez nos conditions d'utilisation",
-  "discoverHowWeProtectYourData": "Découvrez comment nous protégeons vos données",
+  "@legalInformation": {
+    "description": "Texte informations légales"
+  },
   "license": "Licence",
+  "@license": {
+    "description": "Texte licence"
+  },
+  "licenseText": "Ce projet est sous licence MIT. Vous êtes libre de l'utiliser, le modifier et le distribuer selon les termes de cette licence.",
+  "@licenseText": {
+    "description": "Texte de la licence"
+  },
   "acknowledgments": "Remerciements",
+  "@acknowledgments": {
+    "description": "Texte remerciements"
+  },
+  "acknowledgmentsText": "Un grand merci à la communauté Flutter, aux contributeurs des packages utilisés, et à tous ceux qui ont soutenu ce projet.",
+  "@acknowledgmentsText": {
+    "description": "Texte des remerciements"
+  },
   "developedWithLove": "Développé avec ❤️ par",
-  "objectives": "Objectifs",
-  "movesRemaining": "Coups restants",
-  "shuffle": "Mélanger",
-  "hint": "Indice",
-  "noMovesPossible": "Aucun mouvement possible. Utilisez le bouton mélanger !",
-
-  "events": "Événements",
-  "activeEvent": "ÉVÉNEMENT ACTIF",
-  "daysRemaining": "{days} jours restants",
-  "participate": "Participer",
-  "startsIn": "Commence dans {days} jours",
-  "active": "ACTIF",
-  "rewards": "Récompenses",
-  "others": "+{count} autres",
-  "progress": "Progression",
-  "coins": "{quantity} pièces",
-  "gems": "{quantity} gemmes",
-  "plant": "Plante {rarity}★",
-  "boosters": "{quantity} boosters",
-  "completed": "TERMINÉ",
-  "description": "Description",
-  "challenges": "Défis",
-  "comingSoon": "Bientôt disponible",
-  "rarePlant": "Plante rare {rarity} étoiles",
-  "participationInProgress": "Participation à {eventName} en cours...",
-  "springBloom": "Floraison de Printemps",
-  "springBloomDescription": "Célébrez le renouveau avec des fleurs magiques",
-  "summerSolstice": "Solstice d'Été",
-  "summerSolsticeDescription": "Profitez du soleil avec des plantes ensoleillées",
-  "autumnHarvest": "Récolte d'Automne",
-  "autumnHarvestDescription": "Récoltez les fruits de vos efforts",
-  "completeLevels": "Terminez {target} niveaux",
-  "earnStars": "Gagnez {target} étoiles",
-  "useBoosters": "Utilisez {target} boosters",
-  "scorePoints": "Marquez {target} points",
-
-  "shop": "Boutique",
-  "popularItems": "Articles Populaires",
-  "all": "Tout",
-  "lives": "Vies",
-  "currency": "Monnaie",
-  "boosters": "Boosters",
-  "premium": "Premium",
-  "buy": "Acheter",
-  "pop": "POP",
-  "notEnoughCurrency": "Vous n'avez pas assez de {currency}",
-  "purchaseSuccess": "{item} acheté avec succès !",
-  "lives5": "5 Vies",
-  "lives5Description": "Rechargez vos vies pour continuer à jouer",
-  "lives10": "10 Vies",
-  "lives10Description": "Pack de vies plus important",
-  "coins100": "100 Pièces",
-  "coins100Description": "Petit pack de pièces",
-  "coins500": "500 Pièces",
-  "coins500Description": "Pack de pièces moyen",
-  "coins1000": "1000 Pièces",
-  "coins1000Description": "Gros pack de pièces",
-  "gems50": "50 Gemmes",
-  "gems50Description": "Pack de gemmes premium",
-  "shuffler": "Mélangeur",
-  "shufflerDescription": "Mélange automatiquement le plateau",
-  "hint": "Indice",
-  "hintDescription": "Montre un coup possible",
-  "removeAds": "Sans Publicités",
-  "removeAdsDescription": "Supprime toutes les publicités",
-
-  "collection": "Collection",
-  "plants": "Plantes",
-  "rarity": "Rareté",
-  "level": "Niveau",
-  "all": "Toutes",
-  "plantLevel": "Niveau {level}",
-  "bonus": "+{count} bonus",
-  "description": "Description",
-  "unlockCondition": "Condition de déblocage",
-  "bonuses": "Bonus",
-  "upgrade": "Améliorer",
-  "locked": "Verrouillé",
-  "extraMoves": "+{value} coups supplémentaires",
-  "scoreMultiplier": "Score x{value}",
-  "coinMultiplier": "Pièces x{value}",
-  "extraLives": "+{value} vie(s)",
-  "plantUpgraded": "{plantName} améliorée au niveau {level} !",
-
-  "success": "Succès",
-  "rewards": "Récompenses",
-  "progress": "Progression",
-  "all": "Tous",
-  "progression": "Progression",
-  "score": "Score",
-  "collection": "Collection",
-  "game": "Jeu",
-  "social": "Social",
-  "completed": "TERMINÉ",
-  "description": "Description",
-  "progress": "Progression",
-  "reward": "Récompense",
-  "rewardClaimed": "Récompense réclamée",
-  "inProgress": "En cours...",
-  "rewardClaimedMessage": "Récompense de {achievementTitle} réclamée !",
-  "firstSteps": "Premiers Pas",
-  "firstStepsDescription": "Terminez votre premier niveau",
-  "confirmedBeginner": "Débutant Confirmé",
-  "confirmedBeginnerDescription": "Terminez 10 niveaux",
-  "expertInTheMaking": "Expert en Herbe",
-  "expertInTheMakingDescription": "Terminez 50 niveaux",
-  "perfectionist": "Perfectionniste",
-  "perfectionistDescription": "Obtenez 3 étoiles sur un niveau",
-  "scorer": "Scoreur",
-  "scorerDescription": "Marquez 1,000 points en un niveau",
-  "scoreMaster": "Maître du Score",
-  "scoreMasterDescription": "Marquez 5,000 points en un niveau",
-  "accumulator": "Accumulateur",
-  "accumulatorDescription": "Marquez un total de 100,000 points",
-  "beginnerBotanist": "Botaniste Débutant",
-  "beginnerBotanistDescription": "Débloquez votre première plante",
-  "collector": "Collectionneur",
-  "collectorDescription": "Débloquez 5 plantes",
-  "rarityHunter": "Chasseur de Raretés",
-  "rarityHunterDescription": "Débloquez une plante 4 étoiles ou plus",
-  "comboMaster": "Maître du Combo",
-  "comboMasterDescription": "Faites un combo de 5 tuiles",
-  "legendaryCombo": "Combo Légendaire",
-  "legendaryComboDescription": "Faites un combo de 10 tuiles",
-  "saver": "Économiseur",
-  "saverDescription": "Terminez un niveau avec plus de 5 coups restants",
-  "loyal": "Fidèle",
-  "loyalDescription": "Connectez-vous 7 jours de suite",
-  "sharer": "Partageur",
-  "sharerDescription": "Partagez votre score 3 fois",
-
-  "profile": "Profil",
-  "userLevel": "Niveau {level}",
-  "completedLevels": "Niveaux terminés",
+  "@developedWithLove": {
+    "description": "Texte de signature du développeur"
+  },
+  "quote": "\"Cultivez votre jardin intérieur, un match à la fois\"",
+  "@quote": {
+    "description": "Citation du développeur"
+  },
+  "username": "Nom d'utilisateur",
+  "@username": {
+    "description": "Texte nom d'utilisateur"
+  },
+  "editUsername": "Modifier le nom d'utilisateur",
+  "@editUsername": {
+    "description": "Texte modifier le nom d'utilisateur"
+  },
+  "currentStreak": "Série Actuelle",
+  "@currentStreak": {
+    "description": "Titre série actuelle"
+  },
   "bestStreak": "Meilleure série",
-  "lives": "Vies",
-  "detailedStats": "Statistiques détaillées",
-  "totalCoins": "Pièces totales",
-  "gems": "Gemmes",
-  "currentStreak": "Série actuelle",
-  "starsEarned": "Étoiles gagnées",
-  "highestLevel": "Niveau le plus élevé",
-  "quickActions": "Actions rapides",
-  "reviewTutorial": "Revoir le tutoriel",
+  "@bestStreak": {
+    "description": "Texte meilleure série"
+  },
+  "days": "jours",
+  "@days": {
+    "description": "Texte jours"
+  },
+  "saveData": "Sauvegarder les données",
+  "@saveData": {
+    "description": "Texte sauvegarder les données"
+  },
+  "restoreData": "Restaurer les données",
+  "@restoreData": {
+    "description": "Texte restaurer les données"
+  },
   "resetData": "Réinitialiser les données",
-  "shareProfile": "Partager le profil",
-  "recentAchievements": "Réalisations récentes",
-  "firstLevelCompleted": "Premier niveau terminé",
-  "threeStarsObtained": "3 étoiles obtenues",
-  "streakOfFive": "Série de 5 niveaux",
-  "daysAgo": "Il y a {days} jours",
-  "dayAgo": "Il y a 1 jour",
-  "today": "Aujourd'hui",
-  "resetDataTitle": "Réinitialiser les données ?",
-  "resetDataMessage": "Cette action supprimera toutes vos données de progression. Cette action est irréversible.",
-  "cancel": "Annuler",
-  "reset": "Réinitialiser",
+  "@resetData": {
+    "description": "Texte réinitialiser les données"
+  },
+  "saveProgress": "Sauvegarder vos progrès",
+  "@saveProgress": {
+    "description": "Texte sauvegarder les progrès"
+  },
+  "restoreProgress": "Restaurer vos progrès",
+  "@restoreProgress": {
+    "description": "Texte restaurer les progrès"
+  },
+  "deleteAllData": "Supprimer toutes les données (irréversible)",
+  "@deleteAllData": {
+    "description": "Texte supprimer toutes les données"
+  },
+  "resetDataConfirmation": "Êtes-vous sûr de vouloir supprimer toutes vos données ? Cette action est irréversible.",
+  "@resetDataConfirmation": {
+    "description": "Confirmation de réinitialisation des données"
+  },
   "dataReset": "Données réinitialisées",
-  "shareComingSoon": "Partage à venir...",
-  "gems": "{count} gemmes",
-  "boosters": "{count} boosters",
-
-  "termsOfService": "Conditions d'utilisation",
+  "@dataReset": {
+    "description": "Texte données réinitialisées"
+  },
+  "dataSaved": "Données sauvegardées avec succès",
+  "@dataSaved": {
+    "description": "Message de données sauvegardées"
+  },
+  "dataRestored": "Données restaurées avec succès",
+  "@dataRestored": {
+    "description": "Message de données restaurées"
+  },
+  "saveError": "Erreur lors de la sauvegarde",
+  "@saveError": {
+    "description": "Message d'erreur de sauvegarde"
+  },
+  "restoreError": "Erreur lors de la restauration",
+  "@restoreError": {
+    "description": "Message d'erreur de restauration"
+  },
+  "usernameUpdated": "Nom d'utilisateur mis à jour",
+  "@usernameUpdated": {
+    "description": "Message de nom d'utilisateur mis à jour"
+  },
+  "world": "Monde",
+  "@world": {
+    "description": "Texte monde"
+  },
+  "levelCompleted": "Niveau {id} terminé !",
+  "@levelCompleted": {
+    "description": "Message de niveau terminé avec ID",
+    "placeholders": {
+      "id": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "stars": "Étoiles",
+  "@stars": {
+    "description": "Texte étoiles"
+  },
+  "movesUsed": "Coups utilisés",
+  "@movesUsed": {
+    "description": "Texte coups utilisés"
+  },
+  "nextLevel": "Niveau suivant",
+  "@nextLevel": {
+    "description": "Bouton niveau suivant"
+  },
+  "retry": "Réessayer",
+  "@retry": {
+    "description": "Bouton réessayer"
+  },
+  "objectives": "Objectifs",
+  "@objectives": {
+    "description": "Texte objectifs"
+  },
+  "collectTiles": "Collecter {count} {type}",
+  "@collectTiles": {
+    "description": "Objectif collecter des tuiles",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "reachScore": "Atteindre {score} points",
+  "@reachScore": {
+    "description": "Objectif atteindre un score",
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "completeInMoves": "Terminer en {moves} coups",
+  "@completeInMoves": {
+    "description": "Objectif terminer en X coups",
+    "placeholders": {
+      "moves": {
+        "type": "int"
+      }
+    }
+  },
+  "tileTypeFlower": "Fleur",
+  "@tileTypeFlower": {
+    "description": "Type de tuile fleur"
+  },
+  "tileTypeLeaf": "Feuille",
+  "@tileTypeLeaf": {
+    "description": "Type de tuile feuille"
+  },
+  "tileTypeCrystal": "Cristal",
+  "@tileTypeCrystal": {
+    "description": "Type de tuile cristal"
+  },
+  "tileTypeSeed": "Graine",
+  "@tileTypeSeed": {
+    "description": "Type de tuile graine"
+  },
+  "tileTypeDew": "Rosée",
+  "@tileTypeDew": {
+    "description": "Type de tuile rosée"
+  },
+  "tileTypeSun": "Soleil",
+  "@tileTypeSun": {
+    "description": "Type de tuile soleil"
+  },
+  "tileTypeMoon": "Lune",
+  "@tileTypeMoon": {
+    "description": "Type de tuile lune"
+  },
+  "tileTypeGem": "Gemme",
+  "@tileTypeGem": {
+    "description": "Type de tuile gemme"
+  },
+  "achievements": "Réalisations",
+  "@achievements": {
+    "description": "Texte réalisations"
+  },
+  "events": "Événements",
+  "@events": {
+    "description": "Titre de l'écran événements"
+  },
+  "tutorial": "Tutoriel",
+  "@tutorial": {
+    "description": "Texte tutoriel"
+  },
+  "buy": "Acheter",
+  "@buy": {
+    "description": "Bouton acheter"
+  },
+  "price": "Prix",
+  "@price": {
+    "description": "Texte prix"
+  },
+  "owned": "Possédé",
+  "@owned": {
+    "description": "Texte possédé"
+  },
+  "plants": "Plantes",
+  "@plants": {
+    "description": "Texte plantes"
+  },
+  "unlocked": "Débloqué",
+  "@unlocked": {
+    "description": "Texte débloqué"
+  },
+  "locked": "Verrouillé",
+  "@locked": {
+    "description": "Texte verrouillé"
+  },
+  "upgrade": "Améliorer",
+  "@upgrade": {
+    "description": "Bouton améliorer"
+  },
+  "bonus": "Bonus",
+  "@bonus": {
+    "description": "Texte bonus"
+  },
+  "active": "Actif",
+  "@active": {
+    "description": "Texte actif"
+  },
+  "inactive": "Inactif",
+  "@inactive": {
+    "description": "Texte inactif"
+  },
+  "filter": "Filtrer",
+  "@filter": {
+    "description": "Texte filtrer"
+  },
+  "all": "Tous",
+  "@all": {
+    "description": "Texte tous"
+  },
+  "unlockedOnly": "Débloqués seulement",
+  "@unlockedOnly": {
+    "description": "Texte débloqués seulement"
+  },
+  "lockedOnly": "Verrouillés seulement",
+  "@lockedOnly": {
+    "description": "Texte verrouillés seulement"
+  },
+  "noPlantsFound": "Aucune plante trouvée",
+  "@noPlantsFound": {
+    "description": "Message aucune plante trouvée"
+  },
+  "plantDetails": "Détails de la plante",
+  "@plantDetails": {
+    "description": "Titre détails de la plante"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Texte description"
+  },
+  "rarity": "Rareté",
+  "@rarity": {
+    "description": "Texte rareté"
+  },
+  "common": "Commun",
+  "@common": {
+    "description": "Rareté commune"
+  },
+  "rare": "Rare",
+  "@rare": {
+    "description": "Rareté rare"
+  },
+  "epic": "Épique",
+  "@epic": {
+    "description": "Rareté épique"
+  },
+  "legendary": "Légendaire",
+  "@legendary": {
+    "description": "Rareté légendaire"
+  },
+  "upgradeCost": "Coût d'amélioration",
+  "@upgradeCost": {
+    "description": "Texte coût d'amélioration"
+  },
+  "insufficientCoins": "Pièces insuffisantes",
+  "@insufficientCoins": {
+    "description": "Message pièces insuffisantes"
+  },
+  "upgradeSuccess": "Amélioration réussie !",
+  "@upgradeSuccess": {
+    "description": "Message amélioration réussie"
+  },
+  "noLives": "Aucune vie",
+  "@noLives": {
+    "description": "Message aucune vie"
+  },
+  "noLivesMessage": "Vous n'avez plus de vies. Regardez une publicité pour obtenir une vie gratuite ou attendez que les vies se régénèrent.",
+  "@noLivesMessage": {
+    "description": "Contenu du message aucune vie"
+  },
+  "levelLocked": "Niveau verrouillé",
+  "@levelLocked": {
+    "description": "Message niveau verrouillé"
+  },
+  "levelLockedMessage": "Terminez les niveaux précédents pour débloquer celui-ci.",
+  "@levelLockedMessage": {
+    "description": "Contenu du message niveau verrouillé"
+  },
+  "firstSteps": "Premiers Pas",
+  "@firstSteps": {
+    "description": "Réalisation premiers pas"
+  },
+  "firstStepsDescription": "Terminez votre premier niveau",
+  "@firstStepsDescription": {
+    "description": "Description de la réalisation premiers pas"
+  },
+  "levelMaster": "Maître des Niveaux",
+  "@levelMaster": {
+    "description": "Réalisation maître des niveaux"
+  },
+  "levelMasterDescription": "Terminez 10 niveaux",
+  "@levelMasterDescription": {
+    "description": "Description de la réalisation maître des niveaux"
+  },
+  "scoreHunter": "Chasseur de Scores",
+  "@scoreHunter": {
+    "description": "Réalisation chasseur de scores"
+  },
+  "scoreHunterDescription": "Atteignez 10 000 points en un seul niveau",
+  "@scoreHunterDescription": {
+    "description": "Description de la réalisation chasseur de scores"
+  },
+  "comboKing": "Roi des Combos",
+  "@comboKing": {
+    "description": "Réalisation roi des combos"
+  },
+  "comboKingDescription": "Faites un combo de 5",
+  "@comboKingDescription": {
+    "description": "Description de la réalisation roi des combos"
+  },
+  "plantCollector": "Collectionneur de Plantes",
+  "@plantCollector": {
+    "description": "Réalisation collectionneur de plantes"
+  },
+  "plantCollectorDescription": "Débloquez 5 plantes",
+  "@plantCollectorDescription": {
+    "description": "Description de la réalisation collectionneur de plantes"
+  },
+  "perfectPlayer": "Joueur Parfait",
+  "@perfectPlayer": {
+    "description": "Réalisation joueur parfait"
+  },
+  "perfectPlayerDescription": "Terminez un niveau avec 3 étoiles",
+  "@perfectPlayerDescription": {
+    "description": "Description de la réalisation joueur parfait"
+  },
+  "dailyChallenge": "Défi Quotidien",
+  "@dailyChallenge": {
+    "description": "Texte défi quotidien"
+  },
+  "weeklyEvent": "Événement Hebdomadaire",
+  "@weeklyEvent": {
+    "description": "Texte événement hebdomadaire"
+  },
+  "specialOffer": "Offre Spéciale",
+  "@specialOffer": {
+    "description": "Texte offre spéciale"
+  },
+  "limitedTime": "Temps Limité",
+  "@limitedTime": {
+    "description": "Texte temps limité"
+  },
+  "newEvent": "Nouvel Événement",
+  "@newEvent": {
+    "description": "Texte nouvel événement"
+  },
+  "eventDescription": "Terminez des objectifs spéciaux pour gagner des récompenses exclusives !",
+  "@eventDescription": {
+    "description": "Description d'événement"
+  },
+  "participate": "Participer",
+  "@participate": {
+    "description": "Bouton participer"
+  },
+  "rewards": "Récompenses",
+  "@rewards": {
+    "description": "Texte récompenses"
+  },
+  "powerUps": "Power-ups",
+  "@powerUps": {
+    "description": "Texte power-ups"
+  },
+  "bomb": "Bombe",
+  "@bomb": {
+    "description": "Power-up bombe"
+  },
+  "lightning": "Éclair",
+  "@lightning": {
+    "description": "Power-up éclair"
+  },
+  "rainbow": "Arc-en-ciel",
+  "@rainbow": {
+    "description": "Power-up arc-en-ciel"
+  },
+  "hammer": "Marteau",
+  "@hammer": {
+    "description": "Power-up marteau"
+  },
+  "gameplay": "Gameplay",
+  "@gameplay": {
+    "description": "Texte gameplay"
+  },
+  "matchThree": "Associez 3 tuiles ou plus du même type pour les effacer",
+  "@matchThree": {
+    "description": "Instruction match trois"
+  },
+  "combos": "Créez des combos pour des points bonus",
+  "@combos": {
+    "description": "Instruction combos"
+  },
+  "powerUpsUsage": "Utilisez les power-ups pour vous aider dans les situations difficiles",
+  "@powerUpsUsage": {
+    "description": "Instruction utilisation des power-ups"
+  },
+  "livesSystem": "Vous avez un nombre limité de vies. Regardez des publicités pour en obtenir plus !",
+  "@livesSystem": {
+    "description": "Instruction système de vies"
+  },
   "lastUpdated": "Dernière mise à jour : {date}",
-  "acceptanceOfTerms": "1. Acceptation des conditions",
-  "acceptanceOfTermsContent": "En utilisant l'application Mind Bloom, vous acceptez d'être lié par ces conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser notre application.",
-  "serviceDescription": "2. Description du service",
-  "serviceDescriptionContent": "Mind Bloom est un jeu de puzzle mobile développé par YACOUBA SANTARA. L'application propose des mécaniques de match-3 avec des éléments de progression RPG dans un univers de jardin magique.",
-  "authorizedUse": "3. Utilisation autorisée",
-  "authorizedUseContent": "Vous pouvez utiliser Mind Bloom à des fins personnelles et non commerciales uniquement. Il est interdit de :\n\n• Copier, modifier ou distribuer l'application\n• Utiliser l'application à des fins commerciales sans autorisation\n• Tenter de contourner les mesures de sécurité\n• Utiliser l'application de manière à nuire à d'autres utilisateurs",
-  "intellectualProperty": "4. Contenu et propriété intellectuelle",
-  "intellectualPropertyContent": "Tous les éléments de Mind Bloom, incluant mais non limités aux graphismes, sons, code source, et design, sont la propriété exclusive de YACOUBA SANTARA et sont protégés par les lois sur le droit d'auteur.",
-  "inAppPurchases": "5. Achats intégrés",
-  "inAppPurchasesContent": "L'application peut contenir des achats intégrés pour des vies supplémentaires, des boosters, ou d'autres éléments de jeu. Tous les achats sont finaux et non remboursables, sauf disposition contraire de la loi applicable.",
-  "advertisements": "6. Publicités",
-  "advertisementsContent": "Mind Bloom peut afficher des publicités tierces. Ces publicités sont gérées par des partenaires publicitaires et nous ne sommes pas responsables du contenu de ces publicités.",
-  "liabilityLimitation": "7. Limitation de responsabilité",
-  "liabilityLimitationContent": "L'application est fournie \"en l'état\" sans garantie d'aucune sorte. Nous ne serons pas responsables des dommages directs, indirects, accessoires ou consécutifs résultant de l'utilisation de l'application.",
-  "termsModifications": "8. Modifications des conditions",
-  "termsModificationsContent": "Nous nous réservons le droit de modifier ces conditions d'utilisation à tout moment. Les modifications prendront effet dès leur publication dans l'application. Votre utilisation continue de l'application constitue votre acceptation des conditions modifiées.",
-  "termination": "9. Résiliation",
-  "terminationContent": "Nous nous réservons le droit de suspendre ou de résilier votre accès à l'application à tout moment, sans préavis, pour violation de ces conditions d'utilisation.",
-  "applicableLaw": "10. Droit applicable",
-  "applicableLawContent": "Ces conditions d'utilisation sont régies par le droit français. Tout litige sera soumis à la juridiction exclusive des tribunaux français.",
-  "contact": "Contact",
-  "contactContent": "Pour toute question concernant ces conditions d'utilisation, vous pouvez nous contacter à :",
-  "developedWithLove": "Développé avec ❤️ par",
+  "@lastUpdated": {
+    "description": "Texte de dernière mise à jour",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "privacyPolicyIntroduction": "Cette politique de confidentialité décrit comment Mind Bloom collecte, utilise et protège vos informations personnelles lorsque vous utilisez notre application mobile. Nous nous engageons à protéger votre vie privée et à traiter vos données avec le plus grand respect.",
+  "@privacyPolicyIntroduction": {
+    "description": "Introduction de la politique de confidentialité"
+  },
+  "informationWeCollect": "Informations que nous collectons",
+  "@informationWeCollect": {
+    "description": "Titre informations que nous collectons"
+  },
+  "weCollectFollowing": "Nous collectons les informations suivantes :",
+  "@weCollectFollowing": {
+    "description": "Texte nous collectons les informations suivantes"
+  },
+  "gameData": "Données de jeu",
+  "@gameData": {
+    "description": "Texte données de jeu"
+  },
+  "gameDataDescription": "Progression, scores, préférences de jeu",
+  "@gameDataDescription": {
+    "description": "Description des données de jeu"
+  },
+  "technicalData": "Données techniques",
+  "@technicalData": {
+    "description": "Texte données techniques"
+  },
+  "technicalDataDescription": "Version de l'application, type d'appareil, système d'exploitation",
+  "@technicalDataDescription": {
+    "description": "Description des données techniques"
+  },
+  "usageData": "Données d'utilisation",
+  "@usageData": {
+    "description": "Texte données d'utilisation"
+  },
+  "usageDataDescription": "Temps de jeu, fonctionnalités utilisées, métriques de performance",
+  "@usageDataDescription": {
+    "description": "Description des données d'utilisation"
+  },
+  "howWeUseData": "Comment nous utilisons vos données",
+  "@howWeUseData": {
+    "description": "Titre comment nous utilisons vos données"
+  },
+  "dataUsageDescription": "Nous utilisons vos données pour :",
+  "@dataUsageDescription": {
+    "description": "Description utilisation des données"
+  },
 
-  "dataStorage": "4. Stockage et sécurité",
-  "dataStorageContent": "Vos données sont stockées de manière sécurisée :\n\n• **Chiffrement** : Les données sensibles sont chiffrées\n• **Accès limité** : Seul le personnel autorisé peut accéder aux données\n• **Sauvegarde** : Des sauvegardes régulières sont effectuées\n• **Durée** : Les données sont conservées uniquement le temps nécessaire",
-  "cookies": "5. Cookies et technologies similaires",
-  "cookiesContent": "L'application peut utiliser :\n\n• **Cookies locaux** : Pour sauvegarder vos préférences de jeu\n• **Identifiants publicitaires** : Pour personnaliser les publicités\n• **Analytics** : Pour comprendre l'utilisation de l'application\n\nVous pouvez désactiver ces fonctionnalités dans les paramètres de votre appareil.",
-  "thirdPartyAds": "7. Publicités et partenaires tiers",
-  "thirdPartyAdsContent": "L'application peut afficher des publicités via des partenaires tiers comme Google AdMob. Ces partenaires peuvent collecter des informations pour personnaliser les publicités. Vous pouvez :\n\n• Désactiver la personnalisation des publicités dans les paramètres\n• Utiliser les paramètres de confidentialité de votre appareil\n• Contacter directement les partenaires publicitaires",
-  "minorsData": "8. Données des mineurs",
-  "minorsDataContent": "Mind Bloom ne collecte pas sciemment d'informations personnelles d'enfants de moins de 13 ans. Si nous découvrons qu'un enfant de moins de 13 ans nous a fourni des informations personnelles, nous les supprimerons immédiatement.",
-  "policyChanges": "9. Modifications de cette politique",
-  "policyChangesContent": "Nous pouvons modifier cette politique de confidentialité à tout moment. Les modifications importantes seront communiquées via l'application ou par email. Nous vous encourageons à consulter régulièrement cette politique.",
-  "legalBasis": "10. Base légale du traitement",
-  "legalBasisContent": "Nous traitons vos données personnelles sur la base de :\n\n• **Exécution du contrat** : Pour fournir le service de jeu\n• **Intérêt légitime** : Pour améliorer l'application et prévenir la fraude\n• **Consentement** : Pour les publicités personnalisées et les communications marketing",
+  "weUseInformationFor": "Nous utilisons vos informations pour :",
+  "@weUseInformationFor": {
+    "description": "Titre utilisation des informations"
+  },
+
+  "provideService": "Fournir et améliorer le service de jeu",
+  "@provideService": {
+    "description": "Fournir le service"
+  },
+
+  "personalizeExperience": "Personnaliser votre expérience de jeu",
+  "@personalizeExperience": {
+    "description": "Personnaliser l'expérience"
+  },
+
+  "displayAds": "Afficher des publicités personnalisées (avec votre consentement)",
+  "@displayAds": {
+    "description": "Afficher des publicités"
+  },
+
+  "ensureSecurity": "Assurer la sécurité et prévenir la fraude",
+  "@ensureSecurity": {
+    "description": "Assurer la sécurité"
+  },
+  "improveGameplay": "Améliorer l'expérience de jeu",
+  "@improveGameplay": {
+    "description": "Texte améliorer l'expérience de jeu"
+  },
+  "provideSupport": "Fournir un support client",
+  "@provideSupport": {
+    "description": "Texte fournir un support"
+  },
+  "analyzeUsage": "Analyser les habitudes d'utilisation",
+  "@analyzeUsage": {
+    "description": "Texte analyser l'utilisation"
+  },
+  "dataProtection": "Protection des données",
+  "@dataProtection": {
+    "description": "Titre protection des données"
+  },
+  "dataProtectionDescription": "Nous mettons en place des mesures de sécurité appropriées pour protéger vos informations personnelles contre l'accès non autorisé, la modification, la divulgation ou la destruction.",
+  "@dataProtectionDescription": {
+    "description": "Description protection des données"
+  },
+  "contactUs": "Nous contacter",
+  "@contactUs": {
+    "description": "Titre nous contacter"
+  },
+  "contactUsDescription": "Si vous avez des questions concernant cette politique de confidentialité, veuillez nous contacter à :",
+  "@contactUsDescription": {
+    "description": "Description nous contacter"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Texte email"
+  },
+  "emailAddress": "privacy@mindbloom.com",
+  "@emailAddress": {
+    "description": "Adresse email"
+  },
+  "timeRemaining": "Temps",
+  "@timeRemaining": {
+    "description": "Texte temps restant"
+  },
+  "nextLife": "Prochaine vie",
+  "@nextLife": {
+    "description": "Texte prochaine vie"
+  },
+  "watchAdForFreeLife": "Regardez une pub pour obtenir une vie gratuite !",
+  "@watchAdForFreeLife": {
+    "description": "Message regarder une pub pour une vie gratuite"
+  },
+  "lifeEarned": "Vie gagnée ! Vous pouvez continuer à jouer.",
+  "@lifeEarned": {
+    "description": "Message vie gagnée"
+  },
+  "noAdAvailable": "Aucune pub disponible pour le moment. Veuillez réessayer plus tard.",
+  "@noAdAvailable": {
+    "description": "Message aucune pub disponible"
+  },
+  "adError": "Erreur lors du chargement de la pub. Veuillez réessayer.",
+  "@adError": {
+    "description": "Message erreur de pub"
+  },
+  "dailyRewards": "Récompenses Quotidiennes",
+  "@dailyRewards": {
+    "description": "Titre des récompenses quotidiennes"
+  },
+  "claimReward": "Réclamer !",
+  "@claimReward": {
+    "description": "Bouton réclamer récompense"
+  },
+  "rewardAlreadyClaimed": "Récompense déjà réclamée",
+  "@rewardAlreadyClaimed": {
+    "description": "Message récompense déjà réclamée"
+  },
+  "nextRewardIn": "Prochaine récompense dans :",
+  "@nextRewardIn": {
+    "description": "Texte prochaine récompense dans"
+  },
+  "howItWorks": "Comment ça marche ?",
+  "@howItWorks": {
+    "description": "Titre comment ça marche"
+  },
+  "dailyRewardInfo1": "Connectez-vous chaque jour pour réclamer votre récompense",
+  "@dailyRewardInfo1": {
+    "description": "Information récompenses quotidiennes 1"
+  },
+  "dailyRewardInfo2": "Plus votre série est longue, meilleures sont les récompenses",
+  "@dailyRewardInfo2": {
+    "description": "Information récompenses quotidiennes 2"
+  },
+  "dailyRewardInfo3": "Le 7ème jour offre une récompense légendaire",
+  "@dailyRewardInfo3": {
+    "description": "Information récompenses quotidiennes 3"
+  },
+  "dailyRewardInfo4": "Les récompenses se réinitialisent à minuit",
+  "@dailyRewardInfo4": {
+    "description": "Information récompenses quotidiennes 4"
+  },
+  "rewardOfDay": "Récompense du Jour {day}",
+  "@rewardOfDay": {
+    "description": "Titre récompense du jour",
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "legendaryStreak": "Série Légendaire !",
+  "@legendaryStreak": {
+    "description": "Texte série légendaire"
+  },
+  "perfectPerformance": "Performance Parfaite! Bonus x2",
+  "@perfectPerformance": {
+    "description": "Texte performance parfaite"
+  },
+  "milestoneLevel": "Niveau Milestone! Bonus spécial",
+  "@milestoneLevel": {
+    "description": "Texte niveau milestone"
+  },
+  "rewardsClaimed": "Récompenses obtenues",
+  "@rewardsClaimed": {
+    "description": "Titre récompenses obtenues"
+  },
+  "experience": "Expérience",
+  "@experience": {
+    "description": "Texte expérience"
+  },
+  "comboBonus": "Bonus Combo x{multiplier}",
+  "@comboBonus": {
+    "description": "Texte bonus combo",
+    "placeholders": {
+      "multiplier": {
+        "type": "int"
+      }
+    }
+  },
+  "spectacularCombo": "Combo Spectaculaire !",
+  "@spectacularCombo": {
+    "description": "Texte combo spectaculaire"
+  },
+  "megaMatch": "Méga Match de {count} tuiles !",
+  "@megaMatch": {
+    "description": "Texte méga match",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noMoreLives": "Plus de vies !",
+  "@noMoreLives": {
+    "description": "Message plus de vies"
+  },
+  "noMoreLivesMessage": "Vous n'avez plus de vies. Regardez une publicité pour obtenir une vie gratuite, attendez qu'elles se rechargent ou achetez-en plus.",
+  "@noMoreLivesMessage": {
+    "description": "Message détaillé plus de vies"
+  },
+  "wait": "Attendre",
+  "@wait": {
+    "description": "Texte du bouton attendre"
+  },
+  "acceptanceOfTerms": "1. Acceptation des Conditions",
+  "@acceptanceOfTerms": {
+    "description": "Titre de section acceptation des conditions"
+  },
+  "acceptanceOfTermsContent": "En utilisant l'application Mind Bloom, vous acceptez d'être lié par ces conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser notre application.",
+  "@acceptanceOfTermsContent": {
+    "description": "Contenu de section acceptation des conditions"
+  },
+  "serviceDescription": "2. Description du Service",
+  "@serviceDescription": {
+    "description": "Titre de section description du service"
+  },
+  "serviceDescriptionContent": "Mind Bloom est un jeu de puzzle mobile développé par YACOUBA SANTARA. L'application propose des mécaniques de match-3 avec des éléments de progression RPG dans un univers de jardin magique.",
+  "@serviceDescriptionContent": {
+    "description": "Contenu de section description du service"
+  },
+  "authorizedUse": "3. Usage Autorisé",
+  "@authorizedUse": {
+    "description": "Titre de section usage autorisé"
+  },
+  "authorizedUseContent": "Vous pouvez utiliser Mind Bloom uniquement à des fins personnelles et non commerciales. Il est interdit de :\n\n• Copier, modifier ou distribuer l'application\n• Utiliser l'application à des fins commerciales sans autorisation\n• Tenter de contourner les mesures de sécurité\n• Utiliser l'application d'une manière qui nuit aux autres utilisateurs",
+  "@authorizedUseContent": {
+    "description": "Contenu de section usage autorisé"
+  },
+  "intellectualProperty": "4. Contenu et Propriété Intellectuelle",
+  "@intellectualProperty": {
+    "description": "Titre de section propriété intellectuelle"
+  },
+  "intellectualPropertyContent": "Tous les éléments de Mind Bloom, y compris mais sans s'y limiter aux graphismes, sons, code source et design, sont la propriété exclusive de YACOUBA SANTARA et sont protégés par les lois sur le droit d'auteur.",
+  "@intellectualPropertyContent": {
+    "description": "Contenu de section propriété intellectuelle"
+  },
+  "inAppPurchases": "5. Achats In-App",
+  "@inAppPurchases": {
+    "description": "Titre de section achats in-app"
+  },
+  "inAppPurchasesContent": "L'application peut contenir des achats in-app pour des vies supplémentaires, des boosters ou d'autres éléments de jeu. Tous les achats sont finaux et non remboursables, sauf si la loi applicable l'exige.",
+  "@inAppPurchasesContent": {
+    "description": "Contenu de section achats in-app"
+  },
+  "advertisements": "6. Publicités",
+  "@advertisements": {
+    "description": "Titre de section publicités"
+  },
+  "advertisementsContent": "Mind Bloom peut afficher des publicités de tiers. Ces publicités sont gérées par des partenaires publicitaires et nous ne sommes pas responsables du contenu de ces publicités.",
+  "@advertisementsContent": {
+    "description": "Contenu de section publicités"
+  },
+  "liabilityLimitation": "7. Limitation de Responsabilité",
+  "@liabilityLimitation": {
+    "description": "Titre de section limitation de responsabilité"
+  },
+  "liabilityLimitationContent": "L'application est fournie 'en l'état' sans garantie d'aucune sorte. Nous ne serons pas responsables des dommages directs, indirects, accessoires ou consécutifs résultant de l'utilisation de l'application.",
+  "@liabilityLimitationContent": {
+    "description": "Contenu de section limitation de responsabilité"
+  },
+  "termsModifications": "8. Modifications des Conditions",
+  "@termsModifications": {
+    "description": "Titre de section modifications des conditions"
+  },
+  "termsModificationsContent": "Nous nous réservons le droit de modifier ces conditions d'utilisation à tout moment. Les modifications prendront effet dès leur publication dans l'application. Votre utilisation continue de l'application constitue votre acceptation des conditions modifiées.",
+  "@termsModificationsContent": {
+    "description": "Contenu de section modifications des conditions"
+  },
+  "termination": "9. Résiliation",
+  "@termination": {
+    "description": "Titre de section résiliation"
+  },
+  "terminationContent": "Nous nous réservons le droit de suspendre ou de résilier votre accès à l'application à tout moment, sans préavis, en cas de violation de ces conditions d'utilisation.",
+  "@terminationContent": {
+    "description": "Contenu de section résiliation"
+  },
+  "applicableLaw": "10. Droit Applicable",
+  "@applicableLaw": {
+    "description": "Titre de section droit applicable"
+  },
+  "applicableLawContent": "Ces conditions d'utilisation sont régies par le droit français. Tout litige sera soumis à la juridiction exclusive des tribunaux français.",
+  "@applicableLawContent": {
+    "description": "Contenu de section droit applicable"
+  },
+  "contact": "Contact",
+  "@contact": {
+    "description": "Titre de section contact"
+  },
+  "contactContent": "Pour toute question concernant ces conditions d'utilisation, vous pouvez nous contacter à :",
+  "@contactContent": {
+    "description": "Contenu de section contact"
+  },
+  "watchAdForLifeDescription": "Regardez une courte vidéo pour gagner une vie et continuer à jouer !",
+  "@watchAdForLifeDescription": {
+    "description": "Description pour regarder une vidéo et gagner une vie"
+  },
+  "aboutTheGame": "À propos du jeu",
+  "@aboutTheGame": {
+    "description": "Titre à propos du jeu"
+  },
+  "accessData": "Accéder à vos données personnelles",
+  "@accessData": {
+    "description": "Texte d'accès aux données"
+  },
+  "account": "Compte",
+  "@account": {
+    "description": "Texte du compte"
+  },
+  "accumulator": "Accumulateur",
+  "@accumulator": {
+    "description": "Titre accumulateur"
+  },
+  "accumulatorDescription": "Marquez un total de 100 000 points",
+  "@accumulatorDescription": {
+    "description": "Description accumulateur"
+  },
+  "activeEvent": "ÉVÉNEMENT ACTIF",
+  "@activeEvent": {
+    "description": "Texte événement actif"
+  },
+  "audio": "Audio",
+  "@audio": {
+    "description": "Texte audio"
+  },
+  "autumnHarvest": "Récolte d'Automne",
+  "@autumnHarvest": {
+    "description": "Titre récolte d'automne"
+  },
+  "autumnHarvestDescription": "Récoltez les fruits de vos efforts",
+  "@autumnHarvestDescription": {
+    "description": "Description récolte d'automne"
+  },
+  "backToMenu": "Retour au menu",
+  "@backToMenu": {
+    "description": "Texte retour au menu"
+  },
+  "beginnerBotanist": "Botaniste Débutant",
+  "@beginnerBotanist": {
+    "description": "Titre botaniste débutant"
+  },
+  "beginnerBotanistDescription": "Débloquez votre première plante",
+  "@beginnerBotanistDescription": {
+    "description": "Description botaniste débutant"
+  },
+  "bonuses": "Bonus",
+  "@bonuses": {
+    "description": "Texte des bonus"
+  },
+  "boosters": "{count} boosters",
+  "@boosters": {
+    "description": "Texte des boosters",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "challenges": "Défis",
+  "@challenges": {
+    "description": "Texte des défis"
+  },
+  "coinMultiplier": "Pièces x{value}",
+  "@coinMultiplier": {
+    "description": "Multiplicateur de pièces",
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "coins100": "100 Pièces",
+  "@coins100": {
+    "description": "Titre 100 pièces"
+  },
+  "coins1000": "1000 Pièces",
+  "@coins1000": {
+    "description": "Titre 1000 pièces"
+  },
+  "coins1000Description": "Grand pack de pièces",
+  "@coins1000Description": {
+    "description": "Description 1000 pièces"
+  },
+  "coins100Description": "Petit pack de pièces",
+  "@coins100Description": {
+    "description": "Description 100 pièces"
+  },
+  "coins500": "500 Pièces",
+  "@coins500": {
+    "description": "Titre 500 pièces"
+  },
+  "coins500Description": "Pack moyen de pièces",
+  "@coins500Description": {
+    "description": "Description 500 pièces"
+  },
+  "collector": "Collectionneur",
+  "@collector": {
+    "description": "Titre collectionneur"
+  },
+  "collectorDescription": "Débloquez 5 plantes",
+  "@collectorDescription": {
+    "description": "Description collectionneur"
+  },
+  "comboMaster": "Maître des Combos",
+  "@comboMaster": {
+    "description": "Titre maître des combos"
+  },
+  "comboMasterDescription": "Faites un combo de 5 tuiles",
+  "@comboMasterDescription": {
+    "description": "Description maître des combos"
+  },
+  "comingSoon": "Bientôt disponible",
+  "@comingSoon": {
+    "description": "Texte bientôt disponible"
+  },
+  "communicateService": "Communiquer avec vous concernant le service",
+  "@communicateService": {
+    "description": "Description communication service"
+  },
+  "completeLevels": "Terminez {target} niveaux",
+  "@completeLevels": {
+    "description": "Texte terminer niveaux",
+    "placeholders": {
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "completed": "TERMINÉ",
+  "@completed": {
+    "description": "Texte terminé"
+  },
+  "completedLevels": "Niveaux Terminés",
+  "@completedLevels": {
+    "description": "Texte niveaux terminés"
+  },
+  "confirmedBeginner": "Débutant Confirmé",
+  "@confirmedBeginner": {
+    "description": "Titre débutant confirmé"
+  },
+  "confirmedBeginnerDescription": "Terminez 10 niveaux",
+  "@confirmedBeginnerDescription": {
+    "description": "Description débutant confirmé"
+  },
   "contactDPO": "Contact et DPO",
+  "@contactDPO": {
+    "description": "Titre contact DPO"
+  },
   "contactDPOContent": "Pour toute question concernant cette politique de confidentialité ou pour exercer vos droits, contactez-nous :",
-  "responseTime": "Nous nous engageons à répondre à votre demande dans un délai de 30 jours.",
+  "@contactDPOContent": {
+    "description": "Contenu contact DPO"
+  },
+
+  "thirdPartyAds": "7. Publicités et Partenaires Tiers",
+  "@thirdPartyAds": {
+    "description": "Titre publicités tiers"
+  },
+
+  "thirdPartyAdsContent": "L'application peut afficher des publicités via des partenaires tiers comme Google AdMob. Ces partenaires peuvent collecter des informations pour personnaliser les publicités. Vous pouvez :\n\n• Désactiver la personnalisation des publicités dans les paramètres\n• Utiliser les paramètres de confidentialité de votre appareil\n• Contacter directement les partenaires publicitaires",
+  "@thirdPartyAdsContent": {
+    "description": "Contenu publicités tiers"
+  },
+
+  "legalBasis": "10. Base Légale du Traitement",
+  "@legalBasis": {
+    "description": "Titre base légale"
+  },
+
+  "legalBasisContent": "Nous traitons vos données personnelles sur la base de :\n\n• Exécution du Contrat : Pour fournir le service de jeu\n• Intérêt Légitime : Pour améliorer l'application et prévenir la fraude\n• Consentement : Pour les publicités personnalisées et les communications marketing",
+  "@legalBasisContent": {
+    "description": "Contenu base légale"
+  },
+
+  "minorsData": "8. Données des Mineurs",
+  "@minorsData": {
+    "description": "Titre données mineurs"
+  },
+
+  "minorsDataContent": "Mind Bloom ne collecte pas sciemment d'informations personnelles d'enfants de moins de 13 ans. Si nous découvrons qu'un enfant de moins de 13 ans nous a fourni des informations personnelles, nous les supprimerons immédiatement.",
+  "@minorsDataContent": {
+    "description": "Contenu données mineurs"
+  },
+
+  "policyChanges": "9. Modifications de cette Politique",
+  "@policyChanges": {
+    "description": "Titre modifications politique"
+  },
+
+  "policyChangesContent": "Nous pouvons modifier cette politique de confidentialité à tout moment. Les modifications importantes seront communiquées via l'application ou par e-mail. Nous vous encourageons à consulter régulièrement cette politique.",
+  "@policyChangesContent": {
+    "description": "Contenu modifications politique"
+  },
+
+  "yourRights": "Vos droits",
+  "@yourRights": {
+    "description": "Titre vos droits"
+  },
+
+  "yourRightsDescription": "Vous avez le droit de :",
+  "@yourRightsDescription": {
+    "description": "Description vos droits"
+  },
+
+  "accessData": "Accéder à vos données personnelles",
+  "@accessData": {
+    "description": "Accès aux données"
+  },
+
+  "correctData": "Corriger les données inexactes",
+  "@correctData": {
+    "description": "Correction des données"
+  },
+
+  "deleteData": "Supprimer vos données",
+  "@deleteData": {
+    "description": "Suppression des données"
+  },
+
+  "withdrawConsent": "Retirer votre consentement au traitement des données",
+  "@withdrawConsent": {
+    "description": "Retrait du consentement"
+  },
+  "cookies": "5. Cookies et Technologies Similaires",
+  "@cookies": {
+    "description": "Titre cookies"
+  },
+  "cookiesContent": "L'application peut utiliser :\n\n• Cookies Locaux : Pour sauvegarder vos préférences de jeu\n• Identifiants Publicitaires : Pour personnaliser les publicités\n• Analyses : Pour comprendre l'utilisation de l'application\n\nVous pouvez désactiver ces fonctionnalités dans les paramètres de votre appareil.",
+  "@cookiesContent": {
+    "description": "Contenu cookies"
+  },
+  "correctData": "Corriger les données inexactes",
+  "@correctData": {
+    "description": "Texte corriger données"
+  },
+  "currency": "Monnaie",
+  "@currency": {
+    "description": "Texte monnaie"
+  },
+  "darkTheme": "Sombre",
+  "@darkTheme": {
+    "description": "Texte thème sombre"
+  },
+  "data": "Données",
+  "@data": {
+    "description": "Texte données"
+  },
+  "dataSharing": "Partage de données",
+  "@dataSharing": {
+    "description": "Titre partage de données"
+  },
+  "dataSharingDescription": "Nous ne vendons, n'échangeons ou ne transférons pas vos informations personnelles à des tiers sans votre consentement, sauf comme décrit dans cette politique.",
+  "@dataSharingDescription": {
+    "description": "Description partage de données"
+  },
+  "dataStorage": "4. Stockage et Sécurité des Données",
+  "@dataStorage": {
+    "description": "Titre stockage de données"
+  },
+  "dataStorageContent": "Vos données sont stockées en sécurité :\\n\\n• Chiffrement : Les données sensibles sont chiffrées\\n• Accès Limité : Seul le personnel autorisé peut accéder aux données\\n• Sauvegarde : Des sauvegardes régulières sont effectuées\\n• Durée : Les données ne sont conservées que le temps nécessaire",
+  "@dataStorageContent": {
+    "description": "Contenu stockage de données"
+  },
+  "dayAgo": "Il y a 1 jour",
+  "@dayAgo": {
+    "description": "Texte il y a 1 jour"
+  },
+  "daysAgo": "Il y a {days} jours",
+  "@daysAgo": {
+    "description": "Texte il y a plusieurs jours",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "daysRemaining": "{days} jours restants",
+  "@daysRemaining": {
+    "description": "Texte jours restants",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "deleteData": "Supprimer vos données",
+  "@deleteData": {
+    "description": "Texte supprimer données"
+  },
+  "gems50": "50 Gemmes",
+  "@gems50": {
+    "description": "Traduction de gems50"
+  },
+  "gems50Description": "Pack de gemmes",
+  "@gems50Description": {
+    "description": "Traduction de gems50Description"
+  },
+  "hintDescription": "Révèle un coup possible",
+  "@hintDescription": {
+    "description": "Traduction de hintDescription"
+  },
+  "inProgress": "EN COURS",
+  "@inProgress": {
+    "description": "Traduction de inProgress"
+  },
+  "lightTheme": "Clair",
+  "@lightTheme": {
+    "description": "Traduction de lightTheme"
+  },
+  "lives10": "10 Vies",
+  "@lives10": {
+    "description": "Traduction de lives10"
+  },
+  "lives10Description": "Pack de vies",
+  "@lives10Description": {
+    "description": "Traduction de lives10Description"
+  },
+  "lives5": "5 Vies",
+  "@lives5": {
+    "description": "Traduction de lives5"
+  },
+  "lives5Description": "Pack de vies",
+  "@lives5Description": {
+    "description": "Traduction de lives5Description"
+  },
+  "notEnoughCurrency": "Pas assez de {currency}",
+  "@notEnoughCurrency": {
+    "description": "Traduction de notEnoughCurrency",
+    "placeholders": {
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "perfectionist": "Perfectionniste",
+  "@perfectionist": {
+    "description": "Traduction de perfectionist"
+  },
+  "perfectionistDescription": "Terminez un niveau avec 3 étoiles",
+  "@perfectionistDescription": {
+    "description": "Traduction de perfectionistDescription"
+  },
+  "plant": "Plante",
+  "@plant": {
+    "description": "Traduction de plant"
+  },
+  "pop": "Éclater",
+  "@pop": {
+    "description": "Traduction de pop"
+  },
+  "popularItems": "Articles Populaires",
+  "@popularItems": {
+    "description": "Traduction de popularItems"
+  },
+  "premium": "Premium",
+  "@premium": {
+    "description": "Traduction de premium"
+  },
+  "purchaseSuccess": "Achat réussi : {item}",
+  "@purchaseSuccess": {
+    "description": "Traduction de purchaseSuccess",
+    "placeholders": {
+      "item": {
+        "type": "String"
+      }
+    }
+  },
+  "removeAds": "Supprimer les Publicités",
+  "@removeAds": {
+    "description": "Traduction de removeAds"
+  },
+  "removeAdsDescription": "Supprime toutes les publicités de l'application",
+  "@removeAdsDescription": {
+    "description": "Traduction de removeAdsDescription"
+  },
+  "scoreMultiplier": "Score x{value}",
+  "@scoreMultiplier": {
+    "description": "Traduction de scoreMultiplier",
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "shuffler": "Mélangeur",
+  "@shuffler": {
+    "description": "Traduction de shuffler"
+  },
+  "shufflerDescription": "Mélange les tuiles sur la grille",
+  "@shufflerDescription": {
+    "description": "Traduction de shufflerDescription"
+  },
+  "theme": "Thème",
+  "@theme": {
+    "description": "Traduction de theme"
+  },
+  "themeDescription": "Choisissez entre thème clair et sombre",
+  "@themeDescription": {
+    "description": "Traduction de themeDescription"
+  },
+  "userLevel": "Niveau {level}",
+  "@userLevel": {
+    "description": "Traduction de userLevel",
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "youHaveUsedAllMoves": "Vous avez utilisé tous vos coups",
+  "@youHaveUsedAllMoves": {
+    "description": "Traduction de youHaveUsedAllMoves"
+  },
+  "globalProgress": "Progression globale",
+  "@globalProgress": {
+    "description": "Texte progression globale"
+  },
+  "collectTilesObjective": "Collectez {count} {tileName}s",
+  "@collectTilesObjective": {
+    "description": "Objectif collecter des tuiles",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "tileName": {
+        "type": "String"
+      }
+    }
+  },
+  "clearBlockersObjective": "Détruisez {count} bloqueurs",
+  "@clearBlockersObjective": {
+    "description": "Objectif détruire des bloqueurs",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reachScoreObjective": "Atteignez {count} points",
+  "@reachScoreObjective": {
+    "description": "Objectif atteindre un score",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "freeCreatureObjective": "Libérez {count} créatures",
+  "@freeCreatureObjective": {
+    "description": "Objectif libérer des créatures",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "clearJellyObjective": "Détruisez {count} gelées",
+  "@clearJellyObjective": {
+    "description": "Objectif détruire des gelées",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsBonus": "Bonus Pièces",
+  "@coinsBonus": {
+    "description": "Titre bonus pièces"
+  },
+  "gemsGratuits": "Gemmes Gratuites",
+  "@gemsGratuits": {
+    "description": "Titre gemmes gratuites"
+  },
+  "watchAdForCoins": "Regardez une pub pour obtenir des pièces",
+  "@watchAdForCoins": {
+    "description": "Description regarder pub pour pièces"
+  },
+  "watchAdForGems": "Regardez une pub pour obtenir des gemmes",
+  "@watchAdForGems": {
+    "description": "Description regarder pub pour gemmes"
+  },
+  "watchButton": "REGARDER",
+  "@watchButton": {
+    "description": "Bouton regarder"
+  },
+
+  "howWeUseInformation": "Comment nous utilisons vos informations",
+  "@howWeUseInformation": {
+    "description": "Comment nous utilisons vos informations"
+  },
+
+  "enableDisableMusic": "Activer/désactiver la musique de fond",
+  "@enableDisableMusic": {
+    "description": "Activer/désactiver la musique de fond"
+  },
+
+  "enableDisableSfx": "Activer/désactiver les effets sonores",
+  "@enableDisableSfx": {
+    "description": "Activer/désactiver les effets sonores"
+  },
+
+  "game": "Jeu",
+  "@game": {
+    "description": "Jeu"
+  },
+
+  "enableDisableAnimations": "Activer/désactiver les animations",
+  "@enableDisableAnimations": {
+    "description": "Activer/désactiver les animations"
+  },
+
+  "enableDisableVibrations": "Activer/désactiver les vibrations",
+  "@enableDisableVibrations": {
+    "description": "Activer/désactiver les vibrations"
+  },
+
+  "musicVolume": "Volume de la musique",
+  "@musicVolume": {
+    "description": "Volume de la musique"
+  },
+
+  "effectsVolume": "Volume des effets",
+  "@effectsVolume": {
+    "description": "Volume des effets"
+  },
+
+  "noLevelLoaded": "Aucun niveau chargé",
+  "@noLevelLoaded": {
+    "description": "Aucun niveau chargé"
+  },
+
+  "flutterDeveloper": "Développeur Flutter",
+  "@flutterDeveloper": {
+    "description": "Développeur Flutter"
+  },
+
+  "readOurTermsOfService": "Lire nos conditions d'utilisation",
+  "@readOurTermsOfService": {
+    "description": "Lire nos conditions d'utilisation"
+  },
+
+  "discoverHowWeProtectYourData": "Découvrez comment nous protégeons vos données",
+  "@discoverHowWeProtectYourData": {
+    "description": "Découvrez comment nous protégeons vos données"
+  },
+
+  "movesRemaining": "Coups restants",
+  "@movesRemaining": {
+    "description": "Coups restants"
+  },
+
+  "noMovesPossible": "Aucun coup possible. Utilisez le bouton mélanger !",
+  "@noMovesPossible": {
+    "description": "Aucun coup possible. Utilisez le bouton mélanger !"
+  },
+
+  "startsIn": "Commence dans {days} jours",
+  "@startsIn": {
+    "description": "Commence dans {days} jours"
+  },
+
+  "others": "+{count} autres",
+  "@others": {
+    "description": "+{count} autres"
+  },
+
+  "progress": "Progression",
+  "@progress": {
+    "description": "Progression"
+  },
+
+  "rarePlant": "Plante rare {rarity} étoiles",
+  "@rarePlant": {
+    "description": "Plante rare {rarity} étoiles"
+  },
+
+  "participationInProgress": "Participation à {eventName} en cours...",
+  "@participationInProgress": {
+    "description": "Participation à {eventName} en cours..."
+  },
+
+  "springBloom": "Floraison de Printemps",
+  "@springBloom": {
+    "description": "Floraison de Printemps"
+  },
+
+  "springBloomDescription": "Célébrez le renouveau avec des fleurs magiques",
+  "@springBloomDescription": {
+    "description": "Célébrez le renouveau avec des fleurs magiques"
+  },
+
+  "summerSolstice": "Solstice d'Été",
+  "@summerSolstice": {
+    "description": "Solstice d'Été"
+  },
+
+  "summerSolsticeDescription": "Profitez du soleil avec des plantes ensoleillées",
+  "@summerSolsticeDescription": {
+    "description": "Profitez du soleil avec des plantes ensoleillées"
+  },
+
+  "earnStars": "Gagnez {target} étoiles",
+  "@earnStars": {
+    "description": "Gagnez {target} étoiles"
+  },
+
+  "useBoosters": "Utilisez {target} boosters",
+  "@useBoosters": {
+    "description": "Utilisez {target} boosters"
+  },
+
+  "scorePoints": "Marquez {target} points",
+  "@scorePoints": {
+    "description": "Marquez {target} points"
+  },
+
+  "plantLevel": "Niveau {level}",
+  "@plantLevel": {
+    "description": "Niveau {level}"
+  },
+
+  "unlockCondition": "Condition de déverrouillage",
+  "@unlockCondition": {
+    "description": "Condition de déverrouillage"
+  },
+
+  "extraMoves": "+{value} coups supplémentaires",
+  "@extraMoves": {
+    "description": "+{value} coups supplémentaires"
+  },
+
+  "extraLives": "+{value} vie(s)",
+  "@extraLives": {
+    "description": "+{value} vie(s)"
+  },
+
+  "plantUpgraded": "{plantName} améliorée au niveau {level} !",
+  "@plantUpgraded": {
+    "description": "{plantName} améliorée au niveau {level} !"
+  },
+
+  "progression": "Progression",
+  "@progression": {
+    "description": "Progression"
+  },
+
+  "social": "Social",
+  "@social": {
+    "description": "Social"
+  },
+
+  "reward": "Récompense",
+  "@reward": {
+    "description": "Récompense"
+  },
+
+  "rewardClaimed": "Récompense réclamée",
+  "@rewardClaimed": {
+    "description": "Récompense réclamée"
+  },
+
+  "rewardClaimedMessage": "Récompense pour {achievementTitle} réclamée !",
+  "@rewardClaimedMessage": {
+    "description": "Récompense pour {achievementTitle} réclamée !"
+  },
+
+  "expertInTheMaking": "Expert en Formation",
+  "@expertInTheMaking": {
+    "description": "Expert en Formation"
+  },
+
+  "expertInTheMakingDescription": "Terminez 50 niveaux",
+  "@expertInTheMakingDescription": {
+    "description": "Terminez 50 niveaux"
+  },
+
+  "scorer": "Marqueur",
+  "@scorer": {
+    "description": "Marqueur"
+  },
+
+  "scorerDescription": "Marquez 1 000 points en un niveau",
+  "@scorerDescription": {
+    "description": "Marquez 1 000 points en un niveau"
+  },
+
+  "scoreMaster": "Maître du Score",
+  "@scoreMaster": {
+    "description": "Maître du Score"
+  },
+
+  "scoreMasterDescription": "Marquez 5 000 points en un niveau",
+  "@scoreMasterDescription": {
+    "description": "Marquez 5 000 points en un niveau"
+  },
+
+  "rarityHunter": "Chasseur de Rareté",
+  "@rarityHunter": {
+    "description": "Chasseur de Rareté"
+  },
+
+  "rarityHunterDescription": "Débloquez une plante 4 étoiles ou plus",
+  "@rarityHunterDescription": {
+    "description": "Débloquez une plante 4 étoiles ou plus"
+  },
+
+  "legendaryCombo": "Combo Légendaire",
+  "@legendaryCombo": {
+    "description": "Combo Légendaire"
+  },
+
+  "legendaryComboDescription": "Faites un combo de 10 tuiles",
+  "@legendaryComboDescription": {
+    "description": "Faites un combo de 10 tuiles"
+  },
+
+  "saver": "Économiseur",
+  "@saver": {
+    "description": "Économiseur"
+  },
+
+  "saverDescription": "Terminez un niveau avec plus de 5 coups restants",
+  "@saverDescription": {
+    "description": "Terminez un niveau avec plus de 5 coups restants"
+  },
+
+  "loyal": "Fidèle",
+  "@loyal": {
+    "description": "Fidèle"
+  },
+
+  "loyalDescription": "Connectez-vous 7 jours d'affilée",
+  "@loyalDescription": {
+    "description": "Connectez-vous 7 jours d'affilée"
+  },
+
+  "sharer": "Partageur",
+  "@sharer": {
+    "description": "Partageur"
+  },
+
+  "sharerDescription": "Partagez votre score 3 fois",
+  "@sharerDescription": {
+    "description": "Partagez votre score 3 fois"
+  },
+
+  "detailedStats": "Statistiques Détaillées",
+  "@detailedStats": {
+    "description": "Statistiques Détaillées"
+  },
+
+  "totalCoins": "Pièces Totales",
+  "@totalCoins": {
+    "description": "Pièces Totales"
+  },
+
+  "starsEarned": "Étoiles Gagnées",
+  "@starsEarned": {
+    "description": "Étoiles Gagnées"
+  },
+
+  "highestLevel": "Niveau le Plus Élevé",
+  "@highestLevel": {
+    "description": "Niveau le Plus Élevé"
+  },
+
+  "quickActions": "Actions Rapides",
+  "@quickActions": {
+    "description": "Actions Rapides"
+  },
+
+  "reviewTutorial": "Revoir le Tutoriel",
+  "@reviewTutorial": {
+    "description": "Revoir le Tutoriel"
+  },
+
+  "shareProfile": "Partager le Profil",
+  "@shareProfile": {
+    "description": "Partager le Profil"
+  },
+
+  "recentAchievements": "Réalisations Récentes",
+  "@recentAchievements": {
+    "description": "Réalisations Récentes"
+  },
+
+  "firstLevelCompleted": "Premier niveau terminé",
+  "@firstLevelCompleted": {
+    "description": "Premier niveau terminé"
+  },
+
+  "threeStarsObtained": "3 étoiles obtenues",
+  "@threeStarsObtained": {
+    "description": "3 étoiles obtenues"
+  },
+
+  "streakOfFive": "Série de 5 niveaux",
+  "@streakOfFive": {
+    "description": "Série de 5 niveaux"
+  },
+
+  "today": "Aujourd'hui",
+  "@today": {
+    "description": "Aujourd'hui"
+  },
+
+  "resetDataTitle": "Réinitialiser les données ?",
+  "@resetDataTitle": {
+    "description": "Réinitialiser les données ?"
+  },
+
+  "resetDataMessage": "Cette action supprimera toutes vos données de progression. Cette action est irréversible.",
+  "@resetDataMessage": {
+    "description": "Cette action supprimera toutes vos données de progression. Cette action est irréversible."
+  },
+
+  "shareComingSoon": "Le partage arrive bientôt...",
+  "@shareComingSoon": {
+    "description": "Le partage arrive bientôt..."
+  },
+
+  "responseTime": "Nous nous engageons à répondre à votre demande dans les 30 jours.",
+  "@responseTime": {
+    "description": "Nous nous engageons à répondre à votre demande dans les 30 jours."
+  },
 
   "introduction": "Introduction",
+  "@introduction": {
+    "description": "Introduction"
+  },
 
-  "account": "Compte",
-  "username": "Nom d'utilisateur",
-  "experience": "Expérience",
-  "currentStreak": "Série actuelle",
-  "editUsername": "Modifier le nom d'utilisateur",
-  "enterNewUsername": "Entrez le nouveau nom d'utilisateur",
-  "save": "Enregistrer",
-  "usernameUpdated": "Nom d'utilisateur mis à jour avec succès",
+  "enterNewUsername": "Entrez un nouveau nom d'utilisateur",
+  "@enterNewUsername": {
+    "description": "Entrez un nouveau nom d'utilisateur"
+  },
 
-  "theme": "Thème",
-  "lightTheme": "Clair",
-  "darkTheme": "Sombre",
   "systemTheme": "Système",
-  "themeDescription": "Choisissez votre thème préféré",
+  "@systemTheme": {
+    "description": "Système"
+  },
+
   "shareProfileMessage": "Découvrez mes progrès dans Mind Bloom ! Pouvez-vous battre mon score ?",
+  "@shareProfileMessage": {
+    "description": "Découvrez mes progrès dans Mind Bloom ! Pouvez-vous battre mon score ?"
+  },
+
   "levelsCompleted": "Niveaux Terminés",
-  "watchAdForLife": "Regarder une Pub pour une Vie",
-  "watchAdForLifeDescription": "Regardez une courte vidéo pour gagner une vie et continuer à jouer !",
-  "earnOneLife": "Gagner 1 Vie",
-  "watchAd": "Regarder la Pub",
-  "lifeEarned": "Vie gagnée ! Vous pouvez continuer à jouer.",
-  "noAdAvailable": "Aucune pub disponible pour le moment. Veuillez réessayer plus tard.",
-  "adError": "Erreur lors du chargement de la pub. Veuillez réessayer."
+  "@levelsCompleted": {
+    "description": "Niveaux Terminés"
+  },
+
+  "earnOneLife": "Gagnez 1 Vie",
+  "@earnOneLife": {
+    "description": "Gagnez 1 Vie"
+  },
+  "debugUnlockAllLevels": "Déverrouiller tous les niveaux (DEBUG)",
+  "debugUnlockAllLevelsDescription": "Fonction de test pour déverrouiller tous les niveaux",
+  "shareScore": "Partager le score",
+  "shareScoreTitle": "Partager mon score",
+  "shareScoreMessage": "J'ai obtenu {score} points au niveau {level} dans Mind Bloom ! Peux-tu faire mieux ? 🌱",
+  "shareScoreSuccess": "Score partagé avec succès !",
+  "shareScoreError": "Erreur lors du partage du score",
+  "@shareScoreMessage": {
+    "description": "Message de partage du score",
+    "placeholders": {
+      "score": {
+        "type": "int",
+        "description": "Le score obtenu"
+      },
+      "level": {
+        "type": "int",
+        "description": "Le numéro du niveau"
+      }
+    }
+  }
 }

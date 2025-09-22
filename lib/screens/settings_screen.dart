@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
 import 'package:mind_bloom/providers/user_provider.dart';
@@ -259,6 +260,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 icon: Icons.privacy_tip,
                 onTap: () => _navigateToPrivacy(context),
               ),
+
+              // 🚀 BOUTON DEBUG (à supprimer avant publication)
+              if (kDebugMode)
+                _buildButtonTile(
+                  title: l10n.debugUnlockAllLevels,
+                  subtitle: l10n.debugUnlockAllLevelsDescription,
+                  icon: Icons.developer_mode,
+                  onTap: () => _toggleDebugMode(context),
+                ),
             ],
           ),
         ],
@@ -514,8 +524,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Widget _buildLanguageSelector(LanguageProvider languageProvider) {
-    final l10n = AppLocalizations.of(context)!;
-
     return Column(
       children: languageProvider.getSupportedLanguages().map((language) {
         final isSelected =
@@ -601,6 +609,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Text(l10n.cancel),
           ),
         ],
+      ),
+    );
+  }
+
+  // 🚀 MÉTHODE DEBUG (à supprimer avant publication)
+  void _toggleDebugMode(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    userProvider.toggleDebugMode();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(userProvider.debugModeEnabled
+            ? 'Mode debug activé - Tous les niveaux déverrouillés'
+            : 'Mode debug désactivé'),
+        backgroundColor:
+            userProvider.debugModeEnabled ? Colors.green : Colors.orange,
       ),
     );
   }

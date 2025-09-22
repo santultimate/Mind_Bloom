@@ -24,7 +24,6 @@ class ParticleEffectWidget extends StatefulWidget {
 class _ParticleEffectWidgetState extends State<ParticleEffectWidget>
     with TickerProviderStateMixin {
   late AnimationController _controller;
-  late List<Animation<double>> _particleAnimations;
   late List<Animation<Offset>> _particlePositions;
   late List<Animation<double>> _particleScales;
   late List<Animation<double>> _particleOpacities;
@@ -82,16 +81,6 @@ class _ParticleEffectWidgetState extends State<ParticleEffectWidget>
       duration: duration,
       vsync: this,
     );
-
-    _particleAnimations = List.generate(_particleCount, (index) {
-      return Tween<double>(
-        begin: 0.0,
-        end: 1.0,
-      ).animate(CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeOut,
-      ));
-    });
 
     _particlePositions = List.generate(_particleCount, (index) {
       final angle = (index / _particleCount) * 2 * pi;

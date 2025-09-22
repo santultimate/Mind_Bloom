@@ -1,5 +1,6 @@
 import 'dart:async';
-import 'dart:math';
+import 'dart:math' as math;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../models/tile.dart';
 import '../models/level.dart';
@@ -15,6 +16,15 @@ class GameProvider extends ChangeNotifier {
   int _movesLeft = 0;
   int get movesLeft => _movesLeft;
 
+  // Système de temps pour la durée du niveau (en secondes)
+  // Ce minuteur compte le temps restant pour terminer le niveau
+  int _timeLeft = 0;
+  int get timeLeft => _timeLeft;
+
+  Timer? _gameTimer;
+  bool _isTimeRunning = false;
+  bool get isTimeRunning => _isTimeRunning;
+
   Level? _currentLevel;
   Level? get currentLevel => _currentLevel;
 
@@ -27,9 +37,25 @@ class GameProvider extends ChangeNotifier {
   Tile? _selectedTile;
   Tile? get selectedTile => _selectedTile;
 
+  // Animation de permutation
+  Tile? _swappingTile1;
+  Tile? _swappingTile2;
+  bool _isSwapping = false;
+  Tile? get swappingTile1 => _swappingTile1;
+  Tile? get swappingTile2 => _swappingTile2;
+  bool get isSwapping => _isSwapping;
+
+  // Effet de prévisualisation
+  Tile? _previewTile1;
+  Tile? _previewTile2;
+  bool _showPreview = false;
+  Tile? get previewTile1 => _previewTile1;
+  Tile? get previewTile2 => _previewTile2;
+  bool get showPreview => _showPreview;
+
   int _nextTileId = 0; // ID unique global
 
-  final Random _random = Random();
+  final math.Random _random = math.Random();
 
   // Référence au CollectionProvider pour les bonus
   CollectionProvider? _collectionProvider;
@@ -44,10 +70,66 @@ class GameProvider extends ChangeNotifier {
     _selectedTile = null;
     _nextTileId = 0;
 
+    // Debug pour tous les niveaux
+    if (kDebugMode) {
+      print('=== DEBUG LEVEL ${level.id} GAMEPLAY ===');
+      print('Starting Level ${level.id} with:');
+      print('  Grid Size: ${level.gridSize}');
+      print('  Max Moves: ${level.maxMoves}');
+      print('  Time Left: ${_calculateTimeForLevel(level)}');
+      print('  Objectives: ${level.objectives.length}');
+    }
+
+    // 🚀 TIMER SUPPRIMÉ - Le jeu n'a plus de limite de temps
+    _timeLeft = 0; // Pas de timer de jeu
+
     // Appliquer les bonus des collections
     _applyCollectionBonuses();
 
     _generateGrid(level.gridSize);
+
+    // Debug de la grille générée pour tous les niveaux
+    if (kDebugMode) {
+      print('Level ${level.id} Grid Generated:');
+
+      // Debug de la distribution des tuiles
+      final tileCounts = <TileType, int>{};
+      for (int row = 0; row < _grid.length; row++) {
+        String rowStr = '';
+        for (int col = 0; col < _grid[row].length; col++) {
+          if (_grid[row][col] != null) {
+            final tile = _grid[row][col]!;
+            final type = tile.type;
+            tileCounts[type] = (tileCounts[type] ?? 0) + 1;
+            rowStr += '${type.name[0].toUpperCase()} ';
+          } else {
+            rowStr += 'X ';
+          }
+        }
+        print('  Row $row: $rowStr');
+      }
+
+      // Afficher la distribution des tuiles
+      print('Tile Distribution:');
+      tileCounts.forEach((type, count) {
+        print('  $type: $count');
+      });
+
+      // Vérifier les objectifs
+      print('Objectives Check:');
+      for (final objective in _currentObjectives) {
+        if (objective.type == LevelObjectiveType.collectTiles &&
+            objective.tileType != null) {
+          final available = tileCounts[objective.tileType!] ?? 0;
+          final required = objective.target;
+          final status = available >= required ? '✅' : '❌';
+          print('  $status ${objective.tileType}: $available/$required');
+        }
+      }
+
+      print('==============================');
+    }
+
     notifyListeners();
   }
 
@@ -74,51 +156,130 @@ class GameProvider extends ChangeNotifier {
   }
 
   /// Calcule la distribution optimale des tuiles basée sur les objectifs et la difficulté
+  /// Inspiré de Candy Crush : garantit que les objectifs sont réalisables
   Map<TileType, int> _calculateTileDistribution(int totalTiles) {
     final distribution = <TileType, int>{};
 
-    // Calculer le facteur de difficulté basé sur le niveau
-    final difficultyFactor = _calculateDifficultyFactor();
+    // 🎯 CALCULER LES OBJECTIFS REQUIS
+    final requiredTileTypes = <TileType, int>{};
+    int totalRequiredTiles = 0;
 
-    // Initialiser toutes les tuiles avec une distribution équitable
-    final baseCount = (totalTiles / TileType.values.length).floor();
-    final remainder = totalTiles % TileType.values.length;
-
-    for (int i = 0; i < TileType.values.length; i++) {
-      final tileType = TileType.values[i];
-      distribution[tileType] = baseCount + (i < remainder ? 1 : 0);
-    }
-
-    // Ajuster la distribution en fonction des objectifs et de la difficulté
     for (final objective in _currentObjectives) {
       if (objective.type == LevelObjectiveType.collectTiles &&
           objective.tileType != null) {
-        final requiredTiles = objective.target;
-        final currentCount = distribution[objective.tileType!] ?? 0;
+        final required = objective.target;
+        requiredTileTypes[objective.tileType!] = required;
+        totalRequiredTiles += required;
+      }
+    }
 
-        // Calculer le ratio minimum basé sur la difficulté
-        // Plus le niveau est élevé, moins il y a de tuiles du type requis
-        final baseRatio =
-            3.0 - (difficultyFactor * 0.5); // 3.0 → 2.0 selon la difficulté
-        final minRequired = (requiredTiles * baseRatio)
-            .clamp(requiredTiles + (5 - difficultyFactor * 2).clamp(1, 5),
-                totalTiles ~/ 2)
-            .round();
+    if (totalRequiredTiles == 0) {
+      // Pas d'objectifs de tuiles, distribution équitable
+      final baseCount = totalTiles ~/ TileType.values.length;
+      final remainder = totalTiles % TileType.values.length;
 
-        if (currentCount < minRequired) {
-          // Réduire d'autres types pour augmenter le type requis
-          final needed = minRequired - currentCount;
-          final otherTypes =
-              TileType.values.where((t) => t != objective.tileType).toList();
+      for (int i = 0; i < TileType.values.length; i++) {
+        final tileType = TileType.values[i];
+        distribution[tileType] = baseCount + (i < remainder ? 1 : 0);
+      }
+      return distribution;
+    }
 
-          // Réduire équitablement les autres types
-          for (int i = 0; i < needed && otherTypes.isNotEmpty; i++) {
-            final typeToReduce = otherTypes[i % otherTypes.length];
-            if (distribution[typeToReduce]! > 1) {
-              distribution[typeToReduce] = distribution[typeToReduce]! - 1;
-              distribution[objective.tileType!] =
-                  distribution[objective.tileType!]! + 1;
-            }
+    // 🎯 DISTRIBUTION GARANTIE ET ÉQUITABLE
+    // 1. Garantir que chaque tuile d'objectif soit présente avec marge de sécurité
+    for (final entry in requiredTileTypes.entries) {
+      final tileType = entry.key;
+      final required = entry.value;
+
+      // 🚀 GARANTIR 150% du nombre requis pour assurer la faisabilité
+      // Mais pas plus que 40% du total pour maintenir le défi
+      final maxAllowed = (totalTiles * 0.4).round();
+      final guaranteed = math.min(
+          math.max((required * 1.5).round(), required + 5), maxAllowed);
+      distribution[tileType] = guaranteed;
+    }
+
+    // 2. Calculer l'espace restant pour les tuiles non-objectifs
+    final usedForObjectives =
+        distribution.values.fold(0, (sum, count) => sum + count);
+    final remainingForOthers = totalTiles - usedForObjectives;
+
+    // 3. Vérifier si on a assez d'espace pour les objectifs
+    if (remainingForOthers < 0) {
+      // Si on a trop alloué aux objectifs, s'assurer qu'on a au moins les tuiles requises
+      for (final entry in requiredTileTypes.entries) {
+        final tileType = entry.key;
+        final required = entry.value;
+        // S'assurer qu'on a au minimum le nombre requis + 10% de marge
+        final minimum = (required * 1.1).round();
+        if (distribution[tileType]! < minimum) {
+          distribution[tileType] = minimum;
+        }
+      }
+
+      // Réduire proportionnellement si nécessaire
+      final newUsedForObjectives =
+          distribution.values.fold(0, (sum, count) => sum + count);
+      if (newUsedForObjectives > totalTiles) {
+        final scale = totalTiles / newUsedForObjectives;
+        for (final entry in distribution.entries.toList()) {
+          distribution[entry.key] = (entry.value * scale).round();
+        }
+      }
+
+      // Réajuster le total
+      final finalTotal =
+          distribution.values.fold(0, (sum, count) => sum + count);
+      final difference = totalTiles - finalTotal;
+      if (difference != 0) {
+        final mostCommonType = distribution.entries
+            .reduce((a, b) => a.value > b.value ? a : b)
+            .key;
+        distribution[mostCommonType] =
+            distribution[mostCommonType]! + difference;
+      }
+      return distribution;
+    }
+
+    // 3. Distribuer les 2/3 restants entre les types non-objectifs pour corser le jeu
+    final otherTypes =
+        TileType.values.where((t) => !distribution.containsKey(t)).toList();
+
+    if (otherTypes.isNotEmpty && remainingForOthers > 0) {
+      // Distribution équitable pour les tuiles non-objectifs
+      final baseCount = remainingForOthers ~/ otherTypes.length;
+      final remainder = remainingForOthers % otherTypes.length;
+
+      for (int i = 0; i < otherTypes.length; i++) {
+        final tileType = otherTypes[i];
+        // Variation contrôlée pour maintenir l'équilibre (±1)
+        final variation = _random.nextInt(3) - 1; // -1, 0, ou +1
+        final count = baseCount + (i < remainder ? 1 : 0) + variation;
+        distribution[tileType] =
+            math.max(1, count); // Au moins 1 de chaque type
+      }
+    }
+
+    // 4. Ajustement final pour respecter le total exact
+    final finalTotal = distribution.values.fold(0, (sum, count) => sum + count);
+    if (finalTotal != totalTiles) {
+      final difference = totalTiles - finalTotal;
+      if (difference > 0) {
+        // Ajouter aux types les plus nombreux
+        final sortedEntries = distribution.entries.toList()
+          ..sort((a, b) => b.value.compareTo(a.value));
+        distribution[sortedEntries.first.key] =
+            sortedEntries.first.value + difference;
+      } else if (difference < 0) {
+        // Retirer des types les plus nombreux
+        final sortedEntries = distribution.entries.toList()
+          ..sort((a, b) => b.value.compareTo(a.value));
+        final toRemove = (-difference);
+        for (final entry in sortedEntries) {
+          if (entry.value > 1 && toRemove > 0) {
+            final removeCount = math.min(toRemove, entry.value - 1);
+            distribution[entry.key] = entry.value - removeCount;
+            break;
           }
         }
       }
@@ -333,24 +494,68 @@ class GameProvider extends ChangeNotifier {
 
   /// Sélection / Swap
   void selectTile(Tile tile) {
-    if (_isAnimating) return;
+    if (_isAnimating || _isSwapping) return;
 
     if (_selectedTile == null) {
       _selectedTile = tile;
+      _clearPreview();
     } else {
       if (_areAdjacent(_selectedTile!, tile)) {
-        _swapTiles(_selectedTile!, tile);
-        if (_hasMatches()) {
-          _movesLeft--;
-          _processMatches();
-        } else {
-          // swap invalide → revert
-          _swapTiles(_selectedTile!, tile);
-        }
+        _startSwapAnimation(_selectedTile!, tile);
+      } else {
+        _selectedTile = tile;
+        _clearPreview();
       }
-      _selectedTile = null;
     }
     notifyListeners();
+  }
+
+  /// Démarre l'animation de permutation
+  void _startSwapAnimation(Tile tile1, Tile tile2) {
+    _isSwapping = true;
+    _swappingTile1 = tile1;
+    _swappingTile2 = tile2;
+    _clearPreview();
+    notifyListeners();
+
+    // Effectuer la permutation après un court délai pour l'animation
+    Future.delayed(const Duration(milliseconds: 400), () {
+      _executeSwap(tile1, tile2);
+    });
+  }
+
+  /// Exécute la permutation réelle
+  void _executeSwap(Tile tile1, Tile tile2) {
+    _swapTiles(tile1, tile2);
+
+    if (_hasMatches()) {
+      _movesLeft--;
+      _processMatches();
+    } else {
+      // Swap invalide → revert avec animation
+      Future.delayed(const Duration(milliseconds: 200), () {
+        _swapTiles(tile1, tile2);
+        _isSwapping = false;
+        _swappingTile1 = null;
+        _swappingTile2 = null;
+        _selectedTile = null;
+        notifyListeners();
+      });
+      return;
+    }
+
+    _isSwapping = false;
+    _swappingTile1 = null;
+    _swappingTile2 = null;
+    _selectedTile = null;
+    notifyListeners();
+  }
+
+  /// Efface la prévisualisation
+  void _clearPreview() {
+    _previewTile1 = null;
+    _previewTile2 = null;
+    _showPreview = false;
   }
 
   /// Vérifie si deux tuiles sont adjacentes
@@ -464,7 +669,8 @@ class GameProvider extends ChangeNotifier {
     _isAnimating = true;
 
     int comboCount = 0;
-    const maxCombos = 3; // Limite à 3 combos maximum
+    int totalMatchedTiles = 0;
+    const maxCombos = 5; // Augmenté pour plus de satisfaction
 
     while (comboCount < maxCombos) {
       final matches = _findMatches();
@@ -472,44 +678,144 @@ class GameProvider extends ChangeNotifier {
 
       comboCount++;
 
+      // Calculer les bonus de combo
+      int comboMultiplier = 1;
+      if (comboCount >= 2) comboMultiplier = 2;
+      if (comboCount >= 3) comboMultiplier = 3;
+      if (comboCount >= 4) comboMultiplier = 4;
+      if (comboCount >= 5) comboMultiplier = 5;
+
       // suppression et mise à jour des objectifs
       for (var match in matches) {
+        totalMatchedTiles += match.length;
+
         for (var tile in match) {
           _grid[tile.row][tile.col] = null;
           _updateObjectives(tile.type);
         }
-        // Score avec bonus pour les combos spéciaux
-        int baseScore = match.length * 10;
-        if (match.length >= 5) {
+
+        // Score avec bonus pour les combos spéciaux et les cascades
+        int baseScore = match.length * 15; // Augmenté de 10 à 15
+
+        // Bonus de taille de match
+        if (match.length >= 7) {
+          baseScore *= 5; // Bonus x5 pour 7+ tuiles (nouveau)
+        } else if (match.length >= 6) {
+          baseScore *= 4; // Bonus x4 pour 6 tuiles (nouveau)
+        } else if (match.length >= 5) {
           baseScore *= 3; // Bonus x3 pour 5+ tuiles
         } else if (match.length >= 4) {
           baseScore *= 2; // Bonus x2 pour 4 tuiles
+        }
+
+        // Bonus de combo en cascade
+        baseScore *= comboMultiplier;
+
+        // Bonus spécial pour les gros combos
+        if (totalMatchedTiles >= 20) {
+          baseScore *= 2; // Bonus spectaculaire
         }
 
         // Appliquer les bonus des collections
         baseScore = _applyScoreMultiplier(baseScore);
 
         _score += baseScore;
-      }
-      notifyListeners();
-      await Future.delayed(const Duration(milliseconds: 300));
 
-      // gravité
+        // Mettre à jour les objectifs de score
+        _updateScoreObjectives();
+
+        // Feedback spécial pour les gros matches
+        if (match.length >= 5) {
+          _showSpecialEffect(match);
+        }
+      }
+
+      notifyListeners();
+      await Future.delayed(const Duration(
+          milliseconds: 350)); // Légèrement plus long pour apprécier
+
+      // gravité avec animation plus fluide
       _applyGravity();
       notifyListeners();
-      await Future.delayed(const Duration(milliseconds: 200));
+      await Future.delayed(const Duration(milliseconds: 250));
 
-      // refill
+      // refill avec animation
       _fillEmpty();
       notifyListeners();
-      await Future.delayed(const Duration(milliseconds: 200));
+      await Future.delayed(const Duration(milliseconds: 250));
     }
+
+    // Récompenses bonus pour les gros combos
+    if (comboCount >= 3) {
+      _score += comboCount * 50; // Bonus de combo
+    }
+    if (comboCount >= 5) {
+      _score += 200; // Bonus spectaculaire
+    }
+
+    // Mettre à jour les objectifs de score avec les bonus finaux
+    _updateScoreObjectives();
 
     _isAnimating = false;
     notifyListeners();
 
     // Vérifier si le jeu est terminé
     _checkGameEnd();
+  }
+
+  /// Affiche un effet spécial pour les gros matches
+  void _showSpecialEffect(Set<Tile> match) {
+    // Cette méthode peut être étendue pour des effets visuels
+    if (kDebugMode) {
+      print('SPECIAL EFFECT: ${match.length} tiles matched!');
+    }
+  }
+
+  /// Calcule le temps disponible pour un niveau
+  int _calculateTimeForLevel(Level level) {
+    // 🎯 TEMPS RÉDUIT POUR RENDRE LE JEU PLUS DIFFICILE
+    int baseTime;
+
+    switch (level.difficulty) {
+      case LevelDifficulty.easy:
+        baseTime = 300; // 5 minutes (réduit de 10 à 5)
+        break;
+      case LevelDifficulty.medium:
+        baseTime = 450; // 7.5 minutes (réduit de 15 à 7.5)
+        break;
+      case LevelDifficulty.hard:
+        baseTime = 600; // 10 minutes (réduit de 20 à 10)
+        break;
+      case LevelDifficulty.expert:
+        baseTime = 750; // 12.5 minutes (réduit de 25 à 12.5)
+        break;
+    }
+
+    // 🚀 AJUSTEMENT PROGRESSIF SELON LE NIVEAU ET LES OBJECTIFS
+    final levelId = level.id;
+    final objectiveCount = level.objectives.length;
+
+    // Réduire le temps selon le niveau (difficulté progressive)
+    final levelPenalty = (levelId - 1) * 10; // -10 secondes par niveau
+
+    // Ajouter du temps selon les objectifs mais moins généreusement
+    final objectiveBonus =
+        objectiveCount * 60; // +1 minute par objectif (au lieu de 5)
+
+    final finalTime = baseTime + objectiveBonus - levelPenalty;
+
+    // S'assurer qu'on a au moins 2 minutes
+    return math.max(finalTime, 120);
+  }
+
+  /// 🚀 Timer supprimé - Le jeu n'a plus de limite de temps
+  void _startGameTimer() {
+    // Timer de jeu supprimé - seules les vies ont un timer
+  }
+
+  /// 🚀 Timer supprimé - Le jeu n'a plus de limite de temps
+  void _stopGameTimer() {
+    // Timer de jeu supprimé - seules les vies ont un timer
   }
 
   /// Vérifie si le jeu est terminé et déclenche le callback
@@ -673,13 +979,23 @@ class GameProvider extends ChangeNotifier {
     }
   }
 
+  /// Met à jour les objectifs de score
+  void _updateScoreObjectives() {
+    for (final objective in _currentObjectives) {
+      if (objective.type == LevelObjectiveType.reachScore) {
+        objective.current = _score;
+      }
+    }
+  }
+
   /// Vérifie si le niveau est complété
   bool isLevelCompleted() {
     return _currentObjectives.every((objective) => objective.isCompleted);
   }
 
-  /// Vérifie si le jeu est terminé (plus de mouvements ou niveau complété)
+  /// Vérifie si le jeu est terminé (plus de mouvements, temps écoulé ou niveau complété)
   bool isGameOver() {
+    // 🚀 TIMER SUPPRIMÉ - Seuls les mouvements comptent
     return _movesLeft <= 0 || isLevelCompleted();
   }
 
@@ -744,18 +1060,10 @@ class GameProvider extends ChangeNotifier {
   /// Callback pour la fin de jeu
   Function(bool won, int stars, int score, int movesUsed)? _gameEndCallback;
 
-  /// Audio provider pour les sons
-  dynamic _audioProvider;
-
   /// Définit le callback de fin de jeu
   void setGameEndCallback(
       Function(bool won, int stars, int score, int movesUsed) callback) {
     _gameEndCallback = callback;
-  }
-
-  /// Définit l'audio provider
-  void setAudioProvider(dynamic audioProvider) {
-    _audioProvider = audioProvider;
   }
 
   /// Mélange la grille

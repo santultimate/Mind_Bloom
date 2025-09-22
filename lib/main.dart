@@ -10,6 +10,8 @@ import 'package:mind_bloom/providers/ad_provider.dart';
 import 'package:mind_bloom/providers/collection_provider.dart';
 import 'package:mind_bloom/providers/language_provider.dart';
 import 'package:mind_bloom/providers/theme_provider.dart';
+import 'package:mind_bloom/providers/daily_rewards_provider.dart';
+import 'package:mind_bloom/providers/quest_provider.dart';
 import 'package:mind_bloom/screens/splash_screen.dart';
 import 'package:mind_bloom/constants/app_theme.dart';
 import 'package:mind_bloom/generated/l10n/app_localizations.dart';
@@ -44,6 +46,8 @@ class MindBloomApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CollectionProvider()),
         ChangeNotifierProvider(create: (_) => LanguageProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => DailyRewardsProvider()),
+        ChangeNotifierProvider(create: (_) => QuestProvider()),
       ],
       child: Consumer2<LanguageProvider, ThemeProvider>(
         builder: (context, languageProvider, themeProvider, child) {

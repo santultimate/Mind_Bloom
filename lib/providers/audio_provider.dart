@@ -71,9 +71,10 @@ class AudioProvider extends ChangeNotifier {
       _currentMusic = assetPath;
       notifyListeners();
     } catch (e) {
-      debugPrint(
-          'Erreur lors de la lecture de la musique: Unable to load asset: "$assetPath".');
-      // Ne pas afficher l'erreur en production pour éviter le spam
+      // Gestion d'erreur silencieuse pour éviter le spam dans les logs
+      if (kDebugMode) {
+        debugPrint('Erreur audio (ignorée): $e');
+      }
     }
   }
 
@@ -163,13 +164,20 @@ class AudioProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Effets sonores spécifiques au jeu
+  // Effets sonores spécifiques au jeu avec variations
   Future<void> playTileSwap() async {
     await playSfx('audio/sfx/tile_swap.wav');
   }
 
-  Future<void> playTileMatch() async {
-    await playSfx('audio/sfx/tile_match.wav');
+  Future<void> playTileMatch({int matchSize = 3}) async {
+    // Jouer des sons différents selon la taille du match
+    if (matchSize >= 5) {
+      await playSfx('audio/sfx/special_match.wav');
+    } else if (matchSize >= 4) {
+      await playSfx('audio/sfx/tile_match.wav');
+    } else {
+      await playSfx('audio/sfx/tile_match.wav');
+    }
   }
 
   Future<void> playSpecialMatch() async {
@@ -188,17 +196,43 @@ class AudioProvider extends ChangeNotifier {
     await playSfx('audio/sfx/button_click.wav');
   }
 
-  Future<void> playCoinCollect() async {
-    await playSfx('audio/sfx/coin_collect.wav');
+  Future<void> playCoinCollect({int amount = 1}) async {
+    // Son différent selon le montant de pièces collectées
+    if (amount >= 100) {
+      await playSfx('audio/sfx/coin_collect.wav');
+      // Jouer un deuxième son pour les gros montants
+      Future.delayed(const Duration(milliseconds: 200), () {
+        playSfx('audio/sfx/coin_collect.wav');
+      });
+    } else {
+      await playSfx('audio/sfx/coin_collect.wav');
+    }
   }
 
-  // Nouveaux effets sonores
-  Future<void> playCombo() async {
-    await playSfx('audio/sfx/combo.mp3');
+  // Nouveaux effets sonores améliorés
+  Future<void> playCombo({int comboCount = 1}) async {
+    // Sons différents selon le niveau de combo
+    if (comboCount >= 5) {
+      await playSfx('audio/sfx/combo.mp3');
+      // Son supplémentaire pour les méga combos
+      Future.delayed(const Duration(milliseconds: 300), () {
+        playSfx('audio/sfx/special_match.wav');
+      });
+    } else if (comboCount >= 3) {
+      await playSfx('audio/sfx/combo.mp3');
+    } else {
+      await playSfx('audio/sfx/tile_match.wav');
+    }
   }
 
-  Future<void> playStarEarned() async {
-    await playSfx('audio/sfx/star_earned.wav');
+  Future<void> playStarEarned({int stars = 1}) async {
+    // Séquence d'étoiles selon le nombre
+    for (int i = 0; i < stars; i++) {
+      if (i > 0) {
+        await Future.delayed(const Duration(milliseconds: 400));
+      }
+      await playSfx('audio/sfx/star_earned.wav');
+    }
   }
 
   Future<void> playObjectiveComplete() async {
@@ -213,12 +247,59 @@ class AudioProvider extends ChangeNotifier {
     await playSfx('audio/sfx/hint.wav');
   }
 
-  Future<void> playScore() async {
-    await playSfx('audio/sfx/star_earned.wav');
+  Future<void> playScore({int scoreGain = 0}) async {
+    // Son différent selon le gain de score
+    if (scoreGain >= 1000) {
+      await playSfx('audio/sfx/special_match.wav');
+    } else if (scoreGain >= 500) {
+      await playSfx('audio/sfx/star_earned.wav');
+    } else {
+      await playSfx('audio/sfx/tile_match.wav');
+    }
   }
 
   Future<void> playGameOver() async {
     await playSfx('audio/sfx/level_fail.wav');
+  }
+
+  // Nouveaux effets sonores pour l'engagement
+  Future<void> playLevelUp() async {
+    await playSfx('audio/sfx/star_earned.wav');
+    Future.delayed(const Duration(milliseconds: 300), () {
+      playSfx('audio/sfx/level_complete.wav');
+    });
+  }
+
+  Future<void> playPlantUnlock() async {
+    await playSfx('audio/sfx/objective_complete.wav');
+    Future.delayed(const Duration(milliseconds: 200), () {
+      playSfx('audio/sfx/star_earned.wav');
+    });
+  }
+
+  Future<void> playMilestone() async {
+    // Son spécial pour les niveaux milestone (5, 10, 15, etc.)
+    await playSfx('audio/sfx/level_complete.wav');
+    Future.delayed(const Duration(milliseconds: 500), () {
+      playSfx('audio/sfx/special_match.wav');
+    });
+  }
+
+  Future<void> playStreakBonus({int streak = 1}) async {
+    // Son de bonus de série
+    if (streak >= 10) {
+      await playSfx('audio/sfx/special_match.wav');
+      Future.delayed(const Duration(milliseconds: 400), () {
+        playSfx('audio/sfx/level_complete.wav');
+      });
+    } else if (streak >= 5) {
+      await playSfx('audio/sfx/star_earned.wav');
+      Future.delayed(const Duration(milliseconds: 300), () {
+        playSfx('audio/sfx/objective_complete.wav');
+      });
+    } else {
+      await playSfx('audio/sfx/coin_collect.wav');
+    }
   }
 
   // Musiques spécifiques

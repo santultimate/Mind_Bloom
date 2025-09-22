@@ -2653,5 +2653,249 @@
   "adError": "Error loading ad. Please try again.",
   "@adError": {
     "description": "Message when ad fails to load"
+  },
+
+  "timeRemaining": "Time",
+  "@timeRemaining": {
+    "description": "Time remaining label"
+  },
+
+  "nextLife": "Next life",
+  "@nextLife": {
+    "description": "Next life regeneration label"
+  },
+
+  "freeLife": "Free Life",
+  "@freeLife": {
+    "description": "Free life button text"
+  },
+
+  "watchAdForFreeLife": "Watch an ad to get a free life!",
+  "@watchAdForFreeLife": {
+    "description": "Watch ad for free life message"
+  },
+
+  "adInProgress": "Ad in progress...",
+  "@adInProgress": {
+    "description": "Ad in progress message"
+  },
+
+  "lifeEarned": "Life earned! You can continue playing.",
+  "@lifeEarned": {
+    "description": "Life earned success message"
+  },
+
+  "dailyRewards": "Daily Rewards",
+  "@dailyRewards": {
+    "description": "Daily rewards screen title"
+  },
+
+  "currentStreak": "Current Streak",
+  "@currentStreak": {
+    "description": "Current streak title"
+  },
+
+  "claimReward": "Claim!",
+  "@claimReward": {
+    "description": "Claim reward button"
+  },
+
+  "rewardAlreadyClaimed": "Reward already claimed",
+  "@rewardAlreadyClaimed": {
+    "description": "Reward already claimed message"
+  },
+
+  "nextRewardIn": "Next reward in:",
+  "@nextRewardIn": {
+    "description": "Next reward in text"
+  },
+
+  "howItWorks": "How it works?",
+  "@howItWorks": {
+    "description": "How it works title"
+  },
+
+  "dailyRewardInfo1": "Log in every day to claim your reward",
+  "@dailyRewardInfo1": {
+    "description": "Daily reward info 1"
+  },
+
+  "dailyRewardInfo2": "The longer your streak, the better the rewards",
+  "@dailyRewardInfo2": {
+    "description": "Daily reward info 2"
+  },
+
+  "dailyRewardInfo3": "The 7th day offers a legendary reward",
+  "@dailyRewardInfo3": {
+    "description": "Daily reward info 3"
+  },
+
+  "dailyRewardInfo4": "Rewards reset at midnight",
+  "@dailyRewardInfo4": {
+    "description": "Daily reward info 4"
+  },
+
+  "rewardOfDay": "Day {day} Reward",
+  "@rewardOfDay": {
+    "description": "Day reward title",
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+
+  "legendaryStreak": "Legendary Streak!",
+  "@legendaryStreak": {
+    "description": "Legendary streak text"
+  },
+
+  "perfectPerformance": "Perfect Performance! Bonus x2",
+  "@perfectPerformance": {
+    "description": "Perfect performance text"
+  },
+
+  "milestoneLevel": "Milestone Level! Special bonus",
+  "@milestoneLevel": {
+    "description": "Milestone level text"
+  },
+
+  "rewardsClaimed": "Rewards Obtained",
+  "@rewardsClaimed": {
+    "description": "Rewards obtained title"
+  },
+
+  "experience": "Experience",
+  "@experience": {
+    "description": "Experience text"
+  },
+
+  "comboBonus": "Combo Bonus x{multiplier}",
+  "@comboBonus": {
+    "description": "Combo bonus text",
+    "placeholders": {
+      "multiplier": {
+        "type": "int"
+      }
+    }
+  },
+
+  "spectacularCombo": "Spectacular Combo!",
+  "@spectacularCombo": {
+    "description": "Spectacular combo text"
+  },
+
+  "megaMatch": "Mega Match of {count} tiles!",
+  "@megaMatch": {
+    "description": "Mega match text",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "globalProgress": "Global Progress",
+  "@globalProgress": {
+    "description": "Global progress text"
+  },
+
+  "collectTilesObjective": "Collect {count} {tileName}s",
+  "@collectTilesObjective": {
+    "description": "Collect tiles objective",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "tileName": {
+        "type": "String"
+      }
+    }
+  },
+
+  "clearBlockersObjective": "Destroy {count} blockers",
+  "@clearBlockersObjective": {
+    "description": "Clear blockers objective",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "reachScoreObjective": "Reach {count} points",
+  "@reachScoreObjective": {
+    "description": "Reach score objective",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "freeCreatureObjective": "Free {count} creatures",
+  "@freeCreatureObjective": {
+    "description": "Free creature objective",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "clearJellyObjective": "Destroy {count} jellies",
+  "@clearJellyObjective": {
+    "description": "Clear jelly objective",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "coinsBonus": "Coins Bonus",
+  "@coinsBonus": {
+    "description": "Coins bonus title"
+  },
+
+  "gemsGratuits": "Free Gems",
+  "@gemsGratuits": {
+    "description": "Free gems title"
+  },
+
+  "watchAdForCoins": "Watch an ad to get coins",
+  "@watchAdForCoins": {
+    "description": "Watch ad for coins description"
+  },
+
+  "watchAdForGems": "Watch an ad to get gems",
+  "@watchAdForGems": {
+    "description": "Watch ad for gems description"
+  },
+
+  "watchButton": "WATCH",
+  "@watchButton": {
+    "description": "Watch button"
+  },
+
+  "debugUnlockAllLevels": "Unlock All Levels (DEBUG)",
+  "debugUnlockAllLevelsDescription": "Test function to unlock all levels",
+  "shareScore": "Share Score",
+  "shareScoreTitle": "Share My Score",
+  "shareScoreMessage": "I got {score} points on level {level} in Mind Bloom! Can you do better? 🌱",
+  "shareScoreSuccess": "Score shared successfully!",
+  "shareScoreError": "Error sharing score",
+  "@shareScoreMessage": {
+    "description": "Score sharing message",
+    "placeholders": {
+      "score": {
+        "type": "int",
+        "description": "The score achieved"
+      },
+      "level": {
+        "type": "int",
+        "description": "The level number"
+      }
+    }
   }
 }

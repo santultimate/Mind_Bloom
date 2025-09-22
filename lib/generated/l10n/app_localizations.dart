@@ -356,7 +356,7 @@ abstract class AppLocalizations {
   /// **'What would you like to do?'**
   String get whatWouldYouLikeToDo;
 
-  /// Free life text
+  /// Free life button text
   ///
   /// In en, this message translates to:
   /// **'Free Life'**
@@ -542,7 +542,7 @@ abstract class AppLocalizations {
   /// **'Edit Username'**
   String get editUsername;
 
-  /// Current streak label
+  /// Current streak title
   ///
   /// In en, this message translates to:
   /// **'Current Streak'**
@@ -1394,7 +1394,7 @@ abstract class AppLocalizations {
   /// **'Effects volume'**
   String get effectsVolume;
 
-  /// Experience label
+  /// Experience text
   ///
   /// In en, this message translates to:
   /// **'Experience'**
@@ -2402,7 +2402,7 @@ abstract class AppLocalizations {
   /// **'Earn 1 Life'**
   String get earnOneLife;
 
-  /// Message when life is earned
+  /// Life earned success message
   ///
   /// In en, this message translates to:
   /// **'Life earned! You can continue playing.'**
@@ -2419,6 +2419,234 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error loading ad. Please try again.'**
   String get adError;
+
+  /// Time remaining label
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get timeRemaining;
+
+  /// Next life regeneration label
+  ///
+  /// In en, this message translates to:
+  /// **'Next life'**
+  String get nextLife;
+
+  /// Watch ad for free life message
+  ///
+  /// In en, this message translates to:
+  /// **'Watch an ad to get a free life!'**
+  String get watchAdForFreeLife;
+
+  /// Daily rewards screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Rewards'**
+  String get dailyRewards;
+
+  /// Claim reward button
+  ///
+  /// In en, this message translates to:
+  /// **'Claim!'**
+  String get claimReward;
+
+  /// Reward already claimed message
+  ///
+  /// In en, this message translates to:
+  /// **'Reward already claimed'**
+  String get rewardAlreadyClaimed;
+
+  /// Next reward in text
+  ///
+  /// In en, this message translates to:
+  /// **'Next reward in:'**
+  String get nextRewardIn;
+
+  /// How it works title
+  ///
+  /// In en, this message translates to:
+  /// **'How it works?'**
+  String get howItWorks;
+
+  /// Daily reward info 1
+  ///
+  /// In en, this message translates to:
+  /// **'Log in every day to claim your reward'**
+  String get dailyRewardInfo1;
+
+  /// Daily reward info 2
+  ///
+  /// In en, this message translates to:
+  /// **'The longer your streak, the better the rewards'**
+  String get dailyRewardInfo2;
+
+  /// Daily reward info 3
+  ///
+  /// In en, this message translates to:
+  /// **'The 7th day offers a legendary reward'**
+  String get dailyRewardInfo3;
+
+  /// Daily reward info 4
+  ///
+  /// In en, this message translates to:
+  /// **'Rewards reset at midnight'**
+  String get dailyRewardInfo4;
+
+  /// Day reward title
+  ///
+  /// In en, this message translates to:
+  /// **'Day {day} Reward'**
+  String rewardOfDay(int day);
+
+  /// Legendary streak text
+  ///
+  /// In en, this message translates to:
+  /// **'Legendary Streak!'**
+  String get legendaryStreak;
+
+  /// Perfect performance text
+  ///
+  /// In en, this message translates to:
+  /// **'Perfect Performance! Bonus x2'**
+  String get perfectPerformance;
+
+  /// Milestone level text
+  ///
+  /// In en, this message translates to:
+  /// **'Milestone Level! Special bonus'**
+  String get milestoneLevel;
+
+  /// Rewards obtained title
+  ///
+  /// In en, this message translates to:
+  /// **'Rewards Obtained'**
+  String get rewardsClaimed;
+
+  /// Combo bonus text
+  ///
+  /// In en, this message translates to:
+  /// **'Combo Bonus x{multiplier}'**
+  String comboBonus(int multiplier);
+
+  /// Spectacular combo text
+  ///
+  /// In en, this message translates to:
+  /// **'Spectacular Combo!'**
+  String get spectacularCombo;
+
+  /// Mega match text
+  ///
+  /// In en, this message translates to:
+  /// **'Mega Match of {count} tiles!'**
+  String megaMatch(int count);
+
+  /// Global progress text
+  ///
+  /// In en, this message translates to:
+  /// **'Global Progress'**
+  String get globalProgress;
+
+  /// Collect tiles objective
+  ///
+  /// In en, this message translates to:
+  /// **'Collect {count} {tileName}s'**
+  String collectTilesObjective(int count, String tileName);
+
+  /// Clear blockers objective
+  ///
+  /// In en, this message translates to:
+  /// **'Destroy {count} blockers'**
+  String clearBlockersObjective(int count);
+
+  /// Reach score objective
+  ///
+  /// In en, this message translates to:
+  /// **'Reach {count} points'**
+  String reachScoreObjective(int count);
+
+  /// Free creature objective
+  ///
+  /// In en, this message translates to:
+  /// **'Free {count} creatures'**
+  String freeCreatureObjective(int count);
+
+  /// Clear jelly objective
+  ///
+  /// In en, this message translates to:
+  /// **'Destroy {count} jellies'**
+  String clearJellyObjective(int count);
+
+  /// Coins bonus title
+  ///
+  /// In en, this message translates to:
+  /// **'Coins Bonus'**
+  String get coinsBonus;
+
+  /// Free gems title
+  ///
+  /// In en, this message translates to:
+  /// **'Free Gems'**
+  String get gemsGratuits;
+
+  /// Watch ad for coins description
+  ///
+  /// In en, this message translates to:
+  /// **'Watch an ad to get coins'**
+  String get watchAdForCoins;
+
+  /// Watch ad for gems description
+  ///
+  /// In en, this message translates to:
+  /// **'Watch an ad to get gems'**
+  String get watchAdForGems;
+
+  /// Watch button
+  ///
+  /// In en, this message translates to:
+  /// **'WATCH'**
+  String get watchButton;
+
+  /// No description provided for @debugUnlockAllLevels.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock All Levels (DEBUG)'**
+  String get debugUnlockAllLevels;
+
+  /// No description provided for @debugUnlockAllLevelsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Test function to unlock all levels'**
+  String get debugUnlockAllLevelsDescription;
+
+  /// No description provided for @shareScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Score'**
+  String get shareScore;
+
+  /// No description provided for @shareScoreTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share My Score'**
+  String get shareScoreTitle;
+
+  /// Score sharing message
+  ///
+  /// In en, this message translates to:
+  /// **'I got {score} points on level {level} in Mind Bloom! Can you do better? 🌱'**
+  String shareScoreMessage(int score, int level);
+
+  /// No description provided for @shareScoreSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Score shared successfully!'**
+  String get shareScoreSuccess;
+
+  /// No description provided for @shareScoreError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error sharing score'**
+  String get shareScoreError;
 }
 
 class _AppLocalizationsDelegate

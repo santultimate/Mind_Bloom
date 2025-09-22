@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,6 +16,10 @@ class AdProvider extends ChangeNotifier {
   int _adFreePurchased = 0; // 0 = pas acheté, 1 = acheté
   int _interstitialCounter = 0;
   int _lastAdShownLevel = 0;
+  int _rewardedAdsWatched = 0;
+  int _totalAdsWatched = 0;
+  int _consecutiveRewardedAds = 0;
+  DateTime? _lastRewardedAdTime;
 
   // Constructeur avec initialisation automatique
   AdProvider() {
@@ -27,13 +31,26 @@ class AdProvider extends ChangeNotifier {
   bool get adsEnabled => _adsEnabled; // ✅ Réactiver les publicités
   int get interstitialCounter => _interstitialCounter;
   int get lastAdShownLevel => _lastAdShownLevel;
+  int get rewardedAdsWatched => _rewardedAdsWatched;
+  int get totalAdsWatched => _totalAdsWatched;
+  int get consecutiveRewardedAds => _consecutiveRewardedAds;
 
   // Initialisation
   Future<void> initialize() async {
     if (_isInitialized) return;
 
     try {
-      // ✅ Réactiver AdMob avec la configuration correcte
+      // ✅ Désactiver AdMob sur le web pour éviter les erreurs Platform
+      if (kIsWeb) {
+        _adsEnabled = false;
+        _isInitialized = true;
+        if (kDebugMode) {
+          print('🚀 AdProvider initialized successfully (ads disabled on web)');
+        }
+        return;
+      }
+
+      // ✅ Réactiver AdMob avec la configuration correcte pour mobile
       _adsEnabled = true;
       await _loadUserPreferences();
       _isInitialized = true;
@@ -59,6 +76,14 @@ class AdProvider extends ChangeNotifier {
     _adFreePurchased = prefs.getInt('ad_free_purchased') ?? 0;
     _interstitialCounter = prefs.getInt('interstitial_counter') ?? 0;
     _lastAdShownLevel = prefs.getInt('last_ad_shown_level') ?? 0;
+    _rewardedAdsWatched = prefs.getInt('rewarded_ads_watched') ?? 0;
+    _totalAdsWatched = prefs.getInt('total_ads_watched') ?? 0;
+    _consecutiveRewardedAds = prefs.getInt('consecutive_rewarded_ads') ?? 0;
+
+    final lastRewardedAdTimeString = prefs.getString('last_rewarded_ad_time');
+    if (lastRewardedAdTimeString != null) {
+      _lastRewardedAdTime = DateTime.parse(lastRewardedAdTimeString);
+    }
   }
 
   // Sauvegarder les préférences utilisateur
@@ -68,6 +93,14 @@ class AdProvider extends ChangeNotifier {
     await prefs.setInt('ad_free_purchased', _adFreePurchased);
     await prefs.setInt('interstitial_counter', _interstitialCounter);
     await prefs.setInt('last_ad_shown_level', _lastAdShownLevel);
+    await prefs.setInt('rewarded_ads_watched', _rewardedAdsWatched);
+    await prefs.setInt('total_ads_watched', _totalAdsWatched);
+    await prefs.setInt('consecutive_rewarded_ads', _consecutiveRewardedAds);
+
+    if (_lastRewardedAdTime != null) {
+      await prefs.setString(
+          'last_rewarded_ad_time', _lastRewardedAdTime!.toIso8601String());
+    }
   }
 
   // Créer une bannière publicitaire
@@ -321,6 +354,87 @@ class AdProvider extends ChangeNotifier {
       'adFreePurchased': _adFreePurchased == 1,
       'interstitialCounter': _interstitialCounter,
       'lastAdShownLevel': _lastAdShownLevel,
+      'rewardedAdsWatched': _rewardedAdsWatched,
+      'totalAdsWatched': _totalAdsWatched,
+      'consecutiveRewardedAds': _consecutiveRewardedAds,
     };
+  }
+
+  // Système de récompenses progressives pour les publicités
+  Map<String, dynamic> getRewardedAdBonus() {
+    // Bonus basé sur le nombre de publicités regardées consécutivement
+    int bonusMultiplier = 1;
+    String bonusType = 'standard';
+
+    if (_consecutiveRewardedAds >= 10) {
+      bonusMultiplier = 5;
+      bonusType = 'legendary';
+    } else if (_consecutiveRewardedAds >= 5) {
+      bonusMultiplier = 3;
+      bonusType = 'epic';
+    } else if (_consecutiveRewardedAds >= 3) {
+      bonusMultiplier = 2;
+      bonusType = 'rare';
+    }
+
+    return {
+      'multiplier': bonusMultiplier,
+      'type': bonusType,
+      'consecutiveCount': _consecutiveRewardedAds,
+    };
+  }
+
+  // Marquer qu'une publicité récompensée a été regardée
+  Future<void> markRewardedAdWatched() async {
+    _rewardedAdsWatched++;
+    _totalAdsWatched++;
+    _consecutiveRewardedAds++;
+    _lastRewardedAdTime = DateTime.now();
+
+    await _saveUserPreferences();
+    notifyListeners();
+  }
+
+  // Réinitialiser la série de publicités récompensées (si le joueur n'en regarde pas pendant 24h)
+  void checkRewardedAdStreak() {
+    if (_lastRewardedAdTime != null) {
+      final timeSinceLastAd = DateTime.now().difference(_lastRewardedAdTime!);
+      if (timeSinceLastAd.inHours >= 24) {
+        _consecutiveRewardedAds = 0;
+        _saveUserPreferences();
+      }
+    }
+  }
+
+  // Vérifier si le joueur mérite une récompense bonus
+  bool shouldOfferBonusReward() {
+    // Offrir des récompenses bonus après certains milestones
+    return _rewardedAdsWatched > 0 && _rewardedAdsWatched % 5 == 0;
+  }
+
+  // Calculer la récompense optimale pour encourager l'engagement
+  Map<String, int> calculateOptimalReward(String rewardType) {
+    final bonus = getRewardedAdBonus();
+    final multiplier = bonus['multiplier'] as int;
+
+    switch (rewardType) {
+      case 'life':
+        return {
+          'lives': 1 * multiplier,
+          'bonus_coins': multiplier > 1 ? 20 * (multiplier - 1) : 0,
+        };
+      case 'coins':
+        return {
+          'coins': 50 * multiplier,
+          'bonus_gems': multiplier >= 3 ? 1 : 0,
+        };
+      case 'gems':
+        return {
+          'gems': 2 * multiplier,
+          'bonus_coins': 25 * multiplier,
+        };
+      default:
+        return {'coins': 25};
+    }
   }
 }

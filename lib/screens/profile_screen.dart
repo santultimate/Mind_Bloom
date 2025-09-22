@@ -525,6 +525,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   double _getExperienceProgress(UserProvider userProvider) {
     // Calculer la progression vers le niveau suivant
     final experienceForNextLevel = userProvider.level * 100;
+    if (experienceForNextLevel == 0) return 0.0; // Éviter la division par zéro
     return (userProvider.experience % experienceForNextLevel) /
         experienceForNextLevel;
   }
