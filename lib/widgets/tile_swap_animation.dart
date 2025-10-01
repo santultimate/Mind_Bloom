@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mind_bloom/models/tile.dart';
-import 'package:mind_bloom/utils/app_colors.dart';
+import 'package:mind_bloom/constants/app_colors.dart';
 
 class TileSwapAnimation extends StatefulWidget {
   final Tile tile1;
@@ -117,12 +117,16 @@ class _TileSwapAnimationState extends State<TileSwapAnimation>
 
     // Démarrer les animations avec séquence
     _glowController.forward().then((_) {
-      _glowController.reverse();
+      if (mounted) {
+        _glowController.reverse();
+      }
     });
 
     // Délai avant de commencer l'animation principale pour la rendre plus visible
     Future.delayed(const Duration(milliseconds: 100), () {
-      _swapController.forward();
+      if (mounted) {
+        _swapController.forward();
+      }
     });
   }
 
@@ -269,21 +273,21 @@ class _TileSwapAnimationState extends State<TileSwapAnimation>
   Color _getTileColor(TileType type) {
     switch (type) {
       case TileType.flower:
-        return Colors.pink;
+        return const Color(0xFFFF6FA3);
       case TileType.leaf:
-        return Colors.green;
+        return const Color(0xFF48BB78);
       case TileType.crystal:
-        return Colors.blue;
+        return const Color(0xFF4299E1);
       case TileType.seed:
-        return Colors.brown;
+        return const Color(0xFF8B4513);
       case TileType.dew:
-        return Colors.cyan;
+        return const Color(0xFF00CED1);
       case TileType.sun:
-        return Colors.orange;
+        return const Color(0xFFFFD700);
       case TileType.moon:
-        return Colors.purple;
+        return const Color(0xFF9370DB);
       case TileType.gem:
-        return Colors.teal;
+        return const Color(0xFF6CC6B6);
     }
   }
 }
@@ -339,7 +343,7 @@ class _TileSelectionEffectState extends State<TileSelectionEffect>
       curve: Curves.easeInOut,
     ));
 
-    if (widget.isSelected) {
+    if (widget.isSelected && mounted) {
       _selectionController.repeat(reverse: true);
     }
   }
@@ -347,10 +351,10 @@ class _TileSelectionEffectState extends State<TileSelectionEffect>
   @override
   void didUpdateWidget(TileSelectionEffect oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.isSelected && !oldWidget.isSelected) {
+    if (widget.isSelected && !oldWidget.isSelected && mounted) {
       _selectionController.repeat(reverse: true);
       HapticFeedback.selectionClick();
-    } else if (!widget.isSelected && oldWidget.isSelected) {
+    } else if (!widget.isSelected && oldWidget.isSelected && mounted) {
       _selectionController.stop();
       _selectionController.reset();
     }
@@ -458,7 +462,7 @@ class _SwapPreviewEffectState extends State<SwapPreviewEffect>
       curve: Curves.easeInOut,
     ));
 
-    if (widget.showPreview) {
+    if (widget.showPreview && mounted) {
       _previewController.repeat(reverse: true);
     }
   }
@@ -466,9 +470,9 @@ class _SwapPreviewEffectState extends State<SwapPreviewEffect>
   @override
   void didUpdateWidget(SwapPreviewEffect oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.showPreview && !oldWidget.showPreview) {
+    if (widget.showPreview && !oldWidget.showPreview && mounted) {
       _previewController.repeat(reverse: true);
-    } else if (!widget.showPreview && oldWidget.showPreview) {
+    } else if (!widget.showPreview && oldWidget.showPreview && mounted) {
       _previewController.stop();
       _previewController.reset();
     }

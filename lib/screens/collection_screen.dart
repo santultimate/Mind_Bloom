@@ -589,8 +589,8 @@ class _CollectionScreenState extends State<CollectionScreen> {
       case BonusType.extraMoves:
         return AppLocalizations.of(context)!.extraMoves(bonus.value.toInt());
       case BonusType.scoreMultiplier:
-        return AppLocalizations.of(context)!
-            .scoreMultiplier(bonus.value.toInt());
+        return AppLocalizations.of(context)!.scoreMultiplier +
+            ' x${bonus.value.toInt()}';
       case BonusType.coinMultiplier:
         return AppLocalizations.of(context)!
             .coinMultiplier(bonus.value.toInt());

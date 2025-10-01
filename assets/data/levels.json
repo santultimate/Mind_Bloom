@@ -4253,7 +4253,7 @@
         {
           "type": "collectTiles",
           "tileType": "gem",
-          "target": 45
+          "target": 25
         }
       ],
       "initialGrid": [

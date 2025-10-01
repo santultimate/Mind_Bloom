@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
@@ -84,15 +85,24 @@ class PrivacyPolicyScreen extends StatelessWidget {
             // Section 1
             _buildSection(
               title: '1. ${l10n.informationWeCollect}',
-              content:
-                  '${l10n.weCollectFollowing}\n\n• **${l10n.gameData}** : ${l10n.gameDataDescription}\n• **${l10n.technicalData}** : ${l10n.technicalDataDescription}\n• **${l10n.usageData}** : ${l10n.usageDataDescription}',
+              content: '''${l10n.weCollectFollowing}
+
+• **${l10n.gameData}** : ${l10n.gameDataDescription}
+• **${l10n.technicalData}** : ${l10n.technicalDataDescription}
+• **${l10n.usageData}** : ${l10n.usageDataDescription}''',
             ),
 
             // Section 2
             _buildSection(
               title: '2. ${l10n.howWeUseInformation}',
-              content:
-                  '${l10n.weUseInformationFor}\n\n• ${l10n.provideService}\n• ${l10n.personalizeExperience}\n• ${l10n.analyzeUsage}\n• ${l10n.displayAds}\n• ${l10n.ensureSecurity}\n• ${l10n.communicateService}',
+              content: '''${l10n.weUseInformationFor}
+
+• ${l10n.provideService}
+• ${l10n.personalizeExperience}
+• ${l10n.analyzeUsage}
+• ${l10n.displayAds}
+• ${l10n.ensureSecurity}
+• ${l10n.communicateService}''',
             ),
 
             // Section 3
@@ -116,8 +126,12 @@ class PrivacyPolicyScreen extends StatelessWidget {
             // Section 6
             _buildSection(
               title: '6. ${l10n.yourRights}',
-              content:
-                  '${l10n.yourRightsDescription}\n\n• ${l10n.accessData}\n• ${l10n.correctData}\n• ${l10n.deleteData}\n• ${l10n.withdrawConsent}',
+              content: '''${l10n.yourRightsDescription}
+
+• ${l10n.accessData}
+• ${l10n.correctData}
+• ${l10n.deleteData}
+• ${l10n.withdrawConsent}''',
             ),
 
             // Section 7
@@ -247,12 +261,25 @@ class PrivacyPolicyScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Text(
-            content,
-            style: TextStyle(
-              fontSize: 16,
-              color: AppColors.textSecondary,
-              height: 1.5,
+          MarkdownBody(
+            data: content,
+            styleSheet: MarkdownStyleSheet(
+              p: TextStyle(
+                fontSize: 16,
+                color: AppColors.textSecondary,
+                height: 1.6,
+              ),
+              strong: TextStyle(
+                fontSize: 16,
+                color: AppColors.textPrimary,
+                fontWeight: FontWeight.bold,
+              ),
+              listBullet: TextStyle(
+                fontSize: 16,
+                color: AppColors.textSecondary,
+                height: 1.6,
+              ),
+              listBulletPadding: const EdgeInsets.only(right: 8),
             ),
           ),
         ],

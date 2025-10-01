@@ -28,12 +28,12 @@ class _ShopScreenState extends State<ShopScreen> {
 
   void _generateItems() {
     _items = [
-      // Vies
+      // Vies (corrigé - maximum 5 vies)
       ShopItem(
-        id: 'lives_5',
-        title: AppLocalizations.of(context)!.lives5,
-        description: AppLocalizations.of(context)!.lives5Description,
-        price: 50,
+        id: 'lives_refill',
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 25,
         currency: Currency.coins,
         icon: Icons.favorite,
         color: AppColors.error,
@@ -41,22 +41,22 @@ class _ShopScreenState extends State<ShopScreen> {
         isPopular: true,
       ),
       ShopItem(
-        id: 'lives_10',
-        title: AppLocalizations.of(context)!.lives10,
-        description: AppLocalizations.of(context)!.lives10Description,
-        price: 90,
+        id: 'lives_3',
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 15,
         currency: Currency.coins,
         icon: Icons.favorite,
         color: AppColors.error,
         category: ShopCategory.lives,
       ),
 
-      // Monnaie
+      // Monnaie (rééquilibré)
       ShopItem(
-        id: 'coins_100',
-        title: AppLocalizations.of(context)!.coins100,
-        description: AppLocalizations.of(context)!.coins100Description,
-        price: 10,
+        id: 'coins_200',
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 5,
         currency: Currency.gems,
         icon: Icons.monetization_on,
         color: AppColors.coins,
@@ -64,9 +64,9 @@ class _ShopScreenState extends State<ShopScreen> {
       ),
       ShopItem(
         id: 'coins_500',
-        title: AppLocalizations.of(context)!.coins500,
-        description: AppLocalizations.of(context)!.coins500Description,
-        price: 45,
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 10,
         currency: Currency.gems,
         icon: Icons.monetization_on,
         color: AppColors.coins,
@@ -75,31 +75,31 @@ class _ShopScreenState extends State<ShopScreen> {
       ),
       ShopItem(
         id: 'coins_1000',
-        title: AppLocalizations.of(context)!.coins1000,
-        description: AppLocalizations.of(context)!.coins1000Description,
-        price: 80,
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 18,
         currency: Currency.gems,
         icon: Icons.monetization_on,
         color: AppColors.coins,
         category: ShopCategory.currency,
       ),
       ShopItem(
-        id: 'gems_50',
-        title: AppLocalizations.of(context)!.gems50,
-        description: AppLocalizations.of(context)!.gems50Description,
-        price: 500,
+        id: 'gems_25',
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 300,
         currency: Currency.coins,
         icon: Icons.diamond,
         color: AppColors.gold,
         category: ShopCategory.currency,
       ),
 
-      // Boosters
+      // Boosters de jeu (améliorés)
       ShopItem(
         id: 'booster_shuffle',
-        title: AppLocalizations.of(context)!.shuffler,
-        description: AppLocalizations.of(context)!.shufflerDescription,
-        price: 30,
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 25,
         currency: Currency.coins,
         icon: Icons.shuffle,
         color: AppColors.secondary,
@@ -107,24 +107,120 @@ class _ShopScreenState extends State<ShopScreen> {
       ),
       ShopItem(
         id: 'booster_hint',
-        title: AppLocalizations.of(context)!.hint,
-        description: AppLocalizations.of(context)!.hintDescription,
-        price: 20,
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 15,
         currency: Currency.coins,
         icon: Icons.lightbulb,
         color: AppColors.warning,
         category: ShopCategory.boosters,
       ),
+      ShopItem(
+        id: 'booster_extra_moves',
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 40,
+        currency: Currency.coins,
+        icon: Icons.add_circle,
+        color: AppColors.primary,
+        category: ShopCategory.boosters,
+        isPopular: true,
+      ),
+      ShopItem(
+        id: 'booster_score_multiplier',
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 60,
+        currency: Currency.coins,
+        icon: Icons.trending_up,
+        color: AppColors.success,
+        category: ShopCategory.boosters,
+      ),
+
+      // Progression et améliorations
+      ShopItem(
+        id: 'experience_boost',
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 30,
+        currency: Currency.coins,
+        icon: Icons.star,
+        color: AppColors.warning,
+        category: ShopCategory.progression,
+      ),
+      ShopItem(
+        id: 'level_skip',
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 50,
+        currency: Currency.gems,
+        icon: Icons.skip_next,
+        color: AppColors.primary,
+        category: ShopCategory.progression,
+      ),
+      ShopItem(
+        id: 'unlock_all_levels',
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 200,
+        currency: Currency.gems,
+        icon: Icons.lock_open,
+        color: AppColors.gold,
+        category: ShopCategory.progression,
+      ),
+
+      // Cosmétiques et personnalisation
+      ShopItem(
+        id: 'theme_pack_nature',
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 75,
+        currency: Currency.gems,
+        icon: Icons.palette,
+        color: AppColors.success,
+        category: ShopCategory.cosmetics,
+      ),
+      ShopItem(
+        id: 'theme_pack_ocean',
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 75,
+        currency: Currency.gems,
+        icon: Icons.waves,
+        color: AppColors.primary,
+        category: ShopCategory.cosmetics,
+      ),
+      ShopItem(
+        id: 'avatar_frame_gold',
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 100,
+        currency: Currency.gems,
+        icon: Icons.crop_square,
+        color: AppColors.gold,
+        category: ShopCategory.cosmetics,
+      ),
 
       // Premium
       ShopItem(
         id: 'remove_ads',
-        title: AppLocalizations.of(context)!.removeAds,
-        description: AppLocalizations.of(context)!.removeAdsDescription,
-        price: 100,
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 150,
         currency: Currency.gems,
         icon: Icons.block,
         color: AppColors.primary,
+        category: ShopCategory.premium,
+        isPopular: true,
+      ),
+      ShopItem(
+        id: 'premium_pack',
+        title: '', // Sera rempli dynamiquement
+        description: '', // Sera rempli dynamiquement
+        price: 300,
+        currency: Currency.gems,
+        icon: Icons.diamond,
+        color: AppColors.gold,
         category: ShopCategory.premium,
       ),
     ];
@@ -261,9 +357,9 @@ class _ShopScreenState extends State<ShopScreen> {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                const Text(
-                  '🎁 Récompenses Gratuites',
-                  style: TextStyle(
+                Text(
+                  AppLocalizations.of(context)!.freeRewards,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
@@ -392,7 +488,7 @@ class _ShopScreenState extends State<ShopScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      item.title,
+                      _getItemTitle(item.id),
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             fontWeight: FontWeight.bold,
                             color: AppColors.textPrimary,
@@ -403,7 +499,7 @@ class _ShopScreenState extends State<ShopScreen> {
                     const SizedBox(height: 2),
                     Expanded(
                       child: Text(
-                        item.description,
+                        _getItemDescription(item.id),
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: AppColors.textSecondary,
                             ),
@@ -493,6 +589,10 @@ class _ShopScreenState extends State<ShopScreen> {
         return AppLocalizations.of(context)!.currency;
       case ShopCategory.boosters:
         return AppLocalizations.of(context)!.boosters(0).replaceAll('0 ', '');
+      case ShopCategory.progression:
+        return AppLocalizations.of(context)!.progression;
+      case ShopCategory.cosmetics:
+        return AppLocalizations.of(context)!.cosmetics;
       case ShopCategory.premium:
         return AppLocalizations.of(context)!.premium;
     }
@@ -549,14 +649,17 @@ class _ShopScreenState extends State<ShopScreen> {
 
   void _applyPurchaseEffect(ShopItem item, UserProvider userProvider) {
     switch (item.id) {
-      case 'lives_5':
-        userProvider.addLives(5);
+      // Vies
+      case 'lives_refill':
+        userProvider.refillLives();
         break;
-      case 'lives_10':
-        userProvider.addLives(10);
+      case 'lives_3':
+        userProvider.addLives(3);
         break;
-      case 'coins_100':
-        userProvider.addCoins(100);
+
+      // Monnaie
+      case 'coins_200':
+        userProvider.addCoins(200);
         break;
       case 'coins_500':
         userProvider.addCoins(500);
@@ -564,18 +667,143 @@ class _ShopScreenState extends State<ShopScreen> {
       case 'coins_1000':
         userProvider.addCoins(1000);
         break;
-      case 'gems_50':
-        userProvider.addGems(50);
+      case 'gems_25':
+        userProvider.addGems(25);
         break;
+
+      // Boosters
       case 'booster_shuffle':
         // TODO: Ajouter le booster au stock
         break;
       case 'booster_hint':
         // TODO: Ajouter le booster au stock
         break;
+      case 'booster_extra_moves':
+        // TODO: Ajouter le booster au stock
+        break;
+      case 'booster_score_multiplier':
+        // TODO: Ajouter le booster au stock
+        break;
+
+      // Progression
+      case 'experience_boost':
+        userProvider.addExperience(100);
+        break;
+      case 'level_skip':
+        // TODO: Débloquer le niveau suivant
+        break;
+      case 'unlock_all_levels':
+        // TODO: Débloquer tous les niveaux
+        break;
+
+      // Cosmétiques
+      case 'theme_pack_nature':
+        // TODO: Appliquer le thème nature
+        break;
+      case 'theme_pack_ocean':
+        // TODO: Appliquer le thème océan
+        break;
+      case 'avatar_frame_gold':
+        // TODO: Appliquer le cadre doré
+        break;
+
+      // Premium
       case 'remove_ads':
         // TODO: Supprimer les publicités
         break;
+      case 'premium_pack':
+        userProvider.addGems(100);
+        // TODO: Appliquer tous les avantages premium
+        break;
+    }
+  }
+
+  /// Méthodes helper pour obtenir les traductions des articles
+  String _getItemTitle(String itemId) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (itemId) {
+      case 'lives_refill':
+        return l10n.fullLives;
+      case 'lives_3':
+        return l10n.threeLives;
+      case 'coins_200':
+        return l10n.twoHundredCoins;
+      case 'coins_500':
+        return l10n.fiveHundredCoins;
+      case 'coins_1000':
+        return l10n.thousandCoins;
+      case 'gems_25':
+        return l10n.twentyFiveGems;
+      case 'booster_shuffle':
+        return l10n.shuffler;
+      case 'booster_hint':
+        return l10n.hint;
+      case 'booster_extra_moves':
+        return l10n.bonusMoves;
+      case 'booster_score_multiplier':
+        return l10n.scoreMultiplier;
+      case 'experience_boost':
+        return l10n.experienceBoost;
+      case 'level_skip':
+        return l10n.skipLevel;
+      case 'unlock_all_levels':
+        return l10n.unlockAllLevels;
+      case 'theme_pack_nature':
+        return l10n.natureTheme;
+      case 'theme_pack_ocean':
+        return l10n.oceanTheme;
+      case 'avatar_frame_gold':
+        return l10n.goldFrame;
+      case 'remove_ads':
+        return l10n.removeAds;
+      case 'premium_pack':
+        return l10n.premiumPack;
+      default:
+        return 'Item';
+    }
+  }
+
+  String _getItemDescription(String itemId) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (itemId) {
+      case 'lives_refill':
+        return l10n.refillAllLives;
+      case 'lives_3':
+        return l10n.addThreeLives;
+      case 'coins_200':
+        return l10n.smallCoinBoost;
+      case 'coins_500':
+        return l10n.goodCoinStock;
+      case 'coins_1000':
+        return l10n.bigCoinStock;
+      case 'gems_25':
+        return l10n.preciousGems;
+      case 'booster_shuffle':
+        return l10n.shuffleGrid;
+      case 'booster_hint':
+        return l10n.revealWinningMove;
+      case 'booster_extra_moves':
+        return l10n.fiveExtraMoves;
+      case 'booster_score_multiplier':
+        return l10n.doubleScoreThreeLevels;
+      case 'experience_boost':
+        return l10n.hundredXpBoost;
+      case 'level_skip':
+        return l10n.unlockNextLevel;
+      case 'unlock_all_levels':
+        return l10n.accessAllLevels;
+      case 'theme_pack_nature':
+        return l10n.natureThemeDescription;
+      case 'theme_pack_ocean':
+        return l10n.oceanThemeDescription;
+      case 'avatar_frame_gold':
+        return l10n.goldFrameDescription;
+      case 'remove_ads':
+        return l10n.playWithoutAds;
+      case 'premium_pack':
+        return l10n.allPremiumBenefits;
+      default:
+        return 'Description';
     }
   }
 }
@@ -590,6 +818,8 @@ enum ShopCategory {
   lives,
   currency,
   boosters,
+  progression,
+  cosmetics,
   premium,
 }
 

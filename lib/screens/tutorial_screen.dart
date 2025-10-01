@@ -4,6 +4,7 @@ import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/providers/user_provider.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
 import 'package:mind_bloom/screens/home_screen.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class TutorialScreen extends StatefulWidget {
   const TutorialScreen({super.key});
@@ -21,78 +22,92 @@ class _TutorialScreenState extends State<TutorialScreen>
 
   int _currentStep = 0;
 
-  final List<TutorialStep> _steps = [
-    TutorialStep(
-      id: 'welcome',
-      title: 'Bienvenue dans Mind Bloom !',
-      description: 'Découvrez le monde magique des plantes et des puzzles',
-      icon: Icons.eco,
-      color: AppColors.primary,
-      showSkip: false,
-    ),
-    TutorialStep(
-      id: 'matching',
-      title: 'Faites des correspondances',
-      description:
-          'Échangez les tuiles pour créer des lignes de 3 ou plus de la même couleur',
-      icon: Icons.grid_3x3,
-      color: AppColors.success,
-      showSkip: true,
-    ),
-    TutorialStep(
-      id: 'objectives',
-      title: 'Objectifs du niveau',
-      description:
-          'Chaque niveau a des objectifs spécifiques à atteindre pour progresser',
-      icon: Icons.flag,
-      color: AppColors.accent,
-      showSkip: true,
-    ),
-    TutorialStep(
-      id: 'stars',
-      title: 'Gagnez des étoiles',
-      description:
-          'Plus vous atteignez d\'objectifs, plus vous gagnez d\'étoiles',
-      icon: Icons.star,
-      color: AppColors.gold,
-      showSkip: true,
-    ),
-    TutorialStep(
-      id: 'collection',
-      title: 'Collectionnez des plantes',
-      description:
-          'Débloquez de nouvelles plantes magiques avec des bonus spéciaux',
-      icon: Icons.collections,
-      color: AppColors.primary,
-      showSkip: true,
-    ),
-    TutorialStep(
-      id: 'shop',
-      title: 'Boutique',
-      description:
-          'Achetez des vies, des boosters et des récompenses avec vos pièces',
-      icon: Icons.shopping_cart,
-      color: AppColors.coins,
-      showSkip: true,
-    ),
-    TutorialStep(
-      id: 'events',
-      title: 'Événements spéciaux',
-      description:
-          'Participez aux événements saisonniers pour des récompenses exclusives',
-      icon: Icons.event,
-      color: AppColors.accent,
-      showSkip: true,
-    ),
-    TutorialStep(
-      id: 'ready',
-      title: 'Vous êtes prêt !',
-      description: 'Commencez votre aventure et cultivez votre jardin magique',
-      icon: Icons.play_arrow,
-      color: AppColors.success,
-      showSkip: false,
-    ),
-  ];
+  List<TutorialStep> _getSteps(AppLocalizations l10n) {
+    return [
+      TutorialStep(
+        id: 'welcome',
+        title: l10n.tutorial_welcome_title,
+        description: l10n.tutorial_welcome_description,
+        icon: Icons.eco,
+        color: AppColors.primary,
+        showSkip: false,
+      ),
+      TutorialStep(
+        id: 'matching',
+        title: l10n.tutorial_matching_title,
+        description: l10n.tutorial_matching_description,
+        icon: Icons.grid_3x3,
+        color: AppColors.success,
+        showSkip: true,
+      ),
+      TutorialStep(
+        id: 'objectives',
+        title: l10n.tutorial_objectives_title,
+        description: l10n.tutorial_objectives_description,
+        icon: Icons.flag,
+        color: AppColors.accent,
+        showSkip: true,
+      ),
+      TutorialStep(
+        id: 'hint_button',
+        title: l10n.tutorial_hint_title,
+        description: l10n.tutorial_hint_description,
+        icon: Icons.lightbulb,
+        color: AppColors.warning,
+        showSkip: true,
+      ),
+      TutorialStep(
+        id: 'shuffle_button',
+        title: l10n.tutorial_shuffle_title,
+        description: l10n.tutorial_shuffle_description,
+        icon: Icons.shuffle,
+        color: AppColors.secondary,
+        showSkip: true,
+      ),
+      TutorialStep(
+        id: 'stars',
+        title: l10n.tutorial_stars_title,
+        description: l10n.tutorial_stars_description,
+        icon: Icons.star,
+        color: AppColors.gold,
+        showSkip: true,
+      ),
+      TutorialStep(
+        id: 'collection',
+        title: l10n.tutorial_collection_title,
+        description: l10n.tutorial_collection_description,
+        icon: Icons.collections,
+        color: AppColors.primary,
+        showSkip: true,
+      ),
+      TutorialStep(
+        id: 'shop',
+        title: l10n.shop,
+        description:
+            'Achetez des vies, des boosters et des récompenses avec vos pièces',
+        icon: Icons.shopping_cart,
+        color: AppColors.coins,
+        showSkip: true,
+      ),
+      TutorialStep(
+        id: 'events',
+        title: l10n.events,
+        description:
+            'Participez aux événements saisonniers pour des récompenses exclusives',
+        icon: Icons.event,
+        color: AppColors.accent,
+        showSkip: true,
+      ),
+      TutorialStep(
+        id: 'ready',
+        title: l10n.tutorial_complete,
+        description: l10n.tutorial_complete_description,
+        icon: Icons.play_arrow,
+        color: AppColors.success,
+        showSkip: false,
+      ),
+    ];
+  }
 
   @override
   void initState() {
@@ -131,6 +146,9 @@ class _TutorialScreenState extends State<TutorialScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final steps = _getSteps(l10n);
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
@@ -152,7 +170,7 @@ class _TutorialScreenState extends State<TutorialScreen>
                   ),
                   Expanded(
                     child: LinearProgressIndicator(
-                      value: (_currentStep + 1) / _steps.length,
+                      value: (_currentStep + 1) / steps.length,
                       backgroundColor:
                           AppColors.textSecondary.withValues(alpha: 0.2),
                       valueColor: const AlwaysStoppedAnimation<Color>(
@@ -161,7 +179,7 @@ class _TutorialScreenState extends State<TutorialScreen>
                   ),
                   const SizedBox(width: 16),
                   Text(
-                    '${_currentStep + 1}/${_steps.length}',
+                    '${_currentStep + 1}/${steps.length}',
                     style: TextStyle(
                       color: AppColors.textSecondary,
                       fontWeight: FontWeight.w600,
@@ -176,9 +194,9 @@ class _TutorialScreenState extends State<TutorialScreen>
               child: PageView.builder(
                 controller: _pageController,
                 onPageChanged: _onPageChanged,
-                itemCount: _steps.length,
+                itemCount: steps.length,
                 itemBuilder: (context, index) {
-                  return _buildStepContent(_steps[index]);
+                  return _buildStepContent(steps[index]);
                 },
               ),
             ),
@@ -188,11 +206,11 @@ class _TutorialScreenState extends State<TutorialScreen>
               padding: const EdgeInsets.all(16),
               child: Row(
                 children: [
-                  if (_steps[_currentStep].showSkip)
+                  if (steps[_currentStep].showSkip)
                     TextButton(
                       onPressed: _skipTutorial,
                       child: Text(
-                        'Passer',
+                        l10n.tutorial_skip,
                         style: TextStyle(
                           color: AppColors.textSecondary,
                           fontWeight: FontWeight.w600,
@@ -200,7 +218,7 @@ class _TutorialScreenState extends State<TutorialScreen>
                       ),
                     ),
                   const Spacer(),
-                  if (_currentStep < _steps.length - 1)
+                  if (_currentStep < steps.length - 1)
                     ElevatedButton(
                       onPressed: _nextStep,
                       style: ElevatedButton.styleFrom(
@@ -212,9 +230,9 @@ class _TutorialScreenState extends State<TutorialScreen>
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      child: const Text(
-                        'Suivant',
-                        style: TextStyle(
+                      child: Text(
+                        l10n.tutorial_next,
+                        style: const TextStyle(
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -231,9 +249,9 @@ class _TutorialScreenState extends State<TutorialScreen>
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      child: const Text(
-                        'Commencer',
-                        style: TextStyle(
+                      child: Text(
+                        l10n.tutorial_start,
+                        style: const TextStyle(
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -726,7 +744,10 @@ class _TutorialScreenState extends State<TutorialScreen>
     final audioProvider = Provider.of<AudioProvider>(context, listen: false);
     audioProvider.playSfx('audio/sfx/button_click.wav');
 
-    if (_currentStep < _steps.length - 1) {
+    final l10n = AppLocalizations.of(context)!;
+    final steps = _getSteps(l10n);
+
+    if (_currentStep < steps.length - 1) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -748,26 +769,25 @@ class _TutorialScreenState extends State<TutorialScreen>
 
   void _skipTutorial() {
     final audioProvider = Provider.of<AudioProvider>(context, listen: false);
+    final l10n = AppLocalizations.of(context)!;
     audioProvider.playSfx('audio/sfx/button_click.wav');
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Passer le tutoriel ?'),
-        content: const Text(
-          'Êtes-vous sûr de vouloir passer le tutoriel ? Vous pourrez le revoir plus tard dans les paramètres.',
-        ),
+        title: Text(l10n.tutorial_skip_confirmation_title),
+        content: Text(l10n.tutorial_skip_confirmation_message),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Annuler'),
+            child: Text(l10n.cancel),
           ),
           ElevatedButton(
             onPressed: () {
               Navigator.of(context).pop();
               _finishTutorial();
             },
-            child: const Text('Passer'),
+            child: Text(l10n.tutorial_skip),
           ),
         ],
       ),
@@ -810,4 +830,3 @@ class TutorialStep {
     required this.showSkip,
   });
 }
-

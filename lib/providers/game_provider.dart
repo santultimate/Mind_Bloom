@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../models/tile.dart';
 import '../models/level.dart';
 import 'collection_provider.dart';
+import 'user_provider.dart';
 
 class GameProvider extends ChangeNotifier {
   List<List<Tile?>> _grid = [];
@@ -21,9 +22,10 @@ class GameProvider extends ChangeNotifier {
   int _timeLeft = 0;
   int get timeLeft => _timeLeft;
 
-  Timer? _gameTimer;
-  bool _isTimeRunning = false;
-  bool get isTimeRunning => _isTimeRunning;
+  // Timer supprimé - le jeu n'a plus de limite de temps
+  // Timer? _gameTimer;
+  // bool _isTimeRunning = false;
+  // bool get isTimeRunning => _isTimeRunning;
 
   Level? _currentLevel;
   Level? get currentLevel => _currentLevel;
@@ -61,24 +63,45 @@ class GameProvider extends ChangeNotifier {
   CollectionProvider? _collectionProvider;
 
   /// Initialisation du niveau
-  void startLevel(Level level, {CollectionProvider? collectionProvider}) {
+  Future<bool> startLevel(Level level,
+      {CollectionProvider? collectionProvider,
+      UserProvider? userProvider}) async {
+    // Consommer une vie avant de commencer le niveau
+    if (userProvider != null) {
+      final lifeUsed = await userProvider.useLife();
+      if (!lifeUsed) {
+        // Pas de vie disponible
+        return false;
+      }
+    }
+
     _collectionProvider = collectionProvider;
     _currentLevel = level;
-    _currentObjectives = List.from(level.objectives);
+
+    // 🔧 CORRECTION: Réinitialiser complètement les objectifs avec current = 0
+    _currentObjectives = level.objectives
+        .map((objective) => LevelObjective(
+              type: objective.type,
+              tileType: objective.tileType,
+              target: objective.target,
+              current: 0, // Réinitialiser à 0
+            ))
+        .toList();
+
     _score = 0;
     _movesLeft = level.maxMoves;
     _selectedTile = null;
     _nextTileId = 0;
 
-    // Debug pour tous les niveaux
-    if (kDebugMode) {
-      print('=== DEBUG LEVEL ${level.id} GAMEPLAY ===');
-      print('Starting Level ${level.id} with:');
-      print('  Grid Size: ${level.gridSize}');
-      print('  Max Moves: ${level.maxMoves}');
-      print('  Time Left: ${_calculateTimeForLevel(level)}');
-      print('  Objectives: ${level.objectives.length}');
-    }
+    // Debug pour tous les niveaux (commenté pour production)
+    // if (kDebugMode) {
+    //   print('=== DEBUG LEVEL ${level.id} GAMEPLAY ===');
+    //   print('Starting Level ${level.id} with:');
+    //   print('  Grid Size: ${level.gridSize}');
+    //   print('  Max Moves: ${level.maxMoves}');
+    //   print('  Time Left: ${_calculateTimeForLevel(level)}');
+    //   print('  Objectives: ${level.objectives.length}');
+    // }
 
     // 🚀 TIMER SUPPRIMÉ - Le jeu n'a plus de limite de temps
     _timeLeft = 0; // Pas de timer de jeu
@@ -88,49 +111,50 @@ class GameProvider extends ChangeNotifier {
 
     _generateGrid(level.gridSize);
 
-    // Debug de la grille générée pour tous les niveaux
-    if (kDebugMode) {
-      print('Level ${level.id} Grid Generated:');
+    // Debug de la grille générée pour tous les niveaux (commenté pour production)
+    // if (kDebugMode) {
+    //   print('Level ${level.id} Grid Generated:');
 
-      // Debug de la distribution des tuiles
-      final tileCounts = <TileType, int>{};
-      for (int row = 0; row < _grid.length; row++) {
-        String rowStr = '';
-        for (int col = 0; col < _grid[row].length; col++) {
-          if (_grid[row][col] != null) {
-            final tile = _grid[row][col]!;
-            final type = tile.type;
-            tileCounts[type] = (tileCounts[type] ?? 0) + 1;
-            rowStr += '${type.name[0].toUpperCase()} ';
-          } else {
-            rowStr += 'X ';
-          }
-        }
-        print('  Row $row: $rowStr');
-      }
+    //   // Debug de la distribution des tuiles
+    //   final tileCounts = <TileType, int>{};
+    //   for (int row = 0; row < _grid.length; row++) {
+    //     String rowStr = '';
+    //     for (int col = 0; col < _grid[row].length; col++) {
+    //       if (_grid[row][col] != null) {
+    //         final tile = _grid[row][col]!;
+    //         final type = tile.type;
+    //         tileCounts[type] = (tileCounts[type] ?? 0) + 1;
+    //         rowStr += '${type.name[0].toUpperCase()} ';
+    //       } else {
+    //         rowStr += 'X ';
+    //       }
+    //     }
+    //     print('  Row $row: $rowStr');
+    //   }
 
-      // Afficher la distribution des tuiles
-      print('Tile Distribution:');
-      tileCounts.forEach((type, count) {
-        print('  $type: $count');
-      });
+    //   // Afficher la distribution des tuiles
+    //   print('Tile Distribution:');
+    //   tileCounts.forEach((type, count) {
+    //     print('  $type: $count');
+    //   });
 
-      // Vérifier les objectifs
-      print('Objectives Check:');
-      for (final objective in _currentObjectives) {
-        if (objective.type == LevelObjectiveType.collectTiles &&
-            objective.tileType != null) {
-          final available = tileCounts[objective.tileType!] ?? 0;
-          final required = objective.target;
-          final status = available >= required ? '✅' : '❌';
-          print('  $status ${objective.tileType}: $available/$required');
-        }
-      }
+    //   // Vérifier les objectifs
+    //   print('Objectives Check:');
+    //   for (final objective in _currentObjectives) {
+    //     if (objective.type == LevelObjectiveType.collectTiles &&
+    //         objective.tileType != null) {
+    //       final available = tileCounts[objective.tileType!] ?? 0;
+    //       final required = objective.target;
+    //       final status = available >= required ? '✅' : '❌';
+    //       print('  $status ${objective.tileType}: $available/$required');
+    //     }
+    //   }
 
-      print('==============================');
-    }
+    //   print('==============================');
+    // }
 
     notifyListeners();
+    return true;
   }
 
   /// Génère une grille sans matches initiaux
@@ -268,8 +292,10 @@ class GameProvider extends ChangeNotifier {
         // Ajouter aux types les plus nombreux
         final sortedEntries = distribution.entries.toList()
           ..sort((a, b) => b.value.compareTo(a.value));
-        distribution[sortedEntries.first.key] =
-            sortedEntries.first.value + difference;
+        if (sortedEntries.isNotEmpty) {
+          distribution[sortedEntries.first.key] =
+              sortedEntries.first.value + difference;
+        }
       } else if (difference < 0) {
         // Retirer des types les plus nombreux
         final sortedEntries = distribution.entries.toList()
@@ -282,6 +308,20 @@ class GameProvider extends ChangeNotifier {
             break;
           }
         }
+      }
+    }
+
+    // 🔧 CORRECTION: Vérification finale de sécurité
+    final finalCheck = distribution.values.fold(0, (sum, count) => sum + count);
+    if (finalCheck != totalTiles) {
+      // Si le total est encore incorrect, forcer une distribution équitable
+      final baseCount = totalTiles ~/ TileType.values.length;
+      final remainder = totalTiles % TileType.values.length;
+
+      distribution.clear();
+      for (int i = 0; i < TileType.values.length; i++) {
+        final tileType = TileType.values[i];
+        distribution[tileType] = baseCount + (i < remainder ? 1 : 0);
       }
     }
 
@@ -592,6 +632,7 @@ class GameProvider extends ChangeNotifier {
             _grid[r][c - 1] != null &&
             _grid[r][c]!.type == _grid[r][c - 1]!.type) {
           streak++;
+          // 🔧 CORRECTION: Vérifier le match à la fin de la ligne
           if (c == size - 1 && streak >= 3) {
             final match = _grid[r]
                 .sublist(c - streak + 1, c + 1)
@@ -628,6 +669,7 @@ class GameProvider extends ChangeNotifier {
             _grid[r - 1][c] != null &&
             _grid[r][c]!.type == _grid[r - 1][c]!.type) {
           streak++;
+          // 🔧 CORRECTION: Vérifier le match à la fin de la colonne
           if (r == size - 1 && streak >= 3) {
             final match = _grid
                 .sublist(r - streak + 1, r + 1)
@@ -766,57 +808,16 @@ class GameProvider extends ChangeNotifier {
   /// Affiche un effet spécial pour les gros matches
   void _showSpecialEffect(Set<Tile> match) {
     // Cette méthode peut être étendue pour des effets visuels
-    if (kDebugMode) {
-      print('SPECIAL EFFECT: ${match.length} tiles matched!');
-    }
+    // Commenté pour la version de production
+    // if (kDebugMode) {
+    //   print('SPECIAL EFFECT: ${match.length} tiles matched!');
+    // }
   }
 
-  /// Calcule le temps disponible pour un niveau
-  int _calculateTimeForLevel(Level level) {
-    // 🎯 TEMPS RÉDUIT POUR RENDRE LE JEU PLUS DIFFICILE
-    int baseTime;
-
-    switch (level.difficulty) {
-      case LevelDifficulty.easy:
-        baseTime = 300; // 5 minutes (réduit de 10 à 5)
-        break;
-      case LevelDifficulty.medium:
-        baseTime = 450; // 7.5 minutes (réduit de 15 à 7.5)
-        break;
-      case LevelDifficulty.hard:
-        baseTime = 600; // 10 minutes (réduit de 20 à 10)
-        break;
-      case LevelDifficulty.expert:
-        baseTime = 750; // 12.5 minutes (réduit de 25 à 12.5)
-        break;
-    }
-
-    // 🚀 AJUSTEMENT PROGRESSIF SELON LE NIVEAU ET LES OBJECTIFS
-    final levelId = level.id;
-    final objectiveCount = level.objectives.length;
-
-    // Réduire le temps selon le niveau (difficulté progressive)
-    final levelPenalty = (levelId - 1) * 10; // -10 secondes par niveau
-
-    // Ajouter du temps selon les objectifs mais moins généreusement
-    final objectiveBonus =
-        objectiveCount * 60; // +1 minute par objectif (au lieu de 5)
-
-    final finalTime = baseTime + objectiveBonus - levelPenalty;
-
-    // S'assurer qu'on a au moins 2 minutes
-    return math.max(finalTime, 120);
-  }
-
-  /// 🚀 Timer supprimé - Le jeu n'a plus de limite de temps
-  void _startGameTimer() {
-    // Timer de jeu supprimé - seules les vies ont un timer
-  }
-
-  /// 🚀 Timer supprimé - Le jeu n'a plus de limite de temps
-  void _stopGameTimer() {
-    // Timer de jeu supprimé - seules les vies ont un timer
-  }
+  // Méthodes de timer supprimées - le jeu n'a plus de limite de temps
+  // int _calculateTimeForLevel(Level level) { ... }
+  // void _startGameTimer() { ... }
+  // void _stopGameTimer() { ... }
 
   /// Vérifie si le jeu est terminé et déclenche le callback
   void _checkGameEnd() {
@@ -847,20 +848,39 @@ class GameProvider extends ChangeNotifier {
   /// Applique la gravité
   void _applyGravity() {
     final size = _grid.length;
-    for (int c = 0; c < size; c++) {
-      for (int r = size - 1; r >= 0; r--) {
-        if (_grid[r][c] == null) {
-          int above = r - 1;
-          while (above >= 0 && _grid[above][c] == null) {
-            above--;
-          }
-          if (above >= 0) {
-            final tile = _grid[above][c]!;
-            _grid[r][c] = tile..row = r;
-            _grid[above][c] = null;
+    bool moved = true;
+    int iterations = 0;
+    const maxIterations =
+        10; // 🔧 CORRECTION: Protection contre les boucles infinies
+
+    while (moved && iterations < maxIterations) {
+      moved = false;
+      iterations++;
+
+      for (int c = 0; c < size; c++) {
+        for (int r = size - 1; r >= 0; r--) {
+          if (_grid[r][c] == null) {
+            int above = r - 1;
+            while (above >= 0 && _grid[above][c] == null) {
+              above--;
+            }
+            if (above >= 0) {
+              final tile = _grid[above][c]!;
+              _grid[r][c] = tile..row = r;
+              _grid[above][c] = null;
+              moved = true;
+            }
           }
         }
       }
+    }
+
+    // 🔧 CORRECTION: Log d'avertissement si trop d'itérations
+    if (iterations >= maxIterations) {
+      // Commenté pour la version de production
+      // if (kDebugMode) {
+      //   print('Warning: Gravity loop reached max iterations');
+      // }
     }
   }
 
@@ -974,7 +994,10 @@ class GameProvider extends ChangeNotifier {
     for (final objective in _currentObjectives) {
       if (objective.type == LevelObjectiveType.collectTiles &&
           objective.tileType == tileType) {
-        objective.current++;
+        // 🔧 CORRECTION: Vérifier les limites pour éviter les débordements
+        if (objective.current < objective.target) {
+          objective.current++;
+        }
       }
     }
   }
@@ -1029,7 +1052,7 @@ class GameProvider extends ChangeNotifier {
           if (belowTile != null) {
             _swapTiles(tile, belowTile);
             final valid = _hasMatches();
-            _swapTiles(tile, belowTile);
+            _swapTiles(tile, belowTile); // 🔧 CORRECTION: Restaurer l'état
             if (valid) return true;
           }
         }
@@ -1040,7 +1063,7 @@ class GameProvider extends ChangeNotifier {
           if (rightTile != null) {
             _swapTiles(tile, rightTile);
             final valid = _hasMatches();
-            _swapTiles(tile, rightTile);
+            _swapTiles(tile, rightTile); // 🔧 CORRECTION: Restaurer l'état
             if (valid) return true;
           }
         }
@@ -1113,10 +1136,10 @@ class GameProvider extends ChangeNotifier {
           if (belowTile != null) {
             _swapTiles(tile, belowTile);
             if (_hasMatches()) {
-              _swapTiles(tile, belowTile);
+              _swapTiles(tile, belowTile); // 🔧 CORRECTION: Restaurer l'état
               return [tile, belowTile];
             }
-            _swapTiles(tile, belowTile);
+            _swapTiles(tile, belowTile); // 🔧 CORRECTION: Restaurer l'état
           }
         }
 
@@ -1126,10 +1149,10 @@ class GameProvider extends ChangeNotifier {
           if (rightTile != null) {
             _swapTiles(tile, rightTile);
             if (_hasMatches()) {
-              _swapTiles(tile, rightTile);
+              _swapTiles(tile, rightTile); // 🔧 CORRECTION: Restaurer l'état
               return [tile, rightTile];
             }
-            _swapTiles(tile, rightTile);
+            _swapTiles(tile, rightTile); // 🔧 CORRECTION: Restaurer l'état
           }
         }
       }
@@ -1171,9 +1194,54 @@ class GameProvider extends ChangeNotifier {
 
   /// Remettre à zéro le jeu
   void resetGame() {
+    // Réinitialiser l'état de pause
+    _isPaused = false;
+
+    // Réinitialiser les animations et sélections
+    _isAnimating = false;
+    _isSwapping = false;
+    _selectedTile = null;
+    _swappingTile1 = null;
+    _swappingTile2 = null;
+    _previewTile1 = null;
+    _previewTile2 = null;
+    _showPreview = false;
+
     if (_currentLevel != null) {
-      startLevel(_currentLevel!, collectionProvider: _collectionProvider);
+      // Redémarrer le niveau sans consommer de vie (c'est un redémarrage du même niveau)
+      _restartLevel(_currentLevel!);
     }
+  }
+
+  /// Redémarre un niveau sans consommer de vie
+  void _restartLevel(Level level) {
+    _collectionProvider = _collectionProvider;
+    _currentLevel = level;
+
+    // 🔧 CORRECTION: Réinitialiser complètement les objectifs avec current = 0
+    _currentObjectives = level.objectives
+        .map((objective) => LevelObjective(
+              type: objective.type,
+              tileType: objective.tileType,
+              target: objective.target,
+              current: 0, // Réinitialiser à 0
+            ))
+        .toList();
+
+    _score = 0;
+    _movesLeft = level.maxMoves;
+    _selectedTile = null;
+    _nextTileId = 0;
+
+    // 🚀 TIMER SUPPRIMÉ - Le jeu n'a plus de limite de temps
+    _timeLeft = 0; // Pas de timer de jeu
+
+    // Appliquer les bonus des collections
+    _applyCollectionBonuses();
+
+    _generateGrid(level.gridSize);
+
+    notifyListeners();
   }
 
   // === MÉTHODES POUR LES COLLECTIONS ===

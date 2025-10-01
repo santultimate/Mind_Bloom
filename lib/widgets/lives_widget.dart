@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_bloom/providers/game_provider.dart';
 import 'package:mind_bloom/providers/user_provider.dart';
-import 'package:mind_bloom/widgets/rewarded_ad_button.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class LivesWidget extends StatefulWidget {
   final VoidCallback? onShuffle;
@@ -188,22 +188,23 @@ class _LivesWidgetState extends State<LivesWidget>
                       child: InkWell(
                         onTap: () {
                           // TODO: Implémenter la logique de publicité récompensée
-                          if (kDebugMode) {
-                            print('Bouton de vie gratuite tapé');
-                          }
+                          // Commenté pour la version de production
+                          // if (kDebugMode) {
+                          //   print('Bouton de vie gratuite tapé');
+                          // }
                         },
-                        child: const Row(
+                        child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.favorite,
                               color: Colors.white,
                               size: 12,
                             ),
-                            SizedBox(width: 2),
+                            const SizedBox(width: 2),
                             Text(
-                              'Vie Gratuite',
-                              style: TextStyle(
+                              AppLocalizations.of(context)!.freeLife,
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 8,
                                 fontWeight: FontWeight.bold,
@@ -298,5 +299,4 @@ class _LivesWidgetState extends State<LivesWidget>
 
     return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
   }
-
 }

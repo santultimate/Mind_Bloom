@@ -2800,7 +2800,7 @@
     "description": "Global progress text"
   },
 
-  "collectTilesObjective": "Collect {count} {tileName}s",
+  "collectTilesObjective": "Collect {count} {tileName}",
   "@collectTilesObjective": {
     "description": "Collect tiles objective",
     "placeholders": {
@@ -2897,5 +2897,844 @@
         "description": "The level number"
       }
     }
+  },
+  "quit": "Quit",
+  "@quit": {
+    "description": "Quit button text"
+  },
+  "springBloom": "Spring Bloom",
+  "@springBloom": {
+    "description": "Spring event name"
+  },
+  "springBloomDescription": "Celebrate renewal with magical flowers",
+  "@springBloomDescription": {
+    "description": "Spring event description"
+  },
+  "summerSolstice": "Summer Solstice",
+  "@summerSolstice": {
+    "description": "Summer event name"
+  },
+  "summerSolsticeDescription": "Enjoy the sun with sunny plants",
+  "@summerSolsticeDescription": {
+    "description": "Summer event description"
+  },
+  "autumnHarvest": "Autumn Harvest",
+  "@autumnHarvest": {
+    "description": "Autumn event name"
+  },
+  "autumnHarvestDescription": "Harvest the fruits of your efforts",
+  "@autumnHarvestDescription": {
+    "description": "Autumn event description"
+  },
+  "winterSolstice": "Winter Solstice",
+  "@winterSolstice": {
+    "description": "Winter event name"
+  },
+  "winterSolsticeDescription": "Light up the night with ice crystals",
+  "@winterSolsticeDescription": {
+    "description": "Winter event description"
+  },
+  "valentineDay": "Valentine's Day",
+  "@valentineDay": {
+    "description": "Valentine's Day event name"
+  },
+  "valentineDayDescription": "Share love with romantic flowers",
+  "@valentineDayDescription": {
+    "description": "Valentine's Day event description"
+  },
+
+  "shareAchievements": "Badge Sharer",
+  "@shareAchievements": {
+    "description": "Achievement title for sharing badges"
+  },
+  "shareAchievementsDescription": "Share 5 achievements with your friends",
+  "@shareAchievementsDescription": {
+    "description": "Achievement description for sharing badges"
+  },
+
+  "socialButterfly": "Social Butterfly",
+  "@socialButterfly": {
+    "description": "Social butterfly achievement title"
+  },
+  "socialButterflyDescription": "Share 10 achievements with your friends",
+  "@socialButterflyDescription": {
+    "description": "Social butterfly achievement description"
+  },
+
+  "shareThisBadge": "Share this badge",
+  "@shareThisBadge": {
+    "description": "Tooltip for sharing an individual badge"
+  },
+  "shareMyAchievements": "Share my achievements",
+  "@shareMyAchievements": {
+    "description": "Button to share all achievements"
+  },
+  "badgeShared": "Badge \"{badgeTitle}\" shared! 🎉",
+  "@badgeShared": {
+    "description": "Confirmation message for sharing a badge",
+    "placeholders": {
+      "badgeTitle": {
+        "type": "String",
+        "description": "The title of the shared badge"
+      }
+    }
+  },
+  "achievementsShared": "My achievements shared! 🎉",
+  "@achievementsShared": {
+    "description": "Confirmation message for sharing all achievements"
+  },
+  "easterEvent": "Magical Easter",
+  "@easterEvent": {
+    "description": "Easter event name"
+  },
+  "easterEventDescription": "Discover hidden magical eggs",
+  "@easterEventDescription": {
+    "description": "Easter event description"
+  },
+  "halloweenEvent": "Enchanted Halloween",
+  "@halloweenEvent": {
+    "description": "Halloween event name"
+  },
+  "halloweenEventDescription": "Plant mysterious pumpkins",
+  "@halloweenEventDescription": {
+    "description": "Halloween event description"
+  },
+  "christmasEvent": "Fairy Christmas",
+  "@christmasEvent": {
+    "description": "Christmas event name"
+  },
+  "christmasEventDescription": "Decorate your garden with Christmas stars",
+  "@christmasEventDescription": {
+    "description": "Christmas event description"
+  },
+  "newYearEvent": "Bright New Year",
+  "@newYearEvent": {
+    "description": "New Year event name"
+  },
+  "newYearEventDescription": "Start the year with magical fireworks",
+  "@newYearEventDescription": {
+    "description": "New Year event description"
+  },
+  "thanksgivingEvent": "Thanksgiving",
+  "@thanksgivingEvent": {
+    "description": "Thanksgiving event name"
+  },
+  "thanksgivingEventDescription": "Harvest abundance with gratitude",
+  "@thanksgivingEventDescription": {
+    "description": "Thanksgiving event description"
+  },
+  "motherDayEvent": "Mother's Day",
+  "@motherDayEvent": {
+    "description": "Mother's Day event name"
+  },
+  "motherDayEventDescription": "Offer flowers as a tribute to mothers",
+  "@motherDayEventDescription": {
+    "description": "Mother's Day event description"
+  },
+  "fatherDayEvent": "Father's Day",
+  "@fatherDayEvent": {
+    "description": "Father's Day event name"
+  },
+  "fatherDayEventDescription": "Cultivate strength with robust plants",
+  "@fatherDayEventDescription": {
+    "description": "Father's Day event description"
+  },
+  "springCleaningEvent": "Spring Cleaning",
+  "@springCleaningEvent": {
+    "description": "Spring Cleaning event name"
+  },
+  "springCleaningEventDescription": "Refresh your garden for a new season",
+  "@springCleaningEventDescription": {
+    "description": "Spring Cleaning event description"
+  },
+  "summerFestivalEvent": "Summer Festival",
+  "@summerFestivalEvent": {
+    "description": "Summer Festival event name"
+  },
+  "summerFestivalEventDescription": "Celebrate summer with colorful flowers",
+  "@summerFestivalEventDescription": {
+    "description": "Summer Festival event description"
+  },
+  "harvestFestivalEvent": "Harvest Festival",
+  "@harvestFestivalEvent": {
+    "description": "Harvest Festival event name"
+  },
+  "harvestFestivalEventDescription": "Celebrate autumn's abundance",
+  "@harvestFestivalEventDescription": {
+    "description": "Harvest Festival event description"
+  },
+  "winterFestivalEvent": "Winter Festival",
+  "@winterFestivalEvent": {
+    "description": "Winter Festival event name"
+  },
+  "winterFestivalEventDescription": "Light up the dark season with crystals",
+  "@winterFestivalEventDescription": {
+    "description": "Winter Festival event description"
+  },
+  "specialUpdateEvent": "Special Update",
+  "@specialUpdateEvent": {
+    "description": "Special Update event name"
+  },
+  "specialUpdateEventDescription": "Discover new features",
+  "@specialUpdateEventDescription": {
+    "description": "Special Update event description"
+  },
+  "communityChallengeEvent": "Community Challenge",
+  "@communityChallengeEvent": {
+    "description": "Community Challenge event name"
+  },
+  "communityChallengeEventDescription": "Take on challenges with the whole community",
+  "@communityChallengeEventDescription": {
+    "description": "Community Challenge event description"
+  },
+  "limitedTimeEvent": "Limited Time Event",
+  "@limitedTimeEvent": {
+    "description": "Limited Time Event name"
+  },
+  "limitedTimeEventDescription": "Enjoy this unique event before it disappears",
+  "@limitedTimeEventDescription": {
+    "description": "Limited Time Event description"
+  },
+  "birthdayEvent": "Mind Bloom Birthday",
+  "@birthdayEvent": {
+    "description": "Birthday event name"
+  },
+  "birthdayEventDescription": "Celebrate one year of Mind Bloom with surprises",
+  "@birthdayEventDescription": {
+    "description": "Birthday event description"
+  },
+  "milestoneEvent": "Milestone Event",
+  "@milestoneEvent": {
+    "description": "Milestone event name"
+  },
+  "milestoneEventDescription": "Celebrate the game's major milestones",
+  "@milestoneEventDescription": {
+    "description": "Milestone event description"
+  },
+  "earthDayEvent": "Earth Day",
+  "@earthDayEvent": {
+    "description": "Earth Day event name"
+  },
+  "earthDayEventDescription": "Protect nature with eco-friendly plants",
+  "@earthDayEventDescription": {
+    "description": "Earth Day event description"
+  },
+  "independenceDayEvent": "Independence Day",
+  "@independenceDayEvent": {
+    "description": "Independence Day event name"
+  },
+  "independenceDayEventDescription": "Celebrate with patriotic plants",
+  "@independenceDayEventDescription": {
+    "description": "Independence Day event description"
+  },
+  "summerFestivalEvent": "Summer Festival",
+  "@summerFestivalEvent": {
+    "description": "Summer Festival event name"
+  },
+  "summerFestivalEventDescription": "Grand summer festival with many rewards",
+  "@summerFestivalEventDescription": {
+    "description": "Summer Festival event description"
+  },
+  "completeActions": "Complete {target} {actionType} actions",
+  "@completeActions": {
+    "description": "Description for completing actions",
+    "placeholders": {
+      "target": {
+        "type": "int",
+        "description": "Number of actions to complete"
+      },
+      "actionType": {
+        "type": "String",
+        "description": "Type of actions"
+      }
+    }
+  },
+  "playConsecutiveDays": "Play for {target} consecutive days",
+  "@playConsecutiveDays": {
+    "description": "Description for playing consecutive days",
+    "placeholders": {
+      "target": {
+        "type": "int",
+        "description": "Number of days"
+      }
+    }
+  },
+  "completeLevelsWithStars": "Complete {target} levels with {stars} stars",
+  "@completeLevelsWithStars": {
+    "description": "Description for completing levels with stars",
+    "placeholders": {
+      "target": {
+        "type": "int",
+        "description": "Number of levels"
+      },
+      "stars": {
+        "type": "int",
+        "description": "Number of stars"
+      }
+    }
+  },
+  "completeQuests": "Complete {target} {questType} quests",
+  "@completeQuests": {
+    "description": "Description for completing quests",
+    "placeholders": {
+      "target": {
+        "type": "int",
+        "description": "Number of quests"
+      },
+      "questType": {
+        "type": "String",
+        "description": "Type of quests"
+      }
+    }
+  },
+  "collectItems": "Collect {target} {itemType} items",
+  "@collectItems": {
+    "description": "Description for collecting items",
+    "placeholders": {
+      "target": {
+        "type": "int",
+        "description": "Number of items"
+      },
+      "itemType": {
+        "type": "String",
+        "description": "Type of items"
+      }
+    }
+  },
+  "completeLevelsInDays": "Complete {target} levels in {days} days",
+  "@completeLevelsInDays": {
+    "description": "Description for completing levels in X days",
+    "placeholders": {
+      "target": {
+        "type": "int",
+        "description": "Number of levels"
+      },
+      "days": {
+        "type": "int",
+        "description": "Number of days"
+      }
+    }
+  },
+  "giveGifts": "Give {target} gifts",
+  "@giveGifts": {
+    "description": "Description for giving gifts",
+    "placeholders": {
+      "target": {
+        "type": "int",
+        "description": "Number of gifts"
+      }
+    }
+  },
+  "exploreNewFeatures": "Explore the new features",
+  "@exploreNewFeatures": {
+    "description": "Description for exploring new features"
+  },
+  
+  "loadingEvents": "Loading events...",
+  "@loadingEvents": {
+    "description": "Message for loading events"
+  },
+  
+  "activeEvents": "Active Events",
+  "@activeEvents": {
+    "description": "Title for active events section"
+  },
+  
+  "thisMonth": "This Month",
+  "@thisMonth": {
+    "description": "Title for this month's events section"
+  },
+  
+  "upcomingEvents": "Upcoming Events",
+  "@upcomingEvents": {
+    "description": "Title for upcoming events section"
+  },
+  
+  "daysRemaining": "{count} days remaining",
+  "@daysRemaining": {
+    "description": "Number of days remaining for an event",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "lastDay": "Last day",
+  "@lastDay": {
+    "description": "Indicates the last day of an event"
+  },
+  
+  "participate": "Participate",
+  "@participate": {
+    "description": "Button to participate in an event"
+  },
+  
+  "daysLeft": "{count} days",
+  "@daysLeft": {
+    "description": "Number of days left",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "inDays": "In {count} days",
+  "@inDays": {
+    "description": "Number of days before an event starts",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "finished": "Finished",
+  "@finished": {
+    "description": "Indicates that an event is finished"
+  },
+  
+  "challengesCount": "Challenges ({count})",
+  "@challengesCount": {
+    "description": "Number of challenges in an event",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "comingSoon": "Coming soon",
+  "@comingSoon": {
+    "description": "Indicates that an event will be available soon"
+  },
+  
+  "eventStatistics": "Event Statistics",
+  "@eventStatistics": {
+    "description": "Title for event statistics section"
+  },
+  
+  "events": "Events",
+  "@events": {
+    "description": "Word events"
+  },
+  
+  "active": "Active",
+  "@active": {
+    "description": "Indicates active events"
+  },
+  
+  "challenges": "Challenges",
+  "@challenges": {
+    "description": "Word challenges"
+  },
+  
+  "rewards": "Rewards",
+  "@rewards": {
+    "description": "Word rewards"
+  },
+  
+  "filterEvents": "Filter Events",
+  "@filterEvents": {
+    "description": "Title for event filter dialog"
+  },
+  
+  "filterFeatureComingSoon": "Filter feature coming soon...",
+  "@filterFeatureComingSoon": {
+    "description": "Message indicating that the filter feature is coming soon"
+  },
+  
+  "close": "Close",
+  "@close": {
+    "description": "Button to close a dialog"
+  },
+  
+  "participatingInEvent": "Participating in \"{eventName}\"...",
+  "@participatingInEvent": {
+    "description": "Message indicating participation in an event",
+    "placeholders": {
+      "eventName": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "fullLives": "Full Lives",
+  "@fullLives": {
+    "description": "Title for full lives item"
+  },
+  
+  "refillAllLives": "Refills all your lives (5/5)",
+  "@refillAllLives": {
+    "description": "Description for full lives item"
+  },
+  
+  "threeLives": "3 Lives",
+  "@threeLives": {
+    "description": "Title for 3 lives item"
+  },
+  
+  "addThreeLives": "Adds 3 lives to your stock",
+  "@addThreeLives": {
+    "description": "Description for 3 lives item"
+  },
+  
+  "twoHundredCoins": "200 Coins",
+  "@twoHundredCoins": {
+    "description": "Title for 200 coins item"
+  },
+  
+  "smallCoinBoost": "A small coin boost",
+  "@smallCoinBoost": {
+    "description": "Description for 200 coins item"
+  },
+  
+  "fiveHundredCoins": "500 Coins",
+  "@fiveHundredCoins": {
+    "description": "Title for 500 coins item"
+  },
+  
+  "goodCoinStock": "A good coin stock",
+  "@goodCoinStock": {
+    "description": "Description for 500 coins item"
+  },
+  
+  "thousandCoins": "1000 Coins",
+  "@thousandCoins": {
+    "description": "Title for 1000 coins item"
+  },
+  
+  "bigCoinStock": "A big coin stock",
+  "@bigCoinStock": {
+    "description": "Description for 1000 coins item"
+  },
+  
+  "twentyFiveGems": "25 Gems",
+  "@twentyFiveGems": {
+    "description": "Title for 25 gems item"
+  },
+  
+  "preciousGems": "Precious gems for premium purchases",
+  "@preciousGems": {
+    "description": "Description for 25 gems item"
+  },
+  
+  "shuffler": "Shuffler",
+  "@shuffler": {
+    "description": "Title for shuffler booster"
+  },
+  
+  "shuffleGrid": "Shuffles the grid for new moves",
+  "@shuffleGrid": {
+    "description": "Description for shuffler booster"
+  },
+  
+  "hint": "Hint",
+  "@hint": {
+    "description": "Title for hint booster"
+  },
+  
+  "revealWinningMove": "Reveals a winning move",
+  "@revealWinningMove": {
+    "description": "Description for hint booster"
+  },
+  
+  "bonusMoves": "Bonus moves",
+  "@bonusMoves": {
+    "description": "Title for bonus moves booster"
+  },
+  
+  "fiveExtraMoves": "+5 moves for the current level",
+  "@fiveExtraMoves": {
+    "description": "Description for bonus moves booster"
+  },
+  
+  "scoreMultiplier": "Score multiplier",
+  "@scoreMultiplier": {
+    "description": "Title for score multiplier booster"
+  },
+  
+  "doubleScoreThreeLevels": "x2 score for 3 levels",
+  "@doubleScoreThreeLevels": {
+    "description": "Description for score multiplier booster"
+  },
+  
+  "experienceBoost": "Experience boost",
+  "@experienceBoost": {
+    "description": "Title for experience booster"
+  },
+  
+  "hundredXpBoost": "+100 XP to progress faster",
+  "@hundredXpBoost": {
+    "description": "Description for experience booster"
+  },
+  
+  "skipLevel": "Skip a level",
+  "@skipLevel": {
+    "description": "Title for skip level"
+  },
+  
+  "unlockNextLevel": "Unlocks the next level",
+  "@unlockNextLevel": {
+    "description": "Description for skip level"
+  },
+  
+  "unlockAllLevels": "Unlock all levels",
+  "@unlockAllLevels": {
+    "description": "Title for unlock all levels"
+  },
+  
+  "accessAllLevels": "Access to all game levels",
+  "@accessAllLevels": {
+    "description": "Description for unlock all levels"
+  },
+  
+  "natureTheme": "Nature Theme",
+  "@natureTheme": {
+    "description": "Title for nature theme"
+  },
+  
+  "natureThemeDescription": "New visual theme with natural colors",
+  "@natureThemeDescription": {
+    "description": "Description for nature theme"
+  },
+  
+  "oceanTheme": "Ocean Theme",
+  "@oceanTheme": {
+    "description": "Title for ocean theme"
+  },
+  
+  "oceanThemeDescription": "Aquatic theme with blue colors",
+  "@oceanThemeDescription": {
+    "description": "Description for ocean theme"
+  },
+  
+  "goldFrame": "Gold frame",
+  "@goldFrame": {
+    "description": "Title for gold frame"
+  },
+  
+  "goldFrameDescription": "Gold frame for your avatar",
+  "@goldFrameDescription": {
+    "description": "Description for gold frame"
+  },
+  
+  "removeAds": "Remove ads",
+  "@removeAds": {
+    "description": "Title for remove ads"
+  },
+  
+  "playWithoutAds": "Play without advertising interruption",
+  "@playWithoutAds": {
+    "description": "Description for remove ads"
+  },
+  
+  "premiumPack": "Premium Pack",
+  "@premiumPack": {
+    "description": "Title for premium pack"
+  },
+  
+  "allPremiumBenefits": "All premium benefits + 100 gems",
+  "@allPremiumBenefits": {
+    "description": "Description for premium pack"
+  },
+  
+  "progression": "Progression",
+  "@progression": {
+    "description": "Name of progression category"
+  },
+  
+  "cosmetics": "Cosmetics",
+  "@cosmetics": {
+    "description": "Name of cosmetics category"
+  },
+  
+  "freeRewards": "🎁 Free Rewards",
+  "@freeRewards": {
+    "description": "Title for free rewards"
+  },
+
+  "world_garden_beginnings": "Garden of Beginnings",
+  "@world_garden_beginnings": {
+    "description": "Name of world 1 - Garden of Beginnings"
+  },
+  "world_garden_beginnings_description": "Begin your adventure in this peaceful garden where the first seeds of your journey come to life.",
+  "@world_garden_beginnings_description": {
+    "description": "Description of world 1"
+  },
+  "world_valley_flowers": "Valley of Flowers",
+  "@world_valley_flowers": {
+    "description": "Name of world 2 - Valley of Flowers"
+  },
+  "world_valley_flowers_description": "Explore a colorful valley where nature's most beautiful creations bloom.",
+  "@world_valley_flowers_description": {
+    "description": "Description of world 2"
+  },
+  "world_lunar_forest": "Lunar Forest",
+  "@world_lunar_forest": {
+    "description": "Name of world 3 - Lunar Forest"
+  },
+  "world_lunar_forest_description": "Dive into the mysterious darkness of this forest bathed in lunar light.",
+  "@world_lunar_forest_description": {
+    "description": "Description of world 3"
+  },
+  "world_solar_meadow": "Solar Meadow",
+  "@world_solar_meadow": {
+    "description": "Name of world 4 - Solar Meadow"
+  },
+  "world_solar_meadow_description": "Bask in the benevolent warmth of this meadow gilded by the sun.",
+  "@world_solar_meadow_description": {
+    "description": "Description of world 4"
+  },
+  "world_crystal_caverns": "Crystal Caverns",
+  "@world_crystal_caverns": {
+    "description": "Name of world 5 - Crystal Caverns"
+  },
+  "world_crystal_caverns_description": "Discover the hidden treasures in these sparkling caves of precious crystals.",
+  "@world_crystal_caverns_description": {
+    "description": "Description of world 5"
+  },
+  "world_mystic_swamps": "Mystic Swamps",
+  "@world_mystic_swamps": {
+    "description": "Name of world 6 - Mystic Swamps"
+  },
+  "world_mystic_swamps_description": "Navigate through the troubled waters of these swamps filled with ancient magic.",
+  "@world_mystic_swamps_description": {
+    "description": "Description of world 6"
+  },
+  "world_burning_lands": "Burning Lands",
+  "@world_burning_lands": {
+    "description": "Name of world 7 - Burning Lands"
+  },
+  "world_burning_lands_description": "Survive the intense heat of these volcanic lands in permanent eruption.",
+  "@world_burning_lands_description": {
+    "description": "Description of world 7"
+  },
+  "world_eternal_glacier": "Eternal Glacier",
+  "@world_eternal_glacier": {
+    "description": "Name of world 8 - Eternal Glacier"
+  },
+  "world_eternal_glacier_description": "Brave the glacial cold of these pristine white expanses.",
+  "@world_eternal_glacier_description": {
+    "description": "Description of world 8"
+  },
+  "world_lost_rainbow": "Lost Rainbow",
+  "@world_lost_rainbow": {
+    "description": "Name of world 9 - Lost Rainbow"
+  },
+  "world_lost_rainbow_description": "Find the lost colors of this legendary rainbow with magical hues.",
+  "@world_lost_rainbow_description": {
+    "description": "Description of world 9"
+  },
+  "world_celestial_garden": "Celestial Garden",
+  "@world_celestial_garden": {
+    "description": "Name of world 10 - Celestial Garden"
+  },
+  "world_celestial_garden_description": "Access the ultimate garden where stars bloom and dreams become reality.",
+  "@world_celestial_garden_description": {
+    "description": "Description of world 10"
+  },
+
+  "worlds": "Worlds",
+  "@worlds": {
+    "description": "Title for worlds screen"
+  },
+  "levels": "Levels",
+  "@levels": {
+    "description": "Name of levels"
+  },
+  "enter": "Enter",
+  "@enter": {
+    "description": "Button to enter a world"
+  },
+  "locked": "Locked",
+  "@locked": {
+    "description": "Text for a locked world"
+  },
+
+  "tutorial_welcome_title": "Welcome to Mind Bloom!",
+  "@tutorial_welcome_title": {
+    "description": "Tutorial welcome title"
+  },
+  "tutorial_welcome_description": "Discover the magical world of plants and puzzles",
+  "@tutorial_welcome_description": {
+    "description": "Tutorial welcome description"
+  },
+  "tutorial_matching_title": "Make matches",
+  "@tutorial_matching_title": {
+    "description": "Tutorial matching section title"
+  },
+  "tutorial_matching_description": "Swap tiles to create lines of 3 or more of the same color",
+  "@tutorial_matching_description": {
+    "description": "Tutorial matching section description"
+  },
+  "tutorial_objectives_title": "Level objectives",
+  "@tutorial_objectives_title": {
+    "description": "Tutorial objectives section title"
+  },
+  "tutorial_objectives_description": "Each level has specific objectives to achieve to progress",
+  "@tutorial_objectives_description": {
+    "description": "Tutorial objectives section description"
+  },
+  "tutorial_hint_title": "Hint Button",
+  "@tutorial_hint_title": {
+    "description": "Tutorial hint section title"
+  },
+  "tutorial_hint_description": "Use the hint to reveal a winning move when you're stuck",
+  "@tutorial_hint_description": {
+    "description": "Tutorial hint section description"
+  },
+  "tutorial_shuffle_title": "Shuffle Button",
+  "@tutorial_shuffle_title": {
+    "description": "Tutorial shuffle section title"
+  },
+  "tutorial_shuffle_description": "Shuffle the grid to get new possible moves",
+  "@tutorial_shuffle_description": {
+    "description": "Tutorial shuffle section description"
+  },
+  "tutorial_stars_title": "Earn stars",
+  "@tutorial_stars_title": {
+    "description": "Tutorial stars section title"
+  },
+  "tutorial_stars_description": "The more objectives you achieve, the more stars you earn",
+  "@tutorial_stars_description": {
+    "description": "Tutorial stars section description"
+  },
+  "tutorial_collection_title": "Plant collection",
+  "@tutorial_collection_title": {
+    "description": "Tutorial collection section title"
+  },
+  "tutorial_collection_description": "Unlock new magical plants with special bonuses",
+  "@tutorial_collection_description": {
+    "description": "Tutorial collection section description"
+  },
+  "tutorial_skip": "Skip",
+  "@tutorial_skip": {
+    "description": "Button to skip tutorial"
+  },
+  "tutorial_next": "Next",
+  "@tutorial_next": {
+    "description": "Tutorial next button"
+  },
+  "tutorial_start": "Start",
+  "@tutorial_start": {
+    "description": "Button to start the game after tutorial"
+  },
+  "tutorial_complete": "Tutorial complete!",
+  "@tutorial_complete": {
+    "description": "Tutorial completion message"
+  },
+  "tutorial_complete_description": "You are now ready to explore the world of Mind Bloom!",
+  "@tutorial_complete_description": {
+    "description": "Tutorial completion description"
+  },
+  "tutorial_skip_confirmation_title": "Skip tutorial?",
+  "@tutorial_skip_confirmation_title": {
+    "description": "Skip tutorial confirmation dialog title"
+  },
+  "tutorial_skip_confirmation_message": "Are you sure you want to skip the tutorial? You can review it later in the settings.",
+  "@tutorial_skip_confirmation_message": {
+    "description": "Skip tutorial confirmation dialog message"
   }
 }

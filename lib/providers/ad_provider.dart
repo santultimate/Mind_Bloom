@@ -1,4 +1,3 @@
-import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,7 +44,7 @@ class AdProvider extends ChangeNotifier {
         _adsEnabled = false;
         _isInitialized = true;
         if (kDebugMode) {
-          print('🚀 AdProvider initialized successfully (ads disabled on web)');
+          // print('🚀 AdProvider initialized successfully (ads disabled on web)');
         }
         return;
       }
@@ -56,15 +55,15 @@ class AdProvider extends ChangeNotifier {
       _isInitialized = true;
 
       if (kDebugMode) {
-        print('🚀 AdProvider initialized successfully (ads enabled)');
-        print('📱 Platform: ${Platform.isAndroid ? 'Android' : 'iOS'}');
-        print('🎯 Banner Ad Unit ID: $_bannerAdUnitId');
-        print('🎯 Interstitial Ad Unit ID: $_interstitialAdUnitId');
-        print('🎯 Rewarded Ad Unit ID: $_rewardedAdUnitId');
+        // print('🚀 AdProvider initialized successfully (ads enabled)');
+        // print('📱 Platform: ${Platform.isAndroid ? 'Android' : 'iOS'}');
+        // print('🎯 Banner Ad Unit ID: $_bannerAdUnitId');
+        // print('🎯 Interstitial Ad Unit ID: $_interstitialAdUnitId');
+        // print('🎯 Rewarded Ad Unit ID: $_rewardedAdUnitId');
       }
     } catch (e) {
       if (kDebugMode) {
-        print('Error initializing AdProvider: $e');
+        // print('Error initializing AdProvider: $e');
       }
     }
   }
@@ -118,21 +117,21 @@ class AdProvider extends ChangeNotifier {
         },
         onAdFailedToLoad: (ad, error) {
           if (kDebugMode) {
-            print('❌ Banner ad failed to load - Unit ID: $_bannerAdUnitId');
-            print('   Error code: ${error.code}');
-            print('   Error message: ${error.message}');
-            print('   Error domain: ${error.domain}');
+            // print('❌ Banner ad failed to load - Unit ID: $_bannerAdUnitId');
+            // print('   Error code: ${error.code}');
+            // print('   Error message: ${error.message}');
+            // print('   Error domain: ${error.domain}');
           }
           ad.dispose();
         },
         onAdOpened: (ad) {
           if (kDebugMode) {
-            print('Banner ad opened');
+            // print('Banner ad opened');
           }
         },
         onAdClosed: (ad) {
           if (kDebugMode) {
-            print('Banner ad closed');
+            // print('Banner ad closed');
           }
         },
       ),
@@ -160,9 +159,9 @@ class AdProvider extends ChangeNotifier {
             if (kDebugMode) {
               print(
                   '❌ Interstitial ad failed to load - Unit ID: $_interstitialAdUnitId');
-              print('   Error code: ${error.code}');
-              print('   Error message: ${error.message}');
-              print('   Error domain: ${error.domain}');
+              // print('   Error code: ${error.code}');
+              // print('   Error message: ${error.message}');
+              // print('   Error domain: ${error.domain}');
             }
           },
         ),
@@ -170,7 +169,7 @@ class AdProvider extends ChangeNotifier {
       return interstitialAd;
     } catch (e) {
       if (kDebugMode) {
-        print('Error loading interstitial ad: $e');
+        // print('Error loading interstitial ad: $e');
       }
       return null;
     }
@@ -195,7 +194,7 @@ class AdProvider extends ChangeNotifier {
       onAdShowedFullScreenContent: (ad) {
         adShown = true;
         if (kDebugMode) {
-          print('Interstitial ad showed full screen content');
+          // print('Interstitial ad showed full screen content');
         }
       },
       onAdDismissedFullScreenContent: (ad) {
@@ -203,13 +202,13 @@ class AdProvider extends ChangeNotifier {
         _interstitialCounter = 0;
         _saveUserPreferences();
         if (kDebugMode) {
-          print('Interstitial ad dismissed');
+          // print('Interstitial ad dismissed');
         }
       },
       onAdFailedToShowFullScreenContent: (ad, error) {
         ad.dispose();
         if (kDebugMode) {
-          print('Interstitial ad failed to show: $error');
+          // print('Interstitial ad failed to show: $error');
         }
       },
     );
@@ -239,9 +238,9 @@ class AdProvider extends ChangeNotifier {
             if (kDebugMode) {
               print(
                   '❌ Rewarded ad failed to load - Unit ID: $_rewardedAdUnitId');
-              print('   Error code: ${error.code}');
-              print('   Error message: ${error.message}');
-              print('   Error domain: ${error.domain}');
+              // print('   Error code: ${error.code}');
+              // print('   Error message: ${error.message}');
+              // print('   Error domain: ${error.domain}');
             }
           },
         ),
@@ -249,7 +248,7 @@ class AdProvider extends ChangeNotifier {
       return rewardedAd;
     } catch (e) {
       if (kDebugMode) {
-        print('Error loading rewarded ad: $e');
+        // print('Error loading rewarded ad: $e');
       }
       return null;
     }
@@ -269,19 +268,19 @@ class AdProvider extends ChangeNotifier {
     ad.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (ad) {
         if (kDebugMode) {
-          print('Rewarded ad showed full screen content');
+          // print('Rewarded ad showed full screen content');
         }
       },
       onAdDismissedFullScreenContent: (ad) {
         ad.dispose();
         if (kDebugMode) {
-          print('Rewarded ad dismissed');
+          // print('Rewarded ad dismissed');
         }
       },
       onAdFailedToShowFullScreenContent: (ad, error) {
         ad.dispose();
         if (kDebugMode) {
-          print('Rewarded ad failed to show: $error');
+          // print('Rewarded ad failed to show: $error');
         }
       },
     );
@@ -291,7 +290,7 @@ class AdProvider extends ChangeNotifier {
         rewardEarned = true;
         onReward();
         if (kDebugMode) {
-          print('User earned reward: ${reward.amount} ${reward.type}');
+          // print('User earned reward: ${reward.amount} ${reward.type}');
         }
       },
     );

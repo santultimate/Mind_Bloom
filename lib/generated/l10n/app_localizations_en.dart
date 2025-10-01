@@ -396,7 +396,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get active => 'ACTIVE';
+  String get active => 'Active';
 
   @override
   String get inactive => 'Inactive';
@@ -745,8 +745,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get activeEvent => 'ACTIVE EVENT';
 
   @override
-  String daysRemaining(int days) {
-    return '$days days remaining';
+  String daysRemaining(int count) {
+    return '$count days remaining';
   }
 
   @override
@@ -897,7 +897,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hintDescription => 'Shows a possible move';
 
   @override
-  String get removeAds => 'No Ads';
+  String get removeAds => 'Remove ads';
 
   @override
   String get removeAdsDescription => 'Removes all advertisements';
@@ -919,9 +919,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String scoreMultiplier(int value) {
-    return 'Score x$value';
-  }
+  String get scoreMultiplier => 'Score multiplier';
 
   @override
   String coinMultiplier(int value) {
@@ -1355,7 +1353,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String collectTilesObjective(int count, String tileName) {
-    return 'Collect $count ${tileName}s';
+    return 'Collect $count $tileName';
   }
 
   @override
@@ -1416,4 +1414,506 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shareScoreError => 'Error sharing score';
+
+  @override
+  String get quit => 'Quit';
+
+  @override
+  String get winterSolstice => 'Winter Solstice';
+
+  @override
+  String get winterSolsticeDescription =>
+      'Light up the night with ice crystals';
+
+  @override
+  String get valentineDay => 'Valentine\'s Day';
+
+  @override
+  String get valentineDayDescription => 'Share love with romantic flowers';
+
+  @override
+  String get shareAchievements => 'Badge Sharer';
+
+  @override
+  String get shareAchievementsDescription =>
+      'Share 5 achievements with your friends';
+
+  @override
+  String get socialButterfly => 'Social Butterfly';
+
+  @override
+  String get socialButterflyDescription =>
+      'Share 10 achievements with your friends';
+
+  @override
+  String get shareThisBadge => 'Share this badge';
+
+  @override
+  String get shareMyAchievements => 'Share my achievements';
+
+  @override
+  String badgeShared(String badgeTitle) {
+    return 'Badge \"$badgeTitle\" shared! 🎉';
+  }
+
+  @override
+  String get achievementsShared => 'My achievements shared! 🎉';
+
+  @override
+  String get easterEvent => 'Magical Easter';
+
+  @override
+  String get easterEventDescription => 'Discover hidden magical eggs';
+
+  @override
+  String get halloweenEvent => 'Enchanted Halloween';
+
+  @override
+  String get halloweenEventDescription => 'Plant mysterious pumpkins';
+
+  @override
+  String get christmasEvent => 'Fairy Christmas';
+
+  @override
+  String get christmasEventDescription =>
+      'Decorate your garden with Christmas stars';
+
+  @override
+  String get newYearEvent => 'Bright New Year';
+
+  @override
+  String get newYearEventDescription => 'Start the year with magical fireworks';
+
+  @override
+  String get thanksgivingEvent => 'Thanksgiving';
+
+  @override
+  String get thanksgivingEventDescription => 'Harvest abundance with gratitude';
+
+  @override
+  String get motherDayEvent => 'Mother\'s Day';
+
+  @override
+  String get motherDayEventDescription =>
+      'Offer flowers as a tribute to mothers';
+
+  @override
+  String get fatherDayEvent => 'Father\'s Day';
+
+  @override
+  String get fatherDayEventDescription =>
+      'Cultivate strength with robust plants';
+
+  @override
+  String get springCleaningEvent => 'Spring Cleaning';
+
+  @override
+  String get springCleaningEventDescription =>
+      'Refresh your garden for a new season';
+
+  @override
+  String get summerFestivalEvent => 'Summer Festival';
+
+  @override
+  String get summerFestivalEventDescription =>
+      'Grand summer festival with many rewards';
+
+  @override
+  String get harvestFestivalEvent => 'Harvest Festival';
+
+  @override
+  String get harvestFestivalEventDescription => 'Celebrate autumn\'s abundance';
+
+  @override
+  String get winterFestivalEvent => 'Winter Festival';
+
+  @override
+  String get winterFestivalEventDescription =>
+      'Light up the dark season with crystals';
+
+  @override
+  String get specialUpdateEvent => 'Special Update';
+
+  @override
+  String get specialUpdateEventDescription => 'Discover new features';
+
+  @override
+  String get communityChallengeEvent => 'Community Challenge';
+
+  @override
+  String get communityChallengeEventDescription =>
+      'Take on challenges with the whole community';
+
+  @override
+  String get limitedTimeEvent => 'Limited Time Event';
+
+  @override
+  String get limitedTimeEventDescription =>
+      'Enjoy this unique event before it disappears';
+
+  @override
+  String get birthdayEvent => 'Mind Bloom Birthday';
+
+  @override
+  String get birthdayEventDescription =>
+      'Celebrate one year of Mind Bloom with surprises';
+
+  @override
+  String get milestoneEvent => 'Milestone Event';
+
+  @override
+  String get milestoneEventDescription =>
+      'Celebrate the game\'s major milestones';
+
+  @override
+  String get earthDayEvent => 'Earth Day';
+
+  @override
+  String get earthDayEventDescription =>
+      'Protect nature with eco-friendly plants';
+
+  @override
+  String get independenceDayEvent => 'Independence Day';
+
+  @override
+  String get independenceDayEventDescription =>
+      'Celebrate with patriotic plants';
+
+  @override
+  String completeActions(int target, String actionType) {
+    return 'Complete $target $actionType actions';
+  }
+
+  @override
+  String playConsecutiveDays(int target) {
+    return 'Play for $target consecutive days';
+  }
+
+  @override
+  String completeLevelsWithStars(int target, int stars) {
+    return 'Complete $target levels with $stars stars';
+  }
+
+  @override
+  String completeQuests(int target, String questType) {
+    return 'Complete $target $questType quests';
+  }
+
+  @override
+  String collectItems(int target, String itemType) {
+    return 'Collect $target $itemType items';
+  }
+
+  @override
+  String completeLevelsInDays(int target, int days) {
+    return 'Complete $target levels in $days days';
+  }
+
+  @override
+  String giveGifts(int target) {
+    return 'Give $target gifts';
+  }
+
+  @override
+  String get exploreNewFeatures => 'Explore the new features';
+
+  @override
+  String get loadingEvents => 'Loading events...';
+
+  @override
+  String get activeEvents => 'Active Events';
+
+  @override
+  String get thisMonth => 'This Month';
+
+  @override
+  String get upcomingEvents => 'Upcoming Events';
+
+  @override
+  String get lastDay => 'Last day';
+
+  @override
+  String daysLeft(int count) {
+    return '$count days';
+  }
+
+  @override
+  String inDays(int count) {
+    return 'In $count days';
+  }
+
+  @override
+  String get finished => 'Finished';
+
+  @override
+  String challengesCount(int count) {
+    return 'Challenges ($count)';
+  }
+
+  @override
+  String get eventStatistics => 'Event Statistics';
+
+  @override
+  String get filterEvents => 'Filter Events';
+
+  @override
+  String get filterFeatureComingSoon => 'Filter feature coming soon...';
+
+  @override
+  String participatingInEvent(String eventName) {
+    return 'Participating in \"$eventName\"...';
+  }
+
+  @override
+  String get fullLives => 'Full Lives';
+
+  @override
+  String get refillAllLives => 'Refills all your lives (5/5)';
+
+  @override
+  String get threeLives => '3 Lives';
+
+  @override
+  String get addThreeLives => 'Adds 3 lives to your stock';
+
+  @override
+  String get twoHundredCoins => '200 Coins';
+
+  @override
+  String get smallCoinBoost => 'A small coin boost';
+
+  @override
+  String get fiveHundredCoins => '500 Coins';
+
+  @override
+  String get goodCoinStock => 'A good coin stock';
+
+  @override
+  String get thousandCoins => '1000 Coins';
+
+  @override
+  String get bigCoinStock => 'A big coin stock';
+
+  @override
+  String get twentyFiveGems => '25 Gems';
+
+  @override
+  String get preciousGems => 'Precious gems for premium purchases';
+
+  @override
+  String get shuffleGrid => 'Shuffles the grid for new moves';
+
+  @override
+  String get revealWinningMove => 'Reveals a winning move';
+
+  @override
+  String get bonusMoves => 'Bonus moves';
+
+  @override
+  String get fiveExtraMoves => '+5 moves for the current level';
+
+  @override
+  String get doubleScoreThreeLevels => 'x2 score for 3 levels';
+
+  @override
+  String get experienceBoost => 'Experience boost';
+
+  @override
+  String get hundredXpBoost => '+100 XP to progress faster';
+
+  @override
+  String get skipLevel => 'Skip a level';
+
+  @override
+  String get unlockNextLevel => 'Unlocks the next level';
+
+  @override
+  String get unlockAllLevels => 'Unlock all levels';
+
+  @override
+  String get accessAllLevels => 'Access to all game levels';
+
+  @override
+  String get natureTheme => 'Nature Theme';
+
+  @override
+  String get natureThemeDescription => 'New visual theme with natural colors';
+
+  @override
+  String get oceanTheme => 'Ocean Theme';
+
+  @override
+  String get oceanThemeDescription => 'Aquatic theme with blue colors';
+
+  @override
+  String get goldFrame => 'Gold frame';
+
+  @override
+  String get goldFrameDescription => 'Gold frame for your avatar';
+
+  @override
+  String get playWithoutAds => 'Play without advertising interruption';
+
+  @override
+  String get premiumPack => 'Premium Pack';
+
+  @override
+  String get allPremiumBenefits => 'All premium benefits + 100 gems';
+
+  @override
+  String get cosmetics => 'Cosmetics';
+
+  @override
+  String get freeRewards => '🎁 Free Rewards';
+
+  @override
+  String get world_garden_beginnings => 'Garden of Beginnings';
+
+  @override
+  String get world_garden_beginnings_description =>
+      'Begin your adventure in this peaceful garden where the first seeds of your journey come to life.';
+
+  @override
+  String get world_valley_flowers => 'Valley of Flowers';
+
+  @override
+  String get world_valley_flowers_description =>
+      'Explore a colorful valley where nature\'s most beautiful creations bloom.';
+
+  @override
+  String get world_lunar_forest => 'Lunar Forest';
+
+  @override
+  String get world_lunar_forest_description =>
+      'Dive into the mysterious darkness of this forest bathed in lunar light.';
+
+  @override
+  String get world_solar_meadow => 'Solar Meadow';
+
+  @override
+  String get world_solar_meadow_description =>
+      'Bask in the benevolent warmth of this meadow gilded by the sun.';
+
+  @override
+  String get world_crystal_caverns => 'Crystal Caverns';
+
+  @override
+  String get world_crystal_caverns_description =>
+      'Discover the hidden treasures in these sparkling caves of precious crystals.';
+
+  @override
+  String get world_mystic_swamps => 'Mystic Swamps';
+
+  @override
+  String get world_mystic_swamps_description =>
+      'Navigate through the troubled waters of these swamps filled with ancient magic.';
+
+  @override
+  String get world_burning_lands => 'Burning Lands';
+
+  @override
+  String get world_burning_lands_description =>
+      'Survive the intense heat of these volcanic lands in permanent eruption.';
+
+  @override
+  String get world_eternal_glacier => 'Eternal Glacier';
+
+  @override
+  String get world_eternal_glacier_description =>
+      'Brave the glacial cold of these pristine white expanses.';
+
+  @override
+  String get world_lost_rainbow => 'Lost Rainbow';
+
+  @override
+  String get world_lost_rainbow_description =>
+      'Find the lost colors of this legendary rainbow with magical hues.';
+
+  @override
+  String get world_celestial_garden => 'Celestial Garden';
+
+  @override
+  String get world_celestial_garden_description =>
+      'Access the ultimate garden where stars bloom and dreams become reality.';
+
+  @override
+  String get worlds => 'Worlds';
+
+  @override
+  String get levels => 'Levels';
+
+  @override
+  String get enter => 'Enter';
+
+  @override
+  String get tutorial_welcome_title => 'Welcome to Mind Bloom!';
+
+  @override
+  String get tutorial_welcome_description =>
+      'Discover the magical world of plants and puzzles';
+
+  @override
+  String get tutorial_matching_title => 'Make matches';
+
+  @override
+  String get tutorial_matching_description =>
+      'Swap tiles to create lines of 3 or more of the same color';
+
+  @override
+  String get tutorial_objectives_title => 'Level objectives';
+
+  @override
+  String get tutorial_objectives_description =>
+      'Each level has specific objectives to achieve to progress';
+
+  @override
+  String get tutorial_hint_title => 'Hint Button';
+
+  @override
+  String get tutorial_hint_description =>
+      'Use the hint to reveal a winning move when you\'re stuck';
+
+  @override
+  String get tutorial_shuffle_title => 'Shuffle Button';
+
+  @override
+  String get tutorial_shuffle_description =>
+      'Shuffle the grid to get new possible moves';
+
+  @override
+  String get tutorial_stars_title => 'Earn stars';
+
+  @override
+  String get tutorial_stars_description =>
+      'The more objectives you achieve, the more stars you earn';
+
+  @override
+  String get tutorial_collection_title => 'Plant collection';
+
+  @override
+  String get tutorial_collection_description =>
+      'Unlock new magical plants with special bonuses';
+
+  @override
+  String get tutorial_skip => 'Skip';
+
+  @override
+  String get tutorial_next => 'Next';
+
+  @override
+  String get tutorial_start => 'Start';
+
+  @override
+  String get tutorial_complete => 'Tutorial complete!';
+
+  @override
+  String get tutorial_complete_description =>
+      'You are now ready to explore the world of Mind Bloom!';
+
+  @override
+  String get tutorial_skip_confirmation_title => 'Skip tutorial?';
+
+  @override
+  String get tutorial_skip_confirmation_message =>
+      'Are you sure you want to skip the tutorial? You can review it later in the settings.';
 }

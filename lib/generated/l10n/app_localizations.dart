@@ -206,7 +206,7 @@ abstract class AppLocalizations {
   /// **'Menu'**
   String get menu;
 
-  /// Hint booster title
+  /// Title for hint booster
   ///
   /// In en, this message translates to:
   /// **'Hint'**
@@ -272,7 +272,7 @@ abstract class AppLocalizations {
   /// **'Edit'**
   String get edit;
 
-  /// Close button text
+  /// Button to close a dialog
   ///
   /// In en, this message translates to:
   /// **'Close'**
@@ -752,7 +752,7 @@ abstract class AppLocalizations {
   /// **'Achievements'**
   String get achievements;
 
-  /// Events screen title
+  /// Word events
   ///
   /// In en, this message translates to:
   /// **'Events'**
@@ -794,7 +794,7 @@ abstract class AppLocalizations {
   /// **'Unlocked'**
   String get unlocked;
 
-  /// Locked button text
+  /// Text for a locked world
   ///
   /// In en, this message translates to:
   /// **'Locked'**
@@ -812,10 +812,10 @@ abstract class AppLocalizations {
   /// **'+{count} bonus'**
   String bonus(int count);
 
-  /// Active status badge
+  /// Indicates active events
   ///
   /// In en, this message translates to:
-  /// **'ACTIVE'**
+  /// **'Active'**
   String get active;
 
   /// Inactive text
@@ -1046,13 +1046,13 @@ abstract class AppLocalizations {
   /// **'Complete special objectives to earn exclusive rewards!'**
   String get eventDescription;
 
-  /// Participate button text
+  /// Button to participate in an event
   ///
   /// In en, this message translates to:
   /// **'Participate'**
   String get participate;
 
-  /// Rewards statistic label
+  /// Word rewards
   ///
   /// In en, this message translates to:
   /// **'Rewards'**
@@ -1478,11 +1478,11 @@ abstract class AppLocalizations {
   /// **'ACTIVE EVENT'**
   String get activeEvent;
 
-  /// Days remaining for event
+  /// Number of days remaining for an event
   ///
   /// In en, this message translates to:
-  /// **'{days} days remaining'**
-  String daysRemaining(int days);
+  /// **'{count} days remaining'**
+  String daysRemaining(int count);
 
   /// Event starts in X days
   ///
@@ -1520,13 +1520,13 @@ abstract class AppLocalizations {
   /// **'COMPLETED'**
   String get completed;
 
-  /// Challenges section title
+  /// Word challenges
   ///
   /// In en, this message translates to:
   /// **'Challenges'**
   String get challenges;
 
-  /// Coming soon button text
+  /// Indicates that an event will be available soon
   ///
   /// In en, this message translates to:
   /// **'Coming soon'**
@@ -1712,7 +1712,7 @@ abstract class AppLocalizations {
   /// **'Premium gem pack'**
   String get gems50Description;
 
-  /// Shuffler booster title
+  /// Title for shuffler booster
   ///
   /// In en, this message translates to:
   /// **'Shuffler'**
@@ -1730,10 +1730,10 @@ abstract class AppLocalizations {
   /// **'Shows a possible move'**
   String get hintDescription;
 
-  /// Remove ads item title
+  /// Title for remove ads
   ///
   /// In en, this message translates to:
-  /// **'No Ads'**
+  /// **'Remove ads'**
   String get removeAds;
 
   /// Remove ads item description
@@ -1766,11 +1766,11 @@ abstract class AppLocalizations {
   /// **'+{value} extra moves'**
   String extraMoves(int value);
 
-  /// Score multiplier bonus description
+  /// Title for score multiplier booster
   ///
   /// In en, this message translates to:
-  /// **'Score x{value}'**
-  String scoreMultiplier(int value);
+  /// **'Score multiplier'**
+  String get scoreMultiplier;
 
   /// Coin multiplier bonus description
   ///
@@ -1790,7 +1790,7 @@ abstract class AppLocalizations {
   /// **'{plantName} upgraded to level {level}!'**
   String plantUpgraded(String plantName, int level);
 
-  /// Progression category filter
+  /// Name of progression category
   ///
   /// In en, this message translates to:
   /// **'Progression'**
@@ -2549,7 +2549,7 @@ abstract class AppLocalizations {
   /// Collect tiles objective
   ///
   /// In en, this message translates to:
-  /// **'Collect {count} {tileName}s'**
+  /// **'Collect {count} {tileName}'**
   String collectTilesObjective(int count, String tileName);
 
   /// Clear blockers objective
@@ -2647,6 +2647,894 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error sharing score'**
   String get shareScoreError;
+
+  /// Quit button text
+  ///
+  /// In en, this message translates to:
+  /// **'Quit'**
+  String get quit;
+
+  /// Winter event name
+  ///
+  /// In en, this message translates to:
+  /// **'Winter Solstice'**
+  String get winterSolstice;
+
+  /// Winter event description
+  ///
+  /// In en, this message translates to:
+  /// **'Light up the night with ice crystals'**
+  String get winterSolsticeDescription;
+
+  /// Valentine's Day event name
+  ///
+  /// In en, this message translates to:
+  /// **'Valentine\'s Day'**
+  String get valentineDay;
+
+  /// Valentine's Day event description
+  ///
+  /// In en, this message translates to:
+  /// **'Share love with romantic flowers'**
+  String get valentineDayDescription;
+
+  /// Achievement title for sharing badges
+  ///
+  /// In en, this message translates to:
+  /// **'Badge Sharer'**
+  String get shareAchievements;
+
+  /// Achievement description for sharing badges
+  ///
+  /// In en, this message translates to:
+  /// **'Share 5 achievements with your friends'**
+  String get shareAchievementsDescription;
+
+  /// Social butterfly achievement title
+  ///
+  /// In en, this message translates to:
+  /// **'Social Butterfly'**
+  String get socialButterfly;
+
+  /// Social butterfly achievement description
+  ///
+  /// In en, this message translates to:
+  /// **'Share 10 achievements with your friends'**
+  String get socialButterflyDescription;
+
+  /// Tooltip for sharing an individual badge
+  ///
+  /// In en, this message translates to:
+  /// **'Share this badge'**
+  String get shareThisBadge;
+
+  /// Button to share all achievements
+  ///
+  /// In en, this message translates to:
+  /// **'Share my achievements'**
+  String get shareMyAchievements;
+
+  /// Confirmation message for sharing a badge
+  ///
+  /// In en, this message translates to:
+  /// **'Badge \"{badgeTitle}\" shared! 🎉'**
+  String badgeShared(String badgeTitle);
+
+  /// Confirmation message for sharing all achievements
+  ///
+  /// In en, this message translates to:
+  /// **'My achievements shared! 🎉'**
+  String get achievementsShared;
+
+  /// Easter event name
+  ///
+  /// In en, this message translates to:
+  /// **'Magical Easter'**
+  String get easterEvent;
+
+  /// Easter event description
+  ///
+  /// In en, this message translates to:
+  /// **'Discover hidden magical eggs'**
+  String get easterEventDescription;
+
+  /// Halloween event name
+  ///
+  /// In en, this message translates to:
+  /// **'Enchanted Halloween'**
+  String get halloweenEvent;
+
+  /// Halloween event description
+  ///
+  /// In en, this message translates to:
+  /// **'Plant mysterious pumpkins'**
+  String get halloweenEventDescription;
+
+  /// Christmas event name
+  ///
+  /// In en, this message translates to:
+  /// **'Fairy Christmas'**
+  String get christmasEvent;
+
+  /// Christmas event description
+  ///
+  /// In en, this message translates to:
+  /// **'Decorate your garden with Christmas stars'**
+  String get christmasEventDescription;
+
+  /// New Year event name
+  ///
+  /// In en, this message translates to:
+  /// **'Bright New Year'**
+  String get newYearEvent;
+
+  /// New Year event description
+  ///
+  /// In en, this message translates to:
+  /// **'Start the year with magical fireworks'**
+  String get newYearEventDescription;
+
+  /// Thanksgiving event name
+  ///
+  /// In en, this message translates to:
+  /// **'Thanksgiving'**
+  String get thanksgivingEvent;
+
+  /// Thanksgiving event description
+  ///
+  /// In en, this message translates to:
+  /// **'Harvest abundance with gratitude'**
+  String get thanksgivingEventDescription;
+
+  /// Mother's Day event name
+  ///
+  /// In en, this message translates to:
+  /// **'Mother\'s Day'**
+  String get motherDayEvent;
+
+  /// Mother's Day event description
+  ///
+  /// In en, this message translates to:
+  /// **'Offer flowers as a tribute to mothers'**
+  String get motherDayEventDescription;
+
+  /// Father's Day event name
+  ///
+  /// In en, this message translates to:
+  /// **'Father\'s Day'**
+  String get fatherDayEvent;
+
+  /// Father's Day event description
+  ///
+  /// In en, this message translates to:
+  /// **'Cultivate strength with robust plants'**
+  String get fatherDayEventDescription;
+
+  /// Spring Cleaning event name
+  ///
+  /// In en, this message translates to:
+  /// **'Spring Cleaning'**
+  String get springCleaningEvent;
+
+  /// Spring Cleaning event description
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh your garden for a new season'**
+  String get springCleaningEventDescription;
+
+  /// Summer Festival event name
+  ///
+  /// In en, this message translates to:
+  /// **'Summer Festival'**
+  String get summerFestivalEvent;
+
+  /// Summer Festival event description
+  ///
+  /// In en, this message translates to:
+  /// **'Grand summer festival with many rewards'**
+  String get summerFestivalEventDescription;
+
+  /// Harvest Festival event name
+  ///
+  /// In en, this message translates to:
+  /// **'Harvest Festival'**
+  String get harvestFestivalEvent;
+
+  /// Harvest Festival event description
+  ///
+  /// In en, this message translates to:
+  /// **'Celebrate autumn\'s abundance'**
+  String get harvestFestivalEventDescription;
+
+  /// Winter Festival event name
+  ///
+  /// In en, this message translates to:
+  /// **'Winter Festival'**
+  String get winterFestivalEvent;
+
+  /// Winter Festival event description
+  ///
+  /// In en, this message translates to:
+  /// **'Light up the dark season with crystals'**
+  String get winterFestivalEventDescription;
+
+  /// Special Update event name
+  ///
+  /// In en, this message translates to:
+  /// **'Special Update'**
+  String get specialUpdateEvent;
+
+  /// Special Update event description
+  ///
+  /// In en, this message translates to:
+  /// **'Discover new features'**
+  String get specialUpdateEventDescription;
+
+  /// Community Challenge event name
+  ///
+  /// In en, this message translates to:
+  /// **'Community Challenge'**
+  String get communityChallengeEvent;
+
+  /// Community Challenge event description
+  ///
+  /// In en, this message translates to:
+  /// **'Take on challenges with the whole community'**
+  String get communityChallengeEventDescription;
+
+  /// Limited Time Event name
+  ///
+  /// In en, this message translates to:
+  /// **'Limited Time Event'**
+  String get limitedTimeEvent;
+
+  /// Limited Time Event description
+  ///
+  /// In en, this message translates to:
+  /// **'Enjoy this unique event before it disappears'**
+  String get limitedTimeEventDescription;
+
+  /// Birthday event name
+  ///
+  /// In en, this message translates to:
+  /// **'Mind Bloom Birthday'**
+  String get birthdayEvent;
+
+  /// Birthday event description
+  ///
+  /// In en, this message translates to:
+  /// **'Celebrate one year of Mind Bloom with surprises'**
+  String get birthdayEventDescription;
+
+  /// Milestone event name
+  ///
+  /// In en, this message translates to:
+  /// **'Milestone Event'**
+  String get milestoneEvent;
+
+  /// Milestone event description
+  ///
+  /// In en, this message translates to:
+  /// **'Celebrate the game\'s major milestones'**
+  String get milestoneEventDescription;
+
+  /// Earth Day event name
+  ///
+  /// In en, this message translates to:
+  /// **'Earth Day'**
+  String get earthDayEvent;
+
+  /// Earth Day event description
+  ///
+  /// In en, this message translates to:
+  /// **'Protect nature with eco-friendly plants'**
+  String get earthDayEventDescription;
+
+  /// Independence Day event name
+  ///
+  /// In en, this message translates to:
+  /// **'Independence Day'**
+  String get independenceDayEvent;
+
+  /// Independence Day event description
+  ///
+  /// In en, this message translates to:
+  /// **'Celebrate with patriotic plants'**
+  String get independenceDayEventDescription;
+
+  /// Description for completing actions
+  ///
+  /// In en, this message translates to:
+  /// **'Complete {target} {actionType} actions'**
+  String completeActions(int target, String actionType);
+
+  /// Description for playing consecutive days
+  ///
+  /// In en, this message translates to:
+  /// **'Play for {target} consecutive days'**
+  String playConsecutiveDays(int target);
+
+  /// Description for completing levels with stars
+  ///
+  /// In en, this message translates to:
+  /// **'Complete {target} levels with {stars} stars'**
+  String completeLevelsWithStars(int target, int stars);
+
+  /// Description for completing quests
+  ///
+  /// In en, this message translates to:
+  /// **'Complete {target} {questType} quests'**
+  String completeQuests(int target, String questType);
+
+  /// Description for collecting items
+  ///
+  /// In en, this message translates to:
+  /// **'Collect {target} {itemType} items'**
+  String collectItems(int target, String itemType);
+
+  /// Description for completing levels in X days
+  ///
+  /// In en, this message translates to:
+  /// **'Complete {target} levels in {days} days'**
+  String completeLevelsInDays(int target, int days);
+
+  /// Description for giving gifts
+  ///
+  /// In en, this message translates to:
+  /// **'Give {target} gifts'**
+  String giveGifts(int target);
+
+  /// Description for exploring new features
+  ///
+  /// In en, this message translates to:
+  /// **'Explore the new features'**
+  String get exploreNewFeatures;
+
+  /// Message for loading events
+  ///
+  /// In en, this message translates to:
+  /// **'Loading events...'**
+  String get loadingEvents;
+
+  /// Title for active events section
+  ///
+  /// In en, this message translates to:
+  /// **'Active Events'**
+  String get activeEvents;
+
+  /// Title for this month's events section
+  ///
+  /// In en, this message translates to:
+  /// **'This Month'**
+  String get thisMonth;
+
+  /// Title for upcoming events section
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming Events'**
+  String get upcomingEvents;
+
+  /// Indicates the last day of an event
+  ///
+  /// In en, this message translates to:
+  /// **'Last day'**
+  String get lastDay;
+
+  /// Number of days left
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days'**
+  String daysLeft(int count);
+
+  /// Number of days before an event starts
+  ///
+  /// In en, this message translates to:
+  /// **'In {count} days'**
+  String inDays(int count);
+
+  /// Indicates that an event is finished
+  ///
+  /// In en, this message translates to:
+  /// **'Finished'**
+  String get finished;
+
+  /// Number of challenges in an event
+  ///
+  /// In en, this message translates to:
+  /// **'Challenges ({count})'**
+  String challengesCount(int count);
+
+  /// Title for event statistics section
+  ///
+  /// In en, this message translates to:
+  /// **'Event Statistics'**
+  String get eventStatistics;
+
+  /// Title for event filter dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Filter Events'**
+  String get filterEvents;
+
+  /// Message indicating that the filter feature is coming soon
+  ///
+  /// In en, this message translates to:
+  /// **'Filter feature coming soon...'**
+  String get filterFeatureComingSoon;
+
+  /// Message indicating participation in an event
+  ///
+  /// In en, this message translates to:
+  /// **'Participating in \"{eventName}\"...'**
+  String participatingInEvent(String eventName);
+
+  /// Title for full lives item
+  ///
+  /// In en, this message translates to:
+  /// **'Full Lives'**
+  String get fullLives;
+
+  /// Description for full lives item
+  ///
+  /// In en, this message translates to:
+  /// **'Refills all your lives (5/5)'**
+  String get refillAllLives;
+
+  /// Title for 3 lives item
+  ///
+  /// In en, this message translates to:
+  /// **'3 Lives'**
+  String get threeLives;
+
+  /// Description for 3 lives item
+  ///
+  /// In en, this message translates to:
+  /// **'Adds 3 lives to your stock'**
+  String get addThreeLives;
+
+  /// Title for 200 coins item
+  ///
+  /// In en, this message translates to:
+  /// **'200 Coins'**
+  String get twoHundredCoins;
+
+  /// Description for 200 coins item
+  ///
+  /// In en, this message translates to:
+  /// **'A small coin boost'**
+  String get smallCoinBoost;
+
+  /// Title for 500 coins item
+  ///
+  /// In en, this message translates to:
+  /// **'500 Coins'**
+  String get fiveHundredCoins;
+
+  /// Description for 500 coins item
+  ///
+  /// In en, this message translates to:
+  /// **'A good coin stock'**
+  String get goodCoinStock;
+
+  /// Title for 1000 coins item
+  ///
+  /// In en, this message translates to:
+  /// **'1000 Coins'**
+  String get thousandCoins;
+
+  /// Description for 1000 coins item
+  ///
+  /// In en, this message translates to:
+  /// **'A big coin stock'**
+  String get bigCoinStock;
+
+  /// Title for 25 gems item
+  ///
+  /// In en, this message translates to:
+  /// **'25 Gems'**
+  String get twentyFiveGems;
+
+  /// Description for 25 gems item
+  ///
+  /// In en, this message translates to:
+  /// **'Precious gems for premium purchases'**
+  String get preciousGems;
+
+  /// Description for shuffler booster
+  ///
+  /// In en, this message translates to:
+  /// **'Shuffles the grid for new moves'**
+  String get shuffleGrid;
+
+  /// Description for hint booster
+  ///
+  /// In en, this message translates to:
+  /// **'Reveals a winning move'**
+  String get revealWinningMove;
+
+  /// Title for bonus moves booster
+  ///
+  /// In en, this message translates to:
+  /// **'Bonus moves'**
+  String get bonusMoves;
+
+  /// Description for bonus moves booster
+  ///
+  /// In en, this message translates to:
+  /// **'+5 moves for the current level'**
+  String get fiveExtraMoves;
+
+  /// Description for score multiplier booster
+  ///
+  /// In en, this message translates to:
+  /// **'x2 score for 3 levels'**
+  String get doubleScoreThreeLevels;
+
+  /// Title for experience booster
+  ///
+  /// In en, this message translates to:
+  /// **'Experience boost'**
+  String get experienceBoost;
+
+  /// Description for experience booster
+  ///
+  /// In en, this message translates to:
+  /// **'+100 XP to progress faster'**
+  String get hundredXpBoost;
+
+  /// Title for skip level
+  ///
+  /// In en, this message translates to:
+  /// **'Skip a level'**
+  String get skipLevel;
+
+  /// Description for skip level
+  ///
+  /// In en, this message translates to:
+  /// **'Unlocks the next level'**
+  String get unlockNextLevel;
+
+  /// Title for unlock all levels
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock all levels'**
+  String get unlockAllLevels;
+
+  /// Description for unlock all levels
+  ///
+  /// In en, this message translates to:
+  /// **'Access to all game levels'**
+  String get accessAllLevels;
+
+  /// Title for nature theme
+  ///
+  /// In en, this message translates to:
+  /// **'Nature Theme'**
+  String get natureTheme;
+
+  /// Description for nature theme
+  ///
+  /// In en, this message translates to:
+  /// **'New visual theme with natural colors'**
+  String get natureThemeDescription;
+
+  /// Title for ocean theme
+  ///
+  /// In en, this message translates to:
+  /// **'Ocean Theme'**
+  String get oceanTheme;
+
+  /// Description for ocean theme
+  ///
+  /// In en, this message translates to:
+  /// **'Aquatic theme with blue colors'**
+  String get oceanThemeDescription;
+
+  /// Title for gold frame
+  ///
+  /// In en, this message translates to:
+  /// **'Gold frame'**
+  String get goldFrame;
+
+  /// Description for gold frame
+  ///
+  /// In en, this message translates to:
+  /// **'Gold frame for your avatar'**
+  String get goldFrameDescription;
+
+  /// Description for remove ads
+  ///
+  /// In en, this message translates to:
+  /// **'Play without advertising interruption'**
+  String get playWithoutAds;
+
+  /// Title for premium pack
+  ///
+  /// In en, this message translates to:
+  /// **'Premium Pack'**
+  String get premiumPack;
+
+  /// Description for premium pack
+  ///
+  /// In en, this message translates to:
+  /// **'All premium benefits + 100 gems'**
+  String get allPremiumBenefits;
+
+  /// Name of cosmetics category
+  ///
+  /// In en, this message translates to:
+  /// **'Cosmetics'**
+  String get cosmetics;
+
+  /// Title for free rewards
+  ///
+  /// In en, this message translates to:
+  /// **'🎁 Free Rewards'**
+  String get freeRewards;
+
+  /// Name of world 1 - Garden of Beginnings
+  ///
+  /// In en, this message translates to:
+  /// **'Garden of Beginnings'**
+  String get world_garden_beginnings;
+
+  /// Description of world 1
+  ///
+  /// In en, this message translates to:
+  /// **'Begin your adventure in this peaceful garden where the first seeds of your journey come to life.'**
+  String get world_garden_beginnings_description;
+
+  /// Name of world 2 - Valley of Flowers
+  ///
+  /// In en, this message translates to:
+  /// **'Valley of Flowers'**
+  String get world_valley_flowers;
+
+  /// Description of world 2
+  ///
+  /// In en, this message translates to:
+  /// **'Explore a colorful valley where nature\'s most beautiful creations bloom.'**
+  String get world_valley_flowers_description;
+
+  /// Name of world 3 - Lunar Forest
+  ///
+  /// In en, this message translates to:
+  /// **'Lunar Forest'**
+  String get world_lunar_forest;
+
+  /// Description of world 3
+  ///
+  /// In en, this message translates to:
+  /// **'Dive into the mysterious darkness of this forest bathed in lunar light.'**
+  String get world_lunar_forest_description;
+
+  /// Name of world 4 - Solar Meadow
+  ///
+  /// In en, this message translates to:
+  /// **'Solar Meadow'**
+  String get world_solar_meadow;
+
+  /// Description of world 4
+  ///
+  /// In en, this message translates to:
+  /// **'Bask in the benevolent warmth of this meadow gilded by the sun.'**
+  String get world_solar_meadow_description;
+
+  /// Name of world 5 - Crystal Caverns
+  ///
+  /// In en, this message translates to:
+  /// **'Crystal Caverns'**
+  String get world_crystal_caverns;
+
+  /// Description of world 5
+  ///
+  /// In en, this message translates to:
+  /// **'Discover the hidden treasures in these sparkling caves of precious crystals.'**
+  String get world_crystal_caverns_description;
+
+  /// Name of world 6 - Mystic Swamps
+  ///
+  /// In en, this message translates to:
+  /// **'Mystic Swamps'**
+  String get world_mystic_swamps;
+
+  /// Description of world 6
+  ///
+  /// In en, this message translates to:
+  /// **'Navigate through the troubled waters of these swamps filled with ancient magic.'**
+  String get world_mystic_swamps_description;
+
+  /// Name of world 7 - Burning Lands
+  ///
+  /// In en, this message translates to:
+  /// **'Burning Lands'**
+  String get world_burning_lands;
+
+  /// Description of world 7
+  ///
+  /// In en, this message translates to:
+  /// **'Survive the intense heat of these volcanic lands in permanent eruption.'**
+  String get world_burning_lands_description;
+
+  /// Name of world 8 - Eternal Glacier
+  ///
+  /// In en, this message translates to:
+  /// **'Eternal Glacier'**
+  String get world_eternal_glacier;
+
+  /// Description of world 8
+  ///
+  /// In en, this message translates to:
+  /// **'Brave the glacial cold of these pristine white expanses.'**
+  String get world_eternal_glacier_description;
+
+  /// Name of world 9 - Lost Rainbow
+  ///
+  /// In en, this message translates to:
+  /// **'Lost Rainbow'**
+  String get world_lost_rainbow;
+
+  /// Description of world 9
+  ///
+  /// In en, this message translates to:
+  /// **'Find the lost colors of this legendary rainbow with magical hues.'**
+  String get world_lost_rainbow_description;
+
+  /// Name of world 10 - Celestial Garden
+  ///
+  /// In en, this message translates to:
+  /// **'Celestial Garden'**
+  String get world_celestial_garden;
+
+  /// Description of world 10
+  ///
+  /// In en, this message translates to:
+  /// **'Access the ultimate garden where stars bloom and dreams become reality.'**
+  String get world_celestial_garden_description;
+
+  /// Title for worlds screen
+  ///
+  /// In en, this message translates to:
+  /// **'Worlds'**
+  String get worlds;
+
+  /// Name of levels
+  ///
+  /// In en, this message translates to:
+  /// **'Levels'**
+  String get levels;
+
+  /// Button to enter a world
+  ///
+  /// In en, this message translates to:
+  /// **'Enter'**
+  String get enter;
+
+  /// Tutorial welcome title
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Mind Bloom!'**
+  String get tutorial_welcome_title;
+
+  /// Tutorial welcome description
+  ///
+  /// In en, this message translates to:
+  /// **'Discover the magical world of plants and puzzles'**
+  String get tutorial_welcome_description;
+
+  /// Tutorial matching section title
+  ///
+  /// In en, this message translates to:
+  /// **'Make matches'**
+  String get tutorial_matching_title;
+
+  /// Tutorial matching section description
+  ///
+  /// In en, this message translates to:
+  /// **'Swap tiles to create lines of 3 or more of the same color'**
+  String get tutorial_matching_description;
+
+  /// Tutorial objectives section title
+  ///
+  /// In en, this message translates to:
+  /// **'Level objectives'**
+  String get tutorial_objectives_title;
+
+  /// Tutorial objectives section description
+  ///
+  /// In en, this message translates to:
+  /// **'Each level has specific objectives to achieve to progress'**
+  String get tutorial_objectives_description;
+
+  /// Tutorial hint section title
+  ///
+  /// In en, this message translates to:
+  /// **'Hint Button'**
+  String get tutorial_hint_title;
+
+  /// Tutorial hint section description
+  ///
+  /// In en, this message translates to:
+  /// **'Use the hint to reveal a winning move when you\'re stuck'**
+  String get tutorial_hint_description;
+
+  /// Tutorial shuffle section title
+  ///
+  /// In en, this message translates to:
+  /// **'Shuffle Button'**
+  String get tutorial_shuffle_title;
+
+  /// Tutorial shuffle section description
+  ///
+  /// In en, this message translates to:
+  /// **'Shuffle the grid to get new possible moves'**
+  String get tutorial_shuffle_description;
+
+  /// Tutorial stars section title
+  ///
+  /// In en, this message translates to:
+  /// **'Earn stars'**
+  String get tutorial_stars_title;
+
+  /// Tutorial stars section description
+  ///
+  /// In en, this message translates to:
+  /// **'The more objectives you achieve, the more stars you earn'**
+  String get tutorial_stars_description;
+
+  /// Tutorial collection section title
+  ///
+  /// In en, this message translates to:
+  /// **'Plant collection'**
+  String get tutorial_collection_title;
+
+  /// Tutorial collection section description
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock new magical plants with special bonuses'**
+  String get tutorial_collection_description;
+
+  /// Button to skip tutorial
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get tutorial_skip;
+
+  /// Tutorial next button
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get tutorial_next;
+
+  /// Button to start the game after tutorial
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get tutorial_start;
+
+  /// Tutorial completion message
+  ///
+  /// In en, this message translates to:
+  /// **'Tutorial complete!'**
+  String get tutorial_complete;
+
+  /// Tutorial completion description
+  ///
+  /// In en, this message translates to:
+  /// **'You are now ready to explore the world of Mind Bloom!'**
+  String get tutorial_complete_description;
+
+  /// Skip tutorial confirmation dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Skip tutorial?'**
+  String get tutorial_skip_confirmation_title;
+
+  /// Skip tutorial confirmation dialog message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to skip the tutorial? You can review it later in the settings.'**
+  String get tutorial_skip_confirmation_message;
 }
 
 class _AppLocalizationsDelegate

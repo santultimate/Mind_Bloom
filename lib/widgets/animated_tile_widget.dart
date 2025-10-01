@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_bloom/models/tile.dart';
 import 'package:mind_bloom/utils/game_animations.dart';
-import 'package:mind_bloom/utils/app_colors.dart';
+import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/providers/game_provider.dart';
 
 class AnimatedTileWidget extends StatefulWidget {

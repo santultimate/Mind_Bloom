@@ -73,7 +73,7 @@ class AudioProvider extends ChangeNotifier {
     } catch (e) {
       // Gestion d'erreur silencieuse pour éviter le spam dans les logs
       if (kDebugMode) {
-        debugPrint('Erreur audio (ignorée): $e');
+        // debugPrint('Erreur audio (ignorée): $e');
       }
     }
   }

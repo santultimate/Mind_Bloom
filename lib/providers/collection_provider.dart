@@ -262,9 +262,10 @@ class CollectionProvider extends ChangeNotifier {
       _updatePlantStatus();
       notifyListeners();
     } catch (e) {
-      if (kDebugMode) {
-        print('Error loading collection progress: $e');
-      }
+      // Commenté pour la version de production
+      // if (kDebugMode) {
+      //   print('Error loading collection progress: $e');
+      // }
     }
   }
 
@@ -275,9 +276,10 @@ class CollectionProvider extends ChangeNotifier {
       await prefs.setString('plant_progress', json.encode(_plantProgress));
       await prefs.setString('plant_levels', json.encode(_plantLevels));
     } catch (e) {
-      if (kDebugMode) {
-        print('Error saving collection progress: $e');
-      }
+      // Commenté pour la version de production
+      // if (kDebugMode) {
+      //   print('Error saving collection progress: $e');
+      // }
     }
   }
 

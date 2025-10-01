@@ -4,6 +4,7 @@ import 'package:mind_bloom/providers/ad_provider.dart';
 import 'package:mind_bloom/providers/user_provider.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class RewardedAdButton extends StatefulWidget {
   final String rewardType; // 'lives', 'coins', 'gems', 'booster'
@@ -57,7 +58,7 @@ class _RewardedAdButtonState extends State<RewardedAdButton> {
                   )
                 : Icon(widget.icon),
             label: Text(
-              _isLoading ? 'Chargement...' : widget.title,
+              _isLoading ? AppLocalizations.of(context)!.loading : widget.title,
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
@@ -103,10 +104,10 @@ class _RewardedAdButtonState extends State<RewardedAdButton> {
           widget.onRewardEarned!();
         }
       } else {
-        _showErrorDialog('Impossible de charger la publicité');
+        _showErrorDialog(AppLocalizations.of(context)!.adError);
       }
     } catch (e) {
-      _showErrorDialog('Erreur lors de l\'affichage de la publicité');
+      _showErrorDialog(AppLocalizations.of(context)!.adError);
     } finally {
       if (mounted) {
         setState(() {

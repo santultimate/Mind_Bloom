@@ -624,12 +624,16 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
   void _retryLevel() async {
     final audioProvider = Provider.of<AudioProvider>(context, listen: false);
     final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final gameProvider = Provider.of<GameProvider>(context, listen: false);
 
     audioProvider.playSfx('audio/sfx/button_click.wav');
 
     // Vérifier si le joueur a des vies
     if (userProvider.lives > 0) {
       // Le joueur a des vies, rejouer (vie déjà utilisée au début)
+      // 🔧 CORRECTION: Réinitialiser complètement le jeu avant de redémarrer
+      gameProvider.resetGame();
+
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const GameScreen(),
@@ -745,6 +749,7 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
   void _watchAdForLife() async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     final adProvider = Provider.of<AdProvider>(context, listen: false);
+    final gameProvider = Provider.of<GameProvider>(context, listen: false);
     final l10n = AppLocalizations.of(context)!;
 
     Navigator.of(context).pop(); // Fermer le dialog
@@ -757,6 +762,9 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
           onUserEarnedReward: (ad, reward) async {
             // L'utilisateur a regardé la pub, lui donner une vie
             await userProvider.addLives(1);
+
+            // 🔧 CORRECTION: Réinitialiser complètement le jeu avant de redémarrer
+            gameProvider.resetGame();
 
             // Rejouer le niveau
             Navigator.of(context).pushReplacement(

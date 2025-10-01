@@ -18,11 +18,19 @@ class UserProvider extends ChangeNotifier {
   List<int> _completedLevels = [];
   final Map<int, int> _levelStars = {}; // levelId -> stars (0-3)
 
+  // Suivi des achievements
+  int _bestScore = 0;
+  int _bestCombo = 0;
+  int _totalScore = 0;
+  int _perfectLevels = 0; // Niveaux avec 3 étoiles
+  int _shareCount = 0;
+
   // Paramètres de jeu
   bool _animationsEnabled = true;
   bool _vibrationsEnabled = true;
   bool _autoHintsEnabled = false;
   bool _debugModeEnabled = false;
+  bool _tutorialCompleted = false;
 
   // Timer pour la régénération des vies (en secondes)
   // Ce minuteur compte le temps jusqu'à la prochaine régénération de vie
@@ -39,18 +47,26 @@ class UserProvider extends ChangeNotifier {
   int get lives => _lives;
   int get maxLives => _maxLives;
   DateTime? get lastLifeRefill => _lastLifeRefill;
+  int get timeUntilNextLife => _timeUntilNextLife;
   int get currentStreak => _currentStreak;
   int get bestStreak => _bestStreak;
   List<int> get completedLevels => _completedLevels;
   int get levelsCompleted => _completedLevels.length;
   Map<int, int> get levelStars => _levelStars;
 
+  // Getters pour les achievements
+  int get bestScore => _bestScore;
+  int get bestCombo => _bestCombo;
+  int get totalScore => _totalScore;
+  int get perfectLevels => _perfectLevels;
+  int get shareCount => _shareCount;
+
   // Getters pour les paramètres
   bool get animationsEnabled => _animationsEnabled;
   bool get vibrationsEnabled => _vibrationsEnabled;
   bool get autoHintsEnabled => _autoHintsEnabled;
   bool get debugModeEnabled => _debugModeEnabled;
-  int get timeUntilNextLife => _timeUntilNextLife;
+  bool get tutorialCompleted => _tutorialCompleted;
 
   // Initialiser l'utilisateur
   Future<void> initializeUser() async {
@@ -73,6 +89,7 @@ class UserProvider extends ChangeNotifier {
     _vibrationsEnabled = prefs.getBool('vibrationsEnabled') ?? true;
     _autoHintsEnabled = prefs.getBool('autoHintsEnabled') ?? false;
     _debugModeEnabled = prefs.getBool('debugModeEnabled') ?? false;
+    _tutorialCompleted = prefs.getBool('tutorialCompleted') ?? false;
 
     _currentStreak = prefs.getInt('currentStreak') ?? 0;
     _bestStreak = prefs.getInt('bestStreak') ?? 0;
@@ -99,6 +116,13 @@ class UserProvider extends ChangeNotifier {
         }
       }
     }
+
+    // Charger les données d'achievements
+    _bestScore = prefs.getInt('bestScore') ?? 0;
+    _bestCombo = prefs.getInt('bestCombo') ?? 0;
+    _totalScore = prefs.getInt('totalScore') ?? 0;
+    _perfectLevels = prefs.getInt('perfectLevels') ?? 0;
+    _shareCount = prefs.getInt('shareCount') ?? 0;
 
     // Vérifier le remplissage des vies
     _checkLifeRefill();
@@ -135,6 +159,20 @@ class UserProvider extends ChangeNotifier {
     final levelStarsString =
         _levelStars.entries.map((e) => '${e.key}:${e.value}').join(',');
     await prefs.setString('levelStars', levelStarsString);
+
+    // Sauvegarder les données d'achievements
+    await prefs.setInt('bestScore', _bestScore);
+    await prefs.setInt('bestCombo', _bestCombo);
+    await prefs.setInt('totalScore', _totalScore);
+    await prefs.setInt('perfectLevels', _perfectLevels);
+    await prefs.setInt('shareCount', _shareCount);
+
+    // Sauvegarder les paramètres
+    await prefs.setBool('animationsEnabled', _animationsEnabled);
+    await prefs.setBool('vibrationsEnabled', _vibrationsEnabled);
+    await prefs.setBool('autoHintsEnabled', _autoHintsEnabled);
+    await prefs.setBool('debugModeEnabled', _debugModeEnabled);
+    await prefs.setBool('tutorialCompleted', _tutorialCompleted);
   }
 
   // Mettre à jour le nom d'utilisateur
@@ -216,6 +254,29 @@ class UserProvider extends ChangeNotifier {
     return false;
   }
 
+  // Réinitialiser la série de victoires (en cas d'échec)
+  Future<void> resetStreak() async {
+    _currentStreak = 0;
+    await _saveUserData();
+    notifyListeners();
+  }
+
+  // Mettre à jour le meilleur combo
+  Future<void> updateBestCombo(int combo) async {
+    if (combo > _bestCombo) {
+      _bestCombo = combo;
+      await _saveUserData();
+      notifyListeners();
+    }
+  }
+
+  // Incrémenter le compteur de partages
+  Future<void> incrementShareCount() async {
+    _shareCount++;
+    await _saveUserData();
+    notifyListeners();
+  }
+
   // Ajouter des vies
   Future<void> addLives(int amount) async {
     _lives = (_lives + amount).clamp(0, _maxLives);
@@ -231,20 +292,48 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Forcer la vérification des vies (à appeler quand l'app revient au premier plan)
+  Future<void> checkLifeRegeneration() async {
+    _checkLifeRefill();
+    _updateTimeUntilNextLife();
+    notifyListeners();
+  }
+
   // Vérifier le remplissage automatique des vies
   void _checkLifeRefill() {
-    if (_lastLifeRefill == null || _lives >= _maxLives) return;
+    if (_lastLifeRefill == null) {
+      // Si c'est la première fois, initialiser la dernière régénération
+      _lastLifeRefill = DateTime.now();
+      _saveUserData();
+      return;
+    }
+
+    if (_lives >= _maxLives) return;
 
     final now = DateTime.now();
     final timeSinceLastRefill = now.difference(_lastLifeRefill!);
-    const refillTime = Duration(
-        minutes: 15); // Réduit à 15 minutes par vie pour plus d'engagement
+    const refillTimeSeconds = 600; // 10 minutes (10 * 60 = 600 secondes)
 
-    final livesToAdd = timeSinceLastRefill.inMinutes ~/ refillTime.inMinutes;
+    // Calculer combien de vies peuvent être ajoutées
+    final livesToAdd = timeSinceLastRefill.inSeconds ~/ refillTimeSeconds;
+
     if (livesToAdd > 0) {
+      final oldLives = _lives;
       _lives = (_lives + livesToAdd).clamp(0, _maxLives);
-      _lastLifeRefill = now;
-      _saveUserData();
+
+      // Mettre à jour la dernière régénération
+      final actualLivesAdded = _lives - oldLives;
+      if (actualLivesAdded > 0) {
+        _lastLifeRefill = _lastLifeRefill!
+            .add(Duration(seconds: actualLivesAdded * refillTimeSeconds));
+        _saveUserData();
+
+        // Debug pour voir la régénération
+        if (kDebugMode) {
+          print(
+              '🔄 VIE AJOUTÉE: +$actualLivesAdded vie(s). Total: $_lives/$_maxLives');
+        }
+      }
     }
   }
 
@@ -255,6 +344,7 @@ class UserProvider extends ChangeNotifier {
     if (_lives < _maxLives) {
       _updateTimeUntilNextLife();
 
+      // 🔧 CORRECTION: Timer optimisé pour éviter la boucle infinie
       _lifeTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
         if (_lives >= _maxLives) {
           timer.cancel();
@@ -263,13 +353,24 @@ class UserProvider extends ChangeNotifier {
           return;
         }
 
+        // Sauvegarder l'état précédent
+        final previousLives = _lives;
+        final previousTime = _timeUntilNextLife;
+
+        // Vérifier la régénération et mettre à jour le temps
+        _checkLifeRefill();
         _updateTimeUntilNextLife();
 
-        if (_timeUntilNextLife <= 0) {
+        // Si le temps est écoulé, ajouter une vie
+        if (_timeUntilNextLife <= 0 && _lives < _maxLives) {
           _addLifeFromTimer();
         }
 
-        notifyListeners();
+        // Notifier seulement si quelque chose a vraiment changé
+        if (_lives != previousLives ||
+            (_timeUntilNextLife - previousTime).abs() >= 5) {
+          notifyListeners();
+        }
       });
     }
   }
@@ -283,18 +384,18 @@ class UserProvider extends ChangeNotifier {
 
     final now = DateTime.now();
     final timeSinceLastRefill = now.difference(_lastLifeRefill!);
-    const refillTime = Duration(minutes: 15); // 15 minutes par vie
+    const refillTimeSeconds = 600; // 10 minutes (10 * 60 = 600 secondes)
 
-    final totalSeconds = refillTime.inSeconds;
     final elapsedSeconds = timeSinceLastRefill.inSeconds;
 
     // Calculer le temps restant pour la prochaine vie
-    final remainingSeconds = totalSeconds - (elapsedSeconds % totalSeconds);
-    _timeUntilNextLife = remainingSeconds.clamp(0, totalSeconds);
+    final remainingSeconds =
+        refillTimeSeconds - (elapsedSeconds % refillTimeSeconds);
+    _timeUntilNextLife = remainingSeconds.clamp(0, refillTimeSeconds);
 
+    // Debug pour voir le temps restant
     if (kDebugMode) {
-      print(
-          'DEBUG VIE: elapsedSeconds=$elapsedSeconds, remainingSeconds=$remainingSeconds, timeUntilNextLife=$_timeUntilNextLife');
+      print('⏰ VIE: ${_timeUntilNextLife}s restantes pour la prochaine vie');
     }
   }
 
@@ -306,8 +407,9 @@ class UserProvider extends ChangeNotifier {
       _timeUntilNextLife = 0;
       _saveUserData();
 
+      // Debug pour voir l'ajout de vie
       if (kDebugMode) {
-        print('Vie ajoutée automatiquement. Vies actuelles: $_lives');
+        print('🔄 VIE AJOUTÉE (Timer): +1 vie. Total: $_lives/$_maxLives');
       }
 
       // Si on a atteint le maximum, arrêter le timer
@@ -350,21 +452,37 @@ class UserProvider extends ChangeNotifier {
     if (!_completedLevels.contains(levelId)) {
       _completedLevels.add(levelId);
 
-      // Debug: Afficher les informations de débogage
-      if (kDebugMode) {
-        print('=== DEBUG LEVEL COMPLETION ===');
-        print('Level $levelId completed!');
-        print('Updated completed levels: $_completedLevels');
-        print(
-            'Next level ($levelId + 1) should be unlocked: ${_completedLevels.contains(levelId)}');
-        print('=============================');
-      }
+      // Debug: Afficher les informations de débogage (commenté pour production)
+      // if (kDebugMode) {
+      //   print('=== DEBUG LEVEL COMPLETION ===');
+      //   print('Level $levelId completed!');
+      //   print('Updated completed levels: $_completedLevels');
+      //   print(
+      //       'Next level ($levelId + 1) should be unlocked: ${_completedLevels.contains(levelId)}');
+      //   print('=============================');
+      // }
+    }
+
+    // Mettre à jour la série de victoires
+    _currentStreak++;
+    if (_currentStreak > _bestStreak) {
+      _bestStreak = _currentStreak;
     }
 
     // Mettre à jour les étoiles si meilleur score
     final currentStars = _levelStars[levelId] ?? 0;
     if (stars > currentStars) {
       _levelStars[levelId] = stars;
+    }
+
+    // Mettre à jour les achievements
+    if (score > _bestScore) {
+      _bestScore = score;
+    }
+    _totalScore += score;
+
+    if (stars == 3) {
+      _perfectLevels++;
     }
 
     // Système de récompenses amélioré et plus généreux
@@ -464,8 +582,8 @@ class UserProvider extends ChangeNotifier {
   bool isLevelUnlocked(int levelId) {
     if (levelId == 1) return true;
 
-    // Mode debug : déverrouiller tous les niveaux
-    if (_debugModeEnabled) return true;
+    // PRODUCTION: Mode debug désactivé pour la version finale
+    // if (_debugModeEnabled) return true;
 
     return _completedLevels.contains(levelId - 1);
   }
@@ -477,8 +595,8 @@ class UserProvider extends ChangeNotifier {
 
   // Marquer le tutoriel comme terminé
   Future<void> completeTutorial() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('tutorialCompleted', true);
+    _tutorialCompleted = true;
+    await _saveUserData();
     notifyListeners();
   }
 
@@ -531,53 +649,54 @@ class UserProvider extends ChangeNotifier {
     _currentStreak = 0;
     _bestStreak = 0;
     _completedLevels.clear();
+    _debugModeEnabled = false; // Désactiver le mode debug lors du reset
     _levelStars.clear();
 
     await _saveUserData();
     notifyListeners();
   }
 
-  // Méthode de débogage pour vérifier l'état des niveaux
-  void debugLevelStatus() {
-    if (kDebugMode) {
-      print('=== LEVEL STATUS DEBUG ===');
-      print('Completed levels: $_completedLevels');
-      print('Level stars: $_levelStars');
+  // Méthode de débogage pour vérifier l'état des niveaux (commentée pour production)
+  // void debugLevelStatus() {
+  //   if (kDebugMode) {
+  //     print('=== LEVEL STATUS DEBUG ===');
+  //     print('Completed levels: $_completedLevels');
+  //     print('Level stars: $_levelStars');
 
-      // Vérifier les premiers 10 niveaux
-      for (int i = 1; i <= 10; i++) {
-        final isUnlocked = isLevelUnlocked(i);
-        final stars = getLevelStars(i);
-        print('Level $i: Unlocked=$isUnlocked, Stars=$stars');
-      }
-      print('========================');
-    }
-  }
+  //     // Vérifier les premiers 10 niveaux
+  //     for (int i = 1; i <= 10; i++) {
+  //       final isUnlocked = isLevelUnlocked(i);
+  //       final stars = getLevelStars(i);
+  //       print('Level $i: Unlocked=$isUnlocked, Stars=$stars');
+  //     }
+  //     print('========================');
+  //   }
+  // }
 
-  // Méthode pour débloquer manuellement un niveau (pour les tests)
-  Future<void> unlockLevel(int levelId) async {
-    if (!_completedLevels.contains(levelId)) {
-      _completedLevels.add(levelId);
-      await _saveUserData();
-      notifyListeners();
+  // Méthode pour débloquer manuellement un niveau (commentée pour production)
+  // Future<void> unlockLevel(int levelId) async {
+  //   if (!_completedLevels.contains(levelId)) {
+  //     _completedLevels.add(levelId);
+  //     await _saveUserData();
+  //     notifyListeners();
 
-      if (kDebugMode) {
-        print('Level $levelId manually unlocked');
-      }
-    }
-  }
+  //     if (kDebugMode) {
+  //       print('Level $levelId manually unlocked');
+  //     }
+  //   }
+  // }
 
-  // 🚀 FONCTIONNALITÉS DEBUG (à supprimer avant publication)
+  // 🚀 FONCTIONNALITÉS DEBUG (commentées pour la version de production)
 
   /// Active ou désactive le mode debug pour déverrouiller tous les niveaux
-  Future<void> toggleDebugMode() async {
-    _debugModeEnabled = !_debugModeEnabled;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('debugModeEnabled', _debugModeEnabled);
-    notifyListeners();
+  // Future<void> toggleDebugMode() async {
+  //   _debugModeEnabled = !_debugModeEnabled;
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.setBool('debugModeEnabled', _debugModeEnabled);
+  //   notifyListeners();
 
-    if (kDebugMode) {
-      print('Debug mode ${_debugModeEnabled ? "enabled" : "disabled"}');
-    }
-  }
+  //   if (kDebugMode) {
+  //     print('Debug mode ${_debugModeEnabled ? "enabled" : "disabled"}');
+  //   }
+  // }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
+import 'package:mind_bloom/providers/event_provider.dart';
 import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class EventsScreen extends StatefulWidget {
@@ -12,115 +13,27 @@ class EventsScreen extends StatefulWidget {
 }
 
 class _EventsScreenState extends State<EventsScreen> {
-  List<SeasonalEvent> _events = [];
+  bool _isInitializing = true;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (_events.isEmpty) {
-      _generateEvents();
-    }
+  void initState() {
+    super.initState();
+    _initializeEvents();
   }
 
-  void _generateEvents() {
-    _events = [
-      SeasonalEvent(
-        id: 'spring_bloom',
-        name: AppLocalizations.of(context)!.springBloom,
-        description: AppLocalizations.of(context)!.springBloomDescription,
-        startDate: DateTime.now().subtract(const Duration(days: 5)),
-        endDate: DateTime.now().add(const Duration(days: 10)),
-        theme: 'spring',
-        rewards: [
-          EventReward(
-            type: RewardType.plant,
-            itemId: 'rose_magique',
-            quantity: 1,
-            rarity: 5,
-          ),
-          EventReward(
-            type: RewardType.coins,
-            quantity: 500,
-          ),
-          EventReward(
-            type: RewardType.gems,
-            quantity: 50,
-          ),
-        ],
-        challenges: [
-          EventChallenge(
-            id: 'complete_levels',
-            description: AppLocalizations.of(context)!.completeLevels(10),
-            target: 10,
-            progress: 7,
-            reward: 100,
-          ),
-          EventChallenge(
-            id: 'earn_stars',
-            description: AppLocalizations.of(context)!.earnStars(30),
-            target: 30,
-            progress: 18,
-            reward: 200,
-          ),
-          EventChallenge(
-            id: 'use_boosters',
-            description: AppLocalizations.of(context)!.useBoosters(5),
-            target: 5,
-            progress: 3,
-            reward: 150,
-          ),
-        ],
-        isActive: true,
-      ),
-      SeasonalEvent(
-        id: 'summer_solstice',
-        name: AppLocalizations.of(context)!.summerSolstice,
-        description: AppLocalizations.of(context)!.summerSolsticeDescription,
-        startDate: DateTime.now().add(const Duration(days: 15)),
-        endDate: DateTime.now().add(const Duration(days: 30)),
-        theme: 'summer',
-        rewards: [
-          EventReward(
-            type: RewardType.plant,
-            itemId: 'tournesol_or',
-            quantity: 1,
-            rarity: 4,
-          ),
-          EventReward(
-            type: RewardType.coins,
-            quantity: 300,
-          ),
-        ],
-        challenges: [
-          EventChallenge(
-            id: 'score_points',
-            description: AppLocalizations.of(context)!.scorePoints(50000),
-            target: 50000,
-            progress: 0,
-            reward: 250,
-          ),
-        ],
-        isActive: false,
-      ),
-      SeasonalEvent(
-        id: 'autumn_harvest',
-        name: AppLocalizations.of(context)!.autumnHarvest,
-        description: AppLocalizations.of(context)!.autumnHarvestDescription,
-        startDate: DateTime.now().add(const Duration(days: 45)),
-        endDate: DateTime.now().add(const Duration(days: 60)),
-        theme: 'autumn',
-        rewards: [
-          EventReward(
-            type: RewardType.plant,
-            itemId: 'lotus_cristal',
-            quantity: 1,
-            rarity: 5,
-          ),
-        ],
-        challenges: [],
-        isActive: false,
-      ),
-    ];
+  Future<void> _initializeEvents() async {
+    try {
+      final eventProvider = Provider.of<EventProvider>(context, listen: false);
+      await eventProvider.initialize();
+    } catch (e) {
+      // Gérer les erreurs silencieusement
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isInitializing = false;
+        });
+      }
+    }
   }
 
   @override
@@ -138,40 +51,156 @@ class _EventsScreenState extends State<EventsScreen> {
         backgroundColor: AppColors.surface,
         elevation: 0,
         iconTheme: const IconThemeData(color: AppColors.textPrimary),
-      ),
-      body: Column(
-        children: [
-          // Bannière d'événement actif
-          if (_events.any((e) => e.isActive))
-            _buildActiveEventBanner(_events.firstWhere((e) => e.isActive)),
-
-          // Liste des événements
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: _events.length,
-              itemBuilder: (context, index) {
-                return _buildEventCard(_events[index]);
-              },
-            ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              final audioProvider =
+                  Provider.of<AudioProvider>(context, listen: false);
+              audioProvider.playButtonClick();
+              _showEventFilterDialog();
+            },
+            icon: const Icon(Icons.filter_list),
           ),
         ],
+      ),
+      body: SafeArea(
+        child: _isInitializing
+            ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CircularProgressIndicator(),
+                    const SizedBox(height: 16),
+                    Text(
+                      AppLocalizations.of(context)!.loadingEvents,
+                      style: const TextStyle(
+                        color: AppColors.textSecondary,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : Consumer<EventProvider>(
+                builder: (context, eventProvider, child) {
+                  if (eventProvider.annualEventsData == null) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const CircularProgressIndicator(),
+                          const SizedBox(height: 16),
+                          Text(
+                            AppLocalizations.of(context)!.loadingEvents,
+                            style: const TextStyle(
+                              color: AppColors.textSecondary,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+
+                  final activeEvents = eventProvider.getActiveEvents();
+                  final upcomingEvents = eventProvider.getUpcomingEvents();
+                  final currentMonthEvents =
+                      eventProvider.getCurrentMonthEvents();
+
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      setState(() {
+                        _isInitializing = true;
+                      });
+                      await _initializeEvents();
+                    },
+                    child: ListView(
+                      padding: const EdgeInsets.all(16),
+                      children: [
+                        // Bannière d'événement actif
+                        if (activeEvents.isNotEmpty)
+                          _buildActiveEventBanner(
+                              activeEvents.first, eventProvider),
+
+                        const SizedBox(height: 16),
+
+                        // Événements actifs
+                        if (activeEvents.isNotEmpty) ...[
+                          _buildSectionHeader(
+                              AppLocalizations.of(context)!.activeEvents,
+                              Icons.event_available),
+                          const SizedBox(height: 8),
+                          ...activeEvents.map(
+                              (event) => _buildEventCard(event, eventProvider)),
+                          const SizedBox(height: 24),
+                        ],
+
+                        // Événements de ce mois
+                        if (currentMonthEvents.isNotEmpty) ...[
+                          _buildSectionHeader(
+                              AppLocalizations.of(context)!.thisMonth,
+                              Icons.calendar_month),
+                          const SizedBox(height: 8),
+                          ...currentMonthEvents.take(3).map(
+                              (event) => _buildEventCard(event, eventProvider)),
+                          const SizedBox(height: 24),
+                        ],
+
+                        // Événements à venir
+                        if (upcomingEvents.isNotEmpty) ...[
+                          _buildSectionHeader(
+                              AppLocalizations.of(context)!.upcomingEvents,
+                              Icons.schedule),
+                          const SizedBox(height: 8),
+                          ...upcomingEvents.take(5).map(
+                              (event) => _buildEventCard(event, eventProvider)),
+                          const SizedBox(height: 24),
+                        ],
+
+                        // Statistiques
+                        _buildEventStatistics(eventProvider),
+                      ],
+                    ),
+                  );
+                },
+              ),
       ),
     );
   }
 
-  Widget _buildActiveEventBanner(SeasonalEvent event) {
-    final daysLeft = event.endDate.difference(DateTime.now()).inDays;
+  Widget _buildSectionHeader(String title, IconData icon) {
+    return Row(
+      children: [
+        Icon(
+          icon,
+          color: AppColors.primary,
+          size: 20,
+        ),
+        const SizedBox(width: 8),
+        Text(
+          title,
+          style: const TextStyle(
+            color: AppColors.textPrimary,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildActiveEventBanner(
+      Map<String, dynamic> event, EventProvider eventProvider) {
+    final endDate = DateTime.parse(event['end_date']);
+    final daysLeft = endDate.difference(DateTime.now()).inDays;
+    final theme = event['theme'] as String;
 
     return Container(
-      margin: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            AppColors.primary,
-            AppColors.accent,
-          ],
+          colors: _getThemeColors(theme),
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -179,8 +208,8 @@ class _EventsScreenState extends State<EventsScreen> {
         boxShadow: [
           BoxShadow(
             color: AppColors.primary.withValues(alpha: 0.3),
-            blurRadius: 15,
-            offset: const Offset(0, 8),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -189,78 +218,58 @@ class _EventsScreenState extends State<EventsScreen> {
         children: [
           Row(
             children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.2),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(
-                  Icons.event,
-                  color: Colors.white,
-                  size: 24,
-                ),
+              Icon(
+                Icons.event_available,
+                color: Colors.white,
+                size: 24,
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: 8),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.activeEvent,
-                      style: TextStyle(
-                        color: Colors.white.withValues(alpha: 0.8),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                    Text(
-                      event.name,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                child: Text(
+                  _getEventName(context, event),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
           Text(
-            event.description,
+            _getEventDescription(context, event),
             style: TextStyle(
               color: Colors.white.withValues(alpha: 0.9),
               fontSize: 14,
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
           Row(
             children: [
-              Icon(
-                Icons.access_time,
-                color: Colors.white.withValues(alpha: 0.8),
-                size: 16,
-              ),
-              const SizedBox(width: 4),
-              Text(
-                AppLocalizations.of(context)!.daysRemaining(daysLeft),
-                style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.8),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  daysLeft > 0
+                      ? AppLocalizations.of(context)!.daysRemaining(daysLeft)
+                      : AppLocalizations.of(context)!.lastDay,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               const Spacer(),
               ElevatedButton(
-                onPressed: () => _showEventDetails(event),
+                onPressed: () => _participateInEvent(event, eventProvider),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   foregroundColor: AppColors.primary,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
@@ -279,10 +288,17 @@ class _EventsScreenState extends State<EventsScreen> {
     );
   }
 
-  Widget _buildEventCard(SeasonalEvent event) {
-    final isActive = event.isActive;
-    final daysUntilStart = event.startDate.difference(DateTime.now()).inDays;
-    final daysLeft = event.endDate.difference(DateTime.now()).inDays;
+  Widget _buildEventCard(
+      Map<String, dynamic> event, EventProvider eventProvider) {
+    final startDate = DateTime.parse(event['start_date']);
+    final endDate = DateTime.parse(event['end_date']);
+    final now = DateTime.now();
+    final isActive = now.isAfter(startDate) && now.isBefore(endDate);
+    final isUpcoming = startDate.isAfter(now);
+    final daysUntilStart = startDate.difference(now).inDays;
+    final daysLeft = endDate.difference(now).inDays;
+    final theme = event['theme'] as String;
+    final challenges = event['challenges'] as List<dynamic>? ?? [];
 
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
@@ -291,490 +307,174 @@ class _EventsScreenState extends State<EventsScreen> {
           borderRadius: BorderRadius.circular(16),
           gradient: isActive
               ? LinearGradient(
-                  colors: [
-                    AppColors.primary.withValues(alpha: 0.1),
-                    AppColors.accent.withValues(alpha: 0.05),
-                  ],
+                  colors: _getThemeColors(theme),
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 )
               : null,
-        ),
-        child: InkWell(
-          onTap: () => _showEventDetails(event),
-          borderRadius: BorderRadius.circular(16),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // En-tête
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: isActive
-                            ? AppColors.primary.withValues(alpha: 0.2)
-                            : AppColors.textSecondary.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Icon(
-                        _getEventIcon(event.theme),
-                        color: isActive
-                            ? AppColors.primary
-                            : AppColors.textSecondary,
-                        size: 20,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            event.name,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.textPrimary,
-                                ),
-                          ),
-                          Text(
-                            isActive
-                                ? AppLocalizations.of(context)!
-                                    .daysRemaining(daysLeft)
-                                : AppLocalizations.of(context)!
-                                    .startsIn(daysUntilStart),
-                            style: TextStyle(
-                              color: isActive
-                                  ? AppColors.primary
-                                  : AppColors.textSecondary,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    if (isActive)
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: AppColors.success,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          AppLocalizations.of(context)!.active,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-
-                const SizedBox(height: 12),
-
-                // Description
-                Text(
-                  event.description,
-                  style: TextStyle(
-                    color: AppColors.textSecondary,
-                    fontSize: 14,
-                  ),
-                ),
-
-                const SizedBox(height: 12),
-
-                // Récompenses
-                if (event.rewards.isNotEmpty) ...[
-                  Text(
-                    AppLocalizations.of(context)!.rewards,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textPrimary,
-                        ),
-                  ),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: event.rewards.take(3).map((reward) {
-                      return _buildRewardChip(reward);
-                    }).toList(),
-                  ),
-                  if (event.rewards.length > 3)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4),
-                      child: Text(
-                        AppLocalizations.of(context)!
-                            .others(event.rewards.length - 3),
-                        style: TextStyle(
-                          color: AppColors.textSecondary,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                ],
-
-                const SizedBox(height: 12),
-
-                // Progression des défis
-                if (isActive && event.challenges.isNotEmpty) ...[
-                  Text(
-                    AppLocalizations.of(context)!.progress,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textPrimary,
-                        ),
-                  ),
-                  const SizedBox(height: 8),
-                  ...event.challenges.map((challenge) {
-                    return _buildChallengeProgress(challenge);
-                  }),
-                ],
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildRewardChip(EventReward reward) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: _getRewardColor(reward.type).withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: _getRewardColor(reward.type).withValues(alpha: 0.3),
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            _getRewardIcon(reward.type),
-            color: _getRewardColor(reward.type),
-            size: 14,
-          ),
-          const SizedBox(width: 4),
-          Text(
-            _getRewardText(reward),
-            style: TextStyle(
-              color: _getRewardColor(reward.type),
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildChallengeProgress(EventChallenge challenge) {
-    final progress = challenge.progress / challenge.target;
-
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  challenge.description,
-                  style: TextStyle(
-                    color: AppColors.textSecondary,
-                    fontSize: 12,
-                  ),
-                ),
-              ),
-              Text(
-                '${challenge.progress}/${challenge.target}',
-                style: TextStyle(
-                  color: AppColors.textSecondary,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 4),
-          LinearProgressIndicator(
-            value: progress,
-            backgroundColor: AppColors.textSecondary.withValues(alpha: 0.2),
-            valueColor: AlwaysStoppedAnimation<Color>(
-              progress >= 1.0 ? AppColors.success : AppColors.primary,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Row(
-            children: [
-              Icon(
-                Icons.monetization_on,
-                color: AppColors.coins,
-                size: 12,
-              ),
-              const SizedBox(width: 4),
-              Text(
-                '+${challenge.reward}',
-                style: TextStyle(
-                  color: AppColors.coins,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              if (progress >= 1.0) ...[
-                const Spacer(),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(
-                    color: AppColors.success,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    AppLocalizations.of(context)!.completed,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 8,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  IconData _getEventIcon(String theme) {
-    switch (theme) {
-      case 'spring':
-        return Icons.local_florist;
-      case 'summer':
-        return Icons.wb_sunny;
-      case 'autumn':
-        return Icons.eco;
-      case 'winter':
-        return Icons.ac_unit;
-      default:
-        return Icons.event;
-    }
-  }
-
-  IconData _getRewardIcon(RewardType type) {
-    switch (type) {
-      case RewardType.coins:
-        return Icons.monetization_on;
-      case RewardType.gems:
-        return Icons.diamond;
-      case RewardType.plant:
-        return Icons.eco;
-      case RewardType.booster:
-        return Icons.rocket_launch;
-    }
-  }
-
-  Color _getRewardColor(RewardType type) {
-    switch (type) {
-      case RewardType.coins:
-        return AppColors.coins;
-      case RewardType.gems:
-        return AppColors.gold;
-      case RewardType.plant:
-        return AppColors.primary;
-      case RewardType.booster:
-        return AppColors.accent;
-    }
-  }
-
-  String _getRewardText(EventReward reward) {
-    switch (reward.type) {
-      case RewardType.coins:
-        return AppLocalizations.of(context)!.coins(reward.quantity);
-      case RewardType.gems:
-        return AppLocalizations.of(context)!.gems(reward.quantity);
-      case RewardType.plant:
-        return AppLocalizations.of(context)!.plant(reward.rarity ?? 1);
-      case RewardType.booster:
-        return AppLocalizations.of(context)!.boosters(reward.quantity);
-    }
-  }
-
-  void _showEventDetails(SeasonalEvent event) {
-    final audioProvider = Provider.of<AudioProvider>(context, listen: false);
-    audioProvider.playSfx('audio/sfx/button_click.wav');
-
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        height: MediaQuery.of(context).size.height * 0.8,
-        decoration: const BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          color: isActive ? null : AppColors.surface,
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Handle
-              Center(
-                child: Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: AppColors.textSecondary.withValues(alpha: 0.3),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 20),
-
-              // En-tête
               Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withValues(alpha: 0.2),
-                      borderRadius: BorderRadius.circular(12),
+                      color: isActive
+                          ? Colors.white.withValues(alpha: 0.2)
+                          : AppColors.primary.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
-                      _getEventIcon(event.theme),
-                      color: AppColors.primary,
-                      size: 32,
+                      _getEventIcon(event['type'] as String),
+                      color: isActive ? Colors.white : AppColors.primary,
+                      size: 20,
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          event.name,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall
-                              ?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.textPrimary,
-                              ),
+                          _getEventName(context, event),
+                          style: TextStyle(
+                            color:
+                                isActive ? Colors.white : AppColors.textPrimary,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Text(
-                          '${event.startDate.day}/${event.startDate.month} - ${event.endDate.day}/${event.endDate.month}',
+                          _getEventDescription(context, event),
                           style: TextStyle(
-                            color: AppColors.textSecondary,
-                            fontSize: 14,
+                            color: isActive
+                                ? Colors.white.withValues(alpha: 0.8)
+                                : AppColors.textSecondary,
+                            fontSize: 12,
                           ),
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
-
-              const SizedBox(height: 20),
-
-              // Description
-              Text(
-                AppLocalizations.of(context)!.description,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
-                    ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                event.description,
-                style: TextStyle(
-                  color: AppColors.textSecondary,
-                  height: 1.5,
-                ),
-              ),
-
-              const SizedBox(height: 20),
-
-              // Récompenses
-              Text(
-                AppLocalizations.of(context)!.rewards,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
-                    ),
-              ),
-              const SizedBox(height: 12),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: event.rewards.length,
-                  itemBuilder: (context, index) {
-                    return _buildRewardItem(event.rewards[index]);
-                  },
-                ),
-              ),
-
-              // Défis
-              if (event.challenges.isNotEmpty) ...[
-                Text(
-                  AppLocalizations.of(context)!.challenges,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.textPrimary,
-                      ),
-                ),
-                const SizedBox(height: 12),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: event.challenges.length,
-                    itemBuilder: (context, index) {
-                      return _buildChallengeItem(event.challenges[index]);
-                    },
-                  ),
-                ),
-              ],
-
-              const SizedBox(height: 20),
-
-              // Bouton d'action
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed:
-                      event.isActive ? () => _participateInEvent(event) : null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: event.isActive
-                        ? AppColors.primary
-                        : AppColors.textSecondary.withValues(alpha: 0.3),
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: isActive
+                          ? Colors.white.withValues(alpha: 0.2)
+                          : AppColors.accent.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                  ),
-                  child: Text(
-                    event.isActive
-                        ? AppLocalizations.of(context)!.participate
-                        : AppLocalizations.of(context)!.comingSoon,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
+                    child: Text(
+                      isActive
+                          ? (daysLeft > 0
+                              ? AppLocalizations.of(context)!.daysLeft(daysLeft)
+                              : AppLocalizations.of(context)!.lastDay)
+                          : isUpcoming
+                              ? AppLocalizations.of(context)!
+                                  .inDays(daysUntilStart)
+                              : AppLocalizations.of(context)!.finished,
+                      style: TextStyle(
+                        color: isActive ? Colors.white : AppColors.textPrimary,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
+                ],
+              ),
+              if (challenges.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                Text(
+                  AppLocalizations.of(context)!
+                      .challengesCount(challenges.length),
+                  style: TextStyle(
+                    color: isActive ? Colors.white : AppColors.textPrimary,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
+                const SizedBox(height: 8),
+                ...challenges
+                    .take(2)
+                    .map((challenge) => _buildChallengeProgress(
+                          challenge,
+                          event['id'] as String,
+                          eventProvider,
+                          isActive,
+                        )),
+              ],
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  if (isActive) ...[
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () =>
+                            _participateInEvent(event, eventProvider),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: AppColors.primary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        child: Text(
+                          AppLocalizations.of(context)!.participate,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ] else if (isUpcoming) ...[
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: null,
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(
+                              color: AppColors.primary.withValues(alpha: 0.3)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        child: Text(
+                          AppLocalizations.of(context)!.comingSoon,
+                          style: TextStyle(
+                            color: AppColors.textSecondary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ] else ...[
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: null,
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(
+                              color: AppColors.textSecondary
+                                  .withValues(alpha: 0.3)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        child: Text(
+                          AppLocalizations.of(context)!.finished,
+                          style: TextStyle(
+                            color: AppColors.textSecondary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ],
               ),
             ],
           ),
@@ -783,226 +483,440 @@ class _EventsScreenState extends State<EventsScreen> {
     );
   }
 
-  Widget _buildRewardItem(EventReward reward) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: _getRewardColor(reward.type).withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: _getRewardColor(reward.type).withValues(alpha: 0.3),
-        ),
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: _getRewardColor(reward.type).withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Icon(
-              _getRewardIcon(reward.type),
-              color: _getRewardColor(reward.type),
-              size: 24,
-            ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  _getRewardText(reward),
-                  style: TextStyle(
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                  ),
-                ),
-                if (reward.type == RewardType.plant)
-                  Text(
-                    AppLocalizations.of(context)!.rarePlant(reward.rarity ?? 1),
-                    style: TextStyle(
-                      color: AppColors.textSecondary,
-                      fontSize: 14,
-                    ),
-                  ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildChallengeItem(EventChallenge challenge) {
-    final progress = challenge.progress / challenge.target;
-    final isCompleted = progress >= 1.0;
+  Widget _buildChallengeProgress(
+    Map<String, dynamic> challenge,
+    String eventId,
+    EventProvider eventProvider,
+    bool isActive,
+  ) {
+    final challengeId = challenge['id'] as String;
+    final target = challenge['target'] as int;
+    final progress = eventProvider.getChallengeProgress(eventId, challengeId);
+    final isCompleted = progress >= target;
+    final progressPercent =
+        target > 0 ? (progress / target).clamp(0.0, 1.0) : 0.0;
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: isCompleted
-            ? AppColors.success.withValues(alpha: 0.1)
-            : AppColors.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isCompleted
-              ? AppColors.success.withValues(alpha: 0.3)
-              : AppColors.textSecondary.withValues(alpha: 0.2),
-        ),
-      ),
+      margin: const EdgeInsets.only(bottom: 4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(
-                isCompleted ? Icons.check_circle : Icons.radio_button_unchecked,
-                color:
-                    isCompleted ? AppColors.success : AppColors.textSecondary,
-                size: 20,
-              ),
-              const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  challenge.description,
+                  _getChallengeDescription(context, challenge),
                   style: TextStyle(
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.w600,
+                    color: isActive
+                        ? Colors.white.withValues(alpha: 0.9)
+                        : AppColors.textSecondary,
+                    fontSize: 11,
                   ),
                 ),
               ),
               Text(
-                '${challenge.progress}/${challenge.target}',
+                '$progress/$target',
                 style: TextStyle(
-                  color: AppColors.textSecondary,
+                  color: isActive ? Colors.white : AppColors.textPrimary,
+                  fontSize: 10,
                   fontWeight: FontWeight.w600,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 4),
           LinearProgressIndicator(
-            value: progress,
-            backgroundColor: AppColors.textSecondary.withValues(alpha: 0.2),
+            value: progressPercent,
+            backgroundColor: isActive
+                ? Colors.white.withValues(alpha: 0.2)
+                : AppColors.primary.withValues(alpha: 0.1),
             valueColor: AlwaysStoppedAnimation<Color>(
-              isCompleted ? AppColors.success : AppColors.primary,
+              isCompleted
+                  ? Colors.green
+                  : isActive
+                      ? Colors.white
+                      : AppColors.primary,
             ),
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Icon(
-                Icons.monetization_on,
-                color: AppColors.coins,
-                size: 16,
-              ),
-              const SizedBox(width: 4),
-              Text(
-                AppLocalizations.of(context)!.coins(challenge.reward),
-                style: TextStyle(
-                  color: AppColors.coins,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const Spacer(),
-              if (isCompleted)
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: AppColors.success,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    AppLocalizations.of(context)!.completed,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-            ],
           ),
         ],
       ),
     );
   }
 
-  void _participateInEvent(SeasonalEvent event) {
-    // TODO: Implémenter la participation aux événements
+  Widget _buildEventStatistics(EventProvider eventProvider) {
+    final stats = eventProvider.getEventStatistics();
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              AppLocalizations.of(context)!.eventStatistics,
+              style: const TextStyle(
+                color: AppColors.textPrimary,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: _buildStatItem(
+                    AppLocalizations.of(context)!.events,
+                    '${stats['total_events']}',
+                    Icons.event,
+                  ),
+                ),
+                Expanded(
+                  child: _buildStatItem(
+                    AppLocalizations.of(context)!.active,
+                    '${stats['active_events']}',
+                    Icons.event_available,
+                  ),
+                ),
+                Expanded(
+                  child: _buildStatItem(
+                    AppLocalizations.of(context)!.challenges,
+                    '${stats['challenges_completed']}',
+                    Icons.emoji_events,
+                  ),
+                ),
+                Expanded(
+                  child: _buildStatItem(
+                    AppLocalizations.of(context)!.rewards,
+                    '${stats['rewards_claimed']}',
+                    Icons.card_giftcard,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatItem(String label, String value, IconData icon) {
+    return Column(
+      children: [
+        Icon(
+          icon,
+          color: AppColors.primary,
+          size: 20,
+        ),
+        const SizedBox(height: 4),
+        Text(
+          value,
+          style: const TextStyle(
+            color: AppColors.textPrimary,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          label,
+          style: const TextStyle(
+            color: AppColors.textSecondary,
+            fontSize: 10,
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _showEventFilterDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.filterEvents),
+        content: Text(AppLocalizations.of(context)!.filterFeatureComingSoon),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(AppLocalizations.of(context)!.close),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _participateInEvent(
+      Map<String, dynamic> event, EventProvider eventProvider) {
+    final audioProvider = Provider.of<AudioProvider>(context, listen: false);
+    audioProvider.playButtonClick();
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
-            AppLocalizations.of(context)!.participationInProgress(event.name)),
+        content: Text(AppLocalizations.of(context)!
+            .participatingInEvent(_getEventName(context, event))),
         backgroundColor: AppColors.primary,
       ),
     );
   }
-}
 
-class SeasonalEvent {
-  final String id;
-  final String name;
-  final String description;
-  final DateTime startDate;
-  final DateTime endDate;
-  final String theme;
-  final List<EventReward> rewards;
-  final List<EventChallenge> challenges;
-  final bool isActive;
+  List<Color> _getThemeColors(String theme) {
+    switch (theme) {
+      case 'spring':
+        return [const Color(0xFF4CAF50), const Color(0xFF8BC34A)];
+      case 'summer':
+        return [const Color(0xFFFF9800), const Color(0xFFFFC107)];
+      case 'autumn':
+        return [const Color(0xFFFF5722), const Color(0xFFFF9800)];
+      case 'winter':
+        return [const Color(0xFF2196F3), const Color(0xFF03A9F4)];
+      case 'easter':
+        return [const Color(0xFFE91E63), const Color(0xFFF06292)];
+      case 'halloween':
+        return [const Color(0xFF9C27B0), const Color(0xFF673AB7)];
+      case 'christmas':
+        return [const Color(0xFFF44336), const Color(0xFFE91E63)];
+      case 'valentine':
+        return [const Color(0xFFE91E63), const Color(0xFFF8BBD9)];
+      default:
+        return [AppColors.primary, AppColors.accent];
+    }
+  }
 
-  SeasonalEvent({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.startDate,
-    required this.endDate,
-    required this.theme,
-    required this.rewards,
-    required this.challenges,
-    required this.isActive,
-  });
-}
+  IconData _getEventIcon(String type) {
+    switch (type) {
+      case 'seasonal':
+        return Icons.wb_sunny;
+      case 'holiday':
+        return Icons.celebration;
+      case 'special':
+        return Icons.star;
+      case 'update':
+        return Icons.system_update;
+      case 'awareness':
+        return Icons.eco;
+      default:
+        return Icons.event;
+    }
+  }
 
-class EventReward {
-  final RewardType type;
-  final String? itemId;
-  final int quantity;
-  final int? rarity;
+  /// Obtient le nom traduit d'un événement
+  String _getEventName(BuildContext context, Map<String, dynamic> event) {
+    final l10n = AppLocalizations.of(context)!;
+    final locale = Localizations.localeOf(context);
+    final nameKey = event['name_key'] as String?;
 
-  EventReward({
-    required this.type,
-    this.itemId,
-    required this.quantity,
-    this.rarity,
-  });
-}
+    if (nameKey != null) {
+      switch (nameKey) {
+        case 'springBloom':
+          return l10n.springBloom;
+        case 'easterEvent':
+          return l10n.easterEvent;
+        case 'earthDayEvent':
+          return locale.languageCode == 'en' ? 'Earth Day' : 'Jour de la Terre';
+        case 'summerSolstice':
+          return l10n.summerSolstice;
+        case 'independenceDayEvent':
+          return locale.languageCode == 'en'
+              ? 'Independence Day'
+              : 'Fête Nationale';
+        case 'summerFestivalEvent':
+          return locale.languageCode == 'en'
+              ? 'Summer Festival'
+              : 'Festival d\'Été';
+        case 'autumnHarvest':
+          return locale.languageCode == 'en'
+              ? 'Autumn Harvest'
+              : 'Récolte d\'Automne';
+        case 'halloweenEvent':
+          return locale.languageCode == 'en' ? 'Halloween' : 'Halloween';
+        case 'thanksgivingEvent':
+          return locale.languageCode == 'en'
+              ? 'Thanksgiving'
+              : 'Action de Grâce';
+        case 'winterSolstice':
+          return locale.languageCode == 'en'
+              ? 'Winter Solstice'
+              : 'Solstice d\'Hiver';
+        case 'christmasEvent':
+          return locale.languageCode == 'en' ? 'Christmas' : 'Noël';
+        case 'newYearEvent':
+          return locale.languageCode == 'en' ? 'New Year' : 'Nouvel An';
+        case 'valentineDay':
+          return locale.languageCode == 'en'
+              ? 'Valentine\'s Day'
+              : 'Saint-Valentin';
+        case 'birthdayEvent':
+          return locale.languageCode == 'en' ? 'Birthday' : 'Anniversaire';
+        case 'specialUpdateEvent':
+          return locale.languageCode == 'en'
+              ? 'Special Update'
+              : 'Mise à Jour Spéciale';
+        default:
+          return event['name'] as String? ??
+              (locale.languageCode == 'en' ? 'Event' : 'Événement');
+      }
+    }
 
-class EventChallenge {
-  final String id;
-  final String description;
-  final int target;
-  final int progress;
-  final int reward;
+    return event['name'] as String? ??
+        (locale.languageCode == 'en' ? 'Event' : 'Événement');
+  }
 
-  EventChallenge({
-    required this.id,
-    required this.description,
-    required this.target,
-    required this.progress,
-    required this.reward,
-  });
-}
+  /// Obtient la description traduite d'un événement
+  String _getEventDescription(
+      BuildContext context, Map<String, dynamic> event) {
+    final l10n = AppLocalizations.of(context)!;
+    final locale = Localizations.localeOf(context);
+    final descriptionKey = event['description_key'] as String?;
 
-enum RewardType {
-  coins,
-  gems,
-  plant,
-  booster,
+    if (descriptionKey != null) {
+      switch (descriptionKey) {
+        case 'springBloomDescription':
+          return l10n.springBloomDescription;
+        case 'easterEventDescription':
+          return l10n.easterEventDescription;
+        case 'earthDayEventDescription':
+          return locale.languageCode == 'en'
+              ? 'Protect nature with eco-friendly plants'
+              : 'Protégez la nature avec des plantes écologiques';
+        case 'summerSolsticeDescription':
+          return l10n.summerSolsticeDescription;
+        case 'independenceDayEventDescription':
+          return locale.languageCode == 'en'
+              ? 'Celebrate with patriotic plants'
+              : 'Célébrez avec des plantes patriotiques';
+        case 'summerFestivalEventDescription':
+          return locale.languageCode == 'en'
+              ? 'Grand summer festival with many rewards'
+              : 'Grand festival estival avec de nombreuses récompenses';
+        case 'autumnHarvestDescription':
+          return locale.languageCode == 'en'
+              ? 'Harvest the fruits of your work with autumn plants'
+              : 'Récoltez les fruits de votre travail avec des plantes d\'automne';
+        case 'halloweenEventDescription':
+          return locale.languageCode == 'en'
+              ? 'Mysterious plants and spooky rewards'
+              : 'Plantes mystérieuses et récompenses effrayantes';
+        case 'thanksgivingEventDescription':
+          return locale.languageCode == 'en'
+              ? 'Give thanks with gratitude plants'
+              : 'Remerciez avec des plantes de gratitude';
+        case 'winterSolsticeDescription':
+          return locale.languageCode == 'en'
+              ? 'Celebrate the shortest day with winter plants'
+              : 'Célébrez le jour le plus court avec des plantes hivernales';
+        case 'christmasEventDescription':
+          return locale.languageCode == 'en'
+              ? 'Gifts and Christmas plants for everyone'
+              : 'Cadeaux et plantes de Noël pour tous';
+        case 'newYearEventDescription':
+          return locale.languageCode == 'en'
+              ? 'Start the year with new plants'
+              : 'Commencez l\'année avec de nouvelles plantes';
+        case 'valentineDayDescription':
+          return locale.languageCode == 'en'
+              ? 'Love plants and romantic rewards'
+              : 'Plantes d\'amour et récompenses romantiques';
+        case 'birthdayEventDescription':
+          return locale.languageCode == 'en'
+              ? 'Celebrate one year of gaming with special rewards'
+              : 'Célébrez un an de jeu avec des récompenses spéciales';
+        case 'specialUpdateEventDescription':
+          return locale.languageCode == 'en'
+              ? 'New features and improvements'
+              : 'Nouvelles fonctionnalités et améliorations';
+        default:
+          return event['description'] as String? ??
+              (locale.languageCode == 'en'
+                  ? 'Event description'
+                  : 'Description de l\'événement');
+      }
+    }
+
+    return event['description'] as String? ??
+        (locale.languageCode == 'en'
+            ? 'Event description'
+            : 'Description de l\'événement');
+  }
+
+  /// Obtient la description traduite d'un défi
+  String _getChallengeDescription(
+      BuildContext context, Map<String, dynamic> challenge) {
+    final l10n = AppLocalizations.of(context)!;
+    final locale = Localizations.localeOf(context);
+    final descriptionKey = challenge['description_key'] as String?;
+    final descriptionParams =
+        challenge['description_params'] as Map<String, dynamic>?;
+
+    if (descriptionKey != null && descriptionParams != null) {
+      switch (descriptionKey) {
+        case 'completeLevels':
+          final target = descriptionParams['target'] as int? ?? 0;
+          final levelType = descriptionParams['levelType'] as String?;
+          if (levelType != null) {
+            return locale.languageCode == 'en'
+                ? 'Complete $target $levelType levels'
+                : 'Terminez $target niveaux $levelType';
+          }
+          return l10n.completeLevels(target);
+        case 'earnStars':
+          final target = descriptionParams['target'] as int? ?? 0;
+          return l10n.earnStars(target);
+        case 'scorePoints':
+          final target = descriptionParams['target'] as int? ?? 0;
+          return l10n.scorePoints(target);
+        case 'collectTilesObjective':
+          final count = descriptionParams['count'] as int? ?? 0;
+          final tileName = descriptionParams['tileName'] as String? ?? '';
+          return l10n.collectTilesObjective(count, tileName);
+        case 'completeActions':
+          final target = descriptionParams['target'] as int? ?? 0;
+          final actionType = descriptionParams['actionType'] as String? ?? '';
+          return locale.languageCode == 'en'
+              ? 'Complete $target $actionType actions'
+              : 'Effectuez $target actions $actionType';
+        case 'playConsecutiveDays':
+          final target = descriptionParams['target'] as int? ?? 0;
+          return locale.languageCode == 'en'
+              ? 'Play for $target consecutive days'
+              : 'Jouez $target jours consécutifs';
+        case 'completeLevelsWithStars':
+          final target = descriptionParams['target'] as int? ?? 0;
+          final stars = descriptionParams['stars'] as int? ?? 0;
+          return locale.languageCode == 'en'
+              ? 'Complete $target levels with $stars stars'
+              : 'Terminez $target niveaux avec $stars étoiles';
+        case 'completeQuests':
+          final target = descriptionParams['target'] as int? ?? 0;
+          final questType = descriptionParams['questType'] as String? ?? '';
+          return locale.languageCode == 'en'
+              ? 'Complete $target $questType quests'
+              : 'Terminez $target quêtes $questType';
+        case 'collectItems':
+          final target = descriptionParams['target'] as int? ?? 0;
+          final itemType = descriptionParams['itemType'] as String? ?? '';
+          return locale.languageCode == 'en'
+              ? 'Collect $target $itemType items'
+              : 'Collectez $target objets $itemType';
+        case 'completeLevelsInDays':
+          final target = descriptionParams['target'] as int? ?? 0;
+          final days = descriptionParams['days'] as int? ?? 0;
+          return locale.languageCode == 'en'
+              ? 'Complete $target levels in $days days'
+              : 'Terminez $target niveaux en $days jours';
+        case 'giveGifts':
+          final target = descriptionParams['target'] as int? ?? 0;
+          return locale.languageCode == 'en'
+              ? 'Give $target gifts'
+              : 'Offrez $target cadeaux';
+        case 'exploreNewFeatures':
+          return locale.languageCode == 'en'
+              ? 'Explore the new features'
+              : 'Explorez les nouvelles fonctionnalités';
+        default:
+          return challenge['description'] as String? ??
+              (locale.languageCode == 'en' ? 'Challenge' : 'Défi');
+      }
+    }
+
+    return challenge['description'] as String? ??
+        (locale.languageCode == 'en' ? 'Challenge' : 'Défi');
+  }
 }

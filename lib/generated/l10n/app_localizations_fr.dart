@@ -398,7 +398,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get active => 'Actif';
+  String get active => 'Actifs';
 
   @override
   String get inactive => 'Inactif';
@@ -753,8 +753,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get activeEvent => 'ÉVÉNEMENT ACTIF';
 
   @override
-  String daysRemaining(int days) {
-    return '$days jours restants';
+  String daysRemaining(int count) {
+    return '$count jours restants';
   }
 
   @override
@@ -907,7 +907,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get hintDescription => 'Révèle un coup possible';
 
   @override
-  String get removeAds => 'Supprimer les Publicités';
+  String get removeAds => 'Supprimer les pubs';
 
   @override
   String get removeAdsDescription =>
@@ -930,9 +930,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String scoreMultiplier(int value) {
-    return 'Score x$value';
-  }
+  String get scoreMultiplier => 'Multiplicateur de score';
 
   @override
   String coinMultiplier(int value) {
@@ -1370,7 +1368,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String collectTilesObjective(int count, String tileName) {
-    return 'Collectez $count ${tileName}s';
+    return 'Collectez $count $tileName';
   }
 
   @override
@@ -1431,4 +1429,513 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get shareScoreError => 'Erreur lors du partage du score';
+
+  @override
+  String get quit => 'Quitter';
+
+  @override
+  String get winterSolstice => 'Solstice d\'Hiver';
+
+  @override
+  String get winterSolsticeDescription =>
+      'Éclairez la nuit avec des cristaux de glace';
+
+  @override
+  String get valentineDay => 'Jour de la Saint-Valentin';
+
+  @override
+  String get valentineDayDescription =>
+      'Partagez l\'amour avec des fleurs romantiques';
+
+  @override
+  String get shareAchievements => 'Partageur de Badges';
+
+  @override
+  String get shareAchievementsDescription =>
+      'Partagez 5 achievements avec vos amis';
+
+  @override
+  String get socialButterfly => 'Papillon Social';
+
+  @override
+  String get socialButterflyDescription =>
+      'Partagez 10 achievements avec vos amis';
+
+  @override
+  String get shareThisBadge => 'Partager ce badge';
+
+  @override
+  String get shareMyAchievements => 'Partager mes achievements';
+
+  @override
+  String badgeShared(String badgeTitle) {
+    return 'Badge \"$badgeTitle\" partagé ! 🎉';
+  }
+
+  @override
+  String get achievementsShared => 'Mes achievements partagés ! 🎉';
+
+  @override
+  String get easterEvent => 'Pâques Magique';
+
+  @override
+  String get easterEventDescription => 'Découvrez des œufs magiques cachés';
+
+  @override
+  String get halloweenEvent => 'Halloween Enchanté';
+
+  @override
+  String get halloweenEventDescription =>
+      'Plantez des citrouilles mystérieuses';
+
+  @override
+  String get christmasEvent => 'Noël Féerique';
+
+  @override
+  String get christmasEventDescription =>
+      'Décorez votre jardin avec des étoiles de Noël';
+
+  @override
+  String get newYearEvent => 'Nouvel An Luminieux';
+
+  @override
+  String get newYearEventDescription =>
+      'Commencez l\'année avec des feux d\'artifice magiques';
+
+  @override
+  String get thanksgivingEvent => 'Action de Grâce';
+
+  @override
+  String get thanksgivingEventDescription =>
+      'Récoltez l\'abondance avec gratitude';
+
+  @override
+  String get motherDayEvent => 'Fête des Mères';
+
+  @override
+  String get motherDayEventDescription =>
+      'Offrez des fleurs en hommage aux mères';
+
+  @override
+  String get fatherDayEvent => 'Fête des Pères';
+
+  @override
+  String get fatherDayEventDescription =>
+      'Cultivez la force avec des plantes robustes';
+
+  @override
+  String get springCleaningEvent => 'Nettoyage de Printemps';
+
+  @override
+  String get springCleaningEventDescription =>
+      'Rafraîchissez votre jardin pour une nouvelle saison';
+
+  @override
+  String get summerFestivalEvent => 'Festival d\'Été';
+
+  @override
+  String get summerFestivalEventDescription =>
+      'Grand festival estival avec de nombreuses récompenses';
+
+  @override
+  String get harvestFestivalEvent => 'Festival de la Récolte';
+
+  @override
+  String get harvestFestivalEventDescription =>
+      'Célébrez l\'abondance de l\'automne';
+
+  @override
+  String get winterFestivalEvent => 'Festival d\'Hiver';
+
+  @override
+  String get winterFestivalEventDescription =>
+      'Éclairez la saison sombre avec des cristaux';
+
+  @override
+  String get specialUpdateEvent => 'Mise à Jour Spéciale';
+
+  @override
+  String get specialUpdateEventDescription =>
+      'Découvrez de nouvelles fonctionnalités';
+
+  @override
+  String get communityChallengeEvent => 'Défi Communautaire';
+
+  @override
+  String get communityChallengeEventDescription =>
+      'Relevez des défis avec toute la communauté';
+
+  @override
+  String get limitedTimeEvent => 'Événement à Durée Limitée';
+
+  @override
+  String get limitedTimeEventDescription =>
+      'Profitez de cet événement unique avant qu\'il ne disparaisse';
+
+  @override
+  String get birthdayEvent => 'Anniversaire de Mind Bloom';
+
+  @override
+  String get birthdayEventDescription =>
+      'Célébrez un an de Mind Bloom avec des surprises';
+
+  @override
+  String get milestoneEvent => 'Événement Milestone';
+
+  @override
+  String get milestoneEventDescription => 'Célébrez les grandes étapes du jeu';
+
+  @override
+  String get earthDayEvent => 'Jour de la Terre';
+
+  @override
+  String get earthDayEventDescription =>
+      'Protégez la nature avec des plantes écologiques';
+
+  @override
+  String get independenceDayEvent => 'Fête Nationale';
+
+  @override
+  String get independenceDayEventDescription =>
+      'Célébrez avec des plantes patriotiques';
+
+  @override
+  String completeActions(int target, String actionType) {
+    return 'Effectuez $target actions $actionType';
+  }
+
+  @override
+  String playConsecutiveDays(int target) {
+    return 'Jouez $target jours consécutifs';
+  }
+
+  @override
+  String completeLevelsWithStars(int target, int stars) {
+    return 'Terminez $target niveaux avec $stars étoiles';
+  }
+
+  @override
+  String completeQuests(int target, String questType) {
+    return 'Terminez $target quêtes $questType';
+  }
+
+  @override
+  String collectItems(int target, String itemType) {
+    return 'Collectez $target objets $itemType';
+  }
+
+  @override
+  String completeLevelsInDays(int target, int days) {
+    return 'Terminez $target niveaux en $days jours';
+  }
+
+  @override
+  String giveGifts(int target) {
+    return 'Offrez $target cadeaux';
+  }
+
+  @override
+  String get exploreNewFeatures => 'Explorez les nouvelles fonctionnalités';
+
+  @override
+  String get loadingEvents => 'Chargement des événements...';
+
+  @override
+  String get activeEvents => 'Événements Actifs';
+
+  @override
+  String get thisMonth => 'Ce Mois';
+
+  @override
+  String get upcomingEvents => 'Événements à Venir';
+
+  @override
+  String get lastDay => 'Dernier jour';
+
+  @override
+  String daysLeft(int count) {
+    return '$count jours';
+  }
+
+  @override
+  String inDays(int count) {
+    return 'Dans $count jours';
+  }
+
+  @override
+  String get finished => 'Terminé';
+
+  @override
+  String challengesCount(int count) {
+    return 'Défis ($count)';
+  }
+
+  @override
+  String get eventStatistics => 'Statistiques des Événements';
+
+  @override
+  String get filterEvents => 'Filtrer les événements';
+
+  @override
+  String get filterFeatureComingSoon => 'Fonctionnalité de filtrage à venir...';
+
+  @override
+  String participatingInEvent(String eventName) {
+    return 'Participation à \"$eventName\" en cours...';
+  }
+
+  @override
+  String get fullLives => 'Vies complètes';
+
+  @override
+  String get refillAllLives => 'Remplit toutes vos vies (5/5)';
+
+  @override
+  String get threeLives => '3 Vies';
+
+  @override
+  String get addThreeLives => 'Ajoute 3 vies à votre stock';
+
+  @override
+  String get twoHundredCoins => '200 Pièces';
+
+  @override
+  String get smallCoinBoost => 'Un petit boost de pièces';
+
+  @override
+  String get fiveHundredCoins => '500 Pièces';
+
+  @override
+  String get goodCoinStock => 'Un bon stock de pièces';
+
+  @override
+  String get thousandCoins => '1000 Pièces';
+
+  @override
+  String get bigCoinStock => 'Un gros stock de pièces';
+
+  @override
+  String get twentyFiveGems => '25 Gemmes';
+
+  @override
+  String get preciousGems => 'Gemmes précieuses pour les achats premium';
+
+  @override
+  String get shuffleGrid => 'Mélange la grille pour de nouveaux mouvements';
+
+  @override
+  String get revealWinningMove => 'Révèle un mouvement gagnant';
+
+  @override
+  String get bonusMoves => 'Mouvements bonus';
+
+  @override
+  String get fiveExtraMoves => '+5 mouvements pour le niveau actuel';
+
+  @override
+  String get doubleScoreThreeLevels => 'x2 score pendant 3 niveaux';
+
+  @override
+  String get experienceBoost => 'Boost d\'expérience';
+
+  @override
+  String get hundredXpBoost => '+100 XP pour progresser plus vite';
+
+  @override
+  String get skipLevel => 'Passer un niveau';
+
+  @override
+  String get unlockNextLevel => 'Débloque le niveau suivant';
+
+  @override
+  String get unlockAllLevels => 'Débloquer tous les niveaux';
+
+  @override
+  String get accessAllLevels => 'Accès à tous les niveaux du jeu';
+
+  @override
+  String get natureTheme => 'Thème Nature';
+
+  @override
+  String get natureThemeDescription =>
+      'Nouveau thème visuel avec des couleurs naturelles';
+
+  @override
+  String get oceanTheme => 'Thème Océan';
+
+  @override
+  String get oceanThemeDescription =>
+      'Thème aquatique avec des couleurs bleues';
+
+  @override
+  String get goldFrame => 'Cadre doré';
+
+  @override
+  String get goldFrameDescription => 'Cadre doré pour votre avatar';
+
+  @override
+  String get playWithoutAds => 'Jouez sans interruption publicitaire';
+
+  @override
+  String get premiumPack => 'Pack Premium';
+
+  @override
+  String get allPremiumBenefits => 'Tous les avantages premium + 100 gemmes';
+
+  @override
+  String get cosmetics => 'Cosmétiques';
+
+  @override
+  String get freeRewards => '🎁 Récompenses Gratuites';
+
+  @override
+  String get world_garden_beginnings => 'Jardin des Débuts';
+
+  @override
+  String get world_garden_beginnings_description =>
+      'Commencez votre aventure dans ce jardin paisible où les premières graines de votre voyage prennent vie.';
+
+  @override
+  String get world_valley_flowers => 'Vallée des Fleurs';
+
+  @override
+  String get world_valley_flowers_description =>
+      'Explorez une vallée colorée où fleurissent les plus belles créations de la nature.';
+
+  @override
+  String get world_lunar_forest => 'Forêt Lunaire';
+
+  @override
+  String get world_lunar_forest_description =>
+      'Plongez dans l\'obscurité mystérieuse de cette forêt baignée par la lumière lunaire.';
+
+  @override
+  String get world_solar_meadow => 'Prairie Solaire';
+
+  @override
+  String get world_solar_meadow_description =>
+      'Baignez-vous dans la chaleur bienfaisante de cette prairie dorée par le soleil.';
+
+  @override
+  String get world_crystal_caverns => 'Cavernes Cristallines';
+
+  @override
+  String get world_crystal_caverns_description =>
+      'Découvrez les trésors cachés dans ces grottes scintillantes de cristaux précieux.';
+
+  @override
+  String get world_mystic_swamps => 'Marécages Mystiques';
+
+  @override
+  String get world_mystic_swamps_description =>
+      'Naviguez dans les eaux troubles de ces marécages emplis de magie ancienne.';
+
+  @override
+  String get world_burning_lands => 'Terres Ardentes';
+
+  @override
+  String get world_burning_lands_description =>
+      'Survivez à la chaleur intense de ces terres volcaniques en éruption permanente.';
+
+  @override
+  String get world_eternal_glacier => 'Glacier Éternel';
+
+  @override
+  String get world_eternal_glacier_description =>
+      'Bravez le froid glacial de ces étendues blanches immaculées.';
+
+  @override
+  String get world_lost_rainbow => 'Arc-en-Ciel Perdu';
+
+  @override
+  String get world_lost_rainbow_description =>
+      'Retrouvez les couleurs perdues de cet arc-en-ciel légendaire aux teintes magiques.';
+
+  @override
+  String get world_celestial_garden => 'Jardin Céleste';
+
+  @override
+  String get world_celestial_garden_description =>
+      'Accédez au jardin ultime où les étoiles fleurissent et les rêves deviennent réalité.';
+
+  @override
+  String get worlds => 'Mondes';
+
+  @override
+  String get levels => 'Niveaux';
+
+  @override
+  String get enter => 'Entrer';
+
+  @override
+  String get tutorial_welcome_title => 'Bienvenue dans Mind Bloom !';
+
+  @override
+  String get tutorial_welcome_description =>
+      'Découvrez le monde magique des plantes et des puzzles';
+
+  @override
+  String get tutorial_matching_title => 'Faites des correspondances';
+
+  @override
+  String get tutorial_matching_description =>
+      'Échangez les tuiles pour créer des lignes de 3 ou plus de la même couleur';
+
+  @override
+  String get tutorial_objectives_title => 'Objectifs du niveau';
+
+  @override
+  String get tutorial_objectives_description =>
+      'Chaque niveau a des objectifs spécifiques à atteindre pour progresser';
+
+  @override
+  String get tutorial_hint_title => 'Bouton Indice';
+
+  @override
+  String get tutorial_hint_description =>
+      'Utilisez l\'indice pour révéler un mouvement gagnant quand vous êtes bloqué';
+
+  @override
+  String get tutorial_shuffle_title => 'Bouton Mélanger';
+
+  @override
+  String get tutorial_shuffle_description =>
+      'Mélangez la grille pour obtenir de nouveaux mouvements possibles';
+
+  @override
+  String get tutorial_stars_title => 'Gagnez des étoiles';
+
+  @override
+  String get tutorial_stars_description =>
+      'Plus vous atteignez d\'objectifs, plus vous gagnez d\'étoiles';
+
+  @override
+  String get tutorial_collection_title => 'Collection de plantes';
+
+  @override
+  String get tutorial_collection_description =>
+      'Débloquez de nouvelles plantes magiques avec des bonus spéciaux';
+
+  @override
+  String get tutorial_skip => 'Passer';
+
+  @override
+  String get tutorial_next => 'Suivant';
+
+  @override
+  String get tutorial_start => 'Commencer';
+
+  @override
+  String get tutorial_complete => 'Tutoriel terminé !';
+
+  @override
+  String get tutorial_complete_description =>
+      'Vous êtes maintenant prêt à explorer le monde de Mind Bloom !';
+
+  @override
+  String get tutorial_skip_confirmation_title => 'Passer le tutoriel ?';
+
+  @override
+  String get tutorial_skip_confirmation_message =>
+      'Êtes-vous sûr de vouloir passer le tutoriel ? Vous pourrez le revoir plus tard dans les paramètres.';
 }

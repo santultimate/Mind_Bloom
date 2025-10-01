@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
 import 'package:mind_bloom/providers/user_provider.dart';
@@ -8,6 +7,7 @@ import 'package:mind_bloom/providers/theme_provider.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/screens/terms_of_service_screen.dart';
 import 'package:mind_bloom/screens/privacy_policy_screen.dart';
+import 'package:mind_bloom/screens/tutorial_screen.dart';
 import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -260,15 +260,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 icon: Icons.privacy_tip,
                 onTap: () => _navigateToPrivacy(context),
               ),
+              _buildButtonTile(
+                title: l10n.tutorial,
+                subtitle: l10n.reviewTutorial,
+                icon: Icons.school,
+                onTap: () => _showTutorial(context),
+              ),
 
-              // 🚀 BOUTON DEBUG (à supprimer avant publication)
-              if (kDebugMode)
-                _buildButtonTile(
-                  title: l10n.debugUnlockAllLevels,
-                  subtitle: l10n.debugUnlockAllLevelsDescription,
-                  icon: Icons.developer_mode,
-                  onTap: () => _toggleDebugMode(context),
-                ),
+              // 🚀 BOUTON DEBUG (supprimé pour la version de production)
+              // if (kDebugMode)
+              //   _buildButtonTile(
+              //     title: l10n.debugUnlockAllLevels,
+              //     subtitle: l10n.debugUnlockAllLevelsDescription,
+              //     icon: Icons.developer_mode,
+              //     onTap: () => _toggleDebugMode(context),
+              //   ),
             ],
           ),
         ],
@@ -613,20 +619,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // 🚀 MÉTHODE DEBUG (à supprimer avant publication)
-  void _toggleDebugMode(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+  // Afficher le tutoriel
+  void _showTutorial(BuildContext context) {
+    final audioProvider = Provider.of<AudioProvider>(context, listen: false);
+    audioProvider.playSfx('audio/sfx/button_click.wav');
 
-    userProvider.toggleDebugMode();
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(userProvider.debugModeEnabled
-            ? 'Mode debug activé - Tous les niveaux déverrouillés'
-            : 'Mode debug désactivé'),
-        backgroundColor:
-            userProvider.debugModeEnabled ? Colors.green : Colors.orange,
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const TutorialScreen(),
       ),
     );
   }
+
+  // 🚀 MÉTHODE DEBUG (commentée pour la version de production)
+  // void _toggleDebugMode(BuildContext context) {
+  //   final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+  //   userProvider.toggleDebugMode();
+
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     SnackBar(
+  //       content: Text(userProvider.debugModeEnabled
+  //           ? 'Mode debug activé - Tous les niveaux déverrouillés'
+  //           : 'Mode debug désactivé'),
+  //       backgroundColor:
+  //           userProvider.debugModeEnabled ? Colors.green : Colors.orange,
+  //     ),
+  //   );
+  // }
 }

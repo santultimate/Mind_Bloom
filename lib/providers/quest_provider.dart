@@ -283,9 +283,10 @@ class QuestProvider extends ChangeNotifier {
   }
 
   void _onQuestCompleted(Quest quest) {
-    if (kDebugMode) {
-      print('Quest completed: ${quest.title}');
-    }
+    // Commenté pour la version de production
+    // if (kDebugMode) {
+    //   print('Quest completed: ${quest.title}');
+    // }
 
     // Ici on pourrait jouer un son ou afficher une notification
     // Pour l'instant, on se contente du debug

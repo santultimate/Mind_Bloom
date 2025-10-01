@@ -12,6 +12,7 @@ import 'package:mind_bloom/widgets/game_header.dart';
 import 'package:mind_bloom/widgets/lives_widget.dart';
 import 'package:mind_bloom/widgets/banner_ad_widget.dart';
 import 'package:mind_bloom/screens/level_complete_screen.dart';
+import 'package:mind_bloom/screens/home_screen.dart';
 import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class GameScreen extends StatefulWidget {
@@ -291,7 +292,11 @@ class _GameScreenState extends State<GameScreen> {
 
   void _showPauseDialog() {
     final gameProvider = Provider.of<GameProvider>(context, listen: false);
+    final audioProvider = Provider.of<AudioProvider>(context, listen: false);
+
+    // Mettre le jeu en pause
     gameProvider.togglePause();
+    audioProvider.playButtonClick();
 
     showDialog(
       context: context,
@@ -301,42 +306,70 @@ class _GameScreenState extends State<GameScreen> {
         content: Text(AppLocalizations.of(context)!.whatWouldYouLikeToDo),
         actions: [
           TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              _resumeGame();
-            },
+            onPressed: () => _resumeGame(context),
             child: Text(AppLocalizations.of(context)!.resume),
           ),
           TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              _restartLevel();
-            },
+            onPressed: () => _restartLevel(context),
             child: Text(AppLocalizations.of(context)!.restart),
           ),
           TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              _exitToMenu();
-            },
-            child: Text(AppLocalizations.of(context)!.menu),
+            onPressed: () => _exitToMenu(context),
+            child: Text(AppLocalizations.of(context)!.quit),
           ),
         ],
       ),
     );
   }
 
-  void _resumeGame() {
+  void _resumeGame(BuildContext dialogContext) {
     final gameProvider = Provider.of<GameProvider>(context, listen: false);
+    final audioProvider = Provider.of<AudioProvider>(context, listen: false);
+
+    // Fermer le dialogue
+    Navigator.of(dialogContext).pop();
+
+    // Reprendre le jeu (togglePause pour sortir de la pause)
     gameProvider.togglePause();
+    audioProvider.playButtonClick();
   }
 
-  void _restartLevel() {
+  void _restartLevel(BuildContext dialogContext) {
     final gameProvider = Provider.of<GameProvider>(context, listen: false);
+    final audioProvider = Provider.of<AudioProvider>(context, listen: false);
+
+    // Fermer le dialogue
+    Navigator.of(dialogContext).pop();
+
+    // Son de confirmation
+    audioProvider.playButtonClick();
+
+    // Réinitialiser complètement le jeu
     gameProvider.resetGame();
+
+    // Redémarrer le niveau
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const GameScreen(),
+      ),
+    );
   }
 
-  void _exitToMenu() {
-    Navigator.of(context).pop();
+  void _exitToMenu(BuildContext dialogContext) {
+    final audioProvider = Provider.of<AudioProvider>(context, listen: false);
+
+    // Fermer le dialogue
+    Navigator.of(dialogContext).pop();
+
+    // Son de confirmation
+    audioProvider.playButtonClick();
+
+    // Retourner au menu principal (HomeScreen)
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (context) => const HomeScreen(),
+      ),
+      (route) => false,
+    );
   }
 }

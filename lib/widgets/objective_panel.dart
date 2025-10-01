@@ -123,24 +123,37 @@ class ObjectivePanel extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Icône de l'objectif
+          // Icône de l'objectif (agrandie avec couleur)
           Container(
-            width: 20,
-            height: 20,
+            width: 32,
+            height: 32,
             decoration: BoxDecoration(
               color: isCompleted
                   ? AppColors.success
-                  : AppColors.primary.withValues(alpha: 0.1),
+                  : _getObjectiveColor(objective).withValues(alpha: 0.15),
               shape: BoxShape.circle,
+              border: Border.all(
+                color: isCompleted
+                    ? AppColors.success
+                    : _getObjectiveColor(objective),
+                width: 2,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: _getObjectiveColor(objective).withValues(alpha: 0.3),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
             ),
             child: Icon(
               _getObjectiveIcon(objective),
-              color: isCompleted ? Colors.white : AppColors.primary,
-              size: 10,
+              color: isCompleted ? Colors.white : _getObjectiveColor(objective),
+              size: 18,
             ),
           ),
 
-          const SizedBox(width: 4),
+          const SizedBox(width: 8),
 
           // Description et progression
           Expanded(
@@ -151,11 +164,11 @@ class ObjectivePanel extends StatelessWidget {
                   _getObjectiveDescription(context, objective),
                   style: TextStyle(
                     color: AppColors.textPrimary,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
                     decoration: isCompleted ? TextDecoration.lineThrough : null,
                   ),
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
 
@@ -167,10 +180,12 @@ class ObjectivePanel extends StatelessWidget {
                     Expanded(
                       child: LinearProgressIndicator(
                         value: progress.clamp(0.0, 1.0),
-                        backgroundColor:
-                            AppColors.primary.withValues(alpha: 0.1),
+                        backgroundColor: _getObjectiveColor(objective)
+                            .withValues(alpha: 0.1),
                         valueColor: AlwaysStoppedAnimation<Color>(
-                          isCompleted ? AppColors.success : AppColors.primary,
+                          isCompleted
+                              ? AppColors.success
+                              : _getObjectiveColor(objective),
                         ),
                         minHeight: 3,
                       ),
@@ -181,8 +196,8 @@ class ObjectivePanel extends StatelessWidget {
                       style: TextStyle(
                         color: isCompleted
                             ? AppColors.success
-                            : AppColors.textSecondary,
-                        fontSize: 10,
+                            : _getObjectiveColor(objective),
+                        fontSize: 11,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -195,16 +210,23 @@ class ObjectivePanel extends StatelessWidget {
           // Indicateur de complétion
           if (isCompleted)
             Container(
-              width: 16,
-              height: 16,
-              decoration: const BoxDecoration(
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
                 color: AppColors.success,
                 shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.success.withValues(alpha: 0.3),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
               child: const Icon(
                 Icons.check,
                 color: Colors.white,
-                size: 10,
+                size: 14,
               ),
             ),
         ],
@@ -263,6 +285,21 @@ class ObjectivePanel extends StatelessWidget {
     }
   }
 
+  Color _getObjectiveColor(LevelObjective objective) {
+    switch (objective.type) {
+      case LevelObjectiveType.collectTiles:
+        return _getTileColor(objective.tileType);
+      case LevelObjectiveType.clearBlockers:
+        return Colors.red;
+      case LevelObjectiveType.reachScore:
+        return Colors.amber;
+      case LevelObjectiveType.freeCreature:
+        return Colors.green;
+      case LevelObjectiveType.clearJelly:
+        return Colors.blue;
+    }
+  }
+
   IconData _getTileIcon(TileType? tileType) {
     switch (tileType) {
       case TileType.flower:
@@ -272,7 +309,7 @@ class ObjectivePanel extends StatelessWidget {
       case TileType.crystal:
         return Icons.diamond;
       case TileType.seed:
-        return Icons.grass;
+        return Icons.grain;
       case TileType.dew:
         return Icons.water_drop;
       case TileType.sun:
@@ -280,9 +317,32 @@ class ObjectivePanel extends StatelessWidget {
       case TileType.moon:
         return Icons.nightlight_round;
       case TileType.gem:
-        return Icons.diamond;
+        return Icons.star;
       case null:
         return Icons.circle;
+    }
+  }
+
+  Color _getTileColor(TileType? tileType) {
+    switch (tileType) {
+      case TileType.flower:
+        return const Color(0xFFFF6FA3);
+      case TileType.leaf:
+        return const Color(0xFF48BB78);
+      case TileType.crystal:
+        return const Color(0xFF4299E1);
+      case TileType.seed:
+        return const Color(0xFF8B4513);
+      case TileType.dew:
+        return const Color(0xFF00CED1);
+      case TileType.sun:
+        return const Color(0xFFFFD700);
+      case TileType.moon:
+        return const Color(0xFF9370DB);
+      case TileType.gem:
+        return const Color(0xFF6CC6B6);
+      case null:
+        return Colors.grey;
     }
   }
 
@@ -290,7 +350,7 @@ class ObjectivePanel extends StatelessWidget {
       BuildContext context, LevelObjective objective) {
     switch (objective.type) {
       case LevelObjectiveType.collectTiles:
-        final tileName = _getTileName(objective.tileType);
+        final tileName = _getTileName(context, objective.tileType);
         return AppLocalizations.of(context)!
             .collectTilesObjective(objective.target, tileName);
       case LevelObjectiveType.clearBlockers:
@@ -308,26 +368,29 @@ class ObjectivePanel extends StatelessWidget {
     }
   }
 
-  String _getTileName(TileType? tileType) {
+  String _getTileName(BuildContext context, TileType? tileType) {
+    final locale = Localizations.localeOf(context);
+    final isEnglish = locale.languageCode == 'en';
+
     switch (tileType) {
       case TileType.flower:
-        return 'fleur';
+        return isEnglish ? 'flowers' : 'fleurs';
       case TileType.leaf:
-        return 'feuille';
+        return isEnglish ? 'leaves' : 'feuilles';
       case TileType.crystal:
-        return 'cristal';
+        return isEnglish ? 'crystals' : 'cristaux';
       case TileType.seed:
-        return 'graine';
+        return isEnglish ? 'seeds' : 'graines';
       case TileType.dew:
-        return 'rosée';
+        return isEnglish ? 'dew drops' : 'rosées';
       case TileType.sun:
-        return 'soleil';
+        return isEnglish ? 'suns' : 'soleils';
       case TileType.moon:
-        return 'lune';
+        return isEnglish ? 'moons' : 'lunes';
       case TileType.gem:
-        return 'gemme';
+        return isEnglish ? 'gems' : 'gemmes';
       case null:
-        return 'tuile';
+        return isEnglish ? 'tiles' : 'tuiles';
     }
   }
 }

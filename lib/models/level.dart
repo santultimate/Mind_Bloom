@@ -45,6 +45,24 @@ class LevelObjective {
       current: current ?? this.current,
     );
   }
+
+  /// Crée un LevelObjective depuis un Map JSON
+  factory LevelObjective.fromJson(Map<String, dynamic> json) {
+    return LevelObjective(
+      type: LevelObjectiveType.values.firstWhere(
+        (e) => e.name == json['type'],
+        orElse: () => LevelObjectiveType.collectTiles,
+      ),
+      tileType: json['tileType'] != null
+          ? TileType.values.firstWhere(
+              (e) => e.name == json['tileType'],
+              orElse: () => TileType.flower,
+            )
+          : null,
+      target: json['target'] as int,
+      current: json['current'] as int? ?? 0,
+    );
+  }
 }
 
 class Level {
@@ -210,6 +228,55 @@ class Level {
       rewards: rewards ?? this.rewards,
       isUnlocked: isUnlocked ?? this.isUnlocked,
       stars: stars ?? this.stars,
+    );
+  }
+
+  /// Crée un Level depuis un Map JSON
+  factory Level.fromJson(Map<String, dynamic> json) {
+    return Level(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      description: json['description'] as String,
+      difficulty: LevelDifficulty.values.firstWhere(
+        (e) => e.name == json['difficulty'],
+        orElse: () => LevelDifficulty.easy,
+      ),
+      gridSize: json['gridSize'] as int,
+      maxMoves: json['maxMoves'] as int,
+      targetScore: json['targetScore'] as int,
+      objectives: (json['objectives'] as List<dynamic>)
+          .map((obj) => LevelObjective.fromJson(obj as Map<String, dynamic>))
+          .toList(),
+      initialGrid: json['initialGrid'] != null
+          ? (json['initialGrid'] as List<dynamic>)
+              .map((row) => (row as List<dynamic>).cast<int>())
+              .toList()
+          : List.generate(
+              json['gridSize'] as int,
+              (i) => List.generate(json['gridSize'] as int, (j) => -1),
+            ),
+      blockers: json['blockers'] != null
+          ? (json['blockers'] as List<dynamic>)
+              .map((row) => (row as List<dynamic>).cast<bool>())
+              .toList()
+          : List.generate(
+              json['gridSize'] as int,
+              (i) => List.generate(json['gridSize'] as int, (j) => false),
+            ),
+      jelly: json['jelly'] != null
+          ? (json['jelly'] as List<dynamic>)
+              .map((row) => (row as List<dynamic>).cast<bool>())
+              .toList()
+          : List.generate(
+              json['gridSize'] as int,
+              (i) => List.generate(json['gridSize'] as int, (j) => false),
+            ),
+      specialRules: json['specialRules'] as Map<String, dynamic>? ?? {},
+      energyCost: json['energyCost'] as int? ?? 1,
+      rewards:
+          (json['rewards'] as List<dynamic>?)?.cast<String>() ?? ['coins:10'],
+      isUnlocked: json['isUnlocked'] as bool? ?? false,
+      stars: json['stars'] as int? ?? 0,
     );
   }
 

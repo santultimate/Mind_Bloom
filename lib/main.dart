@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -12,6 +13,9 @@ import 'package:mind_bloom/providers/language_provider.dart';
 import 'package:mind_bloom/providers/theme_provider.dart';
 import 'package:mind_bloom/providers/daily_rewards_provider.dart';
 import 'package:mind_bloom/providers/quest_provider.dart';
+import 'package:mind_bloom/providers/event_provider.dart';
+import 'package:mind_bloom/providers/world_provider.dart';
+import 'package:mind_bloom/providers/level_provider.dart';
 import 'package:mind_bloom/screens/splash_screen.dart';
 import 'package:mind_bloom/constants/app_theme.dart';
 import 'package:mind_bloom/generated/l10n/app_localizations.dart';
@@ -26,7 +30,8 @@ void main() async {
   try {
     await MobileAds.instance.initialize();
   } catch (e) {
-    print('Error initializing AdMob: $e');
+    // Commenté pour la version de production
+    // print('Error initializing AdMob: $e');
   }
 
   runApp(const MindBloomApp());
@@ -48,6 +53,9 @@ class MindBloomApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => DailyRewardsProvider()),
         ChangeNotifierProvider(create: (_) => QuestProvider()),
+        ChangeNotifierProvider(create: (_) => EventProvider()),
+        ChangeNotifierProvider(create: (_) => WorldProvider()),
+        ChangeNotifierProvider(create: (_) => LevelProvider()),
       ],
       child: Consumer2<LanguageProvider, ThemeProvider>(
         builder: (context, languageProvider, themeProvider, child) {
@@ -68,7 +76,7 @@ class MindBloomApp extends StatelessWidget {
               Locale('en'), // English
               Locale('fr'), // French
             ],
-            home: const SplashScreen(),
+            home: const AppLifecycleWrapper(child: SplashScreen()),
             builder: (context, child) {
               return MediaQuery(
                 data: MediaQuery.of(context)
@@ -80,5 +88,53 @@ class MindBloomApp extends StatelessWidget {
         },
       ),
     );
+  }
+}
+
+class AppLifecycleWrapper extends StatefulWidget {
+  final Widget child;
+
+  const AppLifecycleWrapper({super.key, required this.child});
+
+  @override
+  State<AppLifecycleWrapper> createState() => _AppLifecycleWrapperState();
+}
+
+class _AppLifecycleWrapperState extends State<AppLifecycleWrapper>
+    with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    // 🔧 CORRECTION: Vérification de vie optimisée
+    if (state == AppLifecycleState.resumed) {
+      // L'application est revenue au premier plan
+      try {
+        final userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.checkLifeRegeneration();
+      } catch (e) {
+        // Éviter les erreurs si le context n'est pas disponible
+        if (kDebugMode) {
+          print('Erreur lors de la vérification des vies: $e');
+        }
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.child;
   }
 }

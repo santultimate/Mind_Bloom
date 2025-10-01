@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:flutter/foundation.dart';
 import 'package:mind_bloom/models/tile.dart';
 import 'package:mind_bloom/models/level.dart';
 
@@ -50,9 +49,10 @@ class GravitySystem {
     }
 
     if (iterations >= maxIterations) {
-      if (kDebugMode) {
-        print('Warning: Gravity loop reached max iterations');
-      }
+      // Commenté pour la version de production
+      // if (kDebugMode) {
+      //   print('Warning: Gravity loop reached max iterations');
+      // }
     }
   }
 
