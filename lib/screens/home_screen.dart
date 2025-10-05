@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_bloom/providers/user_provider.dart';
@@ -13,8 +14,8 @@ import 'package:mind_bloom/screens/events_screen.dart';
 import 'package:mind_bloom/screens/shop_screen.dart';
 import 'package:mind_bloom/screens/collection_screen.dart';
 import 'package:mind_bloom/screens/achievements_screen.dart';
-import 'package:mind_bloom/screens/profile_screen.dart';
 import 'package:mind_bloom/screens/worlds_screen.dart';
+import 'package:mind_bloom/screens/profile_screen.dart';
 import 'package:mind_bloom/screens/settings_screen.dart';
 import 'package:mind_bloom/widgets/level_card.dart';
 import 'package:mind_bloom/widgets/status_bar.dart';
@@ -42,11 +43,24 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _loadCurrentWorld();
+    _initializeCurrentWorld();
   }
 
-  /// Charge le monde en cours et ses niveaux
-  Future<void> _loadCurrentWorld() async {
+  @override
+  void didUpdateWidget(HomeScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Recharger le monde quand le widget est mis à jour
+    _initializeCurrentWorld();
+  }
+
+  /// Joue la musique de fond
+  void _playBackgroundMusic() {
+    final audioProvider = Provider.of<AudioProvider>(context, listen: false);
+    audioProvider.playBackgroundMusic();
+  }
+
+  /// Initialise le monde en cours avec la logique intelligente
+  Future<void> _initializeCurrentWorld() async {
     final worldProvider = Provider.of<WorldProvider>(context, listen: false);
     final levelProvider = Provider.of<LevelProvider>(context, listen: false);
     final userProvider = Provider.of<UserProvider>(context, listen: false);
@@ -59,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
       await levelProvider.initialize();
     }
 
-    // Déterminer le monde en cours basé sur la progression du joueur
+    // 🚀 INITIALISATION: Utiliser la logique intelligente pour déterminer le monde en cours
     final currentWorldId = _getCurrentWorldId(userProvider);
     final worlds = worldProvider.worlds;
 
@@ -81,21 +95,92 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  /// Détermine l'ID du monde en cours basé sur la progression du joueur
-  int _getCurrentWorldId(UserProvider userProvider) {
-    final completedLevels = userProvider.completedLevels;
+  /// Charge le monde en cours et ses niveaux
+  Future<void> _loadCurrentWorld() async {
+    final worldProvider = Provider.of<WorldProvider>(context, listen: false);
+    final levelProvider = Provider.of<LevelProvider>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
 
-    // Trouver le dernier niveau complété pour déterminer le monde
-    if (completedLevels.isEmpty) {
-      return 1; // Premier monde si aucun niveau complété
+    // Initialiser les providers si nécessaire
+    if (!worldProvider.isInitialized) {
+      await worldProvider.initialize(userProvider);
+    }
+    if (!levelProvider.isInitialized) {
+      await levelProvider.initialize();
     }
 
-    // Calculer le monde basé sur le dernier niveau complété
-    final lastCompletedLevel = completedLevels.reduce((a, b) => a > b ? a : b);
-    final worldId = ((lastCompletedLevel - 1) ~/ 10) + 1;
+    // 🚀 CORRECTION: Utiliser le monde sélectionné par l'utilisateur directement
+    final currentWorldId = userProvider.selectedWorldId;
+    final worlds = worldProvider.worlds;
 
-    // S'assurer qu'on ne dépasse pas le nombre de mondes disponibles
-    return worldId.clamp(1, 10);
+    _currentWorld = worlds.firstWhere(
+      (world) => world.id == currentWorldId,
+      orElse: () => worlds.first,
+    );
+
+    // Charger les niveaux du monde en cours avec traduction
+    if (_currentWorld != null) {
+      final locale = Localizations.localeOf(context);
+      final levels = levelProvider.getWorldLevelsWithTranslation(
+          _currentWorld!.id, locale);
+      if (levels != null) {
+        setState(() {
+          _currentWorldLevels = levels;
+        });
+      }
+    }
+  }
+
+  /// Détermine l'ID du monde à afficher (utilise le monde en cours de progression)
+  int _getCurrentWorldId(UserProvider userProvider) {
+    // 🚀 CORRECTION: Déterminer le monde en cours de progression
+    final worldProvider = Provider.of<WorldProvider>(context, listen: false);
+
+    // Trouver le monde en cours de progression (le plus récent avec des niveaux non complétés)
+    final worlds = worldProvider.worlds;
+    int currentWorldId = userProvider.selectedWorldId;
+
+    for (final world in worlds.reversed) {
+      if (world.isUnlocked) {
+        final lastCompletedLevel = userProvider.getWorldProgress(world.id);
+
+        // Calculer le nombre de niveaux complétés dans ce monde
+        final completedInWorld = lastCompletedLevel >= world.startLevel
+            ? (lastCompletedLevel - world.startLevel + 1)
+            : 0;
+        final totalLevelsInWorld = world.levelCount;
+
+        if (kDebugMode) {
+          debugPrint(
+              '🌍 [HomeScreen] World ${world.id}: lastCompletedLevel=$lastCompletedLevel, completedInWorld=$completedInWorld/$totalLevelsInWorld');
+        }
+
+        // Si le monde n'est pas complété à 100%, c'est le monde en cours
+        if (completedInWorld < totalLevelsInWorld) {
+          currentWorldId = world.id;
+          if (kDebugMode) {
+            debugPrint(
+                '🎯 [HomeScreen] Selected world in progress: ${world.id}');
+          }
+          break;
+        }
+      }
+    }
+
+    // Si tous les mondes déverrouillés sont complétés, utiliser le dernier monde déverrouillé
+    if (currentWorldId == userProvider.selectedWorldId) {
+      final unlockedWorlds = worlds.where((w) => w.isUnlocked).toList();
+      if (unlockedWorlds.isNotEmpty) {
+        currentWorldId = unlockedWorlds.last.id;
+      }
+    }
+
+    // Mettre à jour le monde sélectionné si nécessaire
+    if (currentWorldId != userProvider.selectedWorldId) {
+      userProvider.setSelectedWorld(currentWorldId);
+    }
+
+    return currentWorldId;
   }
 
   /// Construit l'en-tête du monde en cours
@@ -176,6 +261,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
+              // Bouton pour changer de monde
+              IconButton(
+                onPressed: () {
+                  _showWorldSelector(context);
+                },
+                icon: const Icon(
+                  Icons.swap_horiz,
+                  color: Colors.white,
+                  size: 24,
+                ),
+                tooltip: 'Changer de monde',
+              ),
             ],
           ),
 
@@ -185,8 +282,8 @@ class _HomeScreenState extends State<HomeScreen> {
           Consumer<UserProvider>(
             builder: (context, userProvider, child) {
               final completedInWorld = _currentWorldLevels
-                  .where((level) => userProvider.completedLevels
-                      .contains(level.id + (_currentWorld!.id - 1) * 10))
+                  .where((level) =>
+                      userProvider.completedLevels.contains(level.id))
                   .length;
 
               return Row(
@@ -230,6 +327,97 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  /// Construit une section pour montrer les mondes déverrouillés et l'aide à la transition
+  Widget _buildWorldTransitionHelp(BuildContext context) {
+    return Consumer<WorldProvider>(
+      builder: (context, worldProvider, child) {
+        final unlockedWorlds = worldProvider.getUnlockedWorlds();
+        final currentWorldId = _currentWorld?.id ?? 1;
+
+        // Vérifier s'il y a des mondes plus récents déverrouillés
+        final newerUnlockedWorlds =
+            unlockedWorlds.where((world) => world.id > currentWorldId).toList();
+
+        if (newerUnlockedWorlds.isEmpty) {
+          return const SizedBox.shrink();
+        }
+
+        return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.green.withValues(alpha: 0.1),
+                Colors.blue.withValues(alpha: 0.1),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: Colors.green.withValues(alpha: 0.3),
+              width: 2,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.celebration,
+                    color: Colors.green[600],
+                    size: 20,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Nouveaux mondes déverrouillés!',
+                    style: TextStyle(
+                      color: Colors.green[700],
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Vous avez complété 100% du monde précédent. Explorez les nouveaux mondes disponibles!',
+                style: TextStyle(
+                  color: Colors.green[600],
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(height: 12),
+              // Bouton pour aller aux mondes
+              ElevatedButton.icon(
+                onPressed: () {
+                  // Naviguer vers l'écran des mondes
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const WorldsScreen(),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.explore, size: 18),
+                label: const Text('Voir les mondes'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green[600],
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -350,21 +538,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   /// Vérifie si un niveau est déverrouillé
   bool _isLevelUnlocked(Level level, UserProvider userProvider) {
-    if (_currentWorld == null) return false;
-
-    // Le premier niveau du premier monde est toujours déverrouillé
-    if (_currentWorld!.id == 1 && level.id == 1) return true;
-
-    // Pour les autres niveaux, vérifier si le niveau précédent est complété
-    if (level.id == 1) {
-      // Premier niveau d'un monde : vérifier si le dernier niveau du monde précédent est complété
-      final previousWorldLastLevel = (_currentWorld!.id - 1) * 10;
-      return userProvider.completedLevels.contains(previousWorldLastLevel);
-    } else {
-      // Niveau suivant : vérifier si le niveau précédent est complété
-      final currentLevelGlobalId = level.id + (_currentWorld!.id - 1) * 10;
-      return userProvider.completedLevels.contains(currentLevelGlobalId - 1);
-    }
+    // Utiliser la logique centralisée du UserProvider
+    return userProvider.isLevelUnlocked(level.id);
   }
 
   /// Joue un niveau
@@ -430,12 +605,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  /// Joue la musique de fond
-  void _playBackgroundMusic() {
-    final audioProvider = Provider.of<AudioProvider>(context, listen: false);
-    audioProvider.playMusic('assets/audio/music/background_music.mp3');
-  }
-
   /// Navigation adaptative qui s'ajuste selon la taille de l'écran
   Widget _buildAdaptiveNavigation() {
     return LayoutBuilder(
@@ -495,7 +664,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             _buildNavButton(
               icon: Icons.public,
-              label: AppLocalizations.of(context)!.worlds ?? 'Mondes',
+              label: AppLocalizations.of(context)!.worlds,
               isSelected: _currentIndex == 1,
               onTap: () {
                 Navigator.of(context).push(
@@ -625,7 +794,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         _buildNavButton(
           icon: Icons.public,
-          label: AppLocalizations.of(context)!.worlds ?? 'Mondes',
+          label: AppLocalizations.of(context)!.worlds,
           isSelected: _currentIndex == 1,
           onTap: () {
             Navigator.of(context).push(
@@ -853,6 +1022,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Relancer la musique de fond quand on revient sur cet écran
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _playBackgroundMusic();
+    });
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
@@ -863,6 +1037,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Titre de la section avec le monde en cours
             _buildCurrentWorldHeader(context),
+
+            // Aide à la transition vers les nouveaux mondes
+            _buildWorldTransitionHelp(context),
 
             // Contenu principal avec les niveaux
             Expanded(
@@ -878,9 +1055,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (context, index) {
                   final level = _currentWorldLevels[index];
                   final userProvider = Provider.of<UserProvider>(context);
-                  final globalLevelId = level.id + (_currentWorld!.id - 1) * 10;
                   final isUnlocked = _isLevelUnlocked(level, userProvider);
-                  final stars = userProvider.getLevelStars(globalLevelId);
+                  final stars = userProvider.getLevelStars(level.id);
 
                   return LevelCard(
                     level: level,
@@ -918,5 +1094,177 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  /// Affiche le sélecteur de monde
+  void _showWorldSelector(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        height: MediaQuery.of(context).size.height * 0.7,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        child: Column(
+          children: [
+            // Handle
+            Container(
+              margin: const EdgeInsets.only(top: 12),
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            // Titre
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Text(
+                'Sélectionner un monde',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+            ),
+            // Liste des mondes
+            Expanded(
+              child: Consumer2<WorldProvider, UserProvider>(
+                builder: (context, worldProvider, userProvider, child) {
+                  final unlockedWorlds = worldProvider.getUnlockedWorlds();
+
+                  return ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    itemCount: unlockedWorlds.length,
+                    itemBuilder: (context, index) {
+                      final world = unlockedWorlds[index];
+                      final isSelected =
+                          world.id == userProvider.selectedWorldId;
+
+                      return Card(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        elevation: isSelected ? 8 : 2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          side: isSelected
+                              ? BorderSide(color: Colors.blue[600]!, width: 2)
+                              : BorderSide.none,
+                        ),
+                        child: ListTile(
+                          onTap: () {
+                            userProvider.setSelectedWorld(world.id);
+                            Navigator.pop(context);
+                            // Recharger le monde
+                            _loadCurrentWorld();
+                          },
+                          leading: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: world.colors.map((color) {
+                                  return Color(int.parse(
+                                      'FF${color.substring(1)}',
+                                      radix: 16));
+                                }).toList(),
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: const Icon(
+                              Icons.public,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                          title: Text(
+                            _getWorldNameFromKey(world.nameKey),
+                            style: TextStyle(
+                              fontWeight: isSelected
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                              color: isSelected ? Colors.blue[600] : null,
+                            ),
+                          ),
+                          subtitle: Text(_getWorldDescriptionFromKey(
+                              world.descriptionKey)),
+                          trailing: isSelected
+                              ? Icon(Icons.check_circle,
+                                  color: Colors.blue[600])
+                              : null,
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Obtient le nom traduit d'un monde à partir de sa clé
+  String _getWorldNameFromKey(String nameKey) {
+    final l10n = AppLocalizations.of(context)!;
+
+    switch (nameKey) {
+      case 'world_garden_beginnings':
+        return l10n.world_garden_beginnings;
+      case 'world_valley_flowers':
+        return l10n.world_valley_flowers;
+      case 'world_lunar_forest':
+        return l10n.world_lunar_forest;
+      case 'world_solar_meadow':
+        return l10n.world_solar_meadow;
+      case 'world_crystal_caverns':
+        return l10n.world_crystal_caverns;
+      case 'world_mystic_swamps':
+        return l10n.world_mystic_swamps;
+      case 'world_burning_lands':
+        return l10n.world_burning_lands;
+      case 'world_eternal_glacier':
+        return l10n.world_eternal_glacier;
+      case 'world_lost_rainbow':
+        return l10n.world_lost_rainbow;
+      case 'world_celestial_garden':
+        return l10n.world_celestial_garden;
+      default:
+        return 'Monde ${nameKey}';
+    }
+  }
+
+  /// Obtient la description traduite d'un monde à partir de sa clé
+  String _getWorldDescriptionFromKey(String descriptionKey) {
+    final l10n = AppLocalizations.of(context)!;
+
+    switch (descriptionKey) {
+      case 'world_garden_beginnings_description':
+        return l10n.world_garden_beginnings_description;
+      case 'world_valley_flowers_description':
+        return l10n.world_valley_flowers_description;
+      case 'world_lunar_forest_description':
+        return l10n.world_lunar_forest_description;
+      case 'world_solar_meadow_description':
+        return l10n.world_solar_meadow_description;
+      case 'world_crystal_caverns_description':
+        return l10n.world_crystal_caverns_description;
+      case 'world_mystic_swamps_description':
+        return l10n.world_mystic_swamps_description;
+      case 'world_burning_lands_description':
+        return l10n.world_burning_lands_description;
+      case 'world_eternal_glacier_description':
+        return l10n.world_eternal_glacier_description;
+      case 'world_lost_rainbow_description':
+        return l10n.world_lost_rainbow_description;
+      case 'world_celestial_garden_description':
+        return l10n.world_celestial_garden_description;
+      default:
+        return 'Un nouveau monde vous attend !';
+    }
   }
 }

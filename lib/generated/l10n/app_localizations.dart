@@ -2726,6 +2726,24 @@ abstract class AppLocalizations {
   /// **'My achievements shared! 🎉'**
   String get achievementsShared;
 
+  /// Notification title for a new unlocked world
+  ///
+  /// In en, this message translates to:
+  /// **'New World Unlocked'**
+  String get newWorldUnlocked;
+
+  /// Button to continue the game
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueGame;
+
+  /// Message when life purchase is limited by maximum
+  ///
+  /// In en, this message translates to:
+  /// **'Only {actualAdded} lives added (limit: {maxLives} lives)'**
+  String livesLimitedToMax(int actualAdded, int maxLives);
+
   /// Easter event name
   ///
   /// In en, this message translates to:
@@ -3086,10 +3104,10 @@ abstract class AppLocalizations {
   /// **'3 Lives'**
   String get threeLives;
 
-  /// Description for 3 lives item
+  /// Description for 3 lives item with limitation
   ///
   /// In en, this message translates to:
-  /// **'Adds 3 lives to your stock'**
+  /// **'Adds 3 lives (max 5 lives)'**
   String get addThreeLives;
 
   /// Title for 200 coins item
@@ -3535,6 +3553,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to skip the tutorial? You can review it later in the settings.'**
   String get tutorial_skip_confirmation_message;
+
+  /// Title for world completion dialog
+  ///
+  /// In en, this message translates to:
+  /// **'World Completed & New World Unlocked!'**
+  String get world_completed_title;
+
+  /// Title for world completion dialog when no new world is unlocked
+  ///
+  /// In en, this message translates to:
+  /// **'World Completed!'**
+  String get world_completed_only_title;
+
+  /// Message for world completion dialog with new world
+  ///
+  /// In en, this message translates to:
+  /// **'Congratulations! You have completed this world and unlocked a new world!'**
+  String get world_completed_message;
+
+  /// Message for world completion dialog without new world
+  ///
+  /// In en, this message translates to:
+  /// **'Congratulations! You have mastered all the challenges of this world with brilliance!'**
+  String get world_completed_only_message;
+
+  /// Message showing newly unlocked world
+  ///
+  /// In en, this message translates to:
+  /// **'New world unlocked: {worldName}'**
+  String new_world_unlocked(String worldName);
+
+  /// Title for rare items unlocked section
+  ///
+  /// In en, this message translates to:
+  /// **'Rare Items Unlocked!'**
+  String get rare_items_unlocked;
+
+  /// Title for completion rewards section
+  ///
+  /// In en, this message translates to:
+  /// **'Completion Rewards'**
+  String get completion_rewards;
+
+  /// Unlock bonus text
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock bonus: +5 Gems'**
+  String get unlock_bonus;
+
+  /// Back to menu button text
+  ///
+  /// In en, this message translates to:
+  /// **'Back to Menu'**
+  String get back_to_menu;
+
+  /// Explore new world button text
+  ///
+  /// In en, this message translates to:
+  /// **'Explore the New World'**
+  String get explore_new_world;
+
+  /// Continue button text
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continue_text;
+
+  /// Default name for new world
+  ///
+  /// In en, this message translates to:
+  /// **'New World'**
+  String get new_world;
 }
 
 class _AppLocalizationsDelegate

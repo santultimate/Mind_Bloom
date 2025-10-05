@@ -23,43 +23,72 @@ class LevelProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e) {
       if (kDebugMode) {
-        print('Error initializing LevelProvider: $e');
+        debugPrint('Error initializing LevelProvider: $e');
       }
     }
   }
 
-  /// Charge les niveaux depuis le fichier JSON
+  /// Charge les niveaux depuis les fichiers JSON
   Future<void> _loadWorldLevels() async {
     try {
-      final String jsonString =
-          await rootBundle.loadString('assets/data/world_levels.json');
-      final Map<String, dynamic> jsonData = json.decode(jsonString);
-
-      final Map<String, dynamic> worlds =
-          jsonData['worlds'] as Map<String, dynamic>;
-
       _worldLevels.clear();
 
-      for (final entry in worlds.entries) {
-        final worldKey = entry.key;
-        final List<dynamic> levelsJson = entry.value as List<dynamic>;
+      // Charger les niveaux 1-50 (mondes 1-5) depuis levels.json
+      await _loadLevelsFromFile('assets/data/levels.json');
 
-        final List<Level> levels = levelsJson.map((levelJson) {
-          return Level.fromJson(levelJson as Map<String, dynamic>);
-        }).toList();
-
-        _worldLevels[worldKey] = levels;
-      }
+      // Charger les mondes 6-10 depuis world_levels.json
+      await _loadWorldsFromFile('assets/data/world_levels.json');
 
       if (kDebugMode) {
-        print(
+        debugPrint(
             'Loaded ${_worldLevels.length} worlds with ${_worldLevels.values.fold(0, (sum, levels) => sum + levels.length)} total levels');
       }
     } catch (e) {
       if (kDebugMode) {
-        print('Error loading world levels: $e');
+        debugPrint('Error loading world levels: $e');
       }
       rethrow;
+    }
+  }
+
+  /// Charge les niveaux depuis levels.json (mondes 1-5)
+  Future<void> _loadLevelsFromFile(String assetPath) async {
+    final String jsonString = await rootBundle.loadString(assetPath);
+    final Map<String, dynamic> jsonData = json.decode(jsonString);
+    
+    final List<dynamic> levelsJson = jsonData['levels'] as List<dynamic>;
+    
+    // Organiser les niveaux par monde (10 niveaux par monde)
+    for (int i = 0; i < levelsJson.length; i++) {
+      final worldId = (i ~/ 10) + 1;
+      final worldKey = 'world_$worldId';
+      
+      if (!_worldLevels.containsKey(worldKey)) {
+        _worldLevels[worldKey] = [];
+      }
+      
+      final level = Level.fromJson(levelsJson[i] as Map<String, dynamic>);
+      _worldLevels[worldKey]!.add(level);
+    }
+  }
+
+  /// Charge les mondes depuis world_levels.json (mondes 6-10)
+  Future<void> _loadWorldsFromFile(String assetPath) async {
+    final String jsonString = await rootBundle.loadString(assetPath);
+    final Map<String, dynamic> jsonData = json.decode(jsonString);
+
+    final Map<String, dynamic> worlds =
+        jsonData['worlds'] as Map<String, dynamic>;
+
+    for (final entry in worlds.entries) {
+      final worldKey = entry.key;
+      final List<dynamic> levelsJson = entry.value as List<dynamic>;
+
+      final List<Level> levels = levelsJson.map((levelJson) {
+        return Level.fromJson(levelJson as Map<String, dynamic>);
+      }).toList();
+
+      _worldLevels[worldKey] = levels;
     }
   }
 

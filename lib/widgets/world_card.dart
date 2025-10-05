@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mind_bloom/models/world.dart';
-import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 /// Widget pour afficher une carte de monde
@@ -308,4 +307,3 @@ class WorldCard extends StatelessWidget {
     );
   }
 }
-

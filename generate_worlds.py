@@ -68,18 +68,27 @@ def generate_level(world_id, level_id, world_data):
         base_moves = 22
         base_score = 3500
     
-    # Générer les objectifs
+    # Générer les objectifs - ÉVITER LA REDONDANCE
     num_objectives = 2 if difficulty == "hard" else 3
     objectives = []
+    used_tile_types = set()  # Éviter les doublons
+    
+    # Calculer la cible selon le type de tuile
+    base_targets = {
+        "flower": 25, "leaf": 28, "crystal": 20, "seed": 30,
+        "dew": 22, "sun": 18, "moon": 15, "gem": 12
+    }
     
     for i in range(num_objectives):
-        tile_type = tile_types[i % len(tile_types)]
+        # Choisir un type de tuile non utilisé
+        available_tiles = [t for t in tile_types if t not in used_tile_types]
         
-        # Calculer la cible selon le type de tuile
-        base_targets = {
-            "flower": 25, "leaf": 28, "crystal": 20, "seed": 30,
-            "dew": 22, "sun": 18, "moon": 15, "gem": 12
-        }
+        if not available_tiles:
+            # Si tous les types sont utilisés, utiliser les types disponibles
+            available_tiles = tile_types.copy()
+        
+        tile_type = available_tiles[i % len(available_tiles)]
+        used_tile_types.add(tile_type)
         
         target = base_targets.get(tile_type, 20) + (level_id * 2)
         
@@ -201,4 +210,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
 

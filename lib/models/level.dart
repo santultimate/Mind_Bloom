@@ -63,6 +63,27 @@ class LevelObjective {
       current: json['current'] as int? ?? 0,
     );
   }
+
+  /// Convertit en Map JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'type': type.name,
+      'tileType': tileType?.name,
+      'target': target,
+      'current': current,
+    };
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is LevelObjective &&
+        other.type == type &&
+        other.tileType == tileType;
+  }
+
+  @override
+  int get hashCode => type.hashCode ^ tileType.hashCode;
 }
 
 class Level {
@@ -141,6 +162,39 @@ class Level {
   // Vérifier si le niveau est terminé
   bool isCompleted(List<LevelObjective> currentObjectives) {
     return currentObjectives.every((objective) => objective.isCompleted);
+  }
+
+  /// Consolide les objectifs similaires pour éviter la redondance
+  static List<LevelObjective> consolidateObjectives(
+      List<LevelObjective> objectives) {
+    final Map<String, LevelObjective> consolidated = {};
+
+    for (final objective in objectives) {
+      if (objective.type == LevelObjectiveType.collectTiles &&
+          objective.tileType != null) {
+        final key = '${objective.type.name}_${objective.tileType!.name}';
+
+        if (consolidated.containsKey(key)) {
+          // Fusionner les objectifs similaires
+          final existing = consolidated[key]!;
+          consolidated[key] = LevelObjective(
+            type: existing.type,
+            tileType: existing.tileType,
+            target: existing.target + objective.target,
+            current: existing.current + objective.current,
+          );
+        } else {
+          consolidated[key] = objective;
+        }
+      } else {
+        // Pour les objectifs non-collectTiles, les garder séparés
+        final key =
+            '${objective.type.name}_${DateTime.now().millisecondsSinceEpoch}';
+        consolidated[key] = objective;
+      }
+    }
+
+    return consolidated.values.toList();
   }
 
   // Calculer le nombre d'étoiles avec un système plus intelligent

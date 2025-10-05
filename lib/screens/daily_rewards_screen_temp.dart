@@ -4,7 +4,6 @@ import 'package:mind_bloom/providers/rewards_provider.dart';
 import 'package:mind_bloom/providers/user_provider.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
-import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 /// Écran des récompenses quotidiennes temporaire - Version simplifiée
 class DailyRewardsScreen extends StatefulWidget {
@@ -20,7 +19,7 @@ class _DailyRewardsScreenState extends State<DailyRewardsScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.dailyRewards),
+        title: const Text('Récompenses Quotidiennes'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -90,7 +89,7 @@ class _DailyRewardsScreenState extends State<DailyRewardsScreen> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: const Text(
-                '🔥 Perfect streak!',
+                '🔥 Série parfaite !',
                 style: TextStyle(
                   color: AppColors.gold,
                   fontWeight: FontWeight.bold,
@@ -172,10 +171,9 @@ class _DailyRewardsScreenState extends State<DailyRewardsScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _buildRewardItem(Icons.monetization_on, AppColors.coins, '50+',
-                  AppLocalizations.of(context)!.coins(50)),
-              _buildRewardItem(Icons.diamond, AppColors.gems, '2+',
-                  AppLocalizations.of(context)!.gems(2)),
+              _buildRewardItem(
+                  Icons.monetization_on, AppColors.coins, '50+', 'Pièces'),
+              _buildRewardItem(Icons.diamond, AppColors.gems, '2+', 'Gemmes'),
             ],
           ),
           const SizedBox(height: 20),
@@ -268,7 +266,7 @@ class _DailyRewardsScreenState extends State<DailyRewardsScreen> {
     try {
       final reward = await rewardsProvider.claimDailyReward();
 
-      if (reward.isNotEmpty) {
+      if (reward != null) {
         // Ajouter les récompenses à l'utilisateur
         await userProvider.addCoins(reward['coins'] ?? 0);
         await userProvider.addGems(reward['gems'] ?? 0);

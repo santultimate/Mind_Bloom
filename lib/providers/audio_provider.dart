@@ -209,6 +209,25 @@ class AudioProvider extends ChangeNotifier {
     }
   }
 
+  // Musique de fond pour l'écran d'accueil
+  Future<void> playBackgroundMusic() async {
+    await playMusic('audio/music/main_menu.mp3', loop: true);
+  }
+
+  // Musique de gameplay
+  Future<void> playGameplayMusic() async {
+    await playMusic('audio/music/gameplay.mp3', loop: true);
+  }
+
+  // Reprendre la musique de fond après le jeu
+  Future<void> resumeBackgroundMusic() async {
+    if (_currentMusic != 'audio/music/main_menu.mp3') {
+      await playBackgroundMusic();
+    } else {
+      await _musicPlayer?.resume();
+    }
+  }
+
   // Nouveaux effets sonores améliorés
   Future<void> playCombo({int comboCount = 1}) async {
     // Sons différents selon le niveau de combo
@@ -305,10 +324,6 @@ class AudioProvider extends ChangeNotifier {
   // Musiques spécifiques
   Future<void> playMainMenuMusic() async {
     await playMusic('audio/music/main_menu.mp3');
-  }
-
-  Future<void> playGameplayMusic() async {
-    await playMusic('audio/music/gameplay.mp3');
   }
 
   Future<void> playVictoryMusic() async {

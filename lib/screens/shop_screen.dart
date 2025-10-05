@@ -654,7 +654,23 @@ class _ShopScreenState extends State<ShopScreen> {
         userProvider.refillLives();
         break;
       case 'lives_3':
+        final livesBefore = userProvider.lives;
         userProvider.addLives(3);
+        final livesAfter = userProvider.lives;
+        final actualLivesAdded = livesAfter - livesBefore;
+
+        // Afficher un message informatif si l'achat a été limité
+        if (actualLivesAdded < 3) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                '${AppLocalizations.of(context)!.purchaseSuccess(item.title)} - ${AppLocalizations.of(context)!.livesLimitedToMax(actualLivesAdded, userProvider.maxLives)}',
+              ),
+              backgroundColor: AppColors.warning,
+              duration: const Duration(seconds: 3),
+            ),
+          );
+        }
         break;
 
       // Monnaie

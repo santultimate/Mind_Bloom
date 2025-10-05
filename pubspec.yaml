@@ -66,6 +66,8 @@ dependencies:
   uuid: ^4.2.1
   url_launcher: ^6.2.1
   share_plus: ^7.2.1
+  crypto: ^3.0.3
+  path_provider: ^2.1.2
   # Haptic Feedback - Commenté pour l'instant
   # vibration: ^1.8.4
 

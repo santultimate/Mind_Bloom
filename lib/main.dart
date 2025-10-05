@@ -11,11 +11,10 @@ import 'package:mind_bloom/providers/ad_provider.dart';
 import 'package:mind_bloom/providers/collection_provider.dart';
 import 'package:mind_bloom/providers/language_provider.dart';
 import 'package:mind_bloom/providers/theme_provider.dart';
-import 'package:mind_bloom/providers/daily_rewards_provider.dart';
-import 'package:mind_bloom/providers/quest_provider.dart';
-import 'package:mind_bloom/providers/event_provider.dart';
+import 'package:mind_bloom/providers/rewards_provider.dart';
 import 'package:mind_bloom/providers/world_provider.dart';
 import 'package:mind_bloom/providers/level_provider.dart';
+import 'package:mind_bloom/providers/game_progression_provider.dart';
 import 'package:mind_bloom/screens/splash_screen.dart';
 import 'package:mind_bloom/constants/app_theme.dart';
 import 'package:mind_bloom/generated/l10n/app_localizations.dart';
@@ -31,7 +30,7 @@ void main() async {
     await MobileAds.instance.initialize();
   } catch (e) {
     // Commenté pour la version de production
-    // print('Error initializing AdMob: $e');
+    // debugPrint('Error initializing AdMob: $e');
   }
 
   runApp(const MindBloomApp());
@@ -51,11 +50,10 @@ class MindBloomApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CollectionProvider()),
         ChangeNotifierProvider(create: (_) => LanguageProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => DailyRewardsProvider()),
-        ChangeNotifierProvider(create: (_) => QuestProvider()),
-        ChangeNotifierProvider(create: (_) => EventProvider()),
+        ChangeNotifierProvider(create: (_) => RewardsProvider()),
         ChangeNotifierProvider(create: (_) => WorldProvider()),
         ChangeNotifierProvider(create: (_) => LevelProvider()),
+        ChangeNotifierProvider(create: (_) => GameProgressionProvider()),
       ],
       child: Consumer2<LanguageProvider, ThemeProvider>(
         builder: (context, languageProvider, themeProvider, child) {
@@ -76,7 +74,8 @@ class MindBloomApp extends StatelessWidget {
               Locale('en'), // English
               Locale('fr'), // French
             ],
-            home: const AppLifecycleWrapper(child: SplashScreen()),
+            home: const AppLifecycleWrapper(
+                child: ProviderInitializer(child: SplashScreen())),
             builder: (context, child) {
               return MediaQuery(
                 data: MediaQuery.of(context)
@@ -127,7 +126,7 @@ class _AppLifecycleWrapperState extends State<AppLifecycleWrapper>
       } catch (e) {
         // Éviter les erreurs si le context n'est pas disponible
         if (kDebugMode) {
-          print('Erreur lors de la vérification des vies: $e');
+          debugPrint('Erreur lors de la vérification des vies: $e');
         }
       }
     }
@@ -135,6 +134,77 @@ class _AppLifecycleWrapperState extends State<AppLifecycleWrapper>
 
   @override
   Widget build(BuildContext context) {
+    return widget.child;
+  }
+}
+
+/// Widget pour initialiser les providers et les connecter
+class ProviderInitializer extends StatefulWidget {
+  final Widget child;
+
+  const ProviderInitializer({super.key, required this.child});
+
+  @override
+  State<ProviderInitializer> createState() => _ProviderInitializerState();
+}
+
+class _ProviderInitializerState extends State<ProviderInitializer> {
+  bool _isInitialized = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeProviders();
+  }
+
+  Future<void> _initializeProviders() async {
+    try {
+      // Initialiser le UserProvider
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      await userProvider.initializeUser();
+
+      // Initialiser le WorldProvider et le connecter au UserProvider
+      final worldProvider = Provider.of<WorldProvider>(context, listen: false);
+      await worldProvider.initialize(userProvider);
+
+      // Initialiser le GameProgressionProvider
+      final gameProgressionProvider =
+          Provider.of<GameProgressionProvider>(context, listen: false);
+      gameProgressionProvider.initialize(userProvider, worldProvider);
+
+      // Connecter les providers
+      userProvider.setWorldProvider(worldProvider);
+      userProvider.setGameProgressionProvider(gameProgressionProvider);
+      worldProvider.setGameProgressionProvider(gameProgressionProvider);
+
+      if (mounted) {
+        setState(() {
+          _isInitialized = true;
+        });
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        debugPrint('Erreur lors de l\'initialisation des providers: $e');
+      }
+      // Même en cas d'erreur, on continue
+      if (mounted) {
+        setState(() {
+          _isInitialized = true;
+        });
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_isInitialized) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return widget.child;
   }
 }

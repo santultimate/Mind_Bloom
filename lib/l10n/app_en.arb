@@ -2983,6 +2983,28 @@
   "@achievementsShared": {
     "description": "Confirmation message for sharing all achievements"
   },
+  "newWorldUnlocked": "New World Unlocked",
+  "@newWorldUnlocked": {
+    "description": "Notification title for a new unlocked world"
+  },
+  "continueGame": "Continue",
+  "@continueGame": {
+    "description": "Button to continue the game"
+  },
+  "livesLimitedToMax": "Only {actualAdded} lives added (limit: {maxLives} lives)",
+  "@livesLimitedToMax": {
+    "description": "Message when life purchase is limited by maximum",
+    "placeholders": {
+      "actualAdded": {
+        "type": "int",
+        "description": "Number of lives actually added"
+      },
+      "maxLives": {
+        "type": "int",
+        "description": "Maximum number of lives allowed"
+      }
+    }
+  },
   "easterEvent": "Magical Easter",
   "@easterEvent": {
     "description": "Easter event name"
@@ -3375,9 +3397,9 @@
     "description": "Title for 3 lives item"
   },
   
-  "addThreeLives": "Adds 3 lives to your stock",
+  "addThreeLives": "Adds 3 lives (max 5 lives)",
   "@addThreeLives": {
-    "description": "Description for 3 lives item"
+    "description": "Description for 3 lives item with limitation"
   },
   
   "twoHundredCoins": "200 Coins",
@@ -3736,5 +3758,59 @@
   "tutorial_skip_confirmation_message": "Are you sure you want to skip the tutorial? You can review it later in the settings.",
   "@tutorial_skip_confirmation_message": {
     "description": "Skip tutorial confirmation dialog message"
+  },
+  "world_completed_title": "World Completed & New World Unlocked!",
+  "@world_completed_title": {
+    "description": "Title for world completion dialog"
+  },
+  "world_completed_only_title": "World Completed!",
+  "@world_completed_only_title": {
+    "description": "Title for world completion dialog when no new world is unlocked"
+  },
+  "world_completed_message": "Congratulations! You have completed this world and unlocked a new world!",
+  "@world_completed_message": {
+    "description": "Message for world completion dialog with new world"
+  },
+  "world_completed_only_message": "Congratulations! You have mastered all the challenges of this world with brilliance!",
+  "@world_completed_only_message": {
+    "description": "Message for world completion dialog without new world"
+  },
+  "new_world_unlocked": "New world unlocked: {worldName}",
+  "@new_world_unlocked": {
+    "description": "Message showing newly unlocked world",
+    "placeholders": {
+      "worldName": {
+        "type": "String",
+        "description": "Name of the newly unlocked world"
+      }
+    }
+  },
+  "rare_items_unlocked": "Rare Items Unlocked!",
+  "@rare_items_unlocked": {
+    "description": "Title for rare items unlocked section"
+  },
+  "completion_rewards": "Completion Rewards",
+  "@completion_rewards": {
+    "description": "Title for completion rewards section"
+  },
+  "unlock_bonus": "Unlock bonus: +5 Gems",
+  "@unlock_bonus": {
+    "description": "Unlock bonus text"
+  },
+  "back_to_menu": "Back to Menu",
+  "@back_to_menu": {
+    "description": "Back to menu button text"
+  },
+  "explore_new_world": "Explore the New World",
+  "@explore_new_world": {
+    "description": "Explore new world button text"
+  },
+  "continue_text": "Continue",
+  "@continue_text": {
+    "description": "Continue button text"
+  },
+  "new_world": "New World",
+  "@new_world": {
+    "description": "Default name for new world"
   }
 }

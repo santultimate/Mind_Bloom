@@ -240,3 +240,9 @@ String _getFeasibilityStatus(double feasibility) {
     return 'TRÈS FACILE';
 }
 
+
+
+
+
+
+

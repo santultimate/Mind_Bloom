@@ -1476,6 +1476,17 @@ class AppLocalizationsFr extends AppLocalizations {
   String get achievementsShared => 'Mes achievements partagés ! 🎉';
 
   @override
+  String get newWorldUnlocked => 'Nouveau Monde Débloqué';
+
+  @override
+  String get continueGame => 'Continuer';
+
+  @override
+  String livesLimitedToMax(int actualAdded, int maxLives) {
+    return 'Seulement $actualAdded vies ajoutées (limite: $maxLives vies)';
+  }
+
+  @override
   String get easterEvent => 'Pâques Magique';
 
   @override
@@ -1694,7 +1705,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get threeLives => '3 Vies';
 
   @override
-  String get addThreeLives => 'Ajoute 3 vies à votre stock';
+  String get addThreeLives => 'Ajoute 3 vies (max 5 vies)';
 
   @override
   String get twoHundredCoins => '200 Pièces';
@@ -1938,4 +1949,45 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get tutorial_skip_confirmation_message =>
       'Êtes-vous sûr de vouloir passer le tutoriel ? Vous pourrez le revoir plus tard dans les paramètres.';
+
+  @override
+  String get world_completed_title =>
+      'Monde Complété & Nouveau Monde Déverrouillé !';
+
+  @override
+  String get world_completed_only_title => 'Monde Complété !';
+
+  @override
+  String get world_completed_message =>
+      'Félicitations ! Vous avez complété ce monde et déverrouillé un nouveau monde !';
+
+  @override
+  String get world_completed_only_message =>
+      'Félicitations ! Vous avez maîtrisé tous les défis de ce monde avec brio !';
+
+  @override
+  String new_world_unlocked(String worldName) {
+    return 'Nouveau monde déverrouillé : $worldName';
+  }
+
+  @override
+  String get rare_items_unlocked => 'Objets Rares Débloqués !';
+
+  @override
+  String get completion_rewards => 'Récompenses de Completion';
+
+  @override
+  String get unlock_bonus => 'Bonus de déverrouillage : +5 Gemmes';
+
+  @override
+  String get back_to_menu => 'Retour au Menu';
+
+  @override
+  String get explore_new_world => 'Explorer le Nouveau Monde';
+
+  @override
+  String get continue_text => 'Continuer';
+
+  @override
+  String get new_world => 'Nouveau Monde';
 }

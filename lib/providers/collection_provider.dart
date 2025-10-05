@@ -31,7 +31,7 @@ class CollectionProvider extends ChangeNotifier {
         id: 'rose_magique',
         name: 'Rose Magique',
         description:
-            'Une rose qui brille dans l\'obscurité et accorde des pouvoirs mystiques',
+            'A rose that shines in the darkness and grants mystical powers',
         rarity: 5,
         bonuses: [
           PlantBonus(type: BonusType.extraMoves, value: 3), // Augmenté
@@ -45,13 +45,13 @@ class CollectionProvider extends ChangeNotifier {
         unlockCondition: PlantUnlockCondition(
           type: UnlockType.levelsCompleted,
           value: 20,
-          description: 'Complétez 20 niveaux',
+          description: 'Complete 20 levels',
         ),
       ),
       Plant(
         id: 'lotus_cristal',
         name: 'Lotus de Cristal',
-        description: 'Un lotus qui purifie l\'eau et augmente la fortune',
+        description: 'A lotus that purifies water and increases fortune',
         rarity: 4,
         bonuses: [
           PlantBonus(type: BonusType.extraMoves, value: 2), // Augmenté
@@ -64,7 +64,7 @@ class CollectionProvider extends ChangeNotifier {
         unlockCondition: PlantUnlockCondition(
           type: UnlockType.levelsCompleted,
           value: 10,
-          description: 'Complétez 10 niveaux',
+          description: 'Complete 10 levels',
         ),
       ),
       Plant(
@@ -87,7 +87,7 @@ class CollectionProvider extends ChangeNotifier {
       Plant(
         id: 'orchidee_lune',
         name: 'Orchidée de Lune',
-        description: 'Une orchidée qui fleurit la nuit',
+        description: 'An orchid that blooms at night',
         rarity: 4,
         bonuses: [
           PlantBonus(type: BonusType.extraLives, value: 1),
@@ -104,7 +104,7 @@ class CollectionProvider extends ChangeNotifier {
       Plant(
         id: 'tournesol_or',
         name: 'Tournesol Doré',
-        description: 'Un tournesol qui suit le soleil',
+        description: 'A sunflower that follows the sun',
         rarity: 2,
         bonuses: [
           PlantBonus(type: BonusType.coinMultiplier, value: 1.05),
@@ -115,14 +115,13 @@ class CollectionProvider extends ChangeNotifier {
         unlockCondition: PlantUnlockCondition(
           type: UnlockType.levelsCompleted,
           value: 1,
-          description: 'Complétez votre premier niveau',
+          description: 'Complete your first level',
         ),
       ),
       Plant(
         id: 'marguerite_etoile',
         name: 'Marguerite Étoilée',
-        description:
-            'Une marguerite qui brille comme une étoile et guide les débutants',
+        description: 'A daisy that shines like a star and guides beginners',
         rarity: 1,
         bonuses: [
           PlantBonus(
@@ -143,7 +142,7 @@ class CollectionProvider extends ChangeNotifier {
       Plant(
         id: 'violette_mystique',
         name: 'Violette Mystique',
-        description: 'Une violette qui révèle les secrets cachés du jardin',
+        description: 'A violet that reveals the hidden secrets of the garden',
         rarity: 2,
         bonuses: [
           PlantBonus(type: BonusType.extraMoves, value: 1),
@@ -155,15 +154,14 @@ class CollectionProvider extends ChangeNotifier {
         unlockCondition: PlantUnlockCondition(
           type: UnlockType.levelsCompleted,
           value: 3,
-          description: 'Complétez 3 niveaux',
+          description: 'Complete 3 levels',
         ),
       ),
 
       Plant(
         id: 'jasmin_eternel',
         name: 'Jasmin Éternel',
-        description:
-            'Un jasmin dont le parfum traverse les dimensions temporelles',
+        description: 'A jasmine whose fragrance transcends temporal dimensions',
         rarity: 3,
         bonuses: [
           PlantBonus(type: BonusType.extraLives, value: 1),
@@ -175,14 +173,14 @@ class CollectionProvider extends ChangeNotifier {
         unlockCondition: PlantUnlockCondition(
           type: UnlockType.perfectLevels,
           value: 5,
-          description: 'Obtenez 3 étoiles sur 5 niveaux',
+          description: 'Get 3 stars on 5 levels',
         ),
       ),
 
       Plant(
         id: 'petunia_cosmique',
         name: 'Pétunia Cosmique',
-        description: 'Un pétunia qui puise son énergie dans les étoiles',
+        description: 'A petunia that draws its energy from the stars',
         rarity: 4,
         bonuses: [
           PlantBonus(type: BonusType.extraMoves, value: 2),
@@ -195,7 +193,7 @@ class CollectionProvider extends ChangeNotifier {
         unlockCondition: PlantUnlockCondition(
           type: UnlockType.score,
           value: 50000,
-          description: 'Atteignez 50 000 points au total',
+          description: 'Reach 50,000 total points',
         ),
       ),
 
@@ -203,7 +201,7 @@ class CollectionProvider extends ChangeNotifier {
         id: 'lys_phoenix',
         name: 'Lys du Phénix',
         description:
-            'Un lys légendaire qui renaît de ses cendres et accorde une seconde chance',
+            'A legendary lily that rises from its ashes and grants a second chance',
         rarity: 5,
         bonuses: [
           PlantBonus(type: BonusType.extraMoves, value: 4),
@@ -217,7 +215,7 @@ class CollectionProvider extends ChangeNotifier {
         unlockCondition: PlantUnlockCondition(
           type: UnlockType.levelsCompleted,
           value: 30,
-          description: 'Complétez 30 niveaux',
+          description: 'Complete 30 levels',
         ),
       ),
 
@@ -225,7 +223,7 @@ class CollectionProvider extends ChangeNotifier {
         id: 'cactus_temporel',
         name: 'Cactus Temporel',
         description:
-            'Un cactus rare qui manipule le temps et prolonge les sessions de jeu',
+            'A rare cactus that manipulates time and extends gameplay sessions',
         rarity: 4,
         bonuses: [
           PlantBonus(type: BonusType.extraLives, value: 3),
@@ -237,7 +235,233 @@ class CollectionProvider extends ChangeNotifier {
         unlockCondition: PlantUnlockCondition(
           type: UnlockType.matches,
           value: 500,
-          description: 'Faites 500 matches au total',
+          description: 'Make 500 total matches',
+        ),
+      ),
+
+      // 🌟 OBJETS RARES SPÉCIFIQUES AUX MONDES 🌟
+
+      // Monde 1 - Garden of Beginnings
+      Plant(
+        id: 'rose_eternelle',
+        name: 'Rose Éternelle du Jardin',
+        description:
+            'A legendary rose from the Garden of Beginnings that grants rebirth powers',
+        rarity: 4,
+        bonuses: [
+          PlantBonus(type: BonusType.extraMoves, value: 3),
+          PlantBonus(type: BonusType.scoreMultiplier, value: 1.2),
+          PlantBonus(type: BonusType.extraLives, value: 1),
+        ],
+        isUnlocked: _plantLevels.containsKey('rose_eternelle'),
+        level: _plantLevels['rose_eternelle'] ?? 0,
+        imagePath: 'assets/images/plants/rose_eternelle.png',
+        unlockCondition: PlantUnlockCondition(
+          type: UnlockType.worldCompleted,
+          value: 1,
+          description: 'Complete World 1 - Garden of Beginnings',
+        ),
+      ),
+
+      // Monde 2 - Valley of Flowers
+      Plant(
+        id: 'lotus_paradis',
+        name: 'Lotus du Paradis des Fleurs',
+        description:
+            'A divine lotus from the Valley of Flowers that blesses every match with its grace',
+        rarity: 4,
+        bonuses: [
+          PlantBonus(type: BonusType.scoreMultiplier, value: 1.3),
+          PlantBonus(type: BonusType.coinMultiplier, value: 1.25),
+          PlantBonus(type: BonusType.extraMoves, value: 2),
+        ],
+        isUnlocked: _plantLevels.containsKey('lotus_paradis'),
+        level: _plantLevels['lotus_paradis'] ?? 0,
+        imagePath: 'assets/images/plants/lotus_paradis.png',
+        unlockCondition: PlantUnlockCondition(
+          type: UnlockType.worldCompleted,
+          value: 2,
+          description: 'Complete World 2 - Valley of Flowers',
+        ),
+      ),
+
+      // Monde 3 - Lunar Forest
+      Plant(
+        id: 'orchidee_lunaire',
+        name: 'Orchidée Lunaire Mystique',
+        description:
+            'An enchanted orchid from the Lunar Forest that draws its strength from the moon',
+        rarity: 5,
+        bonuses: [
+          PlantBonus(type: BonusType.extraMoves, value: 4),
+          PlantBonus(type: BonusType.scoreMultiplier, value: 1.4),
+          PlantBonus(type: BonusType.coinMultiplier, value: 1.3),
+          PlantBonus(type: BonusType.extraLives, value: 2),
+        ],
+        isUnlocked: _plantLevels.containsKey('orchidee_lunaire'),
+        level: _plantLevels['orchidee_lunaire'] ?? 0,
+        imagePath: 'assets/images/plants/orchidee_lunaire.png',
+        unlockCondition: PlantUnlockCondition(
+          type: UnlockType.worldCompleted,
+          value: 3,
+          description: 'Complete World 3 - Lunar Forest',
+        ),
+      ),
+
+      // Monde 4 - Solar Meadow
+      Plant(
+        id: 'tournesol_solaire',
+        name: 'Tournesol du Pré Solaire',
+        description:
+            'A giant sunflower from the Solar Meadow that radiates pure energy',
+        rarity: 4,
+        bonuses: [
+          PlantBonus(type: BonusType.scoreMultiplier, value: 1.35),
+          PlantBonus(type: BonusType.coinMultiplier, value: 1.3),
+          PlantBonus(type: BonusType.extraMoves, value: 3),
+        ],
+        isUnlocked: _plantLevels.containsKey('tournesol_solaire'),
+        level: _plantLevels['tournesol_solaire'] ?? 0,
+        imagePath: 'assets/images/plants/tournesol_solaire.png',
+        unlockCondition: PlantUnlockCondition(
+          type: UnlockType.worldCompleted,
+          value: 4,
+          description: 'Complete World 4 - Solar Meadow',
+        ),
+      ),
+
+      // Monde 5 - Crystal Caverns
+      Plant(
+        id: 'cristal_vegetal',
+        name: 'Cristal Végétal des Cavernes',
+        description:
+            'A living crystal from the Crystal Caverns that amplifies all powers',
+        rarity: 5,
+        bonuses: [
+          PlantBonus(type: BonusType.extraMoves, value: 5),
+          PlantBonus(type: BonusType.scoreMultiplier, value: 1.5),
+          PlantBonus(type: BonusType.coinMultiplier, value: 1.4),
+          PlantBonus(type: BonusType.extraLives, value: 2),
+        ],
+        isUnlocked: _plantLevels.containsKey('cristal_vegetal'),
+        level: _plantLevels['cristal_vegetal'] ?? 0,
+        imagePath: 'assets/images/plants/cristal_vegetal.png',
+        unlockCondition: PlantUnlockCondition(
+          type: UnlockType.worldCompleted,
+          value: 5,
+          description: 'Complete World 5 - Crystal Caverns',
+        ),
+      ),
+
+      // Monde 6 - Mystic Swamps
+      Plant(
+        id: 'nymphaea_mystique',
+        name: 'Nymphaea des Marais Mystiques',
+        description:
+            'A magical water lily from the Mystic Swamps that manipulates the elements',
+        rarity: 4,
+        bonuses: [
+          PlantBonus(type: BonusType.extraLives, value: 3),
+          PlantBonus(type: BonusType.scoreMultiplier, value: 1.25),
+          PlantBonus(type: BonusType.coinMultiplier, value: 1.2),
+        ],
+        isUnlocked: _plantLevels.containsKey('nymphaea_mystique'),
+        level: _plantLevels['nymphaea_mystique'] ?? 0,
+        imagePath: 'assets/images/plants/nymphaea_mystique.png',
+        unlockCondition: PlantUnlockCondition(
+          type: UnlockType.worldCompleted,
+          value: 6,
+          description: 'Complete World 6 - Mystic Swamps',
+        ),
+      ),
+
+      // Monde 7 - Burning Lands
+      Plant(
+        id: 'flamme_vegetale',
+        name: 'Flamme Végétale des Terres Ardentes',
+        description:
+            'A fire plant from the Burning Lands that burns with eternal passion',
+        rarity: 5,
+        bonuses: [
+          PlantBonus(type: BonusType.scoreMultiplier, value: 1.6),
+          PlantBonus(type: BonusType.extraMoves, value: 4),
+          PlantBonus(type: BonusType.coinMultiplier, value: 1.35),
+        ],
+        isUnlocked: _plantLevels.containsKey('flamme_vegetale'),
+        level: _plantLevels['flamme_vegetale'] ?? 0,
+        imagePath: 'assets/images/plants/flamme_vegetale.png',
+        unlockCondition: PlantUnlockCondition(
+          type: UnlockType.worldCompleted,
+          value: 7,
+          description: 'Complete World 7 - Burning Lands',
+        ),
+      ),
+
+      // Monde 8 - Eternal Glacier
+      Plant(
+        id: 'glace_eternelle',
+        name: 'Glace Éternelle du Glacier',
+        description:
+            'An ice plant from the Eternal Glacier that freezes time and challenges',
+        rarity: 5,
+        bonuses: [
+          PlantBonus(type: BonusType.extraLives, value: 4),
+          PlantBonus(type: BonusType.extraMoves, value: 3),
+          PlantBonus(type: BonusType.scoreMultiplier, value: 1.3),
+        ],
+        isUnlocked: _plantLevels.containsKey('glace_eternelle'),
+        level: _plantLevels['glace_eternelle'] ?? 0,
+        imagePath: 'assets/images/plants/glace_eternelle.png',
+        unlockCondition: PlantUnlockCondition(
+          type: UnlockType.worldCompleted,
+          value: 8,
+          description: 'Complete World 8 - Eternal Glacier',
+        ),
+      ),
+
+      // Monde 9 - Lost Rainbow
+      Plant(
+        id: 'arc_en_ciel_perdu',
+        name: 'Arc-en-ciel Perdu',
+        description:
+            'A lost rainbow that colors the world with its magical hues',
+        rarity: 5,
+        bonuses: [
+          PlantBonus(type: BonusType.scoreMultiplier, value: 1.7),
+          PlantBonus(type: BonusType.coinMultiplier, value: 1.5),
+          PlantBonus(type: BonusType.extraMoves, value: 5),
+          PlantBonus(type: BonusType.extraLives, value: 3),
+        ],
+        isUnlocked: _plantLevels.containsKey('arc_en_ciel_perdu'),
+        level: _plantLevels['arc_en_ciel_perdu'] ?? 0,
+        imagePath: 'assets/images/plants/arc_en_ciel_perdu.png',
+        unlockCondition: PlantUnlockCondition(
+          type: UnlockType.worldCompleted,
+          value: 9,
+          description: 'Complete World 9 - Lost Rainbow',
+        ),
+      ),
+
+      // Monde 10 - Celestial Garden (Final Boss)
+      Plant(
+        id: 'jardin_celeste',
+        name: 'Jardin Céleste Ultime',
+        description:
+            'The ultimate Celestial Garden that crowns your adventure with divine powers',
+        rarity: 6, // Rareté spéciale pour le monde final
+        bonuses: [
+          PlantBonus(type: BonusType.scoreMultiplier, value: 2.0),
+          PlantBonus(type: BonusType.coinMultiplier, value: 1.8),
+          PlantBonus(type: BonusType.extraMoves, value: 6),
+          PlantBonus(type: BonusType.extraLives, value: 5),
+        ],
+        isUnlocked: _plantLevels.containsKey('jardin_celeste'),
+        level: _plantLevels['jardin_celeste'] ?? 0,
+        imagePath: 'assets/images/plants/jardin_celeste.png',
+        unlockCondition: PlantUnlockCondition(
+          type: UnlockType.worldCompleted,
+          value: 10,
+          description: 'Complete World 10 - Celestial Garden',
         ),
       ),
     ];
@@ -264,7 +488,7 @@ class CollectionProvider extends ChangeNotifier {
     } catch (e) {
       // Commenté pour la version de production
       // if (kDebugMode) {
-      //   print('Error loading collection progress: $e');
+      //   debugPrint('Error loading collection progress: $e');
       // }
     }
   }
@@ -278,7 +502,7 @@ class CollectionProvider extends ChangeNotifier {
     } catch (e) {
       // Commenté pour la version de production
       // if (kDebugMode) {
-      //   print('Error saving collection progress: $e');
+      //   debugPrint('Error saving collection progress: $e');
       // }
     }
   }
@@ -369,6 +593,10 @@ class CollectionProvider extends ChangeNotifier {
             shouldUnlock = (_plantProgress['perfect_levels'] ?? 0) >=
                 plant.unlockCondition.value;
             break;
+          case UnlockType.worldCompleted:
+            shouldUnlock = (_plantProgress['worlds_completed'] ?? 0) >=
+                plant.unlockCondition.value;
+            break;
           case UnlockType.none:
             shouldUnlock = true;
             break;
@@ -451,11 +679,84 @@ class CollectionProvider extends ChangeNotifier {
       case UnlockType.perfectLevels:
         currentValue = _plantProgress['perfect_levels'] ?? 0;
         break;
+      case UnlockType.worldCompleted:
+        currentValue = _plantProgress['worlds_completed'] ?? 0;
+        break;
       case UnlockType.none:
         return 1.0;
     }
 
     return (currentValue / plant.unlockCondition.value).clamp(0.0, 1.0);
+  }
+
+  // 🌟 NOUVELLE MÉTHODE: Débloquer les objets rares après completion d'un monde
+  Future<List<Plant>> onWorldCompleted(int worldId) async {
+    final List<Plant> newlyUnlockedPlants = [];
+
+    // Mettre à jour le compteur de mondes complétés
+    final currentWorldsCompleted = _plantProgress['worlds_completed'] ?? 0;
+    if (worldId > currentWorldsCompleted) {
+      _plantProgress['worlds_completed'] = worldId;
+      await _saveProgress();
+    }
+
+    // Vérifier toutes les plantes qui peuvent être débloquées
+    for (int i = 0; i < _plants.length; i++) {
+      final plant = _plants[i];
+
+      // Vérifier si cette plante doit être débloquée par la completion de ce monde
+      if (!plant.isUnlocked &&
+          plant.unlockCondition.type == UnlockType.worldCompleted &&
+          plant.unlockCondition.value == worldId) {
+        // Débloquer la plante
+        _plantLevels[plant.id] = 1; // Niveau 1 par défaut
+
+        // Créer une nouvelle instance de la plante débloquée
+        final unlockedPlant = Plant(
+          id: plant.id,
+          name: plant.name,
+          description: plant.description,
+          rarity: plant.rarity,
+          bonuses: plant.bonuses,
+          isUnlocked: true,
+          level: 1,
+          imagePath: plant.imagePath,
+          unlockCondition: plant.unlockCondition,
+        );
+
+        // Remplacer dans la liste
+        _plants[i] = unlockedPlant;
+        newlyUnlockedPlants.add(unlockedPlant);
+
+        if (kDebugMode) {
+          debugPrint(
+              '🌟 [CollectionProvider] Objet rare débloqué: ${plant.name} (Monde $worldId)');
+        }
+      }
+    }
+
+    // Sauvegarder les changements
+    if (newlyUnlockedPlants.isNotEmpty) {
+      await _saveProgress();
+      notifyListeners();
+    }
+
+    return newlyUnlockedPlants;
+  }
+
+  // Méthode pour obtenir les plantes rares spécifiques à un monde
+  List<Plant> getWorldRarePlants(int worldId) {
+    return _plants
+        .where((plant) =>
+            plant.unlockCondition.type == UnlockType.worldCompleted &&
+            plant.unlockCondition.value == worldId)
+        .toList();
+  }
+
+  // Méthode pour vérifier si un monde a des objets rares débloqués
+  bool hasWorldRarePlantsUnlocked(int worldId) {
+    final worldPlants = getWorldRarePlants(worldId);
+    return worldPlants.any((plant) => plant.isUnlocked);
   }
 }
 
@@ -519,4 +820,5 @@ enum UnlockType {
   levelsCompleted,
   matches,
   perfectLevels,
+  worldCompleted, // Nouveau type pour les mondes complétés
 }

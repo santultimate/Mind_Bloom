@@ -1,6 +1,11 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mind_bloom/providers/world_provider.dart';
+import 'package:mind_bloom/providers/game_progression_provider.dart';
+import 'package:mind_bloom/utils/constants.dart';
+import 'package:mind_bloom/utils/error_handler.dart';
+import 'package:mind_bloom/utils/batch_saver.dart';
 
 class UserProvider extends ChangeNotifier {
   // Données utilisateur
@@ -10,13 +15,19 @@ class UserProvider extends ChangeNotifier {
   int _experience = 0;
   int _coins = 100;
   int _gems = 10;
-  int _lives = 5;
-  int _maxLives = 5;
+  int _lives = AppConstants.maxLives;
+  int _maxLives = AppConstants.maxLives;
   DateTime? _lastLifeRefill;
   int _currentStreak = 0;
   int _bestStreak = 0;
   List<int> _completedLevels = [];
   final Map<int, int> _levelStars = {}; // levelId -> stars (0-3)
+
+  // Référence au WorldProvider pour notifier les déverrouillages
+  WorldProvider? _worldProvider;
+
+  // Référence au GameProgressionProvider
+  GameProgressionProvider? _gameProgressionProvider;
 
   // Suivi des achievements
   int _bestScore = 0;
@@ -24,6 +35,12 @@ class UserProvider extends ChangeNotifier {
   int _totalScore = 0;
   int _perfectLevels = 0; // Niveaux avec 3 étoiles
   int _shareCount = 0;
+
+  // Monde sélectionné par l'utilisateur
+  int _selectedWorldId = 1;
+
+  // Progression par monde (mondeId -> dernier niveau complété dans ce monde)
+  final Map<int, int> _worldProgress = {};
 
   // Paramètres de jeu
   bool _animationsEnabled = true;
@@ -61,6 +78,12 @@ class UserProvider extends ChangeNotifier {
   int get perfectLevels => _perfectLevels;
   int get shareCount => _shareCount;
 
+  // Getters pour la sélection de monde
+  int get selectedWorldId => _selectedWorldId;
+
+  // Getters pour la progression des mondes
+  Map<int, int> get worldProgress => _worldProgress;
+
   // Getters pour les paramètres
   bool get animationsEnabled => _animationsEnabled;
   bool get vibrationsEnabled => _vibrationsEnabled;
@@ -68,111 +91,164 @@ class UserProvider extends ChangeNotifier {
   bool get debugModeEnabled => _debugModeEnabled;
   bool get tutorialCompleted => _tutorialCompleted;
 
+  // Méthode pour définir la référence au WorldProvider
+  void setWorldProvider(WorldProvider worldProvider) {
+    _worldProvider = worldProvider;
+  }
+
+  // Setter pour le GameProgressionProvider
+  void setGameProgressionProvider(
+      GameProgressionProvider gameProgressionProvider) {
+    _gameProgressionProvider = gameProgressionProvider;
+  }
+
   // Initialiser l'utilisateur
   Future<void> initializeUser() async {
-    final prefs = await SharedPreferences.getInstance();
+    try {
+      final prefs = await SharedPreferences.getInstance();
 
-    _userId = prefs.getString('userId');
-    _username = prefs.getString('username') ?? 'Joueur';
-    _level = prefs.getInt('level') ?? 1;
-    _experience = prefs.getInt('experience') ?? 0;
-    _coins = prefs.getInt('coins') ?? 100;
-    _gems = prefs.getInt('gems') ?? 10;
-    _lives = prefs.getInt('lives') ?? 5;
-    _maxLives = prefs.getInt('maxLives') ?? 5;
+      _userId = prefs.getString('userId');
+      _username = prefs.getString('username') ?? 'Joueur';
+      _level = prefs.getInt('level') ?? 1;
+      _experience = prefs.getInt('experience') ?? 0;
+      _coins = prefs.getInt('coins') ?? 100;
+      _gems = prefs.getInt('gems') ?? 10;
+      _lives = prefs.getInt('lives') ?? 5;
+      _maxLives = prefs.getInt('maxLives') ?? 5;
 
-    final lastRefill = prefs.getString('lastLifeRefill');
-    _lastLifeRefill = lastRefill != null ? DateTime.parse(lastRefill) : null;
+      final lastRefill = prefs.getString('lastLifeRefill');
+      _lastLifeRefill = lastRefill != null ? DateTime.parse(lastRefill) : null;
 
-    // Charger les paramètres
-    _animationsEnabled = prefs.getBool('animationsEnabled') ?? true;
-    _vibrationsEnabled = prefs.getBool('vibrationsEnabled') ?? true;
-    _autoHintsEnabled = prefs.getBool('autoHintsEnabled') ?? false;
-    _debugModeEnabled = prefs.getBool('debugModeEnabled') ?? false;
-    _tutorialCompleted = prefs.getBool('tutorialCompleted') ?? false;
+      // Charger les paramètres
+      _animationsEnabled = prefs.getBool('animationsEnabled') ?? true;
+      _vibrationsEnabled = prefs.getBool('vibrationsEnabled') ?? true;
+      _autoHintsEnabled = prefs.getBool('autoHintsEnabled') ?? false;
+      _debugModeEnabled = prefs.getBool('debugModeEnabled') ?? false;
+      _tutorialCompleted = prefs.getBool('tutorialCompleted') ?? false;
 
-    _currentStreak = prefs.getInt('currentStreak') ?? 0;
-    _bestStreak = prefs.getInt('bestStreak') ?? 0;
+      _currentStreak = prefs.getInt('currentStreak') ?? 0;
+      _bestStreak = prefs.getInt('bestStreak') ?? 0;
 
-    final completedLevelsString = prefs.getString('completedLevels');
-    if (completedLevelsString != null) {
-      _completedLevels = completedLevelsString
-          .split(',')
-          .where((s) => s.isNotEmpty)
-          .map((s) => int.parse(s))
-          .toList();
-    }
+      final completedLevelsString = prefs.getString('completedLevels');
+      if (completedLevelsString != null) {
+        _completedLevels = completedLevelsString
+            .split(',')
+            .where((s) => s.isNotEmpty)
+            .map((s) => int.parse(s))
+            .toList();
+      }
 
-    // Charger les étoiles des niveaux
-    final levelStarsString = prefs.getString('levelStars');
-    if (levelStarsString != null) {
-      final pairs = levelStarsString.split(',');
-      for (final pair in pairs) {
-        if (pair.isNotEmpty) {
-          final parts = pair.split(':');
-          if (parts.length == 2) {
-            _levelStars[int.parse(parts[0])] = int.parse(parts[1]);
+      // Charger les étoiles des niveaux
+      final levelStarsString = prefs.getString('levelStars');
+      if (levelStarsString != null) {
+        final pairs = levelStarsString.split(',');
+        for (final pair in pairs) {
+          if (pair.isNotEmpty) {
+            final parts = pair.split(':');
+            if (parts.length == 2) {
+              _levelStars[int.parse(parts[0])] = int.parse(parts[1]);
+            }
           }
         }
       }
+
+      // Charger les données d'achievements
+      _bestScore = prefs.getInt('bestScore') ?? 0;
+      _bestCombo = prefs.getInt('bestCombo') ?? 0;
+      _totalScore = prefs.getInt('totalScore') ?? 0;
+      _perfectLevels = prefs.getInt('perfectLevels') ?? 0;
+      _shareCount = prefs.getInt('shareCount') ?? 0;
+      _selectedWorldId = prefs.getInt('selectedWorldId') ?? 1;
+
+      // Charger la progression des mondes
+      final worldProgressString = prefs.getString('worldProgress');
+      if (kDebugMode) {
+        debugPrint(
+            '🌍 [UserProvider] Loading worldProgressString: $worldProgressString');
+      }
+      if (worldProgressString != null && worldProgressString.isNotEmpty) {
+        final pairs = worldProgressString.split(',');
+        for (final pair in pairs) {
+          if (pair.isNotEmpty) {
+            final parts = pair.split(':');
+            if (parts.length == 2) {
+              _worldProgress[int.parse(parts[0])] = int.parse(parts[1]);
+            }
+          }
+        }
+      }
+      if (kDebugMode) {
+        debugPrint('🌍 [UserProvider] Loaded _worldProgress: $_worldProgress');
+      }
+
+      // Vérifier le remplissage des vies
+      _checkLifeRefill();
+
+      // Démarrer le timer de régénération
+      _startLifeTimer();
+
+      notifyListeners();
+    } catch (error, stackTrace) {
+      ErrorHandler.handleError(error, stackTrace,
+          context: 'UserProvider.initializeUser');
     }
-
-    // Charger les données d'achievements
-    _bestScore = prefs.getInt('bestScore') ?? 0;
-    _bestCombo = prefs.getInt('bestCombo') ?? 0;
-    _totalScore = prefs.getInt('totalScore') ?? 0;
-    _perfectLevels = prefs.getInt('perfectLevels') ?? 0;
-    _shareCount = prefs.getInt('shareCount') ?? 0;
-
-    // Vérifier le remplissage des vies
-    _checkLifeRefill();
-
-    // Démarrer le timer de régénération
-    _startLifeTimer();
-
-    notifyListeners();
   }
 
   // Sauvegarder les données utilisateur
   Future<void> _saveUserData() async {
-    final prefs = await SharedPreferences.getInstance();
+    try {
+      final prefs = await SharedPreferences.getInstance();
 
-    await prefs.setString('userId', _userId ?? '');
-    await prefs.setString('username', _username);
-    await prefs.setInt('level', _level);
-    await prefs.setInt('experience', _experience);
-    await prefs.setInt('coins', _coins);
-    await prefs.setInt('gems', _gems);
-    await prefs.setInt('lives', _lives);
-    await prefs.setInt('maxLives', _maxLives);
+      await prefs.setString('userId', _userId ?? '');
+      await prefs.setString('username', _username);
+      await prefs.setInt('level', _level);
+      await prefs.setInt('experience', _experience);
+      await prefs.setInt('coins', _coins);
+      await prefs.setInt('gems', _gems);
+      await prefs.setInt('lives', _lives);
+      await prefs.setInt('maxLives', _maxLives);
 
-    if (_lastLifeRefill != null) {
-      await prefs.setString(
-          'lastLifeRefill', _lastLifeRefill!.toIso8601String());
+      if (_lastLifeRefill != null) {
+        await prefs.setString(
+            'lastLifeRefill', _lastLifeRefill!.toIso8601String());
+      }
+
+      await prefs.setInt('currentStreak', _currentStreak);
+      await prefs.setInt('bestStreak', _bestStreak);
+
+      await prefs.setString('completedLevels', _completedLevels.join(','));
+
+      final levelStarsString =
+          _levelStars.entries.map((e) => '${e.key}:${e.value}').join(',');
+      await prefs.setString('levelStars', levelStarsString);
+
+      // Sauvegarder les données d'achievements
+      await prefs.setInt('bestScore', _bestScore);
+      await prefs.setInt('bestCombo', _bestCombo);
+      await prefs.setInt('totalScore', _totalScore);
+      await prefs.setInt('perfectLevels', _perfectLevels);
+      await prefs.setInt('shareCount', _shareCount);
+      await prefs.setInt('selectedWorldId', _selectedWorldId);
+
+      // Sauvegarder la progression des mondes
+      final worldProgressString =
+          _worldProgress.entries.map((e) => '${e.key}:${e.value}').join(',');
+      if (kDebugMode) {
+        debugPrint(
+            '🌍 [UserProvider] Saving worldProgressString: $worldProgressString');
+      }
+      await prefs.setString('worldProgress', worldProgressString);
+
+      // Sauvegarder les paramètres
+      await prefs.setBool('animationsEnabled', _animationsEnabled);
+      await prefs.setBool('vibrationsEnabled', _vibrationsEnabled);
+      await prefs.setBool('autoHintsEnabled', _autoHintsEnabled);
+      await prefs.setBool('debugModeEnabled', _debugModeEnabled);
+      await prefs.setBool('tutorialCompleted', _tutorialCompleted);
+    } catch (error, stackTrace) {
+      ErrorHandler.handleError(error, stackTrace,
+          context: 'UserProvider._saveUserData');
     }
-
-    await prefs.setInt('currentStreak', _currentStreak);
-    await prefs.setInt('bestStreak', _bestStreak);
-
-    await prefs.setString('completedLevels', _completedLevels.join(','));
-
-    final levelStarsString =
-        _levelStars.entries.map((e) => '${e.key}:${e.value}').join(',');
-    await prefs.setString('levelStars', levelStarsString);
-
-    // Sauvegarder les données d'achievements
-    await prefs.setInt('bestScore', _bestScore);
-    await prefs.setInt('bestCombo', _bestCombo);
-    await prefs.setInt('totalScore', _totalScore);
-    await prefs.setInt('perfectLevels', _perfectLevels);
-    await prefs.setInt('shareCount', _shareCount);
-
-    // Sauvegarder les paramètres
-    await prefs.setBool('animationsEnabled', _animationsEnabled);
-    await prefs.setBool('vibrationsEnabled', _vibrationsEnabled);
-    await prefs.setBool('autoHintsEnabled', _autoHintsEnabled);
-    await prefs.setBool('debugModeEnabled', _debugModeEnabled);
-    await prefs.setBool('tutorialCompleted', _tutorialCompleted);
   }
 
   // Mettre à jour le nom d'utilisateur
@@ -203,7 +279,7 @@ class UserProvider extends ChangeNotifier {
   // Ajouter des pièces
   Future<void> addCoins(int amount) async {
     _coins += amount;
-    await _saveUserData();
+    BatchSaver.queueChange('coins', _coins);
     notifyListeners();
   }
 
@@ -211,7 +287,7 @@ class UserProvider extends ChangeNotifier {
   Future<bool> spendCoins(int amount) async {
     if (_coins >= amount) {
       _coins -= amount;
-      await _saveUserData();
+      BatchSaver.queueChange('coins', _coins);
       notifyListeners();
       return true;
     }
@@ -221,7 +297,7 @@ class UserProvider extends ChangeNotifier {
   // Ajouter des gemmes
   Future<void> addGems(int amount) async {
     _gems += amount;
-    await _saveUserData();
+    BatchSaver.queueChange('gems', _gems);
     notifyListeners();
   }
 
@@ -229,7 +305,7 @@ class UserProvider extends ChangeNotifier {
   Future<bool> spendGems(int amount) async {
     if (_gems >= amount) {
       _gems -= amount;
-      await _saveUserData();
+      BatchSaver.queueChange('gems', _gems);
       notifyListeners();
       return true;
     }
@@ -247,7 +323,7 @@ class UserProvider extends ChangeNotifier {
         _startLifeTimer();
       }
 
-      await _saveUserData();
+      BatchSaver.queueChange('lives', _lives);
       notifyListeners();
       return true;
     }
@@ -277,9 +353,101 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Ajouter des vies
+  // Changer le monde sélectionné
+  Future<void> setSelectedWorld(int worldId) async {
+    _selectedWorldId = worldId;
+    await _saveUserData();
+    notifyListeners();
+  }
+
+  // Obtenir la progression d'un monde spécifique
+  int getWorldProgress(int worldId) {
+    return _worldProgress[worldId] ?? 0;
+  }
+
+  // Mettre à jour la progression d'un monde
+  Future<void> updateWorldProgress(int worldId, int levelId) async {
+    final currentProgress = _worldProgress[worldId] ?? 0;
+    if (kDebugMode) {
+      debugPrint(
+          '🌍 [UserProvider] updateWorldProgress: World $worldId, currentProgress: $currentProgress, new levelId: $levelId');
+    }
+    if (levelId > currentProgress) {
+      _worldProgress[worldId] = levelId;
+      await _saveUserData();
+      notifyListeners();
+      if (kDebugMode) {
+        debugPrint(
+            '🌍 [UserProvider] World $worldId progress updated to level $levelId. Current _worldProgress: $_worldProgress');
+      }
+    } else {
+      if (kDebugMode) {
+        debugPrint(
+            '🌍 [UserProvider] World $worldId progress not updated (level $levelId <= currentProgress $currentProgress).');
+      }
+    }
+  }
+
+  // Obtenir le dernier niveau complété dans un monde
+  int getLastCompletedLevelInWorld(int worldId) {
+    return _worldProgress[worldId] ?? 0;
+  }
+
+  // Vérifier si un monde a été commencé
+  bool isWorldStarted(int worldId) {
+    return _worldProgress.containsKey(worldId) && _worldProgress[worldId]! > 0;
+  }
+
+  // Obtenir le prochain niveau à jouer dans un monde
+  int getNextLevelInWorld(int worldId) {
+    final lastCompleted = _worldProgress[worldId] ?? 0;
+    return lastCompleted + 1;
+  }
+
+  // Obtenir le pourcentage de progression d'un monde
+  double getWorldProgressPercentage(int worldId) {
+    if (_worldProvider == null) return 0.0;
+
+    final world = _worldProvider!.getWorldById(worldId);
+    if (world == null) return 0.0;
+
+    final totalLevels = world.endLevel - world.startLevel + 1;
+    final completedLevels = _worldProgress[worldId] ?? 0;
+    final actualCompleted = completedLevels - world.startLevel + 1;
+
+    return (actualCompleted / totalLevels).clamp(0.0, 1.0);
+  }
+
+  // Obtenir le nombre de niveaux complétés dans un monde
+  int getCompletedLevelsInWorld(int worldId) {
+    if (_worldProvider == null) return 0;
+
+    final world = _worldProvider!.getWorldById(worldId);
+    if (world == null) return 0;
+
+    final lastCompleted = _worldProgress[worldId] ?? 0;
+    if (lastCompleted < world.startLevel) return 0;
+
+    return (lastCompleted - world.startLevel + 1)
+        .clamp(0, world.endLevel - world.startLevel + 1);
+  }
+
+  // Ajouter des vies (avec limitation à 5 vies maximum)
   Future<void> addLives(int amount) async {
-    _lives = (_lives + amount).clamp(0, _maxLives);
+    final newLives = _lives + amount;
+    _lives = newLives.clamp(0, _maxLives);
+
+    // Debug: Afficher les informations de débogage
+    if (kDebugMode) {
+      debugPrint('=== DEBUG VIE PURCHASE ===');
+      debugPrint('Vies actuelles: $_lives');
+      debugPrint('Vies à ajouter: $amount');
+      debugPrint('Nouvelles vies: $newLives');
+      debugPrint('Vies finales (clampé): $_lives');
+      debugPrint('Maximum autorisé: $_maxLives');
+      debugPrint('========================');
+    }
+
     await _saveUserData();
     notifyListeners();
   }
@@ -312,7 +480,7 @@ class UserProvider extends ChangeNotifier {
 
     final now = DateTime.now();
     final timeSinceLastRefill = now.difference(_lastLifeRefill!);
-    const refillTimeSeconds = 600; // 10 minutes (10 * 60 = 600 secondes)
+    const refillTimeSeconds = AppConstants.lifeRegenerationTime;
 
     // Calculer combien de vies peuvent être ajoutées
     final livesToAdd = timeSinceLastRefill.inSeconds ~/ refillTimeSeconds;
@@ -330,7 +498,7 @@ class UserProvider extends ChangeNotifier {
 
         // Debug pour voir la régénération
         if (kDebugMode) {
-          print(
+          debugPrint(
               '🔄 VIE AJOUTÉE: +$actualLivesAdded vie(s). Total: $_lives/$_maxLives');
         }
       }
@@ -345,7 +513,7 @@ class UserProvider extends ChangeNotifier {
       _updateTimeUntilNextLife();
 
       // 🔧 CORRECTION: Timer optimisé pour éviter la boucle infinie
-      _lifeTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      _lifeTimer = Timer.periodic(AppConstants.lifeTimerInterval, (timer) {
         if (_lives >= _maxLives) {
           timer.cancel();
           _timeUntilNextLife = 0;
@@ -384,7 +552,7 @@ class UserProvider extends ChangeNotifier {
 
     final now = DateTime.now();
     final timeSinceLastRefill = now.difference(_lastLifeRefill!);
-    const refillTimeSeconds = 600; // 10 minutes (10 * 60 = 600 secondes)
+    const refillTimeSeconds = AppConstants.lifeRegenerationTime;
 
     final elapsedSeconds = timeSinceLastRefill.inSeconds;
 
@@ -392,11 +560,6 @@ class UserProvider extends ChangeNotifier {
     final remainingSeconds =
         refillTimeSeconds - (elapsedSeconds % refillTimeSeconds);
     _timeUntilNextLife = remainingSeconds.clamp(0, refillTimeSeconds);
-
-    // Debug pour voir le temps restant
-    if (kDebugMode) {
-      print('⏰ VIE: ${_timeUntilNextLife}s restantes pour la prochaine vie');
-    }
   }
 
   // Ajouter une vie depuis le timer
@@ -409,7 +572,7 @@ class UserProvider extends ChangeNotifier {
 
       // Debug pour voir l'ajout de vie
       if (kDebugMode) {
-        print('🔄 VIE AJOUTÉE (Timer): +1 vie. Total: $_lives/$_maxLives');
+        debugPrint('🔄 VIE AJOUTÉE (Timer): +1 vie. Total: $_lives/$_maxLives');
       }
 
       // Si on a atteint le maximum, arrêter le timer
@@ -452,15 +615,18 @@ class UserProvider extends ChangeNotifier {
     if (!_completedLevels.contains(levelId)) {
       _completedLevels.add(levelId);
 
-      // Debug: Afficher les informations de débogage (commenté pour production)
-      // if (kDebugMode) {
-      //   print('=== DEBUG LEVEL COMPLETION ===');
-      //   print('Level $levelId completed!');
-      //   print('Updated completed levels: $_completedLevels');
-      //   print(
-      //       'Next level ($levelId + 1) should be unlocked: ${_completedLevels.contains(levelId)}');
-      //   print('=============================');
-      // }
+      if (kDebugMode) {
+        debugPrint('=== LEVEL COMPLETION ===');
+        debugPrint('Level $levelId completed with $stars stars');
+        debugPrint('Updated completed levels: $_completedLevels');
+        debugPrint('========================');
+      }
+    } else {
+      if (kDebugMode) {
+        debugPrint('=== LEVEL ALREADY COMPLETED ===');
+        debugPrint('Level $levelId was already completed, updating stars only');
+        debugPrint('===============================');
+      }
     }
 
     // Mettre à jour la série de victoires
@@ -563,7 +729,45 @@ class UserProvider extends ChangeNotifier {
     int experienceGain = (levelId * 2) + (stars * 10) + (score / 1000).floor();
     await addExperience(experienceGain);
 
+    // Mettre à jour la progression du monde
+    if (_worldProvider != null) {
+      final world = _worldProvider!.getWorldByLevel(levelId);
+      if (world != null) {
+        if (kDebugMode) {
+          debugPrint(
+              '🌍 [UserProvider] completeLevel: Updating world progress for world ${world.id}, level $levelId');
+        }
+        await updateWorldProgress(world.id, levelId);
+      } else {
+        if (kDebugMode) {
+          debugPrint(
+              '🌍 [UserProvider] completeLevel: World not found for level $levelId');
+        }
+      }
+    } else {
+      if (kDebugMode) {
+        debugPrint(
+            '🌍 [UserProvider] completeLevel: WorldProvider is null, cannot update world progress.');
+      }
+    }
+
     await _saveUserData();
+
+    // Notifier le WorldProvider du niveau complété pour mettre à jour les déverrouillages
+    if (_worldProvider != null) {
+      await _worldProvider!.onLevelCompleted(levelId, this);
+    }
+
+    // Synchroniser avec le GameProgressionProvider
+    if (_gameProgressionProvider != null) {
+      _gameProgressionProvider!.syncWithUserProvider();
+
+      // Debug pour vérifier l'état après synchronisation
+      if (kDebugMode) {
+        _gameProgressionProvider!.debugProgressionState();
+      }
+    }
+
     notifyListeners();
   }
 
@@ -578,13 +782,15 @@ class UserProvider extends ChangeNotifier {
     return 150; // Niveaux experts - bonus maximum
   }
 
-  // Vérifier si un niveau est débloqué
+  // Vérifier si un niveau est débloqué - DÉLÈGUE AU GameProgressionProvider
   bool isLevelUnlocked(int levelId) {
+    // Déléguer au GameProgressionProvider pour éviter la duplication de logique
+    if (_gameProgressionProvider != null) {
+      return _gameProgressionProvider!.isLevelUnlocked(levelId);
+    }
+
+    // Fallback : logique simplifiée si GameProgressionProvider n'est pas disponible
     if (levelId == 1) return true;
-
-    // PRODUCTION: Mode debug désactivé pour la version finale
-    // if (_debugModeEnabled) return true;
-
     return _completedLevels.contains(levelId - 1);
   }
 
@@ -659,17 +865,17 @@ class UserProvider extends ChangeNotifier {
   // Méthode de débogage pour vérifier l'état des niveaux (commentée pour production)
   // void debugLevelStatus() {
   //   if (kDebugMode) {
-  //     print('=== LEVEL STATUS DEBUG ===');
-  //     print('Completed levels: $_completedLevels');
-  //     print('Level stars: $_levelStars');
+  //     debugPrint('=== LEVEL STATUS DEBUG ===');
+  //     debugPrint('Completed levels: $_completedLevels');
+  //     debugPrint('Level stars: $_levelStars');
 
   //     // Vérifier les premiers 10 niveaux
   //     for (int i = 1; i <= 10; i++) {
   //       final isUnlocked = isLevelUnlocked(i);
   //       final stars = getLevelStars(i);
-  //       print('Level $i: Unlocked=$isUnlocked, Stars=$stars');
+  //       debugPrint('Level $i: Unlocked=$isUnlocked, Stars=$stars');
   //     }
-  //     print('========================');
+  //     debugPrint('========================');
   //   }
   // }
 
@@ -681,7 +887,7 @@ class UserProvider extends ChangeNotifier {
   //     notifyListeners();
 
   //     if (kDebugMode) {
-  //       print('Level $levelId manually unlocked');
+  //       debugPrint('Level $levelId manually unlocked');
   //     }
   //   }
   // }
@@ -696,7 +902,7 @@ class UserProvider extends ChangeNotifier {
   //   notifyListeners();
 
   //   if (kDebugMode) {
-  //     print('Debug mode ${_debugModeEnabled ? "enabled" : "disabled"}');
+  //     debugPrint('Debug mode ${_debugModeEnabled ? "enabled" : "disabled"}');
   //   }
   // }
 }

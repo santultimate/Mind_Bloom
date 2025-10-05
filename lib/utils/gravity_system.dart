@@ -51,7 +51,7 @@ class GravitySystem {
     if (iterations >= maxIterations) {
       // Commenté pour la version de production
       // if (kDebugMode) {
-      //   print('Warning: Gravity loop reached max iterations');
+      //   debugPrint('Warning: Gravity loop reached max iterations');
       // }
     }
   }

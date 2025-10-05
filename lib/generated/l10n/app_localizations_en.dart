@@ -1460,6 +1460,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get achievementsShared => 'My achievements shared! 🎉';
 
   @override
+  String get newWorldUnlocked => 'New World Unlocked';
+
+  @override
+  String get continueGame => 'Continue';
+
+  @override
+  String livesLimitedToMax(int actualAdded, int maxLives) {
+    return 'Only $actualAdded lives added (limit: $maxLives lives)';
+  }
+
+  @override
   String get easterEvent => 'Magical Easter';
 
   @override
@@ -1674,7 +1685,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get threeLives => '3 Lives';
 
   @override
-  String get addThreeLives => 'Adds 3 lives to your stock';
+  String get addThreeLives => 'Adds 3 lives (max 5 lives)';
 
   @override
   String get twoHundredCoins => '200 Coins';
@@ -1916,4 +1927,44 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutorial_skip_confirmation_message =>
       'Are you sure you want to skip the tutorial? You can review it later in the settings.';
+
+  @override
+  String get world_completed_title => 'World Completed & New World Unlocked!';
+
+  @override
+  String get world_completed_only_title => 'World Completed!';
+
+  @override
+  String get world_completed_message =>
+      'Congratulations! You have completed this world and unlocked a new world!';
+
+  @override
+  String get world_completed_only_message =>
+      'Congratulations! You have mastered all the challenges of this world with brilliance!';
+
+  @override
+  String new_world_unlocked(String worldName) {
+    return 'New world unlocked: $worldName';
+  }
+
+  @override
+  String get rare_items_unlocked => 'Rare Items Unlocked!';
+
+  @override
+  String get completion_rewards => 'Completion Rewards';
+
+  @override
+  String get unlock_bonus => 'Unlock bonus: +5 Gems';
+
+  @override
+  String get back_to_menu => 'Back to Menu';
+
+  @override
+  String get explore_new_world => 'Explore the New World';
+
+  @override
+  String get continue_text => 'Continue';
+
+  @override
+  String get new_world => 'New World';
 }

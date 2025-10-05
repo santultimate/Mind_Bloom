@@ -92,3 +92,8 @@ double _calculateFeasibility(Map<String, dynamic> level) {
   return feasibility.clamp(0.0, 1.0);
 }
 
+
+
+
+
+

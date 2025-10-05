@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_bloom/models/level.dart';
 import 'package:mind_bloom/models/world.dart';
@@ -7,6 +8,7 @@ import 'package:mind_bloom/providers/user_provider.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
 import 'package:mind_bloom/providers/game_provider.dart';
 import 'package:mind_bloom/providers/collection_provider.dart';
+import 'package:mind_bloom/providers/game_progression_provider.dart';
 import 'package:mind_bloom/screens/shop_screen.dart';
 import 'package:mind_bloom/screens/game_screen.dart';
 import 'package:mind_bloom/widgets/level_card.dart';
@@ -109,6 +111,8 @@ class _WorldLevelsScreenState extends State<WorldLevelsScreen> {
                   itemBuilder: (context, index) {
                     final level = levels[index];
                     final isUnlocked = _isLevelUnlocked(level, userProvider);
+                    // Calculer le numéro local du niveau dans le monde (1-10 pour chaque monde)
+                    final localLevelNumber = index + 1;
 
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 12),
@@ -116,6 +120,7 @@ class _WorldLevelsScreenState extends State<WorldLevelsScreen> {
                         level: level,
                         isUnlocked: isUnlocked,
                         stars: 0, // TODO: Récupérer les vraies étoiles
+                        localLevelNumber: localLevelNumber,
                         onTap: isUnlocked ? () => _playLevel(level) : () {},
                       ),
                     );
@@ -133,10 +138,8 @@ class _WorldLevelsScreenState extends State<WorldLevelsScreen> {
   Widget _buildWorldInfo(
       BuildContext context, AppLocalizations l10n, List<Level> levels) {
     final completedLevels = Provider.of<UserProvider>(context).completedLevels;
-    final completedInWorld = levels
-        .where((level) =>
-            completedLevels.contains(level.id + (widget.world.id - 1) * 10))
-        .length;
+    final completedInWorld =
+        levels.where((level) => completedLevels.contains(level.id)).length;
 
     return Container(
       margin: const EdgeInsets.all(16),
@@ -248,19 +251,21 @@ class _WorldLevelsScreenState extends State<WorldLevelsScreen> {
 
   /// Vérifie si un niveau est déverrouillé
   bool _isLevelUnlocked(Level level, UserProvider userProvider) {
-    // Le premier niveau du premier monde est toujours déverrouillé
-    if (widget.world.id == 1 && level.id == 1) return true;
+    // Utiliser GameProgressionProvider pour une logique cohérente
+    final gameProgressionProvider =
+        Provider.of<GameProgressionProvider>(context, listen: false);
+    final isUnlocked = gameProgressionProvider.isLevelUnlocked(level.id);
 
-    // Pour les autres niveaux, vérifier si le niveau précédent est complété
-    if (level.id == 1) {
-      // Premier niveau d'un monde : vérifier si le dernier niveau du monde précédent est complété
-      final previousWorldLastLevel = widget.world.id - 1;
-      return userProvider.completedLevels.contains(previousWorldLastLevel * 10);
-    } else {
-      // Niveau suivant : vérifier si le niveau précédent est complété
-      final currentLevelGlobalId = level.id + (widget.world.id - 1) * 10;
-      return userProvider.completedLevels.contains(currentLevelGlobalId - 1);
+    // Debug pour les niveaux problématiques
+    if ((level.id == 11 || level.id == 12) && kDebugMode) {
+      debugPrint('=== DEBUG WORLD LEVELS SCREEN ===');
+      debugPrint('Level ${level.id} in world ${widget.world.id}');
+      debugPrint('Is unlocked: $isUnlocked');
+      debugPrint('UserProvider completed levels: ${userProvider.completedLevels}');
+      debugPrint('================================');
     }
+
+    return isUnlocked;
   }
 
   /// Joue un niveau

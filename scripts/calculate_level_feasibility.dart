@@ -220,3 +220,9 @@ String _getInterpretation(double feasibility) {
   return 'Extrêmement difficile (impossible)';
 }
 
+
+
+
+
+
+

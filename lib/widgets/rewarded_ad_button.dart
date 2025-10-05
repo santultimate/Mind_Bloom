@@ -221,8 +221,8 @@ class FreeCoinsButton extends StatelessWidget {
     return RewardedAdButton(
       rewardType: 'coins',
       rewardAmount: 50,
-      title: '50 Pièces Gratuites',
-      description: 'Regardez une publicité pour obtenir 50 pièces',
+      title: '50 Free Coins',
+      description: 'Watch an ad to get 50 coins',
       icon: Icons.monetization_on,
       color: AppColors.coins,
       onRewardEarned: onRewardEarned,
@@ -240,8 +240,8 @@ class FreeGemsButton extends StatelessWidget {
     return RewardedAdButton(
       rewardType: 'gems',
       rewardAmount: 5,
-      title: '5 Gemmes Gratuites',
-      description: 'Regardez une publicité pour obtenir 5 gemmes',
+      title: '5 Free Gems',
+      description: 'Watch an ad to get 5 gems',
       icon: Icons.diamond,
       color: AppColors.gems,
       onRewardEarned: onRewardEarned,
@@ -274,8 +274,8 @@ class CoinsRewardedAdButton extends StatelessWidget {
     return const RewardedAdButton(
       rewardType: 'coins',
       rewardAmount: 100,
-      title: '100 Pièces Gratuites',
-      description: 'Regardez une pub pour obtenir 100 pièces',
+      title: '100 Free Coins',
+      description: 'Watch an ad to get 100 coins',
       icon: Icons.monetization_on,
       color: AppColors.coins,
     );
@@ -290,8 +290,8 @@ class GemsRewardedAdButton extends StatelessWidget {
     return const RewardedAdButton(
       rewardType: 'gems',
       rewardAmount: 5,
-      title: '5 Gemmes Gratuites',
-      description: 'Regardez une pub pour obtenir 5 gemmes',
+      title: '5 Free Gems',
+      description: 'Watch an ad to get 5 gems',
       icon: Icons.diamond,
       color: AppColors.gems,
     );

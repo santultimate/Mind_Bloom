@@ -79,7 +79,10 @@ class GameProvider extends ChangeNotifier {
     _currentLevel = level;
 
     // 🔧 CORRECTION: Réinitialiser complètement les objectifs avec current = 0
-    _currentObjectives = level.objectives
+    // 🚀 NOUVEAU: Consolider les objectifs similaires pour éviter la redondance
+    final consolidatedObjectives =
+        Level.consolidateObjectives(level.objectives);
+    _currentObjectives = consolidatedObjectives
         .map((objective) => LevelObjective(
               type: objective.type,
               tileType: objective.tileType,
@@ -95,12 +98,12 @@ class GameProvider extends ChangeNotifier {
 
     // Debug pour tous les niveaux (commenté pour production)
     // if (kDebugMode) {
-    //   print('=== DEBUG LEVEL ${level.id} GAMEPLAY ===');
-    //   print('Starting Level ${level.id} with:');
-    //   print('  Grid Size: ${level.gridSize}');
-    //   print('  Max Moves: ${level.maxMoves}');
-    //   print('  Time Left: ${_calculateTimeForLevel(level)}');
-    //   print('  Objectives: ${level.objectives.length}');
+    //   debugPrint('=== DEBUG LEVEL ${level.id} GAMEPLAY ===');
+    //   debugPrint('Starting Level ${level.id} with:');
+    //   debugPrint('  Grid Size: ${level.gridSize}');
+    //   debugPrint('  Max Moves: ${level.maxMoves}');
+    //   debugPrint('  Time Left: ${_calculateTimeForLevel(level)}');
+    //   debugPrint('  Objectives: ${level.objectives.length}');
     // }
 
     // 🚀 TIMER SUPPRIMÉ - Le jeu n'a plus de limite de temps
@@ -113,7 +116,7 @@ class GameProvider extends ChangeNotifier {
 
     // Debug de la grille générée pour tous les niveaux (commenté pour production)
     // if (kDebugMode) {
-    //   print('Level ${level.id} Grid Generated:');
+    //   debugPrint('Level ${level.id} Grid Generated:');
 
     //   // Debug de la distribution des tuiles
     //   final tileCounts = <TileType, int>{};
@@ -129,28 +132,28 @@ class GameProvider extends ChangeNotifier {
     //         rowStr += 'X ';
     //       }
     //     }
-    //     print('  Row $row: $rowStr');
+    //     debugPrint('  Row $row: $rowStr');
     //   }
 
     //   // Afficher la distribution des tuiles
-    //   print('Tile Distribution:');
+    //   debugPrint('Tile Distribution:');
     //   tileCounts.forEach((type, count) {
-    //     print('  $type: $count');
+    //     debugPrint('  $type: $count');
     //   });
 
     //   // Vérifier les objectifs
-    //   print('Objectives Check:');
+    //   debugPrint('Objectives Check:');
     //   for (final objective in _currentObjectives) {
     //     if (objective.type == LevelObjectiveType.collectTiles &&
     //         objective.tileType != null) {
     //       final available = tileCounts[objective.tileType!] ?? 0;
     //       final required = objective.target;
     //       final status = available >= required ? '✅' : '❌';
-    //       print('  $status ${objective.tileType}: $available/$required');
+    //       debugPrint('  $status ${objective.tileType}: $available/$required');
     //     }
     //   }
 
-    //   print('==============================');
+    //   debugPrint('==============================');
     // }
 
     notifyListeners();
@@ -810,7 +813,7 @@ class GameProvider extends ChangeNotifier {
     // Cette méthode peut être étendue pour des effets visuels
     // Commenté pour la version de production
     // if (kDebugMode) {
-    //   print('SPECIAL EFFECT: ${match.length} tiles matched!');
+    //   debugPrint('SPECIAL EFFECT: ${match.length} tiles matched!');
     // }
   }
 
@@ -827,7 +830,8 @@ class GameProvider extends ChangeNotifier {
     if (isGameOver()) {
       final won = isLevelCompleted();
       final stars = _calculateStars();
-      final movesUsed = _currentLevel!.maxMoves - _movesLeft;
+      final movesUsed = (_currentLevel!.maxMoves - _movesLeft)
+          .clamp(0, _currentLevel!.maxMoves);
       _gameEndCallback!(won, stars, _score, movesUsed);
     }
   }
@@ -879,7 +883,7 @@ class GameProvider extends ChangeNotifier {
     if (iterations >= maxIterations) {
       // Commenté pour la version de production
       // if (kDebugMode) {
-      //   print('Warning: Gravity loop reached max iterations');
+      //   debugPrint('Warning: Gravity loop reached max iterations');
       // }
     }
   }
@@ -1000,6 +1004,14 @@ class GameProvider extends ChangeNotifier {
         }
       }
     }
+
+    // 🚀 CORRECTION: Vérifier immédiatement si tous les objectifs sont atteints
+    if (isLevelCompleted()) {
+      // Arrêter le traitement des matches et terminer le jeu
+      _isAnimating = false;
+      notifyListeners();
+      _checkGameEnd();
+    }
   }
 
   /// Met à jour les objectifs de score
@@ -1008,6 +1020,14 @@ class GameProvider extends ChangeNotifier {
       if (objective.type == LevelObjectiveType.reachScore) {
         objective.current = _score;
       }
+    }
+
+    // 🚀 CORRECTION: Vérifier immédiatement si tous les objectifs sont atteints
+    if (isLevelCompleted()) {
+      // Arrêter le traitement des matches et terminer le jeu
+      _isAnimating = false;
+      notifyListeners();
+      _checkGameEnd();
     }
   }
 
@@ -1254,7 +1274,8 @@ class GameProvider extends ChangeNotifier {
 
     // Bonus de mouvements supplémentaires
     if (bonuses.containsKey(BonusType.extraMoves)) {
-      _movesLeft += bonuses[BonusType.extraMoves]!.toInt();
+      _movesLeft = (_movesLeft + bonuses[BonusType.extraMoves]!.toInt())
+          .clamp(0, _currentLevel!.maxMoves);
     }
   }
 

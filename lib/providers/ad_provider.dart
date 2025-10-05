@@ -44,7 +44,7 @@ class AdProvider extends ChangeNotifier {
         _adsEnabled = false;
         _isInitialized = true;
         if (kDebugMode) {
-          // print('🚀 AdProvider initialized successfully (ads disabled on web)');
+          // debugPrint('🚀 AdProvider initialized successfully (ads disabled on web)');
         }
         return;
       }
@@ -55,15 +55,15 @@ class AdProvider extends ChangeNotifier {
       _isInitialized = true;
 
       if (kDebugMode) {
-        // print('🚀 AdProvider initialized successfully (ads enabled)');
-        // print('📱 Platform: ${Platform.isAndroid ? 'Android' : 'iOS'}');
-        // print('🎯 Banner Ad Unit ID: $_bannerAdUnitId');
-        // print('🎯 Interstitial Ad Unit ID: $_interstitialAdUnitId');
-        // print('🎯 Rewarded Ad Unit ID: $_rewardedAdUnitId');
+        // debugPrint('🚀 AdProvider initialized successfully (ads enabled)');
+        // debugPrint('📱 Platform: ${Platform.isAndroid ? 'Android' : 'iOS'}');
+        // debugPrint('🎯 Banner Ad Unit ID: $_bannerAdUnitId');
+        // debugPrint('🎯 Interstitial Ad Unit ID: $_interstitialAdUnitId');
+        // debugPrint('🎯 Rewarded Ad Unit ID: $_rewardedAdUnitId');
       }
     } catch (e) {
       if (kDebugMode) {
-        // print('Error initializing AdProvider: $e');
+        // debugPrint('Error initializing AdProvider: $e');
       }
     }
   }
@@ -111,27 +111,27 @@ class AdProvider extends ChangeNotifier {
       listener: BannerAdListener(
         onAdLoaded: (ad) {
           if (kDebugMode) {
-            print(
+            debugPrint(
                 '✅ Banner ad loaded successfully - Unit ID: $_bannerAdUnitId');
           }
         },
         onAdFailedToLoad: (ad, error) {
           if (kDebugMode) {
-            // print('❌ Banner ad failed to load - Unit ID: $_bannerAdUnitId');
-            // print('   Error code: ${error.code}');
-            // print('   Error message: ${error.message}');
-            // print('   Error domain: ${error.domain}');
+            // debugPrint('❌ Banner ad failed to load - Unit ID: $_bannerAdUnitId');
+            // debugPrint('   Error code: ${error.code}');
+            // debugPrint('   Error message: ${error.message}');
+            // debugPrint('   Error domain: ${error.domain}');
           }
           ad.dispose();
         },
         onAdOpened: (ad) {
           if (kDebugMode) {
-            // print('Banner ad opened');
+            // debugPrint('Banner ad opened');
           }
         },
         onAdClosed: (ad) {
           if (kDebugMode) {
-            // print('Banner ad closed');
+            // debugPrint('Banner ad closed');
           }
         },
       ),
@@ -151,17 +151,17 @@ class AdProvider extends ChangeNotifier {
           onAdLoaded: (ad) {
             interstitialAd = ad;
             if (kDebugMode) {
-              print(
+              debugPrint(
                   '✅ Interstitial ad loaded successfully - Unit ID: $_interstitialAdUnitId');
             }
           },
           onAdFailedToLoad: (error) {
             if (kDebugMode) {
-              print(
+              debugPrint(
                   '❌ Interstitial ad failed to load - Unit ID: $_interstitialAdUnitId');
-              // print('   Error code: ${error.code}');
-              // print('   Error message: ${error.message}');
-              // print('   Error domain: ${error.domain}');
+              // debugPrint('   Error code: ${error.code}');
+              // debugPrint('   Error message: ${error.message}');
+              // debugPrint('   Error domain: ${error.domain}');
             }
           },
         ),
@@ -169,7 +169,7 @@ class AdProvider extends ChangeNotifier {
       return interstitialAd;
     } catch (e) {
       if (kDebugMode) {
-        // print('Error loading interstitial ad: $e');
+        // debugPrint('Error loading interstitial ad: $e');
       }
       return null;
     }
@@ -194,7 +194,7 @@ class AdProvider extends ChangeNotifier {
       onAdShowedFullScreenContent: (ad) {
         adShown = true;
         if (kDebugMode) {
-          // print('Interstitial ad showed full screen content');
+          // debugPrint('Interstitial ad showed full screen content');
         }
       },
       onAdDismissedFullScreenContent: (ad) {
@@ -202,13 +202,13 @@ class AdProvider extends ChangeNotifier {
         _interstitialCounter = 0;
         _saveUserPreferences();
         if (kDebugMode) {
-          // print('Interstitial ad dismissed');
+          // debugPrint('Interstitial ad dismissed');
         }
       },
       onAdFailedToShowFullScreenContent: (ad, error) {
         ad.dispose();
         if (kDebugMode) {
-          // print('Interstitial ad failed to show: $error');
+          // debugPrint('Interstitial ad failed to show: $error');
         }
       },
     );
@@ -230,17 +230,17 @@ class AdProvider extends ChangeNotifier {
           onAdLoaded: (ad) {
             rewardedAd = ad;
             if (kDebugMode) {
-              print(
+              debugPrint(
                   '✅ Rewarded ad loaded successfully - Unit ID: $_rewardedAdUnitId');
             }
           },
           onAdFailedToLoad: (error) {
             if (kDebugMode) {
-              print(
+              debugPrint(
                   '❌ Rewarded ad failed to load - Unit ID: $_rewardedAdUnitId');
-              // print('   Error code: ${error.code}');
-              // print('   Error message: ${error.message}');
-              // print('   Error domain: ${error.domain}');
+              // debugPrint('   Error code: ${error.code}');
+              // debugPrint('   Error message: ${error.message}');
+              // debugPrint('   Error domain: ${error.domain}');
             }
           },
         ),
@@ -248,7 +248,7 @@ class AdProvider extends ChangeNotifier {
       return rewardedAd;
     } catch (e) {
       if (kDebugMode) {
-        // print('Error loading rewarded ad: $e');
+        // debugPrint('Error loading rewarded ad: $e');
       }
       return null;
     }
@@ -268,19 +268,19 @@ class AdProvider extends ChangeNotifier {
     ad.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (ad) {
         if (kDebugMode) {
-          // print('Rewarded ad showed full screen content');
+          // debugPrint('Rewarded ad showed full screen content');
         }
       },
       onAdDismissedFullScreenContent: (ad) {
         ad.dispose();
         if (kDebugMode) {
-          // print('Rewarded ad dismissed');
+          // debugPrint('Rewarded ad dismissed');
         }
       },
       onAdFailedToShowFullScreenContent: (ad, error) {
         ad.dispose();
         if (kDebugMode) {
-          // print('Rewarded ad failed to show: $error');
+          // debugPrint('Rewarded ad failed to show: $error');
         }
       },
     );
@@ -290,7 +290,7 @@ class AdProvider extends ChangeNotifier {
         rewardEarned = true;
         onReward();
         if (kDebugMode) {
-          // print('User earned reward: ${reward.amount} ${reward.type}');
+          // debugPrint('User earned reward: ${reward.amount} ${reward.type}');
         }
       },
     );
@@ -317,10 +317,13 @@ class AdProvider extends ChangeNotifier {
   bool shouldShowInterstitialAdOnLevelComplete(int currentLevel) {
     if (!adsEnabled) return false;
 
-    // Afficher une pub à la fin de chaque niveau gagné (plus agressif pour les revenus)
-    // Mais seulement si on n'a pas déjà affiché une pub récemment
-    if (currentLevel > _lastAdShownLevel) {
-      return true;
+    // Afficher une pub tous les 2 niveaux pour éviter les interruptions trop fréquentes
+    // Éviter aussi les pubs lors des dialogues de completion de monde
+    if (currentLevel % 2 == 0 && currentLevel > _lastAdShownLevel) {
+      // Éviter les pubs lors des fins de monde (niveaux 10, 20, 30, etc.)
+      if (currentLevel % 10 != 0) {
+        return true;
+      }
     }
 
     return false;

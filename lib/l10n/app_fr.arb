@@ -2006,6 +2006,28 @@
   "@achievementsShared": {
     "description": "Message de confirmation de partage de tous les achievements"
   },
+  "newWorldUnlocked": "Nouveau Monde Débloqué",
+  "@newWorldUnlocked": {
+    "description": "Titre de notification pour un nouveau monde débloqué"
+  },
+  "continueGame": "Continuer",
+  "@continueGame": {
+    "description": "Bouton pour continuer le jeu"
+  },
+  "livesLimitedToMax": "Seulement {actualAdded} vies ajoutées (limite: {maxLives} vies)",
+  "@livesLimitedToMax": {
+    "description": "Message quand l'achat de vies est limité par le maximum",
+    "placeholders": {
+      "actualAdded": {
+        "type": "int",
+        "description": "Nombre de vies réellement ajoutées"
+      },
+      "maxLives": {
+        "type": "int",
+        "description": "Nombre maximum de vies autorisées"
+      }
+    }
+  },
   "easterEvent": "Pâques Magique",
   "@easterEvent": {
     "description": "Nom de l'événement Pâques"
@@ -2398,9 +2420,9 @@
     "description": "Titre pour l'article de 3 vies"
   },
   
-  "addThreeLives": "Ajoute 3 vies à votre stock",
+  "addThreeLives": "Ajoute 3 vies (max 5 vies)",
   "@addThreeLives": {
-    "description": "Description pour l'article de 3 vies"
+    "description": "Description pour l'article de 3 vies avec limitation"
   },
   
   "twoHundredCoins": "200 Pièces",
@@ -2759,5 +2781,59 @@
   "tutorial_skip_confirmation_message": "Êtes-vous sûr de vouloir passer le tutoriel ? Vous pourrez le revoir plus tard dans les paramètres.",
   "@tutorial_skip_confirmation_message": {
     "description": "Message de confirmation pour passer le tutoriel"
+  },
+  "world_completed_title": "Monde Complété & Nouveau Monde Déverrouillé !",
+  "@world_completed_title": {
+    "description": "Titre du dialogue de completion de monde"
+  },
+  "world_completed_only_title": "Monde Complété !",
+  "@world_completed_only_title": {
+    "description": "Titre du dialogue de completion de monde sans nouveau monde"
+  },
+  "world_completed_message": "Félicitations ! Vous avez complété ce monde et déverrouillé un nouveau monde !",
+  "@world_completed_message": {
+    "description": "Message du dialogue de completion de monde avec nouveau monde"
+  },
+  "world_completed_only_message": "Félicitations ! Vous avez maîtrisé tous les défis de ce monde avec brio !",
+  "@world_completed_only_message": {
+    "description": "Message du dialogue de completion de monde sans nouveau monde"
+  },
+  "new_world_unlocked": "Nouveau monde déverrouillé : {worldName}",
+  "@new_world_unlocked": {
+    "description": "Message montrant le nouveau monde déverrouillé",
+    "placeholders": {
+      "worldName": {
+        "type": "String",
+        "description": "Nom du nouveau monde déverrouillé"
+      }
+    }
+  },
+  "rare_items_unlocked": "Objets Rares Débloqués !",
+  "@rare_items_unlocked": {
+    "description": "Titre de la section objets rares débloqués"
+  },
+  "completion_rewards": "Récompenses de Completion",
+  "@completion_rewards": {
+    "description": "Titre de la section récompenses de completion"
+  },
+  "unlock_bonus": "Bonus de déverrouillage : +5 Gemmes",
+  "@unlock_bonus": {
+    "description": "Texte du bonus de déverrouillage"
+  },
+  "back_to_menu": "Retour au Menu",
+  "@back_to_menu": {
+    "description": "Texte du bouton retour au menu"
+  },
+  "explore_new_world": "Explorer le Nouveau Monde",
+  "@explore_new_world": {
+    "description": "Texte du bouton explorer le nouveau monde"
+  },
+  "continue_text": "Continuer",
+  "@continue_text": {
+    "description": "Texte du bouton continuer"
+  },
+  "new_world": "Nouveau Monde",
+  "@new_world": {
+    "description": "Nom par défaut pour un nouveau monde"
   }
 }

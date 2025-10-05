@@ -43,10 +43,11 @@ class AdMobConfig {
 
   // Fréquence des publicités interstitielles - OPTIMISÉE POUR MAXIMISER LES REVENUS
   static const int interstitialFrequency =
-      1; // TOUS LES NIVEAUX pour maximiser les revenus
+      2; // TOUS LES 2 NIVEAUX pour éviter les interruptions trop fréquentes
 
   // Délai avant affichage des publicités interstitielles (en secondes)
-  static const int interstitialDelay = 3;
+  static const int interstitialDelay =
+      8; // Augmenté pour laisser plus de temps à l'utilisateur
 
   // Configuration des bannières
   static const bool showBanners = true;

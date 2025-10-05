@@ -190,7 +190,7 @@ class _LivesWidgetState extends State<LivesWidget>
                           // TODO: Implémenter la logique de publicité récompensée
                           // Commenté pour la version de production
                           // if (kDebugMode) {
-                          //   print('Bouton de vie gratuite tapé');
+                          //   debugPrint('Bouton de vie gratuite tapé');
                           // }
                         },
                         child: Row(

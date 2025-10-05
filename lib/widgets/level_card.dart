@@ -7,6 +7,7 @@ class LevelCard extends StatelessWidget {
   final bool isUnlocked;
   final int stars;
   final VoidCallback onTap;
+  final int? localLevelNumber; // Numéro local du niveau dans le monde
 
   const LevelCard({
     super.key,
@@ -14,6 +15,7 @@ class LevelCard extends StatelessWidget {
     required this.isUnlocked,
     required this.stars,
     required this.onTap,
+    this.localLevelNumber,
   });
 
   @override
@@ -51,7 +53,7 @@ class LevelCard extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  '${level.id}',
+                  '${localLevelNumber ?? level.id}',
                   style: TextStyle(
                     color: isUnlocked ? Colors.white : AppColors.textSecondary,
                     fontWeight: FontWeight.bold,

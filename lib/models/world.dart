@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 /// Modèle représentant un monde dans le jeu
 class World {
   final int id;
@@ -230,15 +232,25 @@ class WorldGenerator {
   static List<World> getUnlockedWorlds(List<int> completedLevels) {
     return predefinedWorlds.where((world) {
       if (world.id == 1) return true; // Premier monde toujours déverrouillé
-      // Un monde est déverrouillé si le monde précédent a au moins 8 niveaux complétés
+
+      // Un monde est déverrouillé si le dernier niveau du monde précédent est complété
       final previousWorld = getWorldById(world.id - 1);
       if (previousWorld == null) return false;
 
-      final completedInPreviousWorld = completedLevels
-          .where((level) => previousWorld.containsLevel(level))
-          .length;
+      // Vérifier si le dernier niveau du monde précédent est complété
+      final lastLevelOfPreviousWorld = previousWorld.endLevel;
+      final isUnlocked = completedLevels.contains(lastLevelOfPreviousWorld);
 
-      return completedInPreviousWorld >= 8; // 80% du monde précédent
+      // Debug réduit pour éviter le spam
+      if (kDebugMode && world.id <= 3) {
+        debugPrint('=== DEBUG WORLD UNLOCK ===');
+        debugPrint('World ${world.id} unlocked: $isUnlocked');
+        debugPrint('Last level of previous world ($lastLevelOfPreviousWorld) completed: ${completedLevels.contains(lastLevelOfPreviousWorld)}');
+        debugPrint('Completed levels: $completedLevels');
+        debugPrint('==========================');
+      }
+
+      return isUnlocked;
     }).toList();
   }
 
@@ -253,4 +265,3 @@ class WorldGenerator {
     }).toList();
   }
 }
-

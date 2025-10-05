@@ -588,7 +588,7 @@
     {
       "id": 21,
       "name": "Challenge 21",
-      "description": "Maîtrisez le niveau 21",
+      "description": "Master level 21",
       "difficulty": "medium",
       "gridSize": 7,
       "maxMoves": 24,
@@ -810,7 +810,7 @@
     {
       "id": 22,
       "name": "Défi 22",
-      "description": "Maîtrisez le niveau 22",
+      "description": "Master level 22",
       "difficulty": "medium",
       "gridSize": 7,
       "maxMoves": 27,
@@ -1041,8 +1041,8 @@
     },
     {
       "id": 23,
-      "name": "Niveau 23",
-      "description": "Relevez le défi du niveau 23",
+      "name": "Level 23",
+      "description": "Take on the challenge of level 23",
       "difficulty": "medium",
       "gridSize": 7,
       "maxMoves": 27,
@@ -1055,17 +1055,12 @@
         {
           "type": "collectTiles",
           "tileType": "dew",
-          "target": 34
+          "target": 74
         },
         {
           "type": "collectTiles",
           "tileType": "leaf",
           "target": 20
-        },
-        {
-          "type": "collectTiles",
-          "tileType": "dew",
-          "target": 40
         }
       ],
       "initialGrid": [
@@ -1274,7 +1269,7 @@
     {
       "id": 24,
       "name": "Challenge 24",
-      "description": "Testez vos compétences au niveau 24",
+      "description": "Test your skills at level 24",
       "difficulty": "medium",
       "gridSize": 7,
       "maxMoves": 30,
@@ -1287,12 +1282,7 @@
         {
           "type": "collectTiles",
           "tileType": "sun",
-          "target": 24
-        },
-        {
-          "type": "collectTiles",
-          "tileType": "sun",
-          "target": 35
+          "target": 59
         },
         {
           "type": "collectTiles",
@@ -1506,7 +1496,7 @@
     {
       "id": 25,
       "name": "Épreuve 25",
-      "description": "Découvrez les secrets du niveau 25",
+      "description": "Discover the secrets of level 25",
       "difficulty": "medium",
       "gridSize": 7,
       "maxMoves": 27,
@@ -1524,12 +1514,7 @@
         {
           "type": "collectTiles",
           "tileType": "moon",
-          "target": 31
-        },
-        {
-          "type": "collectTiles",
-          "tileType": "moon",
-          "target": 33
+          "target": 64
         }
       ],
       "initialGrid": [
@@ -1737,8 +1722,8 @@
     },
     {
       "id": 26,
-      "name": "Niveau 26",
-      "description": "Découvrez les secrets du niveau 26",
+      "name": "Level 26",
+      "description": "Discover the secrets of level 26",
       "difficulty": "medium",
       "gridSize": 8,
       "maxMoves": 30,
@@ -1751,12 +1736,7 @@
         {
           "type": "collectTiles",
           "tileType": "sun",
-          "target": 24
-        },
-        {
-          "type": "collectTiles",
-          "tileType": "sun",
-          "target": 35
+          "target": 59
         }
       ],
       "initialGrid": [
@@ -2015,8 +1995,8 @@
     },
     {
       "id": 27,
-      "name": "Niveau 27",
-      "description": "Testez vos compétences au niveau 27",
+      "name": "Level 27",
+      "description": "Test your skills at level 27",
       "difficulty": "medium",
       "gridSize": 8,
       "maxMoves": 29,
@@ -2294,7 +2274,7 @@
     {
       "id": 28,
       "name": "Test 28",
-      "description": "Testez vos compétences au niveau 28",
+      "description": "Test your skills at level 28",
       "difficulty": "medium",
       "gridSize": 8,
       "maxMoves": 27,
@@ -2567,7 +2547,7 @@
     {
       "id": 29,
       "name": "Test 29",
-      "description": "Testez vos compétences au niveau 29",
+      "description": "Test your skills at level 29",
       "difficulty": "medium",
       "gridSize": 8,
       "maxMoves": 27,
@@ -2840,7 +2820,7 @@
     {
       "id": 30,
       "name": "Épreuve 30",
-      "description": "Relevez le défi du niveau 30",
+      "description": "Take on the challenge of level 30",
       "difficulty": "medium",
       "gridSize": 8,
       "maxMoves": 29,
@@ -3117,8 +3097,8 @@
     },
     {
       "id": 31,
-      "name": "Niveau 31",
-      "description": "Maîtrisez le niveau 31",
+      "name": "Level 31",
+      "description": "Master level 31",
       "difficulty": "hard",
       "gridSize": 8,
       "maxMoves": 28,
@@ -3679,7 +3659,7 @@
     {
       "id": 33,
       "name": "Défi 33",
-      "description": "Relevez le défi du niveau 33",
+      "description": "Take on the challenge of level 33",
       "difficulty": "hard",
       "gridSize": 8,
       "maxMoves": 29,
@@ -3697,12 +3677,7 @@
         {
           "type": "collectTiles",
           "tileType": "moon",
-          "target": 35
-        },
-        {
-          "type": "collectTiles",
-          "tileType": "moon",
-          "target": 44
+          "target": 79
         }
       ],
       "initialGrid": [
@@ -3962,7 +3937,7 @@
     {
       "id": 34,
       "name": "Défi 34",
-      "description": "Testez vos compétences au niveau 34",
+      "description": "Test your skills at level 34",
       "difficulty": "hard",
       "gridSize": 8,
       "maxMoves": 30,
@@ -4240,7 +4215,7 @@
     {
       "id": 35,
       "name": "Épreuve 35",
-      "description": "Maîtrisez le niveau 35",
+      "description": "Master level 35",
       "difficulty": "hard",
       "gridSize": 8,
       "maxMoves": 29,
@@ -4513,7 +4488,7 @@
     {
       "id": 36,
       "name": "Challenge 36",
-      "description": "Découvrez les secrets du niveau 36",
+      "description": "Discover the secrets of level 36",
       "difficulty": "hard",
       "gridSize": 9,
       "maxMoves": 30,
@@ -4847,8 +4822,8 @@
     },
     {
       "id": 37,
-      "name": "Niveau 37",
-      "description": "Relevez le défi du niveau 37",
+      "name": "Level 37",
+      "description": "Take on the challenge of level 37",
       "difficulty": "hard",
       "gridSize": 9,
       "maxMoves": 30,
@@ -5178,7 +5153,7 @@
     {
       "id": 38,
       "name": "Défi 38",
-      "description": "Testez vos compétences au niveau 38",
+      "description": "Test your skills at level 38",
       "difficulty": "hard",
       "gridSize": 9,
       "maxMoves": 30,
@@ -6183,7 +6158,7 @@
     {
       "id": 41,
       "name": "Test 41",
-      "description": "Testez vos compétences au niveau 41",
+      "description": "Test your skills at level 41",
       "difficulty": "expert",
       "gridSize": 9,
       "maxMoves": 25,
@@ -6513,7 +6488,7 @@
     {
       "id": 42,
       "name": "Challenge 42",
-      "description": "Maîtrisez le niveau 42",
+      "description": "Master level 42",
       "difficulty": "expert",
       "gridSize": 9,
       "maxMoves": 26,
@@ -6843,7 +6818,7 @@
     {
       "id": 43,
       "name": "Challenge 43",
-      "description": "Maîtrisez le niveau 43",
+      "description": "Master level 43",
       "difficulty": "expert",
       "gridSize": 9,
       "maxMoves": 27,
@@ -7173,7 +7148,7 @@
     {
       "id": 44,
       "name": "Test 44",
-      "description": "Relevez le défi du niveau 44",
+      "description": "Take on the challenge of level 44",
       "difficulty": "expert",
       "gridSize": 9,
       "maxMoves": 30,
@@ -7843,7 +7818,7 @@
     {
       "id": 46,
       "name": "Épreuve 46",
-      "description": "Relevez le défi du niveau 46",
+      "description": "Take on the challenge of level 46",
       "difficulty": "expert",
       "gridSize": 9,
       "maxMoves": 30,
@@ -7861,12 +7836,7 @@
         {
           "type": "collectTiles",
           "tileType": "seed",
-          "target": 40
-        },
-        {
-          "type": "collectTiles",
-          "tileType": "seed",
-          "target": 40
+          "target": 80
         }
       ],
       "initialGrid": [
@@ -8182,8 +8152,8 @@
     },
     {
       "id": 47,
-      "name": "Niveau 47",
-      "description": "Relevez le défi du niveau 47",
+      "name": "Level 47",
+      "description": "Take on the challenge of level 47",
       "difficulty": "expert",
       "gridSize": 9,
       "maxMoves": 30,
@@ -8518,7 +8488,7 @@
     {
       "id": 48,
       "name": "Épreuve 48",
-      "description": "Relevez le défi du niveau 48",
+      "description": "Take on the challenge of level 48",
       "difficulty": "expert",
       "gridSize": 9,
       "maxMoves": 30,
@@ -8531,12 +8501,7 @@
         {
           "type": "collectTiles",
           "tileType": "leaf",
-          "target": 55
-        },
-        {
-          "type": "collectTiles",
-          "tileType": "leaf",
-          "target": 59
+          "target": 114
         },
         {
           "type": "collectTiles",
@@ -8858,7 +8823,7 @@
     {
       "id": 49,
       "name": "Épreuve 49",
-      "description": "Testez vos compétences au niveau 49",
+      "description": "Test your skills at level 49",
       "difficulty": "expert",
       "gridSize": 9,
       "maxMoves": 30,
@@ -9188,7 +9153,7 @@
     {
       "id": 50,
       "name": "Challenge 50",
-      "description": "Relevez le défi du niveau 50",
+      "description": "Take on the challenge of level 50",
       "difficulty": "expert",
       "gridSize": 9,
       "maxMoves": 30,

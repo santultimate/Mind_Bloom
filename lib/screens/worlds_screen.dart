@@ -32,11 +32,47 @@ class _WorldsScreenState extends State<WorldsScreen> {
 
     await worldProvider.initialize(userProvider);
 
-    // Sélectionner le premier monde déverrouillé par défaut
-    final unlockedWorlds = worldProvider.getUnlockedWorlds();
-    if (unlockedWorlds.isNotEmpty && _selectedWorld == null) {
+    // 🚀 CORRECTION: Sélectionner le monde en cours de progression par défaut
+    final worlds = worldProvider.worlds;
+    World? currentWorld;
+
+    // Trouver le monde en cours de progression (le plus récent avec des niveaux non complétés)
+    for (final world in worlds.reversed) {
+      if (world.isUnlocked) {
+        final lastCompletedLevel = userProvider.getWorldProgress(world.id);
+
+        // Calculer le nombre de niveaux complétés dans ce monde
+        final completedInWorld = lastCompletedLevel >= world.startLevel
+            ? (lastCompletedLevel - world.startLevel + 1)
+            : 0;
+        final totalLevelsInWorld = world.levelCount;
+
+        // Si le monde n'est pas complété à 100%, c'est le monde en cours
+        if (completedInWorld < totalLevelsInWorld) {
+          currentWorld = world;
+          break;
+        }
+      }
+    }
+
+    // Si tous les mondes déverrouillés sont complétés, utiliser le dernier monde déverrouillé
+    if (currentWorld == null) {
+      final unlockedWorlds = worldProvider.getUnlockedWorlds();
+      if (unlockedWorlds.isNotEmpty) {
+        currentWorld = unlockedWorlds.last;
+      }
+    }
+
+    // Utiliser le monde sélectionné par l'utilisateur s'il existe, sinon le monde en cours
+    final selectedWorldId = userProvider.selectedWorldId;
+    final userSelectedWorld = worlds.firstWhere(
+      (world) => world.id == selectedWorldId && world.isUnlocked,
+      orElse: () => currentWorld ?? worlds.first,
+    );
+
+    if (_selectedWorld == null) {
       setState(() {
-        _selectedWorld = unlockedWorlds.first;
+        _selectedWorld = userSelectedWorld;
       });
     }
   }
@@ -49,7 +85,7 @@ class _WorldsScreenState extends State<WorldsScreen> {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: Text(
-          l10n.worlds ?? 'Mondes',
+          l10n.worlds,
           style: TextStyle(
             color: Theme.of(context).colorScheme.onBackground,
             fontWeight: FontWeight.bold,
@@ -144,7 +180,7 @@ class _WorldsScreenState extends State<WorldsScreen> {
                 child: _buildStatItem(
                   context,
                   '${stats['unlockedWorlds']}/${stats['totalWorlds']}',
-                  l10n.worlds ?? 'Mondes',
+                  l10n.worlds,
                   Icons.public,
                 ),
               ),
@@ -152,7 +188,7 @@ class _WorldsScreenState extends State<WorldsScreen> {
                 child: _buildStatItem(
                   context,
                   '${stats['completedLevels']}/${stats['totalLevels']}',
-                  l10n.levels ?? 'Niveaux',
+                  l10n.levels,
                   Icons.stairs,
                 ),
               ),
@@ -160,7 +196,7 @@ class _WorldsScreenState extends State<WorldsScreen> {
                 child: _buildStatItem(
                   context,
                   '${stats['overallProgress']}%',
-                  l10n.completed ?? 'Terminé',
+                  l10n.completed,
                   Icons.check_circle,
                 ),
               ),
@@ -228,8 +264,8 @@ class _WorldsScreenState extends State<WorldsScreen> {
           ),
           child: Text(
             world.isUnlocked
-                ? '${l10n.enter ?? 'Entrer'} - ${_getWorldName(l10n, world)}'
-                : '${l10n.locked ?? 'Verrouillé'}',
+                ? '${l10n.enter} - ${_getWorldName(l10n, world)}'
+                : '${l10n.locked}',
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -243,10 +279,14 @@ class _WorldsScreenState extends State<WorldsScreen> {
   /// Sélectionne un monde
   void _selectWorld(World world) {
     final audioProvider = Provider.of<AudioProvider>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     setState(() {
       _selectedWorld = world;
     });
+
+    // 🚀 CORRECTION: Mettre à jour le monde sélectionné dans UserProvider
+    userProvider.setSelectedWorld(world.id);
 
     audioProvider.playButtonClick();
   }
