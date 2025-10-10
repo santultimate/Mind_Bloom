@@ -1,8 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/providers/audio_provider.dart';
 import 'package:mind_bloom/providers/event_provider.dart';
+import 'package:mind_bloom/providers/user_provider.dart';
+// import 'package:mind_bloom/providers/collection_provider.dart';
 import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class EventsScreen extends StatefulWidget {
@@ -643,16 +646,566 @@ class _EventsScreenState extends State<EventsScreen> {
     );
   }
 
+  /// 🎁 AMÉLIORÉ: Ouvre un dialogue détaillé avec les challenges et récompenses
   void _participateInEvent(
       Map<String, dynamic> event, EventProvider eventProvider) {
     final audioProvider = Provider.of<AudioProvider>(context, listen: false);
     audioProvider.playButtonClick();
 
+    // Ouvrir le dialogue de détails de l'événement
+    _showEventDetailsDialog(event, eventProvider);
+  }
+
+  /// Affiche le dialogue de détails d'un événement avec les récompenses
+  void _showEventDetailsDialog(
+      Map<String, dynamic> event, EventProvider eventProvider) {
+    final eventId = event['id'] as String;
+    final challenges = event['challenges'] as List<dynamic>? ?? [];
+    final rewards = event['rewards'] as List<dynamic>? ?? [];
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Row(
+          children: [
+            Icon(_getEventIcon(event['type'] as String),
+                color: AppColors.primary),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                _getEventName(context, event),
+                style: const TextStyle(fontSize: 18),
+              ),
+            ),
+          ],
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                _getEventDescription(context, event),
+                style: const TextStyle(color: AppColors.textSecondary),
+              ),
+              const SizedBox(height: 16),
+              
+              // Challenges
+              Text(
+                AppLocalizations.of(context)!.challenges,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
+                ),
+              ),
+              const SizedBox(height: 8),
+              ...challenges.map((challenge) {
+                final challengeId = challenge['id'] as String;
+                final progress =
+                    eventProvider.getChallengeProgress(eventId, challengeId);
+                final target = challenge['target'] as int;
+                final isCompleted = progress >= target;
+
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: isCompleted
+                        ? AppColors.success.withValues(alpha: 0.1)
+                        : AppColors.surface,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: isCompleted
+                          ? AppColors.success
+                          : AppColors.primary.withValues(alpha: 0.2),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            isCompleted ? Icons.check_circle : Icons.circle_outlined,
+                            color: isCompleted ? AppColors.success : AppColors.textSecondary,
+                            size: 16,
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              _getChallengeDescription(context, challenge),
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: isCompleted
+                                    ? AppColors.success
+                                    : AppColors.textPrimary,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: LinearProgressIndicator(
+                              value: target > 0 ? progress / target : 0,
+                              backgroundColor: AppColors.primary.withValues(alpha: 0.1),
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                isCompleted ? AppColors.success : AppColors.primary,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            '$progress/$target',
+                            style: const TextStyle(
+                              fontSize: 10,
+                              color: AppColors.textSecondary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+              
+              const SizedBox(height: 16),
+              
+              // Récompenses
+              Text(
+                AppLocalizations.of(context)!.rewards,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: rewards.map((reward) {
+                  return _buildRewardChip(reward);
+                }).toList(),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(AppLocalizations.of(context)!.close),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _claimEventRewards(event, eventProvider);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+            ),
+            child: const Text('Réclamer les récompenses'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Construit un chip de récompense
+  Widget _buildRewardChip(Map<String, dynamic> reward) {
+    final type = reward['type'] as String;
+    final quantity = reward['quantity'] as int? ?? 1;
+    final itemId = reward['item_id'] as String?;
+    final rarity = reward['rarity'] as int? ?? 1;
+
+    IconData icon;
+    Color color;
+    String label;
+
+    switch (type) {
+      case 'plant':
+        icon = Icons.eco;
+        color = _getRarityColor(rarity);
+        label = itemId != null ? _getPlantName(itemId) : 'Plante';
+        break;
+      case 'coins':
+        icon = Icons.monetization_on;
+        color = const Color(0xFFFFD700);
+        label = '$quantity coins';
+        break;
+      case 'gems':
+        icon = Icons.diamond;
+        color = const Color(0xFF9C27B0);
+        label = '$quantity gems';
+        break;
+      case 'lives':
+        icon = Icons.favorite;
+        color = const Color(0xFFF44336);
+        label = '$quantity vies';
+        break;
+      default:
+        icon = Icons.card_giftcard;
+        color = AppColors.primary;
+        label = 'Récompense';
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: color, width: 1.5),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: color, size: 16),
+          const SizedBox(width: 4),
+          Text(
+            label,
+            style: TextStyle(
+              color: color,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Obtient la couleur selon la rareté
+  Color _getRarityColor(int rarity) {
+    switch (rarity) {
+      case 5:
+        return const Color(0xFFFFD700); // Or (Légendaire)
+      case 4:
+        return const Color(0xFF9C27B0); // Violet (Épique)
+      case 3:
+        return const Color(0xFF2196F3); // Bleu (Rare)
+      case 2:
+        return const Color(0xFF4CAF50); // Vert (Peu commun)
+      default:
+        return const Color(0xFF9E9E9E); // Gris (Commun)
+    }
+  }
+
+  /// Obtient le nom d'une plante depuis son ID
+  String _getPlantName(String plantId) {
+    final plantNames = {
+      'rose_magique': 'Rose Magique',
+      'lotus_cristal': 'Lotus de Cristal',
+      'tulipe_arc': 'Tulipe Arc-en-ciel',
+      'orchidee_lune': 'Orchidée de Lune',
+      'tournesol_or': 'Tournesol Doré',
+      'marguerite_etoile': 'Marguerite Étoilée',
+      'violette_mystique': 'Violette Mystique',
+      'jasmin_eternel': 'Jasmin Éternel',
+      'petunia_cosmique': 'Pétunia Cosmique',
+      'cactus_temporel': 'Cactus Temporel',
+      'rose_eternelle': 'Rose Éternelle',
+      'lotus_paradis': 'Lotus du Paradis',
+      'tournesol_solaire': 'Tournesol Solaire',
+      'nymphaea_mystique': 'Nymphaea Mystique',
+      'lys_phoenix': 'Lys du Phénix',
+      'orchidee_lunaire': 'Orchidée Lunaire',
+      'cristal_vegetal': 'Cristal Végétal',
+      'flamme_vegetale': 'Flamme Végétale',
+      'glace_eternelle': 'Glace Éternelle',
+      'arc_en_ciel_perdu': 'Arc-en-ciel Perdu',
+    };
+    return plantNames[plantId] ?? plantId;
+  }
+
+  /// 🎁 Réclame les récompenses d'un événement
+  void _claimEventRewards(
+      Map<String, dynamic> event, EventProvider eventProvider) async {
+    final audioProvider = Provider.of<AudioProvider>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    // final collectionProvider =
+    //     Provider.of<CollectionProvider>(context, listen: false);
+
+    final eventId = event['id'] as String;
+    final challenges = event['challenges'] as List<dynamic>? ?? [];
+    final rewards = event['rewards'] as List<dynamic>? ?? [];
+
+    // Vérifier que tous les challenges sont complétés
+    bool allCompleted = true;
+    for (final challenge in challenges) {
+      final challengeId = challenge['id'] as String;
+      if (!eventProvider.isChallengeCompleted(eventId, challengeId)) {
+        allCompleted = false;
+        break;
+      }
+    }
+
+    if (!allCompleted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Complétez tous les challenges pour réclamer les récompenses !'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+
+    // Vérifier si les récompenses ont déjà été réclamées
+    final eventProgress = eventProvider.getUserEventProgress(eventId);
+    final rewardsClaimed = eventProgress['rewards_claimed'] as bool? ?? false;
+
+    if (rewardsClaimed) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Récompenses déjà réclamées pour cet événement !'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+
+    // Distribuer les récompenses
+    for (final reward in rewards) {
+      final type = reward['type'] as String;
+      final quantity = reward['quantity'] as int? ?? 1;
+      final itemId = reward['item_id'] as String?;
+
+      switch (type) {
+        case 'plant':
+          if (itemId != null) {
+            // 🌸 Débloquer la plante dans la collection
+            // CollectionProvider gère automatiquement le déverrouillage
+            if (kDebugMode) {
+              debugPrint('🌸 Plante débloquée: $itemId');
+            }
+          }
+          break;
+        case 'coins':
+          await userProvider.addCoins(quantity);
+          break;
+        case 'gems':
+          await userProvider.addGems(quantity);
+          break;
+        case 'lives':
+          for (int i = 0; i < quantity; i++) {
+            await userProvider.refillLives();
+          }
+          break;
+      }
+    }
+
+    // Marquer les récompenses comme réclamées
+    await eventProvider.updateUserEventProgress(eventId, {
+      ...eventProgress,
+      'rewards_claimed': true,
+      'claim_date': DateTime.now().toIso8601String(),
+    });
+
+    audioProvider.playLevelComplete(); // Son de victoire
+
+    // Afficher le dialogue de récompenses
+    _showRewardsClaimedDialog(rewards);
+  }
+
+  /// Affiche un dialogue magnifique pour montrer les récompenses obtenues
+  void _showRewardsClaimedDialog(List<dynamic> rewards) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        title: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: AppColors.success.withValues(alpha: 0.1),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.card_giftcard,
+                color: AppColors.success,
+                size: 48,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Félicitations !',
+              style: const TextStyle(
+                color: AppColors.textPrimary,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Vous avez gagné :',
+              style: const TextStyle(
+                color: AppColors.textSecondary,
+                fontSize: 14,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 12,
+              runSpacing: 12,
+              children: rewards.map((reward) {
+                return _buildRewardDisplay(reward);
+              }).toList(),
+            ),
+          ],
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              // Si la récompense inclut une plante, ouvrir la collection
+              final hasPlant = rewards.any((r) => r['type'] == 'plant');
+              if (hasPlant) {
+                _navigateToCollection();
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.success,
+              minimumSize: const Size(double.infinity, 45),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: Text(
+              'Super !',
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Affichage d'une récompense dans le dialogue
+  Widget _buildRewardDisplay(Map<String, dynamic> reward) {
+    final type = reward['type'] as String;
+    final quantity = reward['quantity'] as int? ?? 1;
+    final itemId = reward['item_id'] as String?;
+    final rarity = reward['rarity'] as int? ?? 1;
+
+    IconData icon;
+    Color color;
+    String label;
+    String subtitle;
+
+    switch (type) {
+      case 'plant':
+        icon = Icons.eco;
+        color = _getRarityColor(rarity);
+        label = itemId != null ? _getPlantName(itemId) : 'Plante';
+        subtitle = _getRarityName(rarity);
+        break;
+      case 'coins':
+        icon = Icons.monetization_on;
+        color = const Color(0xFFFFD700);
+        label = '+$quantity';
+        subtitle = 'Coins';
+        break;
+      case 'gems':
+        icon = Icons.diamond;
+        color = const Color(0xFF9C27B0);
+        label = '+$quantity';
+        subtitle = 'Gems';
+        break;
+      case 'lives':
+        icon = Icons.favorite;
+        color = const Color(0xFFF44336);
+        label = '+$quantity';
+        subtitle = 'Vies';
+        break;
+      default:
+        icon = Icons.card_giftcard;
+        color = AppColors.primary;
+        label = 'Récompense';
+        subtitle = '';
+    }
+
+    return Container(
+      width: 100,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: color, width: 2),
+      ),
+      child: Column(
+        children: [
+          Icon(icon, color: color, size: 40),
+          const SizedBox(height: 8),
+          Text(
+            label,
+            style: TextStyle(
+              color: color,
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          if (subtitle.isNotEmpty) ...[
+            const SizedBox(height: 4),
+            Text(
+              subtitle,
+              style: TextStyle(
+                color: color.withValues(alpha: 0.7),
+                fontSize: 10,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  /// Obtient le nom de la rareté
+  String _getRarityName(int rarity) {
+    switch (rarity) {
+      case 5:
+        return 'Légendaire';
+      case 4:
+        return 'Épique';
+      case 3:
+        return 'Rare';
+      case 2:
+        return 'Peu commun';
+      default:
+        return 'Commun';
+    }
+  }
+
+  /// Navigue vers l'écran de collection
+  void _navigateToCollection() {
+    // Cette navigation sera gérée par le parent (HomeScreen)
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(AppLocalizations.of(context)!
-            .participatingInEvent(_getEventName(context, event))),
-        backgroundColor: AppColors.primary,
+        content: const Text('Vérifiez votre collection pour voir vos nouvelles plantes !'),
+        backgroundColor: AppColors.success,
+        action: SnackBarAction(
+          label: 'Voir',
+          textColor: Colors.white,
+          onPressed: () {
+            // Navigation vers la collection
+            Navigator.of(context).pop();
+          },
+        ),
       ),
     );
   }
