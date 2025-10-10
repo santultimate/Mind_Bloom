@@ -42,14 +42,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get lives => 'Vies';
 
   @override
-  String coins(int quantity) {
-    return 'Pièces';
-  }
+  String get coins => 'Pièces';
 
   @override
-  String gems(int count) {
-    return 'Gemmes';
-  }
+  String get gems => 'Gemmes';
 
   @override
   String get play => 'Jouer';
@@ -771,9 +767,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get progress => 'Progression';
 
   @override
-  String plant(int rarity) {
-    return 'Plante';
-  }
+  String get plant => 'Plante';
 
   @override
   String boosters(int count) {
@@ -1993,4 +1987,62 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get next_world => 'Monde Suivant';
+
+  @override
+  String get claim_rewards => 'Réclamer les récompenses';
+
+  @override
+  String get complete_all_challenges =>
+      'Complétez tous les challenges pour réclamer les récompenses !';
+
+  @override
+  String get rewards_already_claimed =>
+      'Récompenses déjà réclamées pour cet événement !';
+
+  @override
+  String get congratulations => 'Félicitations !';
+
+  @override
+  String get you_earned => 'Vous avez gagné :';
+
+  @override
+  String get awesome => 'Super !';
+
+  @override
+  String get check_your_collection =>
+      'Vérifiez votre collection pour voir vos nouvelles plantes !';
+
+  @override
+  String get view => 'Voir';
+
+  @override
+  String get uncommon => 'Peu commun';
+
+  @override
+  String get see_worlds => 'Voir les mondes';
+
+  @override
+  String get continueButton => 'Continuer';
+
+  @override
+  String get reward_obtained => 'Récompense obtenue !';
+
+  @override
+  String get free_lives => 'Vies Gratuites';
+
+  @override
+  String get reset_data => 'Réinitialiser les données';
+
+  @override
+  String get share_continue => 'Partager et Continuer';
+
+  @override
+  String get achievement_copied =>
+      '🎉 Succès copié ! Partagez votre réussite !';
+
+  @override
+  String get sharing_error => 'Erreur lors du partage';
+
+  @override
+  String get claim_error => 'Erreur lors de la réclamation';
 }

@@ -145,13 +145,13 @@ class _RewardedAdButtonState extends State<RewardedAdButton> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Récompense obtenue !'),
+        title: Text(AppLocalizations.of(context)!.reward_obtained),
         content: Text(
             'Vous avez gagné ${widget.rewardAmount} ${_getRewardName()} !'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('OK'),
+            child: Text(AppLocalizations.of(context)!.ok),
           ),
         ],
       ),
@@ -162,12 +162,12 @@ class _RewardedAdButtonState extends State<RewardedAdButton> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Erreur'),
+        title: Text(AppLocalizations.of(context)!.error),
         content: Text(message),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('OK'),
+            child: Text(AppLocalizations.of(context)!.ok),
           ),
         ],
       ),

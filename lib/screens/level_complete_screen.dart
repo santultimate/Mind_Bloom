@@ -1746,7 +1746,7 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                 ),
               ),
               icon: const Icon(Icons.share, size: 20),
-              label: const Text('Share & Continue'),
+              label: Text(AppLocalizations.of(context)!.share_continue),
             ),
           ],
         );
@@ -1781,7 +1781,7 @@ Come and take up the challenge and discover this amazing puzzle game!
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('🎉 Achievement copied! Share your success!'),
+            content: Text(AppLocalizations.of(context)!.achievement_copied),
             backgroundColor: Colors.green,
             duration: const Duration(seconds: 3),
             action: SnackBarAction(
@@ -1800,7 +1800,7 @@ Come and take up the challenge and discover this amazing puzzle game!
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('Error during sharing'),
+            content: Text(AppLocalizations.of(context)!.sharing_error),
             backgroundColor: Colors.red,
             duration: const Duration(seconds: 2),
           ),

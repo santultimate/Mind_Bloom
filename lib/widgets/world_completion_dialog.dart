@@ -166,7 +166,7 @@ class WorldCompletionDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Text('Continuer'),
+            child: Text(AppLocalizations.of(context)!.continueButton),
           ),
       ],
     );

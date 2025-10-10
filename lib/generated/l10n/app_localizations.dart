@@ -158,23 +158,23 @@ abstract class AppLocalizations {
   /// **'Moves'**
   String get moves;
 
-  /// Lives statistic
+  /// Lives name
   ///
   /// In en, this message translates to:
   /// **'Lives'**
   String get lives;
 
-  /// Coins reward text
+  /// Currency coins name
   ///
   /// In en, this message translates to:
-  /// **'{quantity} coins'**
-  String coins(int quantity);
+  /// **'Coins'**
+  String get coins;
 
-  /// Gems count text
+  /// Gems name
   ///
   /// In en, this message translates to:
-  /// **'{count} gems'**
-  String gems(int count);
+  /// **'Gems'**
+  String get gems;
 
   /// Play button text
   ///
@@ -230,7 +230,7 @@ abstract class AppLocalizations {
   /// **'Back'**
   String get back;
 
-  /// Cancel button text
+  /// Cancel button
   ///
   /// In en, this message translates to:
   /// **'Cancel'**
@@ -260,7 +260,7 @@ abstract class AppLocalizations {
   /// **'Reset'**
   String get reset;
 
-  /// Delete button text
+  /// Delete button
   ///
   /// In en, this message translates to:
   /// **'Delete'**
@@ -278,7 +278,7 @@ abstract class AppLocalizations {
   /// **'Close'**
   String get close;
 
-  /// OK button text
+  /// Confirmation button
   ///
   /// In en, this message translates to:
   /// **'OK'**
@@ -302,7 +302,7 @@ abstract class AppLocalizations {
   /// **'Loading...'**
   String get loading;
 
-  /// Error text
+  /// Error title
   ///
   /// In en, this message translates to:
   /// **'Error'**
@@ -1502,11 +1502,11 @@ abstract class AppLocalizations {
   /// **'Progress'**
   String get progress;
 
-  /// Plant reward text
+  /// Generic plant name
   ///
   /// In en, this message translates to:
-  /// **'{rarity}★ Plant'**
-  String plant(int rarity);
+  /// **'Plant'**
+  String get plant;
 
   /// Boosters count text
   ///
@@ -1802,7 +1802,7 @@ abstract class AppLocalizations {
   /// **'Social'**
   String get social;
 
-  /// Reward section title
+  /// Generic reward name
   ///
   /// In en, this message translates to:
   /// **'Reward'**
@@ -3631,6 +3631,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Next World'**
   String get next_world;
+
+  /// Button to claim event rewards
+  ///
+  /// In en, this message translates to:
+  /// **'Claim Rewards'**
+  String get claim_rewards;
+
+  /// Error message when not all challenges are completed
+  ///
+  /// In en, this message translates to:
+  /// **'Complete all challenges to claim rewards!'**
+  String get complete_all_challenges;
+
+  /// Error message when rewards have already been claimed
+  ///
+  /// In en, this message translates to:
+  /// **'Rewards already claimed for this event!'**
+  String get rewards_already_claimed;
+
+  /// Congratulations title
+  ///
+  /// In en, this message translates to:
+  /// **'Congratulations!'**
+  String get congratulations;
+
+  /// Message indicating what the player earned
+  ///
+  /// In en, this message translates to:
+  /// **'You earned:'**
+  String get you_earned;
+
+  /// Positive confirmation button
+  ///
+  /// In en, this message translates to:
+  /// **'Awesome!'**
+  String get awesome;
+
+  /// Message to encourage checking the collection
+  ///
+  /// In en, this message translates to:
+  /// **'Check your collection to see your new plants!'**
+  String get check_your_collection;
+
+  /// Button to view something
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get view;
+
+  /// Uncommon rarity
+  ///
+  /// In en, this message translates to:
+  /// **'Uncommon'**
+  String get uncommon;
+
+  /// Button to see worlds list
+  ///
+  /// In en, this message translates to:
+  /// **'See Worlds'**
+  String get see_worlds;
+
+  /// Continue button
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueButton;
+
+  /// Title when a reward is obtained
+  ///
+  /// In en, this message translates to:
+  /// **'Reward Obtained!'**
+  String get reward_obtained;
+
+  /// Free lives screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Free Lives'**
+  String get free_lives;
+
+  /// Button to reset data
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Data'**
+  String get reset_data;
+
+  /// Button to share and continue
+  ///
+  /// In en, this message translates to:
+  /// **'Share & Continue'**
+  String get share_continue;
+
+  /// Message when achievement is copied
+  ///
+  /// In en, this message translates to:
+  /// **'🎉 Achievement copied! Share your success!'**
+  String get achievement_copied;
+
+  /// Error message during sharing
+  ///
+  /// In en, this message translates to:
+  /// **'Error during sharing'**
+  String get sharing_error;
+
+  /// Error message during claim
+  ///
+  /// In en, this message translates to:
+  /// **'Error during claim'**
+  String get claim_error;
 }
 
 class _AppLocalizationsDelegate

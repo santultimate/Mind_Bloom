@@ -807,7 +807,7 @@ class _EventsScreenState extends State<EventsScreen> {
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
             ),
-            child: const Text('Réclamer les récompenses'),
+            child: Text(AppLocalizations.of(context)!.claim_rewards),
           ),
         ],
       ),
@@ -829,27 +829,27 @@ class _EventsScreenState extends State<EventsScreen> {
       case 'plant':
         icon = Icons.eco;
         color = _getRarityColor(rarity);
-        label = itemId != null ? _getPlantName(itemId) : 'Plante';
+        label = itemId != null ? _getPlantName(itemId) : AppLocalizations.of(context)!.plant;
         break;
       case 'coins':
         icon = Icons.monetization_on;
         color = const Color(0xFFFFD700);
-        label = '$quantity coins';
+        label = '$quantity ${AppLocalizations.of(context)!.coins}';
         break;
       case 'gems':
         icon = Icons.diamond;
         color = const Color(0xFF9C27B0);
-        label = '$quantity gems';
+        label = '$quantity ${AppLocalizations.of(context)!.gems}';
         break;
       case 'lives':
         icon = Icons.favorite;
         color = const Color(0xFFF44336);
-        label = '$quantity vies';
+        label = '$quantity ${AppLocalizations.of(context)!.lives}';
         break;
       default:
         icon = Icons.card_giftcard;
         color = AppColors.primary;
-        label = 'Récompense';
+        label = AppLocalizations.of(context)!.reward;
     }
 
     return Container(
@@ -945,7 +945,7 @@ class _EventsScreenState extends State<EventsScreen> {
     if (!allCompleted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Complétez tous les challenges pour réclamer les récompenses !'),
+          content: Text(AppLocalizations.of(context)!.complete_all_challenges),
           backgroundColor: Colors.orange,
         ),
       );
@@ -959,7 +959,7 @@ class _EventsScreenState extends State<EventsScreen> {
     if (rewardsClaimed) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Récompenses déjà réclamées pour cet événement !'),
+          content: Text(AppLocalizations.of(context)!.rewards_already_claimed),
           backgroundColor: Colors.orange,
         ),
       );
@@ -1034,7 +1034,7 @@ class _EventsScreenState extends State<EventsScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Félicitations !',
+              AppLocalizations.of(context)!.congratulations,
               style: const TextStyle(
                 color: AppColors.textPrimary,
                 fontSize: 24,
@@ -1047,7 +1047,7 @@ class _EventsScreenState extends State<EventsScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Vous avez gagné :',
+              AppLocalizations.of(context)!.you_earned,
               style: const TextStyle(
                 color: AppColors.textSecondary,
                 fontSize: 14,
@@ -1082,7 +1082,7 @@ class _EventsScreenState extends State<EventsScreen> {
               ),
             ),
             child: Text(
-              'Super !',
+              AppLocalizations.of(context)!.awesome,
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -1110,31 +1110,31 @@ class _EventsScreenState extends State<EventsScreen> {
       case 'plant':
         icon = Icons.eco;
         color = _getRarityColor(rarity);
-        label = itemId != null ? _getPlantName(itemId) : 'Plante';
+        label = itemId != null ? _getPlantName(itemId) : AppLocalizations.of(context)!.plant;
         subtitle = _getRarityName(rarity);
         break;
       case 'coins':
         icon = Icons.monetization_on;
         color = const Color(0xFFFFD700);
         label = '+$quantity';
-        subtitle = 'Coins';
+        subtitle = AppLocalizations.of(context)!.coins;
         break;
       case 'gems':
         icon = Icons.diamond;
         color = const Color(0xFF9C27B0);
         label = '+$quantity';
-        subtitle = 'Gems';
+        subtitle = AppLocalizations.of(context)!.gems;
         break;
       case 'lives':
         icon = Icons.favorite;
         color = const Color(0xFFF44336);
         label = '+$quantity';
-        subtitle = 'Vies';
+        subtitle = AppLocalizations.of(context)!.lives;
         break;
       default:
         icon = Icons.card_giftcard;
         color = AppColors.primary;
-        label = 'Récompense';
+        label = AppLocalizations.of(context)!.reward;
         subtitle = '';
     }
 
@@ -1179,15 +1179,15 @@ class _EventsScreenState extends State<EventsScreen> {
   String _getRarityName(int rarity) {
     switch (rarity) {
       case 5:
-        return 'Légendaire';
+        return AppLocalizations.of(context)!.legendary;
       case 4:
-        return 'Épique';
+        return AppLocalizations.of(context)!.epic;
       case 3:
-        return 'Rare';
+        return AppLocalizations.of(context)!.rare;
       case 2:
-        return 'Peu commun';
+        return AppLocalizations.of(context)!.uncommon;
       default:
-        return 'Commun';
+        return AppLocalizations.of(context)!.common;
     }
   }
 
@@ -1196,10 +1196,10 @@ class _EventsScreenState extends State<EventsScreen> {
     // Cette navigation sera gérée par le parent (HomeScreen)
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text('Vérifiez votre collection pour voir vos nouvelles plantes !'),
+        content: Text(AppLocalizations.of(context)!.check_your_collection),
         backgroundColor: AppColors.success,
         action: SnackBarAction(
-          label: 'Voir',
+          label: AppLocalizations.of(context)!.view,
           textColor: Colors.white,
           onPressed: () {
             // Navigation vers la collection

@@ -3816,5 +3816,160 @@
   "next_world": "Next World",
   "@next_world": {
     "description": "Button text to go to next world"
+  },
+
+  "claim_rewards": "Claim Rewards",
+  "@claim_rewards": {
+    "description": "Button to claim event rewards"
+  },
+
+  "complete_all_challenges": "Complete all challenges to claim rewards!",
+  "@complete_all_challenges": {
+    "description": "Error message when not all challenges are completed"
+  },
+
+  "rewards_already_claimed": "Rewards already claimed for this event!",
+  "@rewards_already_claimed": {
+    "description": "Error message when rewards have already been claimed"
+  },
+
+  "congratulations": "Congratulations!",
+  "@congratulations": {
+    "description": "Congratulations title"
+  },
+
+  "you_earned": "You earned:",
+  "@you_earned": {
+    "description": "Message indicating what the player earned"
+  },
+
+  "awesome": "Awesome!",
+  "@awesome": {
+    "description": "Positive confirmation button"
+  },
+
+  "check_your_collection": "Check your collection to see your new plants!",
+  "@check_your_collection": {
+    "description": "Message to encourage checking the collection"
+  },
+
+  "view": "View",
+  "@view": {
+    "description": "Button to view something"
+  },
+
+  "plant": "Plant",
+  "@plant": {
+    "description": "Generic plant name"
+  },
+
+  "reward": "Reward",
+  "@reward": {
+    "description": "Generic reward name"
+  },
+
+  "coins": "Coins",
+  "@coins": {
+    "description": "Currency coins name"
+  },
+
+  "gems": "Gems",
+  "@gems": {
+    "description": "Gems name"
+  },
+
+  "lives": "Lives",
+  "@lives": {
+    "description": "Lives name"
+  },
+
+  "legendary": "Legendary",
+  "@legendary": {
+    "description": "Legendary rarity"
+  },
+
+  "epic": "Epic",
+  "@epic": {
+    "description": "Epic rarity"
+  },
+
+  "rare": "Rare",
+  "@rare": {
+    "description": "Rare rarity"
+  },
+
+  "uncommon": "Uncommon",
+  "@uncommon": {
+    "description": "Uncommon rarity"
+  },
+
+  "common": "Common",
+  "@common": {
+    "description": "Common rarity"
+  },
+
+  "see_worlds": "See Worlds",
+  "@see_worlds": {
+    "description": "Button to see worlds list"
+  },
+
+  "continueButton": "Continue",
+  "@continueButton": {
+    "description": "Continue button"
+  },
+
+  "reward_obtained": "Reward Obtained!",
+  "@reward_obtained": {
+    "description": "Title when a reward is obtained"
+  },
+
+  "ok": "OK",
+  "@ok": {
+    "description": "Confirmation button"
+  },
+
+  "error": "Error",
+  "@error": {
+    "description": "Error title"
+  },
+
+  "free_lives": "Free Lives",
+  "@free_lives": {
+    "description": "Free lives screen title"
+  },
+
+  "reset_data": "Reset Data",
+  "@reset_data": {
+    "description": "Button to reset data"
+  },
+
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button"
+  },
+
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button"
+  },
+
+  "share_continue": "Share & Continue",
+  "@share_continue": {
+    "description": "Button to share and continue"
+  },
+
+  "achievement_copied": "🎉 Achievement copied! Share your success!",
+  "@achievement_copied": {
+    "description": "Message when achievement is copied"
+  },
+
+  "sharing_error": "Error during sharing",
+  "@sharing_error": {
+    "description": "Error message during sharing"
+  },
+
+  "claim_error": "Error during claim",
+  "@claim_error": {
+    "description": "Error message during claim"
   }
 }

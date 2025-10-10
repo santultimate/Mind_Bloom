@@ -42,14 +42,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lives => 'Lives';
 
   @override
-  String coins(int quantity) {
-    return '$quantity coins';
-  }
+  String get coins => 'Coins';
 
   @override
-  String gems(int count) {
-    return '$count gems';
-  }
+  String get gems => 'Gems';
 
   @override
   String get play => 'Play';
@@ -763,9 +759,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get progress => 'Progress';
 
   @override
-  String plant(int rarity) {
-    return '$rarity★ Plant';
-  }
+  String get plant => 'Plant';
 
   @override
   String boosters(int count) {
@@ -1970,4 +1964,61 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get next_world => 'Next World';
+
+  @override
+  String get claim_rewards => 'Claim Rewards';
+
+  @override
+  String get complete_all_challenges =>
+      'Complete all challenges to claim rewards!';
+
+  @override
+  String get rewards_already_claimed =>
+      'Rewards already claimed for this event!';
+
+  @override
+  String get congratulations => 'Congratulations!';
+
+  @override
+  String get you_earned => 'You earned:';
+
+  @override
+  String get awesome => 'Awesome!';
+
+  @override
+  String get check_your_collection =>
+      'Check your collection to see your new plants!';
+
+  @override
+  String get view => 'View';
+
+  @override
+  String get uncommon => 'Uncommon';
+
+  @override
+  String get see_worlds => 'See Worlds';
+
+  @override
+  String get continueButton => 'Continue';
+
+  @override
+  String get reward_obtained => 'Reward Obtained!';
+
+  @override
+  String get free_lives => 'Free Lives';
+
+  @override
+  String get reset_data => 'Reset Data';
+
+  @override
+  String get share_continue => 'Share & Continue';
+
+  @override
+  String get achievement_copied => '🎉 Achievement copied! Share your success!';
+
+  @override
+  String get sharing_error => 'Error during sharing';
+
+  @override
+  String get claim_error => 'Error during claim';
 }

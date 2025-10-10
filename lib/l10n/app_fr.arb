@@ -2839,5 +2839,160 @@
   "next_world": "Monde Suivant",
   "@next_world": {
     "description": "Texte du bouton pour aller au monde suivant"
+  },
+
+  "claim_rewards": "Réclamer les récompenses",
+  "@claim_rewards": {
+    "description": "Bouton pour réclamer les récompenses d'un événement"
+  },
+
+  "complete_all_challenges": "Complétez tous les challenges pour réclamer les récompenses !",
+  "@complete_all_challenges": {
+    "description": "Message d'erreur quand tous les challenges ne sont pas complétés"
+  },
+
+  "rewards_already_claimed": "Récompenses déjà réclamées pour cet événement !",
+  "@rewards_already_claimed": {
+    "description": "Message d'erreur quand les récompenses ont déjà été réclamées"
+  },
+
+  "congratulations": "Félicitations !",
+  "@congratulations": {
+    "description": "Titre de félicitations"
+  },
+
+  "you_earned": "Vous avez gagné :",
+  "@you_earned": {
+    "description": "Message indiquant ce que le joueur a gagné"
+  },
+
+  "awesome": "Super !",
+  "@awesome": {
+    "description": "Bouton de confirmation positif"
+  },
+
+  "check_your_collection": "Vérifiez votre collection pour voir vos nouvelles plantes !",
+  "@check_your_collection": {
+    "description": "Message pour encourager à vérifier la collection"
+  },
+
+  "view": "Voir",
+  "@view": {
+    "description": "Bouton pour voir quelque chose"
+  },
+
+  "plant": "Plante",
+  "@plant": {
+    "description": "Nom générique d'une plante"
+  },
+
+  "reward": "Récompense",
+  "@reward": {
+    "description": "Nom générique d'une récompense"
+  },
+
+  "coins": "Pièces",
+  "@coins": {
+    "description": "Nom des pièces de monnaie"
+  },
+
+  "gems": "Gemmes",
+  "@gems": {
+    "description": "Nom des gemmes"
+  },
+
+  "lives": "Vies",
+  "@lives": {
+    "description": "Nom des vies"
+  },
+
+  "legendary": "Légendaire",
+  "@legendary": {
+    "description": "Rareté légendaire"
+  },
+
+  "epic": "Épique",
+  "@epic": {
+    "description": "Rareté épique"
+  },
+
+  "rare": "Rare",
+  "@rare": {
+    "description": "Rareté rare"
+  },
+
+  "uncommon": "Peu commun",
+  "@uncommon": {
+    "description": "Rareté peu commune"
+  },
+
+  "common": "Commun",
+  "@common": {
+    "description": "Rareté commune"
+  },
+
+  "see_worlds": "Voir les mondes",
+  "@see_worlds": {
+    "description": "Bouton pour voir la liste des mondes"
+  },
+
+  "continueButton": "Continuer",
+  "@continueButton": {
+    "description": "Bouton pour continuer"
+  },
+
+  "reward_obtained": "Récompense obtenue !",
+  "@reward_obtained": {
+    "description": "Titre quand une récompense est obtenue"
+  },
+
+  "ok": "OK",
+  "@ok": {
+    "description": "Bouton de confirmation"
+  },
+
+  "error": "Erreur",
+  "@error": {
+    "description": "Titre d'erreur"
+  },
+
+  "free_lives": "Vies Gratuites",
+  "@free_lives": {
+    "description": "Titre de l'écran des vies gratuites"
+  },
+
+  "reset_data": "Réinitialiser les données",
+  "@reset_data": {
+    "description": "Bouton pour réinitialiser les données"
+  },
+
+  "cancel": "Annuler",
+  "@cancel": {
+    "description": "Bouton d'annulation"
+  },
+
+  "delete": "Supprimer",
+  "@delete": {
+    "description": "Bouton de suppression"
+  },
+
+  "share_continue": "Partager et Continuer",
+  "@share_continue": {
+    "description": "Bouton pour partager et continuer"
+  },
+
+  "achievement_copied": "🎉 Succès copié ! Partagez votre réussite !",
+  "@achievement_copied": {
+    "description": "Message quand un succès est copié"
+  },
+
+  "sharing_error": "Erreur lors du partage",
+  "@sharing_error": {
+    "description": "Message d'erreur lors du partage"
+  },
+
+  "claim_error": "Erreur lors de la réclamation",
+  "@claim_error": {
+    "description": "Message d'erreur lors de la réclamation"
   }
 }

@@ -432,7 +432,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Réinitialiser les données'),
+        title: Text(AppLocalizations.of(context)!.reset_data),
         content: const Text(
           'Êtes-vous sûr de vouloir supprimer toutes vos données ? '
           'Cette action est irréversible.',
@@ -440,7 +440,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Annuler'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () {
@@ -456,7 +456,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               backgroundColor: AppColors.error,
               foregroundColor: Colors.white,
             ),
-            child: const Text('Supprimer'),
+            child: Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),

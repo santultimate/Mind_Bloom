@@ -289,7 +289,7 @@ class _DailyRewardsScreenState extends State<DailyRewardsScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('Erreur lors de la réclamation'),
+            content: Text(AppLocalizations.of(context)!.claim_error),
             backgroundColor: Colors.red,
           ),
         );

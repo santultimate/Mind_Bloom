@@ -406,7 +406,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
                 icon: const Icon(Icons.explore, size: 18),
-                label: const Text('Voir les mondes'),
+                label: Text(AppLocalizations.of(context)!.see_worlds),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green[600],
                   foregroundColor: Colors.white,

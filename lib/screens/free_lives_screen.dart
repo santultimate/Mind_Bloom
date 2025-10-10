@@ -13,7 +13,7 @@ class FreeLivesScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('Vies Gratuites'),
+        title: Text(AppLocalizations.of(context)!.free_lives),
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
         elevation: 0,
