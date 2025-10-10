@@ -615,10 +615,9 @@ class _ShopScreenState extends State<ShopScreen> {
         SnackBar(
           content: Text(AppLocalizations.of(context)!.notEnoughCurrency(
               item.currency == Currency.coins
-                  ? AppLocalizations.of(context)!.coins(0).replaceAll('0 ', '')
+                  ? AppLocalizations.of(context)!.coins
                   : AppLocalizations.of(context)!
-                      .gems(0)
-                      .replaceAll('0 ', ''))),
+                      .gems)),
           backgroundColor: AppColors.error,
         ),
       );

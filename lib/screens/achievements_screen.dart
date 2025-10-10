@@ -577,7 +577,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                     ),
                     _buildStatistic(
                       AppLocalizations.of(context)!.rewards,
-                      '$totalRewards ${AppLocalizations.of(context)!.coins(0).replaceAll('0 ', '')}',
+                      '$totalRewards ${AppLocalizations.of(context)!.coins}',
                       Icons.monetization_on,
                       AppColors.coins,
                     ),
@@ -861,7 +861,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            '+${achievement.reward} ${AppLocalizations.of(context)!.coins(0).replaceAll('0 ', '')}',
+                            '+${achievement.reward} ${AppLocalizations.of(context)!.coins}',
                             style: TextStyle(
                               color: AppColors.coins,
                               fontWeight: FontWeight.w600,
@@ -1091,7 +1091,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                             ),
                           ),
                           Text(
-                            '+${achievement.reward} ${AppLocalizations.of(context)!.coins(0).replaceAll('0 ', '')}',
+                            '+${achievement.reward} ${AppLocalizations.of(context)!.coins}',
                             style: TextStyle(
                               color: AppColors.coins,
                               fontWeight: FontWeight.bold,

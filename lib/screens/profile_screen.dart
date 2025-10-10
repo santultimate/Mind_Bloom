@@ -248,7 +248,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           _buildStatRow(AppLocalizations.of(context)!.totalCoins,
               '${userProvider.coins}', Icons.monetization_on, AppColors.coins),
           _buildStatRow(
-              AppLocalizations.of(context)!.gems(0).replaceAll('0 ', ''),
+              AppLocalizations.of(context)!.gems,
               '${userProvider.gems}',
               Icons.diamond,
               AppColors.gold),

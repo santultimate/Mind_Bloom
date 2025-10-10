@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
@@ -238,6 +239,10 @@ class _CollectionScreenState extends State<CollectionScreen> {
                               height: 60,
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
+                                // Debug: afficher l'erreur
+                                if (kDebugMode) {
+                                  debugPrint('Erreur chargement image ${plant.imagePath}: $error');
+                                }
                                 // Fallback vers l'icône si l'image n'existe pas
                                 return Icon(
                                   Icons.eco,
@@ -449,6 +454,10 @@ class _CollectionScreenState extends State<CollectionScreen> {
                             height: 80,
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) {
+                              // Debug: afficher l'erreur
+                              if (kDebugMode) {
+                                debugPrint('Erreur chargement image modal ${plant.imagePath}: $error');
+                              }
                               return Icon(
                                 Icons.eco,
                                 color: plant.isUnlocked

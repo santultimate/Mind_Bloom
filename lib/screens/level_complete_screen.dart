@@ -594,7 +594,7 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
     rewards.add({
       'icon': Icons.monetization_on,
       'color': AppColors.coins,
-      'text': '+${AppLocalizations.of(context)!.coins(totalCoins)}',
+      'text': '+$totalCoins ${AppLocalizations.of(context)!.coins}',
     });
 
     // Gemmes
@@ -608,7 +608,7 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
       rewards.add({
         'icon': Icons.diamond,
         'color': AppColors.gems,
-        'text': '+${AppLocalizations.of(context)!.gems(gems)}',
+        'text': '+$gems ${AppLocalizations.of(context)!.gems}',
       });
     }
 
@@ -1354,11 +1354,11 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               _buildRewardIcon(Icons.diamond, AppColors.gems,
-                                  '+${AppLocalizations.of(context)!.gems(10)}'),
+                                  '+10 ${AppLocalizations.of(context)!.gems}'),
                               _buildRewardIcon(
                                   Icons.monetization_on,
                                   AppColors.coins,
-                                  '+${AppLocalizations.of(context)!.coins(200)}'),
+                                  '+200 ${AppLocalizations.of(context)!.coins}'),
                               _buildRewardIcon(
                                   Icons.star_outline, Colors.purple, '+100 XP'),
                             ],
