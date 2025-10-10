@@ -41,13 +41,13 @@ class AdMobConfig {
   // Configuration des publicités
   static const bool isTestMode = false; // Production mode activé
 
-  // Fréquence des publicités interstitielles - OPTIMISÉE POUR MAXIMISER LES REVENUS
+  // 🔧 OPTIMISÉ: Fréquence réduite pour moins d'intrusion
   static const int interstitialFrequency =
-      2; // TOUS LES 2 NIVEAUX pour éviter les interruptions trop fréquentes
+      5; // TOUS LES 5 NIVEAUX pour une meilleure expérience utilisateur
 
-  // Délai avant affichage des publicités interstitielles (en secondes)
+  // 🔧 OPTIMISÉ: Délai augmenté pour laisser le joueur savourer sa victoire
   static const int interstitialDelay =
-      8; // Augmenté pour laisser plus de temps à l'utilisateur
+      3; // 3 secondes - Assez court pour ne pas perdre l'utilisateur
 
   // Configuration des bannières
   static const bool showBanners = true;

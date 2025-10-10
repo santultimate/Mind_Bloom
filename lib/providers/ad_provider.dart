@@ -19,6 +19,13 @@ class AdProvider extends ChangeNotifier {
   int _totalAdsWatched = 0;
   int _consecutiveRewardedAds = 0;
   DateTime? _lastRewardedAdTime;
+  
+  // 🔧 OPTIMISÉ: Suivi des défaites consécutives pour éviter les pubs intrusives
+  int _consecutiveLosses = 0;
+  
+  // 🔧 OPTIMISÉ: Cooldown après une session intensive
+  DateTime? _lastInterstitialTime;
+  static const Duration _minTimeBetweenInterstitials = Duration(minutes: 2);
 
   // Constructeur avec initialisation automatique
   AdProvider() {
@@ -313,20 +320,70 @@ class AdProvider extends ChangeNotifier {
     return false;
   }
 
-  // Nouvelle méthode pour forcer l'affichage d'une pub interstitielle (pour les fins de niveau)
-  bool shouldShowInterstitialAdOnLevelComplete(int currentLevel) {
+  // 🔧 OPTIMISÉ: Affichage des pubs interstitielles moins intrusif
+  bool shouldShowInterstitialAdOnLevelComplete(int currentLevel, {int stars = 0, bool won = true}) {
     if (!adsEnabled) return false;
 
-    // Afficher une pub tous les 2 niveaux pour éviter les interruptions trop fréquentes
-    // Éviter aussi les pubs lors des dialogues de completion de monde
-    if (currentLevel % 2 == 0 && currentLevel > _lastAdShownLevel) {
-      // Éviter les pubs lors des fins de monde (niveaux 10, 20, 30, etc.)
-      if (currentLevel % 10 != 0) {
-        return true;
+    // ✅ JAMAIS de pub après une DÉFAITE - Le joueur est déjà frustré
+    if (!won) {
+      _consecutiveLosses++;
+      if (kDebugMode) {
+        debugPrint('❌ Pas de pub après défaite ($_consecutiveLosses consécutive(s))');
+      }
+      return false;
+    } else {
+      _consecutiveLosses = 0; // Reset le compteur de défaites
+    }
+
+    // ✅ Ne JAMAIS afficher de pub après une victoire parfaite (3 étoiles)
+    if (stars == 3) {
+      if (kDebugMode) {
+        debugPrint('🌟 Pas de pub après 3 étoiles - Récompenser le joueur !');
+      }
+      return false;
+    }
+
+    // ✅ Ne JAMAIS afficher de pub sur les niveaux Boss (multiples de 10)
+    if (currentLevel % 10 == 0) {
+      if (kDebugMode) {
+        debugPrint('👑 Pas de pub sur niveau Boss ($currentLevel)');
+      }
+      return false;
+    }
+
+    // ✅ Respecter un cooldown minimum de 2 minutes entre les pubs
+    if (_lastInterstitialTime != null) {
+      final timeSinceLastAd = DateTime.now().difference(_lastInterstitialTime!);
+      if (timeSinceLastAd < _minTimeBetweenInterstitials) {
+        if (kDebugMode) {
+          final remainingTime = _minTimeBetweenInterstitials - timeSinceLastAd;
+          debugPrint('⏱️ Cooldown actif - ${remainingTime.inSeconds}s restantes');
+        }
+        return false;
       }
     }
 
+    // ✅ Afficher une pub tous les 5 niveaux seulement (au lieu de 2)
+    final levelsSinceLastAd = currentLevel - _lastAdShownLevel;
+    if (levelsSinceLastAd >= AdMobConfig.interstitialFrequency) {
+      _lastAdShownLevel = currentLevel;
+      _lastInterstitialTime = DateTime.now(); // Marquer le temps de la pub
+      _saveUserPreferences();
+      if (kDebugMode) {
+        debugPrint('📺 Pub interstitielle affichée (niveau $currentLevel)');
+      }
+      return true;
+    }
+
+    if (kDebugMode) {
+      debugPrint('⏭️ Pas de pub (seulement $levelsSinceLastAd niveau(x) depuis la dernière)');
+    }
     return false;
+  }
+  
+  // Réinitialiser le compteur de défaites consécutives
+  void resetConsecutiveLosses() {
+    _consecutiveLosses = 0;
   }
 
   // Activer/désactiver les publicités

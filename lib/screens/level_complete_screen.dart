@@ -931,9 +931,12 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
         return; // Pas de pub lors de la completion d'un monde
       }
 
-      // Afficher une publicité interstitielle si les conditions sont remplies
-      if (adProvider
-          .shouldShowInterstitialAdOnLevelComplete(widget.currentLevel.id)) {
+      // 🔧 OPTIMISÉ: Afficher une pub uniquement si conditions favorables
+      if (adProvider.shouldShowInterstitialAdOnLevelComplete(
+        widget.currentLevel.id,
+        stars: widget.stars, // Pas de pub après 3 étoiles
+        won: widget.won, // Pas de pub après défaite
+      )) {
         await adProvider.showInterstitialAd();
       }
     }

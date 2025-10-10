@@ -6,6 +6,35 @@ Toutes les modifications notables de ce projet seront documentées dans ce fichi
 
 ## [1.3.1] - 2025-10-10
 
+### 📺 Optimisation des Publicités
+
+#### Modifié
+- **Fréquence interstitielles** : 2 → 5 niveaux (-60% de pubs)
+- **Délai d'affichage** : 8 → 3 secondes (plus rapide, moins d'abandon)
+- **Logique intelligente** : Pas de pub après 3 étoiles, défaite ou niveau boss
+- **Cooldown** : Minimum 2 minutes entre les pubs
+
+#### Ajouté
+- **Tracking des défaites** : Éviter les pubs après plusieurs défaites consécutives
+- **Documentation** : `AD_OPTIMIZATION_GUIDE.md` avec stratégie complète
+
+### 🎪 Restauration du Système d'Événements Complet
+
+#### Restauré
+- **EventProvider** : Gestion complète des événements annuels
+- **Programmation multi-jours** : Événements sur plusieurs jours/semaines
+- **Thèmes saisonniers** : Printemps, été, automne, hiver avec couleurs adaptées
+- **Affichage orange** : Gradients colorés selon le thème de l'événement
+- **Statistiques** : Événements actifs, à venir, challenges complétés
+- **Challenges** : Système de défis avec progression et récompenses
+
+#### Fonctionnalités
+- Bannière événement actif avec dégradé de couleurs
+- Événements de ce mois / à venir / passés
+- Progrès des challenges en temps réel
+- Filtre d'événements par thème/type
+- Rafraîchissement pull-to-refresh
+
 ### 🚀 Optimisations de Performance (Phase 1 + Phase 2)
 
 #### Ajouté

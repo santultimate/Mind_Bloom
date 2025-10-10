@@ -15,6 +15,7 @@ import 'package:mind_bloom/providers/rewards_provider.dart';
 import 'package:mind_bloom/providers/world_provider.dart';
 import 'package:mind_bloom/providers/level_provider.dart';
 import 'package:mind_bloom/providers/game_progression_provider.dart';
+import 'package:mind_bloom/providers/event_provider.dart';
 import 'package:mind_bloom/screens/splash_screen.dart';
 import 'package:mind_bloom/constants/app_theme.dart';
 import 'package:mind_bloom/generated/l10n/app_localizations.dart';
@@ -54,6 +55,7 @@ class MindBloomApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => WorldProvider()),
         ChangeNotifierProvider(create: (_) => LevelProvider()),
         ChangeNotifierProvider(create: (_) => GameProgressionProvider()),
+        ChangeNotifierProvider(create: (_) => EventProvider()), // 🔧 Restauré
       ],
       child: Consumer2<LanguageProvider, ThemeProvider>(
         builder: (context, languageProvider, themeProvider, child) {
