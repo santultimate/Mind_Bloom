@@ -1967,4 +1967,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get new_world => 'New World';
+
+  @override
+  String get next_world => 'Next World';
 }

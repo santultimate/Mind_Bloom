@@ -3812,5 +3812,9 @@
   "new_world": "New World",
   "@new_world": {
     "description": "Default name for new world"
+  },
+  "next_world": "Next World",
+  "@next_world": {
+    "description": "Button text to go to next world"
   }
 }

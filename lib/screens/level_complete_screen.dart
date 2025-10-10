@@ -1029,7 +1029,6 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
   // 🎯 NOUVELLE MÉTHODE: Afficher le dialogue de completion de monde
   void _showWorldCompletionDialog(World completedWorld) async {
     final audioProvider = Provider.of<AudioProvider>(context, listen: false);
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
     final worldProvider = Provider.of<WorldProvider>(context, listen: false);
     final collectionProvider =
         Provider.of<CollectionProvider>(context, listen: false);
@@ -1373,6 +1372,117 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                           ],
                         ],
                       ),
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    // Boutons d'action
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop(); // Fermer le dialogue
+                              _goToHome(); // Retourner au menu
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.secondary,
+                              foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: Text(
+                              AppLocalizations.of(context)!.backToMenu,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                        ),
+                        if (hasNextWorld) ...[
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                Navigator.of(context)
+                                    .pop(); // Fermer le dialogue
+
+                                // Démarrer le premier niveau du monde suivant
+                                final gameProvider = Provider.of<GameProvider>(
+                                    context,
+                                    listen: false);
+                                final levelProvider =
+                                    Provider.of<LevelProvider>(context,
+                                        listen: false);
+                                final collectionProvider =
+                                    Provider.of<CollectionProvider>(context,
+                                        listen: false);
+                                final userProvider = Provider.of<UserProvider>(
+                                    context,
+                                    listen: false);
+
+                                if (nextWorld != null) {
+                                  // Mettre à jour le monde sélectionné
+                                  await userProvider
+                                      .setSelectedWorld(nextWorld.id);
+
+                                  // Obtenir le premier niveau du nouveau monde
+                                  final firstLevel = levelProvider.getLevel(
+                                      nextWorld.id, nextWorld.startLevel);
+
+                                  if (firstLevel != null) {
+                                    final success =
+                                        await gameProvider.startLevel(
+                                      firstLevel,
+                                      collectionProvider: collectionProvider,
+                                      userProvider: userProvider,
+                                    );
+
+                                    if (success) {
+                                      Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const GameScreen(),
+                                        ),
+                                      );
+                                      return;
+                                    }
+                                  }
+                                }
+
+                                // Si erreur, retourner au menu
+                                _goToHome();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.primary,
+                                foregroundColor: Colors.white,
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 14),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Monde Suivant',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  const Icon(Icons.arrow_forward, size: 18),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
                   ],
                 ),

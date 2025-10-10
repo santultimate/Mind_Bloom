@@ -8,7 +8,8 @@ import 'package:mind_bloom/utils/error_handler.dart';
 class ImageCacheManager {
   static final Map<String, Uint8List> _memoryCache = {};
   static final Map<String, DateTime> _cacheTimestamps = {};
-  static const int _maxMemoryCacheSize = 50; // Nombre max d'images en mémoire
+  static const int _maxMemoryCacheSize =
+      20; // 🔧 OPTIMISÉ: Réduit de 50 à 20 pour économiser la RAM
   static const Duration _cacheExpiry = Duration(hours: 24);
 
   /// Charge une image depuis le cache ou les assets
@@ -117,6 +118,7 @@ class ImageCacheManager {
   }
 
   /// Préchauffe le cache avec les images les plus utilisées
+  /// 🔧 OPTIMISÉ: Uniquement les tiles de jeu, pas les plants (lazy loading)
   static Future<void> preloadCommonImages() async {
     const commonImages = [
       'assets/images/tiles/flower.png',
@@ -128,6 +130,7 @@ class ImageCacheManager {
       'assets/images/tiles/moon.png',
       'assets/images/tiles/gem.png',
       'assets/images/icone.png',
+      // 🔧 Les images plants sont chargées à la demande (lazy loading)
     ];
 
     if (kDebugMode) {

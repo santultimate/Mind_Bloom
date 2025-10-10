@@ -279,11 +279,12 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(height: 16),
 
           // Progression du monde
-          Consumer<UserProvider>(
-            builder: (context, userProvider, child) {
+          // 🔧 OPTIMISÉ: Selector au lieu de Consumer pour éviter les rebuilds inutiles
+          Selector<UserProvider, List<int>>(
+            selector: (_, user) => user.completedLevels,
+            builder: (context, completedLevels, child) {
               final completedInWorld = _currentWorldLevels
-                  .where((level) =>
-                      userProvider.completedLevels.contains(level.id))
+                  .where((level) => completedLevels.contains(level.id))
                   .length;
 
               return Row(

@@ -228,15 +228,58 @@ class _CollectionScreenState extends State<CollectionScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: plant.isUnlocked
-                          ? Icon(
-                              Icons.eco,
-                              color: AppColors.primary,
-                              size: 30,
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.asset(
+                                plant.imagePath,
+                                width: 60,
+                                height: 60,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  // Fallback vers l'icône si l'image n'existe pas
+                                  return Icon(
+                                    Icons.eco,
+                                    color: AppColors.primary,
+                                    size: 30,
+                                  );
+                                },
+                              ),
                             )
-                          : Icon(
-                              Icons.lock,
-                              color: AppColors.textSecondary,
-                              size: 30,
+                          : Stack(
+                              children: [
+                                // Silhouette noire de la plante
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: ColorFiltered(
+                                    colorFilter: const ColorFilter.mode(
+                                      Colors.black,
+                                      BlendMode.srcIn,
+                                    ),
+                                    child: Image.asset(
+                                      plant.imagePath,
+                                      width: 60,
+                                      height: 60,
+                                      fit: BoxFit.cover,
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return Icon(
+                                          Icons.lock,
+                                          color: AppColors.textSecondary,
+                                          size: 30,
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                // Icône de cadenas par-dessus
+                                const Center(
+                                  child: Icon(
+                                    Icons.lock,
+                                    color: Colors.white,
+                                    size: 24,
+                                  ),
+                                ),
+                              ],
                             ),
                     ),
                     const SizedBox(width: 8),
@@ -390,15 +433,57 @@ class _CollectionScreenState extends State<CollectionScreen> {
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: plant.isUnlocked
-                        ? Icon(
-                            Icons.eco,
-                            color: AppColors.primary,
-                            size: 40,
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: Image.asset(
+                              plant.imagePath,
+                              width: 80,
+                              height: 80,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                // Fallback vers l'icône si l'image n'existe pas
+                                return Icon(
+                                  Icons.eco,
+                                  color: AppColors.primary,
+                                  size: 40,
+                                );
+                              },
+                            ),
                           )
-                        : Icon(
-                            Icons.lock,
-                            color: AppColors.textSecondary,
-                            size: 40,
+                        : Stack(
+                            children: [
+                              // Silhouette noire de la plante
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: ColorFiltered(
+                                  colorFilter: const ColorFilter.mode(
+                                    Colors.black,
+                                    BlendMode.srcIn,
+                                  ),
+                                  child: Image.asset(
+                                    plant.imagePath,
+                                    width: 80,
+                                    height: 80,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Icon(
+                                        Icons.lock,
+                                        color: AppColors.textSecondary,
+                                        size: 40,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                              // Icône de cadenas par-dessus
+                              const Center(
+                                child: Icon(
+                                  Icons.lock,
+                                  color: Colors.white,
+                                  size: 32,
+                                ),
+                              ),
+                            ],
                           ),
                   ),
                   const SizedBox(width: 16),

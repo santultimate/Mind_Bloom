@@ -3625,6 +3625,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'New World'**
   String get new_world;
+
+  /// Button text to go to next world
+  ///
+  /// In en, this message translates to:
+  /// **'Next World'**
+  String get next_world;
 }
 
 class _AppLocalizationsDelegate

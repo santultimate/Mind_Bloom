@@ -2835,5 +2835,9 @@
   "new_world": "Nouveau Monde",
   "@new_world": {
     "description": "Nom par défaut pour un nouveau monde"
+  },
+  "next_world": "Monde Suivant",
+  "@next_world": {
+    "description": "Texte du bouton pour aller au monde suivant"
   }
 }

@@ -39,6 +39,22 @@ class GameProvider extends ChangeNotifier {
   Tile? _selectedTile;
   Tile? get selectedTile => _selectedTile;
 
+  // 🔧 OPTIMISATION PHASE 2: Batch updates pour réduire les notifyListeners()
+  bool _shouldNotify = true;
+
+  /// Groupe plusieurs mises à jour en un seul notifyListeners()
+  void _batchUpdate(Function updates) {
+    _shouldNotify = false;
+    updates();
+    _shouldNotify = true;
+    notifyListeners();
+  }
+
+  @override
+  void notifyListeners() {
+    if (_shouldNotify) super.notifyListeners();
+  }
+
   // Animation de permutation
   Tile? _swappingTile1;
   Tile? _swappingTile2;
@@ -709,6 +725,7 @@ class GameProvider extends ChangeNotifier {
   bool _hasMatches() => _findMatches().isNotEmpty;
 
   /// Process complet : matches → suppression → gravité → refill → cascade
+  /// 🔧 OPTIMISÉ: Utilisation de _batchUpdate pour réduire les rebuilds
   Future<void> _processMatches() async {
     if (_isAnimating) return;
     _isAnimating = true;
@@ -730,79 +747,82 @@ class GameProvider extends ChangeNotifier {
       if (comboCount >= 4) comboMultiplier = 4;
       if (comboCount >= 5) comboMultiplier = 5;
 
-      // suppression et mise à jour des objectifs
-      for (var match in matches) {
-        totalMatchedTiles += match.length;
+      // 🔧 GROUPER: suppression, score et objectifs en un seul update
+      _batchUpdate(() {
+        for (var match in matches) {
+          totalMatchedTiles += match.length;
 
-        for (var tile in match) {
-          _grid[tile.row][tile.col] = null;
-          _updateObjectives(tile.type);
+          for (var tile in match) {
+            _grid[tile.row][tile.col] = null;
+            _updateObjectives(tile.type);
+          }
+
+          // Score avec bonus pour les combos spéciaux et les cascades
+          int baseScore = match.length * 15; // Augmenté de 10 à 15
+
+          // Bonus de taille de match
+          if (match.length >= 7) {
+            baseScore *= 5; // Bonus x5 pour 7+ tuiles (nouveau)
+          } else if (match.length >= 6) {
+            baseScore *= 4; // Bonus x4 pour 6 tuiles (nouveau)
+          } else if (match.length >= 5) {
+            baseScore *= 3; // Bonus x3 pour 5+ tuiles
+          } else if (match.length >= 4) {
+            baseScore *= 2; // Bonus x2 pour 4 tuiles
+          }
+
+          // Bonus de combo en cascade
+          baseScore *= comboMultiplier;
+
+          // Bonus spécial pour les gros combos
+          if (totalMatchedTiles >= 20) {
+            baseScore *= 2; // Bonus spectaculaire
+          }
+
+          // Appliquer les bonus des collections
+          baseScore = _applyScoreMultiplier(baseScore);
+
+          _score += baseScore;
+
+          // Mettre à jour les objectifs de score
+          _updateScoreObjectives();
+
+          // Feedback spécial pour les gros matches
+          if (match.length >= 5) {
+            _showSpecialEffect(match);
+          }
         }
-
-        // Score avec bonus pour les combos spéciaux et les cascades
-        int baseScore = match.length * 15; // Augmenté de 10 à 15
-
-        // Bonus de taille de match
-        if (match.length >= 7) {
-          baseScore *= 5; // Bonus x5 pour 7+ tuiles (nouveau)
-        } else if (match.length >= 6) {
-          baseScore *= 4; // Bonus x4 pour 6 tuiles (nouveau)
-        } else if (match.length >= 5) {
-          baseScore *= 3; // Bonus x3 pour 5+ tuiles
-        } else if (match.length >= 4) {
-          baseScore *= 2; // Bonus x2 pour 4 tuiles
-        }
-
-        // Bonus de combo en cascade
-        baseScore *= comboMultiplier;
-
-        // Bonus spécial pour les gros combos
-        if (totalMatchedTiles >= 20) {
-          baseScore *= 2; // Bonus spectaculaire
-        }
-
-        // Appliquer les bonus des collections
-        baseScore = _applyScoreMultiplier(baseScore);
-
-        _score += baseScore;
-
-        // Mettre à jour les objectifs de score
-        _updateScoreObjectives();
-
-        // Feedback spécial pour les gros matches
-        if (match.length >= 5) {
-          _showSpecialEffect(match);
-        }
-      }
-
-      notifyListeners();
+      });
       await Future.delayed(const Duration(
           milliseconds: 350)); // Légèrement plus long pour apprécier
 
-      // gravité avec animation plus fluide
-      _applyGravity();
-      notifyListeners();
+      // 🔧 GROUPER: gravité et refill ensemble
+      _batchUpdate(() {
+        _applyGravity();
+      });
       await Future.delayed(const Duration(milliseconds: 250));
 
-      // refill avec animation
-      _fillEmpty();
-      notifyListeners();
+      _batchUpdate(() {
+        _fillEmpty();
+      });
       await Future.delayed(const Duration(milliseconds: 250));
     }
 
-    // Récompenses bonus pour les gros combos
-    if (comboCount >= 3) {
-      _score += comboCount * 50; // Bonus de combo
-    }
-    if (comboCount >= 5) {
-      _score += 200; // Bonus spectaculaire
-    }
+    // 🔧 GROUPER: Récompenses finales et fin d'animation
+    _batchUpdate(() {
+      // Récompenses bonus pour les gros combos
+      if (comboCount >= 3) {
+        _score += comboCount * 50; // Bonus de combo
+      }
+      if (comboCount >= 5) {
+        _score += 200; // Bonus spectaculaire
+      }
 
-    // Mettre à jour les objectifs de score avec les bonus finaux
-    _updateScoreObjectives();
+      // Mettre à jour les objectifs de score avec les bonus finaux
+      _updateScoreObjectives();
 
-    _isAnimating = false;
-    notifyListeners();
+      _isAnimating = false;
+    });
 
     // Vérifier si le jeu est terminé
     _checkGameEnd();

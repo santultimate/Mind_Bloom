@@ -96,11 +96,13 @@ class AudioProvider extends ChangeNotifier {
   }
 
   // Jouer un effet sonore
+  /// 🔧 OPTIMISÉ: Pas de notifyListeners() pour les SFX (pas de changement d'état UI)
   Future<void> playSfx(String assetPath) async {
     if (!_isSfxEnabled) return;
 
     try {
       await _sfxPlayer?.play(AssetSource(assetPath));
+      // ✅ PAS de notifyListeners() ici - Les SFX ne changent pas l'état de l'UI
     } catch (e) {
       debugPrint(
           'Erreur lors de la lecture du SFX: Unable to load asset: "$assetPath".');

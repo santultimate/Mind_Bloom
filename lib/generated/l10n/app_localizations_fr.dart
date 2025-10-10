@@ -1990,4 +1990,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get new_world => 'Nouveau Monde';
+
+  @override
+  String get next_world => 'Monde Suivant';
 }

@@ -200,13 +200,18 @@ class _GameScreenState extends State<GameScreen> {
                                       );
                                     }
 
-                                    return TileSelectionEffect(
-                                      isSelected: isSelected,
-                                      onTap: () => _onTileTap(tile),
-                                      child: AnimatedTileWidget(
-                                        tile: tile,
-                                        size: finalTileSize,
+                                    // 🔧 OPTIMISÉ: RepaintBoundary pour isoler chaque tuile
+                                    return RepaintBoundary(
+                                      child: TileSelectionEffect(
                                         isSelected: isSelected,
+                                        onTap: () => _onTileTap(tile),
+                                        child: AnimatedTileWidget(
+                                          key: ValueKey(tile
+                                              .id), // Key stable pour éviter les rebuilds
+                                          tile: tile,
+                                          size: finalTileSize,
+                                          isSelected: isSelected,
+                                        ),
                                       ),
                                     );
                                   },

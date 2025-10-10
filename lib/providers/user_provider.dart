@@ -195,40 +195,39 @@ class UserProvider extends ChangeNotifier {
   }
 
   // Sauvegarder les données utilisateur
-  Future<void> _saveUserData() async {
+  /// 🔧 OPTIMISÉ: Utilisation de BatchSaver pour éviter de bloquer l'UI
+  void _saveUserData() {
     try {
-      final prefs = await SharedPreferences.getInstance();
-
-      await prefs.setString('userId', _userId ?? '');
-      await prefs.setString('username', _username);
-      await prefs.setInt('level', _level);
-      await prefs.setInt('experience', _experience);
-      await prefs.setInt('coins', _coins);
-      await prefs.setInt('gems', _gems);
-      await prefs.setInt('lives', _lives);
-      await prefs.setInt('maxLives', _maxLives);
+      // Utiliser BatchSaver pour grouper les sauvegardes (toutes les 2 secondes)
+      BatchSaver.queueChange('userId', _userId ?? '');
+      BatchSaver.queueChange('username', _username);
+      BatchSaver.queueChange('level', _level);
+      BatchSaver.queueChange('experience', _experience);
+      BatchSaver.queueChange('coins', _coins);
+      BatchSaver.queueChange('gems', _gems);
+      BatchSaver.queueChange('lives', _lives);
+      BatchSaver.queueChange('maxLives', _maxLives);
 
       if (_lastLifeRefill != null) {
-        await prefs.setString(
+        BatchSaver.queueChange(
             'lastLifeRefill', _lastLifeRefill!.toIso8601String());
       }
 
-      await prefs.setInt('currentStreak', _currentStreak);
-      await prefs.setInt('bestStreak', _bestStreak);
-
-      await prefs.setString('completedLevels', _completedLevels.join(','));
+      BatchSaver.queueChange('currentStreak', _currentStreak);
+      BatchSaver.queueChange('bestStreak', _bestStreak);
+      BatchSaver.queueChange('completedLevels', _completedLevels.join(','));
 
       final levelStarsString =
           _levelStars.entries.map((e) => '${e.key}:${e.value}').join(',');
-      await prefs.setString('levelStars', levelStarsString);
+      BatchSaver.queueChange('levelStars', levelStarsString);
 
       // Sauvegarder les données d'achievements
-      await prefs.setInt('bestScore', _bestScore);
-      await prefs.setInt('bestCombo', _bestCombo);
-      await prefs.setInt('totalScore', _totalScore);
-      await prefs.setInt('perfectLevels', _perfectLevels);
-      await prefs.setInt('shareCount', _shareCount);
-      await prefs.setInt('selectedWorldId', _selectedWorldId);
+      BatchSaver.queueChange('bestScore', _bestScore);
+      BatchSaver.queueChange('bestCombo', _bestCombo);
+      BatchSaver.queueChange('totalScore', _totalScore);
+      BatchSaver.queueChange('perfectLevels', _perfectLevels);
+      BatchSaver.queueChange('shareCount', _shareCount);
+      BatchSaver.queueChange('selectedWorldId', _selectedWorldId);
 
       // Sauvegarder la progression des mondes
       final worldProgressString =
@@ -237,24 +236,30 @@ class UserProvider extends ChangeNotifier {
         debugPrint(
             '🌍 [UserProvider] Saving worldProgressString: $worldProgressString');
       }
-      await prefs.setString('worldProgress', worldProgressString);
+      BatchSaver.queueChange('worldProgress', worldProgressString);
 
       // Sauvegarder les paramètres
-      await prefs.setBool('animationsEnabled', _animationsEnabled);
-      await prefs.setBool('vibrationsEnabled', _vibrationsEnabled);
-      await prefs.setBool('autoHintsEnabled', _autoHintsEnabled);
-      await prefs.setBool('debugModeEnabled', _debugModeEnabled);
-      await prefs.setBool('tutorialCompleted', _tutorialCompleted);
+      BatchSaver.queueChange('animationsEnabled', _animationsEnabled);
+      BatchSaver.queueChange('vibrationsEnabled', _vibrationsEnabled);
+      BatchSaver.queueChange('autoHintsEnabled', _autoHintsEnabled);
+      BatchSaver.queueChange('debugModeEnabled', _debugModeEnabled);
+      BatchSaver.queueChange('tutorialCompleted', _tutorialCompleted);
     } catch (error, stackTrace) {
       ErrorHandler.handleError(error, stackTrace,
           context: 'UserProvider._saveUserData');
     }
   }
 
+  /// Sauvegarde immédiate des données critiques (à utiliser quand l'app se ferme)
+  Future<void> saveUserDataImmediate() async {
+    _saveUserData();
+    await BatchSaver.flushNow();
+  }
+
   // Mettre à jour le nom d'utilisateur
   Future<void> updateUsername(String newUsername) async {
     _username = newUsername;
-    await _saveUserData();
+    _saveUserData(); // 🔧 Plus besoin d'await avec BatchSaver
     notifyListeners();
   }
 
@@ -272,7 +277,7 @@ class UserProvider extends ChangeNotifier {
       _gems += 1;
     }
 
-    await _saveUserData();
+    _saveUserData();
     notifyListeners();
   }
 
@@ -333,7 +338,7 @@ class UserProvider extends ChangeNotifier {
   // Réinitialiser la série de victoires (en cas d'échec)
   Future<void> resetStreak() async {
     _currentStreak = 0;
-    await _saveUserData();
+    _saveUserData();
     notifyListeners();
   }
 
@@ -341,7 +346,7 @@ class UserProvider extends ChangeNotifier {
   Future<void> updateBestCombo(int combo) async {
     if (combo > _bestCombo) {
       _bestCombo = combo;
-      await _saveUserData();
+      _saveUserData();
       notifyListeners();
     }
   }
@@ -349,14 +354,14 @@ class UserProvider extends ChangeNotifier {
   // Incrémenter le compteur de partages
   Future<void> incrementShareCount() async {
     _shareCount++;
-    await _saveUserData();
+    _saveUserData();
     notifyListeners();
   }
 
   // Changer le monde sélectionné
   Future<void> setSelectedWorld(int worldId) async {
     _selectedWorldId = worldId;
-    await _saveUserData();
+    _saveUserData();
     notifyListeners();
   }
 
@@ -374,7 +379,7 @@ class UserProvider extends ChangeNotifier {
     }
     if (levelId > currentProgress) {
       _worldProgress[worldId] = levelId;
-      await _saveUserData();
+      _saveUserData();
       notifyListeners();
       if (kDebugMode) {
         debugPrint(
@@ -448,7 +453,7 @@ class UserProvider extends ChangeNotifier {
       debugPrint('========================');
     }
 
-    await _saveUserData();
+    _saveUserData();
     notifyListeners();
   }
 
@@ -456,7 +461,7 @@ class UserProvider extends ChangeNotifier {
   Future<void> refillLives() async {
     _lives = _maxLives;
     _lastLifeRefill = DateTime.now();
-    await _saveUserData();
+    _saveUserData();
     notifyListeners();
   }
 
@@ -606,7 +611,7 @@ class UserProvider extends ChangeNotifier {
       _currentStreak = 0;
     }
 
-    await _saveUserData();
+    _saveUserData();
     notifyListeners();
   }
 
@@ -751,7 +756,7 @@ class UserProvider extends ChangeNotifier {
       }
     }
 
-    await _saveUserData();
+    _saveUserData();
 
     // Notifier le WorldProvider du niveau complété pour mettre à jour les déverrouillages
     if (_worldProvider != null) {
@@ -802,7 +807,7 @@ class UserProvider extends ChangeNotifier {
   // Marquer le tutoriel comme terminé
   Future<void> completeTutorial() async {
     _tutorialCompleted = true;
-    await _saveUserData();
+    _saveUserData();
     notifyListeners();
   }
 
@@ -836,7 +841,7 @@ class UserProvider extends ChangeNotifier {
 
   // Méthodes publiques pour la sauvegarde/restauration
   Future<void> saveUserData() async {
-    await _saveUserData();
+    _saveUserData();
   }
 
   Future<void> loadUserData() async {
@@ -858,7 +863,7 @@ class UserProvider extends ChangeNotifier {
     _debugModeEnabled = false; // Désactiver le mode debug lors du reset
     _levelStars.clear();
 
-    await _saveUserData();
+    _saveUserData();
     notifyListeners();
   }
 
@@ -883,7 +888,7 @@ class UserProvider extends ChangeNotifier {
   // Future<void> unlockLevel(int levelId) async {
   //   if (!_completedLevels.contains(levelId)) {
   //     _completedLevels.add(levelId);
-  //     await _saveUserData();
+  //     _saveUserData();
   //     notifyListeners();
 
   //     if (kDebugMode) {
