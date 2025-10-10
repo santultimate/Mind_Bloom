@@ -1299,8 +1299,18 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                                         .withOpacity(0.2),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: Image.asset(plant.imagePath,
-                                      fit: BoxFit.contain),
+                                  child: Image.asset(
+                                    plant.imagePath,
+                                    fit: BoxFit.contain,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      // Fallback vers l'icône si l'image n'existe pas
+                                      return Icon(
+                                        Icons.eco,
+                                        color: _getRarityColor(plant.rarity),
+                                        size: 20,
+                                      );
+                                    },
+                                  ),
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
