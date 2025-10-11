@@ -6,7 +6,7 @@
       "description": "Collectez 15 fleurs pour commencer votre jardin",
       "difficulty": "easy",
       "gridSize": 7,
-      "maxMoves": 12,
+      "maxMoves": 20,
       "targetScore": 1000,
       "objectives": [
         {
@@ -27,7 +27,7 @@
       "description": "Mélangez les couleurs avec des feuilles et des graines",
       "difficulty": "easy",
       "gridSize": 7,
-      "maxMoves": 13,
+      "maxMoves": 20,
       "targetScore": 1500,
       "objectives": [
         {
@@ -54,7 +54,7 @@
       "description": "Découvrez la puissance des cristaux enchantés",
       "difficulty": "easy",
       "gridSize": 7,
-      "maxMoves": 15,
+      "maxMoves": 20,
       "targetScore": 2000,
       "objectives": [
         {
@@ -79,7 +79,7 @@
       "description": "Récoltez la rosée précieuse du matin",
       "difficulty": "easy",
       "gridSize": 7,
-      "maxMoves": 15,
+      "maxMoves": 20,
       "targetScore": 2500,
       "objectives": [
         {
@@ -100,7 +100,7 @@
       "description": "Capturez l'énergie du soleil dans votre jardin",
       "difficulty": "easy",
       "gridSize": 7,
-      "maxMoves": 17,
+      "maxMoves": 20,
       "targetScore": 3000,
       "objectives": [
         {
@@ -128,7 +128,7 @@
       "description": "Explorez les secrets de la lune mystique",
       "difficulty": "medium",
       "gridSize": 7,
-      "maxMoves": 11,
+      "maxMoves": 19,
       "targetScore": 3500,
       "objectives": [
         {
@@ -154,7 +154,7 @@
       "description": "Découvrez des gemmes rares cachées dans le jardin",
       "difficulty": "medium",
       "gridSize": 7,
-      "maxMoves": 12,
+      "maxMoves": 19,
       "targetScore": 4000,
       "objectives": [
         {
@@ -176,7 +176,7 @@
       "description": "Créez une harmonie parfaite entre tous les éléments",
       "difficulty": "medium",
       "gridSize": 8,
-      "maxMoves": 15,
+      "maxMoves": 18,
       "targetScore": 4500,
       "objectives": [
         {
@@ -207,7 +207,7 @@
       "description": "Maîtrisez l'art de la manipulation des cristaux",
       "difficulty": "medium",
       "gridSize": 8,
-      "maxMoves": 17,
+      "maxMoves": 18,
       "targetScore": 5000,
       "objectives": [
         {
@@ -234,7 +234,7 @@
       "description": "Prouvez votre maîtrise en tant que jardinier expert",
       "difficulty": "medium",
       "gridSize": 8,
-      "maxMoves": 18,
+      "maxMoves": 16,
       "targetScore": 6000,
       "objectives": [
         {
@@ -266,7 +266,7 @@
       "description": "Survivez à une tempête magique de pétales colorés",
       "difficulty": "hard",
       "gridSize": 8,
-      "maxMoves": 10,
+      "maxMoves": 17,
       "targetScore": 7000,
       "objectives": [
         {
@@ -292,7 +292,7 @@
       "description": "Naviguez dans une cascade éblouissante de cristaux",
       "difficulty": "hard",
       "gridSize": 8,
-      "maxMoves": 10,
+      "maxMoves": 17,
       "targetScore": 7500,
       "objectives": [
         {
@@ -323,7 +323,7 @@
       "description": "Explorez les mystères d'un jardin qui ne fleurit que la nuit",
       "difficulty": "hard",
       "gridSize": 8,
-      "maxMoves": 10,
+      "maxMoves": 17,
       "targetScore": 8000,
       "objectives": [
         {
@@ -349,7 +349,7 @@
       "description": "Orchestrez une symphonie de rayons solaires",
       "difficulty": "hard",
       "gridSize": 8,
-      "maxMoves": 10,
+      "maxMoves": 17,
       "targetScore": 8500,
       "objectives": [
         {
@@ -381,7 +381,7 @@
       "description": "Découvrez un sanctuaire ancien rempli de gemmes précieuses",
       "difficulty": "hard",
       "gridSize": 9,
-      "maxMoves": 15,
+      "maxMoves": 17,
       "targetScore": 9000,
       "objectives": [
         {
@@ -413,7 +413,7 @@
       "description": "Réveillez tous les éléments de la nature",
       "difficulty": "expert",
       "gridSize": 9,
-      "maxMoves": 10,
+      "maxMoves": 16,
       "targetScore": 10000,
       "objectives": [
         {
@@ -449,7 +449,7 @@
       "description": "Participez à la danse éternelle des saisons",
       "difficulty": "expert",
       "gridSize": 9,
-      "maxMoves": 10,
+      "maxMoves": 16,
       "targetScore": 11000,
       "objectives": [
         {
@@ -481,7 +481,7 @@
       "description": "Fusionnez les énergies cosmiques dans votre jardin",
       "difficulty": "expert",
       "gridSize": 9,
-      "maxMoves": 10,
+      "maxMoves": 16,
       "targetScore": 12000,
       "objectives": [
         {
@@ -517,7 +517,7 @@
       "description": "Naviguez dans un labyrinthe complexe de fleurs magiques",
       "difficulty": "expert",
       "gridSize": 9,
-      "maxMoves": 10,
+      "maxMoves": 16,
       "targetScore": 13000,
       "objectives": [
         {
@@ -548,7 +548,7 @@
       "description": "Atteignez l'apothéose en tant que maître jardinier cosmique",
       "difficulty": "expert",
       "gridSize": 9,
-      "maxMoves": 10,
+      "maxMoves": 16,
       "targetScore": 15000,
       "objectives": [
         {
@@ -591,7 +591,7 @@
       "description": "Master level 21",
       "difficulty": "medium",
       "gridSize": 7,
-      "maxMoves": 24,
+      "maxMoves": 19,
       "targetScore": 2000,
       "objectives": [
         {
@@ -813,7 +813,7 @@
       "description": "Master level 22",
       "difficulty": "medium",
       "gridSize": 7,
-      "maxMoves": 27,
+      "maxMoves": 19,
       "targetScore": 2500,
       "objectives": [
         {
@@ -1045,7 +1045,7 @@
       "description": "Take on the challenge of level 23",
       "difficulty": "medium",
       "gridSize": 7,
-      "maxMoves": 27,
+      "maxMoves": 19,
       "targetScore": 3000,
       "objectives": [
         {
@@ -1272,7 +1272,7 @@
       "description": "Test your skills at level 24",
       "difficulty": "medium",
       "gridSize": 7,
-      "maxMoves": 30,
+      "maxMoves": 19,
       "targetScore": 3500,
       "objectives": [
         {
@@ -1499,7 +1499,7 @@
       "description": "Discover the secrets of level 25",
       "difficulty": "medium",
       "gridSize": 7,
-      "maxMoves": 27,
+      "maxMoves": 19,
       "targetScore": 4000,
       "objectives": [
         {
@@ -1726,7 +1726,7 @@
       "description": "Discover the secrets of level 26",
       "difficulty": "medium",
       "gridSize": 8,
-      "maxMoves": 30,
+      "maxMoves": 18,
       "targetScore": 4500,
       "objectives": [
         {
@@ -1999,7 +1999,7 @@
       "description": "Test your skills at level 27",
       "difficulty": "medium",
       "gridSize": 8,
-      "maxMoves": 29,
+      "maxMoves": 18,
       "targetScore": 5000,
       "objectives": [
         {
@@ -2277,7 +2277,7 @@
       "description": "Test your skills at level 28",
       "difficulty": "medium",
       "gridSize": 8,
-      "maxMoves": 27,
+      "maxMoves": 18,
       "targetScore": 5500,
       "objectives": [
         {
@@ -2550,7 +2550,7 @@
       "description": "Test your skills at level 29",
       "difficulty": "medium",
       "gridSize": 8,
-      "maxMoves": 27,
+      "maxMoves": 18,
       "targetScore": 6000,
       "objectives": [
         {
@@ -2823,7 +2823,7 @@
       "description": "Take on the challenge of level 30",
       "difficulty": "medium",
       "gridSize": 8,
-      "maxMoves": 29,
+      "maxMoves": 18,
       "targetScore": 6500,
       "objectives": [
         {
@@ -3101,7 +3101,7 @@
       "description": "Master level 31",
       "difficulty": "hard",
       "gridSize": 8,
-      "maxMoves": 28,
+      "maxMoves": 17,
       "targetScore": 7000,
       "objectives": [
         {
@@ -3384,7 +3384,7 @@
       "description": "Affrontez l'épreuve 32",
       "difficulty": "hard",
       "gridSize": 8,
-      "maxMoves": 26,
+      "maxMoves": 17,
       "targetScore": 7500,
       "objectives": [
         {
@@ -3662,7 +3662,7 @@
       "description": "Take on the challenge of level 33",
       "difficulty": "hard",
       "gridSize": 8,
-      "maxMoves": 29,
+      "maxMoves": 17,
       "targetScore": 8000,
       "objectives": [
         {
@@ -3940,7 +3940,7 @@
       "description": "Test your skills at level 34",
       "difficulty": "hard",
       "gridSize": 8,
-      "maxMoves": 30,
+      "maxMoves": 17,
       "targetScore": 8500,
       "objectives": [
         {
@@ -4218,7 +4218,7 @@
       "description": "Master level 35",
       "difficulty": "hard",
       "gridSize": 8,
-      "maxMoves": 29,
+      "maxMoves": 17,
       "targetScore": 9000,
       "objectives": [
         {
@@ -4491,7 +4491,7 @@
       "description": "Discover the secrets of level 36",
       "difficulty": "hard",
       "gridSize": 9,
-      "maxMoves": 30,
+      "maxMoves": 17,
       "targetScore": 9500,
       "objectives": [
         {
@@ -4826,7 +4826,7 @@
       "description": "Take on the challenge of level 37",
       "difficulty": "hard",
       "gridSize": 9,
-      "maxMoves": 30,
+      "maxMoves": 17,
       "targetScore": 10000,
       "objectives": [
         {
@@ -5156,7 +5156,7 @@
       "description": "Test your skills at level 38",
       "difficulty": "hard",
       "gridSize": 9,
-      "maxMoves": 30,
+      "maxMoves": 17,
       "targetScore": 10500,
       "objectives": [
         {
@@ -5496,7 +5496,7 @@
       "description": "Affrontez l'épreuve 39",
       "difficulty": "hard",
       "gridSize": 9,
-      "maxMoves": 30,
+      "maxMoves": 17,
       "targetScore": 11000,
       "objectives": [
         {
@@ -5826,7 +5826,7 @@
       "description": "Affrontez l'épreuve 40",
       "difficulty": "hard",
       "gridSize": 9,
-      "maxMoves": 30,
+      "maxMoves": 17,
       "targetScore": 11500,
       "objectives": [
         {
@@ -6161,7 +6161,7 @@
       "description": "Test your skills at level 41",
       "difficulty": "expert",
       "gridSize": 9,
-      "maxMoves": 25,
+      "maxMoves": 16,
       "targetScore": 12000,
       "objectives": [
         {
@@ -6491,7 +6491,7 @@
       "description": "Master level 42",
       "difficulty": "expert",
       "gridSize": 9,
-      "maxMoves": 26,
+      "maxMoves": 16,
       "targetScore": 12500,
       "objectives": [
         {
@@ -6821,7 +6821,7 @@
       "description": "Master level 43",
       "difficulty": "expert",
       "gridSize": 9,
-      "maxMoves": 27,
+      "maxMoves": 16,
       "targetScore": 13000,
       "objectives": [
         {
@@ -7151,7 +7151,7 @@
       "description": "Take on the challenge of level 44",
       "difficulty": "expert",
       "gridSize": 9,
-      "maxMoves": 30,
+      "maxMoves": 16,
       "targetScore": 13500,
       "objectives": [
         {
@@ -7491,7 +7491,7 @@
       "description": "Affrontez l'épreuve 45",
       "difficulty": "expert",
       "gridSize": 9,
-      "maxMoves": 30,
+      "maxMoves": 16,
       "targetScore": 14000,
       "objectives": [
         {
@@ -7821,7 +7821,7 @@
       "description": "Take on the challenge of level 46",
       "difficulty": "expert",
       "gridSize": 9,
-      "maxMoves": 30,
+      "maxMoves": 16,
       "targetScore": 14500,
       "objectives": [
         {
@@ -8156,7 +8156,7 @@
       "description": "Take on the challenge of level 47",
       "difficulty": "expert",
       "gridSize": 9,
-      "maxMoves": 30,
+      "maxMoves": 16,
       "targetScore": 15000,
       "objectives": [
         {
@@ -8491,7 +8491,7 @@
       "description": "Take on the challenge of level 48",
       "difficulty": "expert",
       "gridSize": 9,
-      "maxMoves": 30,
+      "maxMoves": 16,
       "targetScore": 15500,
       "objectives": [
         {
@@ -8826,7 +8826,7 @@
       "description": "Test your skills at level 49",
       "difficulty": "expert",
       "gridSize": 9,
-      "maxMoves": 30,
+      "maxMoves": 16,
       "targetScore": 16000,
       "objectives": [
         {
@@ -9156,7 +9156,7 @@
       "description": "Take on the challenge of level 50",
       "difficulty": "expert",
       "gridSize": 9,
-      "maxMoves": 30,
+      "maxMoves": 16,
       "targetScore": 16500,
       "objectives": [
         {

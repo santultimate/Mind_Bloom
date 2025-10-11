@@ -4,6 +4,7 @@ import 'package:mind_bloom/providers/user_provider.dart';
 import 'package:mind_bloom/constants/app_colors.dart';
 import 'package:mind_bloom/widgets/rewarded_ad_button.dart';
 import 'package:mind_bloom/widgets/banner_ad_widget.dart';
+import 'package:mind_bloom/generated/l10n/app_localizations.dart';
 
 class FreeLivesScreen extends StatelessWidget {
   const FreeLivesScreen({super.key});

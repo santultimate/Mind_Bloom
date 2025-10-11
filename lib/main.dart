@@ -174,9 +174,14 @@ class _ProviderInitializerState extends State<ProviderInitializer> {
           Provider.of<GameProgressionProvider>(context, listen: false);
       gameProgressionProvider.initialize(userProvider, worldProvider);
 
+      // Obtenir le CollectionProvider
+      final collectionProvider =
+          Provider.of<CollectionProvider>(context, listen: false);
+      
       // Connecter les providers
       userProvider.setWorldProvider(worldProvider);
       userProvider.setGameProgressionProvider(gameProgressionProvider);
+      userProvider.setCollectionProvider(collectionProvider);
       worldProvider.setGameProgressionProvider(gameProgressionProvider);
 
       if (mounted) {

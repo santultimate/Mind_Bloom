@@ -29,9 +29,8 @@ class CollectionProvider extends ChangeNotifier {
     _plants = [
       Plant(
         id: 'rose_magique',
-        name: 'Rose Magique',
-        description:
-            'A rose that shines in the darkness and grants mystical powers',
+        nameKey: 'plant_rose_magique_name',
+        descriptionKey: 'plant_rose_magique_description',
         rarity: 5,
         bonuses: [
           PlantBonus(type: BonusType.extraMoves, value: 3), // Augmenté
@@ -50,8 +49,8 @@ class CollectionProvider extends ChangeNotifier {
       ),
       Plant(
         id: 'lotus_cristal',
-        name: 'Lotus de Cristal',
-        description: 'A lotus that purifies water and increases fortune',
+        nameKey: 'plant_lotus_cristal_name',
+        descriptionKey: 'plant_lotus_cristal_description',
         rarity: 4,
         bonuses: [
           PlantBonus(type: BonusType.extraMoves, value: 2), // Augmenté
@@ -69,8 +68,8 @@ class CollectionProvider extends ChangeNotifier {
       ),
       Plant(
         id: 'tulipe_arc',
-        name: 'Tulipe Arc-en-ciel',
-        description: 'Une tulipe aux couleurs changeantes',
+        nameKey: 'plant_tulipe_arc_name',
+        descriptionKey: 'plant_tulipe_arc_description',
         rarity: 3,
         bonuses: [
           PlantBonus(type: BonusType.scoreMultiplier, value: 1.1),
@@ -86,8 +85,8 @@ class CollectionProvider extends ChangeNotifier {
       ),
       Plant(
         id: 'orchidee_lune',
-        name: 'Orchidée de Lune',
-        description: 'An orchid that blooms at night',
+        nameKey: 'plant_orchidee_lune_name',
+        descriptionKey: 'plant_orchidee_lune_description',
         rarity: 4,
         bonuses: [
           PlantBonus(type: BonusType.extraLives, value: 1),
@@ -103,8 +102,8 @@ class CollectionProvider extends ChangeNotifier {
       ),
       Plant(
         id: 'tournesol_or',
-        name: 'Tournesol Doré',
-        description: 'A sunflower that follows the sun',
+        nameKey: 'plant_tournesol_or_name',
+        descriptionKey: 'plant_tournesol_or_description',
         rarity: 2,
         bonuses: [
           PlantBonus(type: BonusType.coinMultiplier, value: 1.05),
@@ -120,8 +119,8 @@ class CollectionProvider extends ChangeNotifier {
       ),
       Plant(
         id: 'marguerite_etoile',
-        name: 'Marguerite Étoilée',
-        description: 'A daisy that shines like a star and guides beginners',
+        nameKey: 'plant_marguerite_etoile_name',
+        descriptionKey: 'plant_marguerite_etoile_description',
         rarity: 1,
         bonuses: [
           PlantBonus(
@@ -141,8 +140,8 @@ class CollectionProvider extends ChangeNotifier {
       // Nouvelles plantes pour enrichir le gameplay
       Plant(
         id: 'violette_mystique',
-        name: 'Violette Mystique',
-        description: 'A violet that reveals the hidden secrets of the garden',
+        nameKey: 'plant_violette_mystique_name',
+        descriptionKey: 'plant_violette_mystique_description',
         rarity: 2,
         bonuses: [
           PlantBonus(type: BonusType.extraMoves, value: 1),
@@ -160,8 +159,8 @@ class CollectionProvider extends ChangeNotifier {
 
       Plant(
         id: 'jasmin_eternel',
-        name: 'Jasmin Éternel',
-        description: 'A jasmine whose fragrance transcends temporal dimensions',
+        nameKey: 'plant_jasmin_eternel_name',
+        descriptionKey: 'plant_jasmin_eternel_description',
         rarity: 3,
         bonuses: [
           PlantBonus(type: BonusType.extraLives, value: 1),
@@ -179,8 +178,8 @@ class CollectionProvider extends ChangeNotifier {
 
       Plant(
         id: 'petunia_cosmique',
-        name: 'Pétunia Cosmique',
-        description: 'A petunia that draws its energy from the stars',
+        nameKey: 'plant_petunia_cosmique_name',
+        descriptionKey: 'plant_petunia_cosmique_description',
         rarity: 4,
         bonuses: [
           PlantBonus(type: BonusType.extraMoves, value: 2),
@@ -199,9 +198,8 @@ class CollectionProvider extends ChangeNotifier {
 
       Plant(
         id: 'lys_phoenix',
-        name: 'Lys du Phénix',
-        description:
-            'A legendary lily that rises from its ashes and grants a second chance',
+        nameKey: 'plant_lys_phoenix_name',
+        descriptionKey: 'plant_lys_phoenix_description',
         rarity: 5,
         bonuses: [
           PlantBonus(type: BonusType.extraMoves, value: 4),
@@ -221,9 +219,8 @@ class CollectionProvider extends ChangeNotifier {
 
       Plant(
         id: 'cactus_temporel',
-        name: 'Cactus Temporel',
-        description:
-            'A rare cactus that manipulates time and extends gameplay sessions',
+        nameKey: 'plant_cactus_temporel_name',
+        descriptionKey: 'plant_cactus_temporel_description',
         rarity: 4,
         bonuses: [
           PlantBonus(type: BonusType.extraLives, value: 3),
@@ -244,9 +241,8 @@ class CollectionProvider extends ChangeNotifier {
       // Monde 1 - Garden of Beginnings
       Plant(
         id: 'rose_eternelle',
-        name: 'Rose Éternelle du Jardin',
-        description:
-            'A legendary rose from the Garden of Beginnings that grants rebirth powers',
+        nameKey: 'plant_rose_eternelle_name',
+        descriptionKey: 'plant_rose_eternelle_description',
         rarity: 4,
         bonuses: [
           PlantBonus(type: BonusType.extraMoves, value: 3),
@@ -266,9 +262,8 @@ class CollectionProvider extends ChangeNotifier {
       // Monde 2 - Valley of Flowers
       Plant(
         id: 'lotus_paradis',
-        name: 'Lotus du Paradis des Fleurs',
-        description:
-            'A divine lotus from the Valley of Flowers that blesses every match with its grace',
+        nameKey: 'plant_lotus_paradis_name',
+        descriptionKey: 'plant_lotus_paradis_description',
         rarity: 4,
         bonuses: [
           PlantBonus(type: BonusType.scoreMultiplier, value: 1.3),
@@ -288,9 +283,8 @@ class CollectionProvider extends ChangeNotifier {
       // Monde 3 - Lunar Forest
       Plant(
         id: 'orchidee_lunaire',
-        name: 'Orchidée Lunaire Mystique',
-        description:
-            'An enchanted orchid from the Lunar Forest that draws its strength from the moon',
+        nameKey: 'plant_orchidee_lunaire_name',
+        descriptionKey: 'plant_orchidee_lunaire_description',
         rarity: 5,
         bonuses: [
           PlantBonus(type: BonusType.extraMoves, value: 4),
@@ -311,9 +305,8 @@ class CollectionProvider extends ChangeNotifier {
       // Monde 4 - Solar Meadow
       Plant(
         id: 'tournesol_solaire',
-        name: 'Tournesol du Pré Solaire',
-        description:
-            'A giant sunflower from the Solar Meadow that radiates pure energy',
+        nameKey: 'plant_tournesol_solaire_name',
+        descriptionKey: 'plant_tournesol_solaire_description',
         rarity: 4,
         bonuses: [
           PlantBonus(type: BonusType.scoreMultiplier, value: 1.35),
@@ -333,9 +326,8 @@ class CollectionProvider extends ChangeNotifier {
       // Monde 5 - Crystal Caverns
       Plant(
         id: 'cristal_vegetal',
-        name: 'Cristal Végétal des Cavernes',
-        description:
-            'A living crystal from the Crystal Caverns that amplifies all powers',
+        nameKey: 'plant_cristal_vegetal_name',
+        descriptionKey: 'plant_cristal_vegetal_description',
         rarity: 5,
         bonuses: [
           PlantBonus(type: BonusType.extraMoves, value: 5),
@@ -356,9 +348,8 @@ class CollectionProvider extends ChangeNotifier {
       // Monde 6 - Mystic Swamps
       Plant(
         id: 'nymphaea_mystique',
-        name: 'Nymphaea des Marais Mystiques',
-        description:
-            'A magical water lily from the Mystic Swamps that manipulates the elements',
+        nameKey: 'plant_nymphaea_mystique_name',
+        descriptionKey: 'plant_nymphaea_mystique_description',
         rarity: 4,
         bonuses: [
           PlantBonus(type: BonusType.extraLives, value: 3),
@@ -378,9 +369,8 @@ class CollectionProvider extends ChangeNotifier {
       // Monde 7 - Burning Lands
       Plant(
         id: 'flamme_vegetale',
-        name: 'Flamme Végétale des Terres Ardentes',
-        description:
-            'A fire plant from the Burning Lands that burns with eternal passion',
+        nameKey: 'plant_flamme_vegetale_name',
+        descriptionKey: 'plant_flamme_vegetale_description',
         rarity: 5,
         bonuses: [
           PlantBonus(type: BonusType.scoreMultiplier, value: 1.6),
@@ -400,9 +390,8 @@ class CollectionProvider extends ChangeNotifier {
       // Monde 8 - Eternal Glacier
       Plant(
         id: 'glace_eternelle',
-        name: 'Glace Éternelle du Glacier',
-        description:
-            'An ice plant from the Eternal Glacier that freezes time and challenges',
+        nameKey: 'plant_glace_eternelle_name',
+        descriptionKey: 'plant_glace_eternelle_description',
         rarity: 5,
         bonuses: [
           PlantBonus(type: BonusType.extraLives, value: 4),
@@ -422,9 +411,8 @@ class CollectionProvider extends ChangeNotifier {
       // Monde 9 - Lost Rainbow
       Plant(
         id: 'arc_en_ciel_perdu',
-        name: 'Arc-en-ciel Perdu',
-        description:
-            'A lost rainbow that colors the world with its magical hues',
+        nameKey: 'plant_arc_en_ciel_perdu_name',
+        descriptionKey: 'plant_arc_en_ciel_perdu_description',
         rarity: 5,
         bonuses: [
           PlantBonus(type: BonusType.scoreMultiplier, value: 1.7),
@@ -445,9 +433,8 @@ class CollectionProvider extends ChangeNotifier {
       // Monde 10 - Celestial Garden (Final Boss)
       Plant(
         id: 'jardin_celeste',
-        name: 'Jardin Céleste Ultime',
-        description:
-            'The ultimate Celestial Garden that crowns your adventure with divine powers',
+        nameKey: 'plant_jardin_celeste_name',
+        descriptionKey: 'plant_jardin_celeste_description',
         rarity: 6, // Rareté spéciale pour le monde final
         bonuses: [
           PlantBonus(type: BonusType.scoreMultiplier, value: 2.0),
@@ -516,8 +503,8 @@ class CollectionProvider extends ChangeNotifier {
 
       _plants[i] = Plant(
         id: plant.id,
-        name: plant.name,
-        description: plant.description,
+        nameKey: plant.nameKey,
+        descriptionKey: plant.descriptionKey,
         rarity: plant.rarity,
         bonuses: plant.bonuses,
         isUnlocked: isUnlocked,
@@ -714,8 +701,8 @@ class CollectionProvider extends ChangeNotifier {
         // Créer une nouvelle instance de la plante débloquée
         final unlockedPlant = Plant(
           id: plant.id,
-          name: plant.name,
-          description: plant.description,
+          nameKey: plant.nameKey,
+          descriptionKey: plant.descriptionKey,
           rarity: plant.rarity,
           bonuses: plant.bonuses,
           isUnlocked: true,
@@ -730,7 +717,7 @@ class CollectionProvider extends ChangeNotifier {
 
         if (kDebugMode) {
           debugPrint(
-              '🌟 [CollectionProvider] Objet rare débloqué: ${plant.name} (Monde $worldId)');
+              '🌟 [CollectionProvider] Objet rare débloqué: ${plant.id} (Monde $worldId)');
         }
       }
     }
@@ -763,8 +750,8 @@ class CollectionProvider extends ChangeNotifier {
 // Modèles de données
 class Plant {
   final String id;
-  final String name;
-  final String description;
+  final String nameKey;
+  final String descriptionKey;
   final int rarity; // 1-5 étoiles
   final List<PlantBonus> bonuses;
   final bool isUnlocked;
@@ -774,8 +761,8 @@ class Plant {
 
   Plant({
     required this.id,
-    required this.name,
-    required this.description,
+    required this.nameKey,
+    required this.descriptionKey,
     required this.rarity,
     required this.bonuses,
     required this.isUnlocked,

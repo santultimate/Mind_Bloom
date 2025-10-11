@@ -2045,4 +2045,151 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get claim_error => 'Erreur lors de la réclamation';
+
+  @override
+  String get plant_lotus_cristal_description =>
+      'Un lotus qui purifie l\'eau et augmente la fortune';
+
+  @override
+  String get plant_tournesol_or_name => 'Tournesol Doré';
+
+  @override
+  String get plant_rose_magique_name => 'Rose Magique';
+
+  @override
+  String get plant_lotus_cristal_name => 'Lotus de Cristal';
+
+  @override
+  String get plant_tulipe_arc_name => 'Tulipe Arc-en-ciel';
+
+  @override
+  String get plant_orchidee_lune_name => 'Orchidée de Lune';
+
+  @override
+  String get plant_marguerite_etoile_name => 'Marguerite Étoilée';
+
+  @override
+  String get plant_violette_mystique_name => 'Violette Mystique';
+
+  @override
+  String get plant_jasmin_eternel_name => 'Jasmin Éternel';
+
+  @override
+  String get plant_petunia_cosmique_name => 'Pétunia Cosmique';
+
+  @override
+  String get plant_lys_phoenix_name => 'Lys du Phénix';
+
+  @override
+  String get plant_cactus_temporel_name => 'Cactus Temporel';
+
+  @override
+  String get plant_rose_eternelle_name => 'Rose Éternelle du Jardin';
+
+  @override
+  String get plant_lotus_paradis_name => 'Lotus du Paradis des Fleurs';
+
+  @override
+  String get plant_orchidee_lunaire_name => 'Orchidée Lunaire Mystique';
+
+  @override
+  String get plant_tournesol_solaire_name => 'Tournesol du Pré Solaire';
+
+  @override
+  String get plant_cristal_vegetal_name => 'Cristal Végétal des Cavernes';
+
+  @override
+  String get plant_nymphaea_mystique_name => 'Nymphaea des Marais Mystiques';
+
+  @override
+  String get plant_flamme_vegetale_name =>
+      'Flamme Végétale des Terres Ardentes';
+
+  @override
+  String get plant_glace_eternelle_name => 'Glace Éternelle du Glacier';
+
+  @override
+  String get plant_arc_en_ciel_perdu_name => 'Arc-en-ciel Perdu';
+
+  @override
+  String get plant_jardin_celeste_name => 'Jardin Céleste Ultime';
+
+  @override
+  String get plant_tournesol_or_description =>
+      'Un tournesol qui suit le soleil';
+
+  @override
+  String get plant_marguerite_etoile_description =>
+      'Une marguerite qui brille comme une étoile et guide les débutants';
+
+  @override
+  String get plant_violette_mystique_description =>
+      'Une violette qui révèle les secrets cachés du jardin';
+
+  @override
+  String get plant_jasmin_eternel_description =>
+      'Un jasmin dont le parfum transcende les dimensions temporelles';
+
+  @override
+  String get plant_petunia_cosmique_description =>
+      'Un pétunia qui puise son énergie dans les étoiles';
+
+  @override
+  String get plant_orchidee_lune_description =>
+      'Une orchidée qui fleurit la nuit';
+
+  @override
+  String get plant_tulipe_arc_description =>
+      'Une tulipe aux couleurs changeantes';
+
+  @override
+  String get plant_rose_magique_description =>
+      'Une rose magique qui pousse dans les jardins enchantés';
+
+  @override
+  String get plant_tournesol_solaire_description =>
+      'Un tournesol qui absorbe l\'énergie solaire';
+
+  @override
+  String get plant_cristal_vegetal_description =>
+      'Un cristal végétal qui brille de mille feux';
+
+  @override
+  String get plant_nymphaea_mystique_description =>
+      'Un nénuphar mystique des eaux profondes';
+
+  @override
+  String get plant_flamme_vegetale_description =>
+      'Une plante de feu qui résiste aux flammes';
+
+  @override
+  String get plant_glace_eternelle_description =>
+      'Une plante de glace éternelle';
+
+  @override
+  String get plant_arc_en_ciel_perdu_description =>
+      'Un arc-en-ciel perdu dans le jardin';
+
+  @override
+  String get plant_jardin_celeste_description =>
+      'Un jardin céleste dans une plante';
+
+  @override
+  String get plant_lys_phoenix_description =>
+      'Un lys qui renaît de ses cendres';
+
+  @override
+  String get plant_cactus_temporel_description =>
+      'Un cactus qui voyage dans le temps';
+
+  @override
+  String get plant_rose_eternelle_description =>
+      'Une rose éternelle qui ne se fane jamais';
+
+  @override
+  String get plant_lotus_paradis_description => 'Un lotus du paradis céleste';
+
+  @override
+  String get plant_orchidee_lunaire_description =>
+      'Une orchidée qui fleurit sous la lune';
 }

@@ -2021,4 +2021,149 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get claim_error => 'Error during claim';
+
+  @override
+  String get plant_lotus_cristal_description =>
+      'A lotus that purifies water and increases fortune';
+
+  @override
+  String get plant_tournesol_or_name => 'Golden Sunflower';
+
+  @override
+  String get plant_rose_magique_name => 'Magic Rose';
+
+  @override
+  String get plant_lotus_cristal_name => 'Crystal Lotus';
+
+  @override
+  String get plant_tulipe_arc_name => 'Rainbow Tulip';
+
+  @override
+  String get plant_orchidee_lune_name => 'Moon Orchid';
+
+  @override
+  String get plant_marguerite_etoile_name => 'Star Daisy';
+
+  @override
+  String get plant_violette_mystique_name => 'Mystic Violet';
+
+  @override
+  String get plant_jasmin_eternel_name => 'Eternal Jasmine';
+
+  @override
+  String get plant_petunia_cosmique_name => 'Cosmic Petunia';
+
+  @override
+  String get plant_lys_phoenix_name => 'Phoenix Lily';
+
+  @override
+  String get plant_cactus_temporel_name => 'Temporal Cactus';
+
+  @override
+  String get plant_rose_eternelle_name => 'Eternal Garden Rose';
+
+  @override
+  String get plant_lotus_paradis_name => 'Paradise Flower Lotus';
+
+  @override
+  String get plant_orchidee_lunaire_name => 'Mystic Lunar Orchid';
+
+  @override
+  String get plant_tournesol_solaire_name => 'Solar Meadow Sunflower';
+
+  @override
+  String get plant_cristal_vegetal_name => 'Crystal Cave Vegetal';
+
+  @override
+  String get plant_nymphaea_mystique_name => 'Mystic Swamp Nymphaea';
+
+  @override
+  String get plant_flamme_vegetale_name => 'Burning Lands Vegetal Flame';
+
+  @override
+  String get plant_glace_eternelle_name => 'Eternal Glacier Ice';
+
+  @override
+  String get plant_arc_en_ciel_perdu_name => 'Lost Rainbow';
+
+  @override
+  String get plant_jardin_celeste_name => 'Ultimate Celestial Garden';
+
+  @override
+  String get plant_tournesol_or_description =>
+      'A sunflower that follows the sun';
+
+  @override
+  String get plant_marguerite_etoile_description =>
+      'A daisy that shines like a star and guides beginners';
+
+  @override
+  String get plant_violette_mystique_description =>
+      'A violet that reveals the hidden secrets of the garden';
+
+  @override
+  String get plant_jasmin_eternel_description =>
+      'A jasmine whose fragrance transcends temporal dimensions';
+
+  @override
+  String get plant_petunia_cosmique_description =>
+      'A petunia that draws its energy from the stars';
+
+  @override
+  String get plant_orchidee_lune_description =>
+      'An orchid that blooms at night';
+
+  @override
+  String get plant_tulipe_arc_description => 'A tulip with changing colors';
+
+  @override
+  String get plant_rose_magique_description =>
+      'A magical rose that grows in enchanted gardens';
+
+  @override
+  String get plant_tournesol_solaire_description =>
+      'A sunflower that absorbs solar energy';
+
+  @override
+  String get plant_cristal_vegetal_description =>
+      'A plant crystal that shines with a thousand lights';
+
+  @override
+  String get plant_nymphaea_mystique_description =>
+      'A mystical water lily from deep waters';
+
+  @override
+  String get plant_flamme_vegetale_description =>
+      'A fire plant that resists flames';
+
+  @override
+  String get plant_glace_eternelle_description => 'An eternal ice plant';
+
+  @override
+  String get plant_arc_en_ciel_perdu_description =>
+      'A lost rainbow in the garden';
+
+  @override
+  String get plant_jardin_celeste_description =>
+      'A celestial garden in a plant';
+
+  @override
+  String get plant_lys_phoenix_description =>
+      'A lily that rises from its ashes';
+
+  @override
+  String get plant_cactus_temporel_description =>
+      'A cactus that travels through time';
+
+  @override
+  String get plant_rose_eternelle_description =>
+      'An eternal rose that never fades';
+
+  @override
+  String get plant_lotus_paradis_description =>
+      'A lotus from the celestial paradise';
+
+  @override
+  String get plant_orchidee_lunaire_description =>
+      'An orchid that blooms under the moon';
 }

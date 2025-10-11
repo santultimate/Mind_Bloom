@@ -3739,6 +3739,258 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error during claim'**
   String get claim_error;
+
+  /// Description of the Crystal Lotus plant
+  ///
+  /// In en, this message translates to:
+  /// **'A lotus that purifies water and increases fortune'**
+  String get plant_lotus_cristal_description;
+
+  /// Name of the Golden Sunflower plant
+  ///
+  /// In en, this message translates to:
+  /// **'Golden Sunflower'**
+  String get plant_tournesol_or_name;
+
+  /// Name of the Magic Rose plant
+  ///
+  /// In en, this message translates to:
+  /// **'Magic Rose'**
+  String get plant_rose_magique_name;
+
+  /// Name of the Crystal Lotus plant
+  ///
+  /// In en, this message translates to:
+  /// **'Crystal Lotus'**
+  String get plant_lotus_cristal_name;
+
+  /// Name of the Rainbow Tulip plant
+  ///
+  /// In en, this message translates to:
+  /// **'Rainbow Tulip'**
+  String get plant_tulipe_arc_name;
+
+  /// Name of the Moon Orchid plant
+  ///
+  /// In en, this message translates to:
+  /// **'Moon Orchid'**
+  String get plant_orchidee_lune_name;
+
+  /// Name of the Star Daisy plant
+  ///
+  /// In en, this message translates to:
+  /// **'Star Daisy'**
+  String get plant_marguerite_etoile_name;
+
+  /// Name of the Mystic Violet plant
+  ///
+  /// In en, this message translates to:
+  /// **'Mystic Violet'**
+  String get plant_violette_mystique_name;
+
+  /// Name of the Eternal Jasmine plant
+  ///
+  /// In en, this message translates to:
+  /// **'Eternal Jasmine'**
+  String get plant_jasmin_eternel_name;
+
+  /// Name of the Cosmic Petunia plant
+  ///
+  /// In en, this message translates to:
+  /// **'Cosmic Petunia'**
+  String get plant_petunia_cosmique_name;
+
+  /// Name of the Phoenix Lily plant
+  ///
+  /// In en, this message translates to:
+  /// **'Phoenix Lily'**
+  String get plant_lys_phoenix_name;
+
+  /// Name of the Temporal Cactus plant
+  ///
+  /// In en, this message translates to:
+  /// **'Temporal Cactus'**
+  String get plant_cactus_temporel_name;
+
+  /// Name of the Eternal Garden Rose plant
+  ///
+  /// In en, this message translates to:
+  /// **'Eternal Garden Rose'**
+  String get plant_rose_eternelle_name;
+
+  /// Name of the Paradise Flower Lotus plant
+  ///
+  /// In en, this message translates to:
+  /// **'Paradise Flower Lotus'**
+  String get plant_lotus_paradis_name;
+
+  /// Name of the Mystic Lunar Orchid plant
+  ///
+  /// In en, this message translates to:
+  /// **'Mystic Lunar Orchid'**
+  String get plant_orchidee_lunaire_name;
+
+  /// Name of the Solar Meadow Sunflower plant
+  ///
+  /// In en, this message translates to:
+  /// **'Solar Meadow Sunflower'**
+  String get plant_tournesol_solaire_name;
+
+  /// Name of the Crystal Cave Vegetal plant
+  ///
+  /// In en, this message translates to:
+  /// **'Crystal Cave Vegetal'**
+  String get plant_cristal_vegetal_name;
+
+  /// Name of the Mystic Swamp Nymphaea plant
+  ///
+  /// In en, this message translates to:
+  /// **'Mystic Swamp Nymphaea'**
+  String get plant_nymphaea_mystique_name;
+
+  /// Name of the Burning Lands Vegetal Flame plant
+  ///
+  /// In en, this message translates to:
+  /// **'Burning Lands Vegetal Flame'**
+  String get plant_flamme_vegetale_name;
+
+  /// Name of the Eternal Glacier Ice plant
+  ///
+  /// In en, this message translates to:
+  /// **'Eternal Glacier Ice'**
+  String get plant_glace_eternelle_name;
+
+  /// Name of the Lost Rainbow plant
+  ///
+  /// In en, this message translates to:
+  /// **'Lost Rainbow'**
+  String get plant_arc_en_ciel_perdu_name;
+
+  /// Name of the Ultimate Celestial Garden plant
+  ///
+  /// In en, this message translates to:
+  /// **'Ultimate Celestial Garden'**
+  String get plant_jardin_celeste_name;
+
+  /// Description of the Golden Sunflower plant
+  ///
+  /// In en, this message translates to:
+  /// **'A sunflower that follows the sun'**
+  String get plant_tournesol_or_description;
+
+  /// Description of the Star Daisy plant
+  ///
+  /// In en, this message translates to:
+  /// **'A daisy that shines like a star and guides beginners'**
+  String get plant_marguerite_etoile_description;
+
+  /// Description of the Mystic Violet plant
+  ///
+  /// In en, this message translates to:
+  /// **'A violet that reveals the hidden secrets of the garden'**
+  String get plant_violette_mystique_description;
+
+  /// Description of the Eternal Jasmine plant
+  ///
+  /// In en, this message translates to:
+  /// **'A jasmine whose fragrance transcends temporal dimensions'**
+  String get plant_jasmin_eternel_description;
+
+  /// Description of the Cosmic Petunia plant
+  ///
+  /// In en, this message translates to:
+  /// **'A petunia that draws its energy from the stars'**
+  String get plant_petunia_cosmique_description;
+
+  /// Description of the Moon Orchid plant
+  ///
+  /// In en, this message translates to:
+  /// **'An orchid that blooms at night'**
+  String get plant_orchidee_lune_description;
+
+  /// Description of the Rainbow Tulip plant
+  ///
+  /// In en, this message translates to:
+  /// **'A tulip with changing colors'**
+  String get plant_tulipe_arc_description;
+
+  /// Description of the Magic Rose plant
+  ///
+  /// In en, this message translates to:
+  /// **'A magical rose that grows in enchanted gardens'**
+  String get plant_rose_magique_description;
+
+  /// Description of the Solar Sunflower plant
+  ///
+  /// In en, this message translates to:
+  /// **'A sunflower that absorbs solar energy'**
+  String get plant_tournesol_solaire_description;
+
+  /// Description of the Plant Crystal
+  ///
+  /// In en, this message translates to:
+  /// **'A plant crystal that shines with a thousand lights'**
+  String get plant_cristal_vegetal_description;
+
+  /// Description of the Mystic Water Lily plant
+  ///
+  /// In en, this message translates to:
+  /// **'A mystical water lily from deep waters'**
+  String get plant_nymphaea_mystique_description;
+
+  /// Description of the Vegetal Flame plant
+  ///
+  /// In en, this message translates to:
+  /// **'A fire plant that resists flames'**
+  String get plant_flamme_vegetale_description;
+
+  /// Description of the Eternal Ice plant
+  ///
+  /// In en, this message translates to:
+  /// **'An eternal ice plant'**
+  String get plant_glace_eternelle_description;
+
+  /// Description of the Lost Rainbow plant
+  ///
+  /// In en, this message translates to:
+  /// **'A lost rainbow in the garden'**
+  String get plant_arc_en_ciel_perdu_description;
+
+  /// Description of the Celestial Garden plant
+  ///
+  /// In en, this message translates to:
+  /// **'A celestial garden in a plant'**
+  String get plant_jardin_celeste_description;
+
+  /// Description of the Phoenix Lily plant
+  ///
+  /// In en, this message translates to:
+  /// **'A lily that rises from its ashes'**
+  String get plant_lys_phoenix_description;
+
+  /// Description of the Temporal Cactus plant
+  ///
+  /// In en, this message translates to:
+  /// **'A cactus that travels through time'**
+  String get plant_cactus_temporel_description;
+
+  /// Description of the Eternal Rose plant
+  ///
+  /// In en, this message translates to:
+  /// **'An eternal rose that never fades'**
+  String get plant_rose_eternelle_description;
+
+  /// Description of the Paradise Lotus plant
+  ///
+  /// In en, this message translates to:
+  /// **'A lotus from the celestial paradise'**
+  String get plant_lotus_paradis_description;
+
+  /// Description of the Lunar Orchid plant
+  ///
+  /// In en, this message translates to:
+  /// **'An orchid that blooms under the moon'**
+  String get plant_orchidee_lunaire_description;
 }
 
 class _AppLocalizationsDelegate

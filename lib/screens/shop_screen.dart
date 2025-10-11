@@ -28,12 +28,12 @@ class _ShopScreenState extends State<ShopScreen> {
 
   void _generateItems() {
     _items = [
-      // Vies (corrigé - maximum 5 vies)
+      // Vies (prix augmentés pour équilibrer)
       ShopItem(
         id: 'lives_refill',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 25,
+        price: 150, // 25 → 150 (x6)
         currency: Currency.coins,
         icon: Icons.favorite,
         color: AppColors.error,
@@ -44,19 +44,19 @@ class _ShopScreenState extends State<ShopScreen> {
         id: 'lives_3',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 15,
+        price: 80, // 15 → 80 (x5.3)
         currency: Currency.coins,
         icon: Icons.favorite,
         color: AppColors.error,
         category: ShopCategory.lives,
       ),
 
-      // Monnaie (rééquilibré)
+      // Monnaie (prix augmentés pour équilibrer)
       ShopItem(
         id: 'coins_200',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 5,
+        price: 15, // 5 → 15 (x3)
         currency: Currency.gems,
         icon: Icons.monetization_on,
         color: AppColors.coins,
@@ -66,7 +66,7 @@ class _ShopScreenState extends State<ShopScreen> {
         id: 'coins_500',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 10,
+        price: 35, // 10 → 35 (x3.5)
         currency: Currency.gems,
         icon: Icons.monetization_on,
         color: AppColors.coins,
@@ -77,7 +77,7 @@ class _ShopScreenState extends State<ShopScreen> {
         id: 'coins_1000',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 18,
+        price: 65, // 18 → 65 (x3.6)
         currency: Currency.gems,
         icon: Icons.monetization_on,
         color: AppColors.coins,
@@ -87,7 +87,7 @@ class _ShopScreenState extends State<ShopScreen> {
         id: 'gems_25',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 300,
+        price: 1200, // 300 → 1200 (x4)
         currency: Currency.coins,
         icon: Icons.diamond,
         color: AppColors.gold,
@@ -99,7 +99,7 @@ class _ShopScreenState extends State<ShopScreen> {
         id: 'booster_shuffle',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 25,
+        price: 120, // 25 → 120 (x4.8)
         currency: Currency.coins,
         icon: Icons.shuffle,
         color: AppColors.secondary,
@@ -109,7 +109,7 @@ class _ShopScreenState extends State<ShopScreen> {
         id: 'booster_hint',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 15,
+        price: 75, // 15 → 75 (x5)
         currency: Currency.coins,
         icon: Icons.lightbulb,
         color: AppColors.warning,
@@ -119,7 +119,7 @@ class _ShopScreenState extends State<ShopScreen> {
         id: 'booster_extra_moves',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 40,
+        price: 200, // 40 → 200 (x5)
         currency: Currency.coins,
         icon: Icons.add_circle,
         color: AppColors.primary,
@@ -130,7 +130,7 @@ class _ShopScreenState extends State<ShopScreen> {
         id: 'booster_score_multiplier',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 60,
+        price: 300, // 60 → 300 (x5)
         currency: Currency.coins,
         icon: Icons.trending_up,
         color: AppColors.success,
@@ -142,7 +142,7 @@ class _ShopScreenState extends State<ShopScreen> {
         id: 'experience_boost',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 30,
+        price: 150, // 30 → 150 (x5)
         currency: Currency.coins,
         icon: Icons.star,
         color: AppColors.warning,
@@ -152,7 +152,7 @@ class _ShopScreenState extends State<ShopScreen> {
         id: 'level_skip',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 50,
+        price: 200, // 50 → 200 (x4)
         currency: Currency.gems,
         icon: Icons.skip_next,
         color: AppColors.primary,
@@ -162,7 +162,7 @@ class _ShopScreenState extends State<ShopScreen> {
         id: 'unlock_all_levels',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 200,
+        price: 800, // 200 → 800 (x4)
         currency: Currency.gems,
         icon: Icons.lock_open,
         color: AppColors.gold,
@@ -174,7 +174,7 @@ class _ShopScreenState extends State<ShopScreen> {
         id: 'theme_pack_nature',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 75,
+        price: 300, // 75 → 300 (x4)
         currency: Currency.gems,
         icon: Icons.palette,
         color: AppColors.success,
@@ -184,7 +184,7 @@ class _ShopScreenState extends State<ShopScreen> {
         id: 'theme_pack_ocean',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 75,
+        price: 300, // 75 → 300 (x4)
         currency: Currency.gems,
         icon: Icons.waves,
         color: AppColors.primary,
@@ -194,7 +194,7 @@ class _ShopScreenState extends State<ShopScreen> {
         id: 'avatar_frame_gold',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 100,
+        price: 400, // 100 → 400 (x4)
         currency: Currency.gems,
         icon: Icons.crop_square,
         color: AppColors.gold,
@@ -206,7 +206,7 @@ class _ShopScreenState extends State<ShopScreen> {
         id: 'remove_ads',
         title: '', // Sera rempli dynamiquement
         description: '', // Sera rempli dynamiquement
-        price: 150,
+        price: 600, // 150 → 600 (x4)
         currency: Currency.gems,
         icon: Icons.block,
         color: AppColors.primary,
@@ -616,8 +616,7 @@ class _ShopScreenState extends State<ShopScreen> {
           content: Text(AppLocalizations.of(context)!.notEnoughCurrency(
               item.currency == Currency.coins
                   ? AppLocalizations.of(context)!.coins
-                  : AppLocalizations.of(context)!
-                      .gems)),
+                  : AppLocalizations.of(context)!.gems)),
           backgroundColor: AppColors.error,
         ),
       );

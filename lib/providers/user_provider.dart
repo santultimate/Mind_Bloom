@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mind_bloom/providers/world_provider.dart';
 import 'package:mind_bloom/providers/game_progression_provider.dart';
+import 'package:mind_bloom/providers/collection_provider.dart';
 import 'package:mind_bloom/utils/constants.dart';
 import 'package:mind_bloom/utils/error_handler.dart';
 import 'package:mind_bloom/utils/batch_saver.dart';
@@ -28,6 +29,9 @@ class UserProvider extends ChangeNotifier {
 
   // Référence au GameProgressionProvider
   GameProgressionProvider? _gameProgressionProvider;
+
+  // Référence au CollectionProvider pour les bonus
+  CollectionProvider? _collectionProvider;
 
   // Suivi des achievements
   int _bestScore = 0;
@@ -62,7 +66,12 @@ class UserProvider extends ChangeNotifier {
   int get coins => _coins;
   int get gems => _gems;
   int get lives => _lives;
-  int get maxLives => _maxLives;
+  int get maxLives {
+    // 🔧 PRODUCTION: Maximum de vies plafonné à 5
+    // Les bonus de collection sont désactivés pour maintenir l'équilibre du jeu
+    return AppConstants.maxLives; // Toujours 5
+  }
+
   DateTime? get lastLifeRefill => _lastLifeRefill;
   int get timeUntilNextLife => _timeUntilNextLife;
   int get currentStreak => _currentStreak;
@@ -100,6 +109,11 @@ class UserProvider extends ChangeNotifier {
   void setGameProgressionProvider(
       GameProgressionProvider gameProgressionProvider) {
     _gameProgressionProvider = gameProgressionProvider;
+  }
+
+  // Setter pour le CollectionProvider
+  void setCollectionProvider(CollectionProvider collectionProvider) {
+    _collectionProvider = collectionProvider;
   }
 
   // Initialiser l'utilisateur
@@ -440,7 +454,8 @@ class UserProvider extends ChangeNotifier {
   // Ajouter des vies (avec limitation à 5 vies maximum)
   Future<void> addLives(int amount) async {
     final newLives = _lives + amount;
-    _lives = newLives.clamp(0, _maxLives);
+    // 🔧 PRODUCTION: Plafonner strictement à 5 vies maximum
+    _lives = newLives.clamp(0, AppConstants.maxLives);
 
     // Debug: Afficher les informations de débogage
     if (kDebugMode) {
@@ -449,7 +464,7 @@ class UserProvider extends ChangeNotifier {
       debugPrint('Vies à ajouter: $amount');
       debugPrint('Nouvelles vies: $newLives');
       debugPrint('Vies finales (clampé): $_lives');
-      debugPrint('Maximum autorisé: $_maxLives');
+      debugPrint('Maximum autorisé: ${AppConstants.maxLives}');
       debugPrint('========================');
     }
 
@@ -459,7 +474,8 @@ class UserProvider extends ChangeNotifier {
 
   // Remplir les vies
   Future<void> refillLives() async {
-    _lives = _maxLives;
+    // 🔧 PRODUCTION: Remplir à 5 vies maximum
+    _lives = AppConstants.maxLives;
     _lastLifeRefill = DateTime.now();
     _saveUserData();
     notifyListeners();
@@ -481,7 +497,7 @@ class UserProvider extends ChangeNotifier {
       return;
     }
 
-    if (_lives >= _maxLives) return;
+    if (_lives >= AppConstants.maxLives) return;
 
     final now = DateTime.now();
     final timeSinceLastRefill = now.difference(_lastLifeRefill!);
@@ -492,7 +508,8 @@ class UserProvider extends ChangeNotifier {
 
     if (livesToAdd > 0) {
       final oldLives = _lives;
-      _lives = (_lives + livesToAdd).clamp(0, _maxLives);
+      // 🔧 PRODUCTION: Plafonner à 5 vies maximum
+      _lives = (_lives + livesToAdd).clamp(0, AppConstants.maxLives);
 
       // Mettre à jour la dernière régénération
       final actualLivesAdded = _lives - oldLives;
@@ -514,12 +531,12 @@ class UserProvider extends ChangeNotifier {
   void _startLifeTimer() {
     _lifeTimer?.cancel();
 
-    if (_lives < _maxLives) {
+    if (_lives < AppConstants.maxLives) {
       _updateTimeUntilNextLife();
 
       // 🔧 CORRECTION: Timer optimisé pour éviter la boucle infinie
       _lifeTimer = Timer.periodic(AppConstants.lifeTimerInterval, (timer) {
-        if (_lives >= _maxLives) {
+        if (_lives >= AppConstants.maxLives) {
           timer.cancel();
           _timeUntilNextLife = 0;
           notifyListeners();
@@ -550,7 +567,7 @@ class UserProvider extends ChangeNotifier {
 
   // Mettre à jour le temps restant jusqu'à la prochaine vie
   void _updateTimeUntilNextLife() {
-    if (_lastLifeRefill == null || _lives >= _maxLives) {
+    if (_lastLifeRefill == null || _lives >= AppConstants.maxLives) {
       _timeUntilNextLife = 0;
       return;
     }
@@ -569,7 +586,7 @@ class UserProvider extends ChangeNotifier {
 
   // Ajouter une vie depuis le timer
   void _addLifeFromTimer() {
-    if (_lives < _maxLives) {
+    if (_lives < AppConstants.maxLives) {
       _lives++;
       _lastLifeRefill = DateTime.now();
       _timeUntilNextLife = 0;
@@ -577,11 +594,12 @@ class UserProvider extends ChangeNotifier {
 
       // Debug pour voir l'ajout de vie
       if (kDebugMode) {
-        debugPrint('🔄 VIE AJOUTÉE (Timer): +1 vie. Total: $_lives/$_maxLives');
+        debugPrint(
+            '🔄 VIE AJOUTÉE (Timer): +1 vie. Total: $_lives/${AppConstants.maxLives}');
       }
 
       // Si on a atteint le maximum, arrêter le timer
-      if (_lives >= _maxLives) {
+      if (_lives >= AppConstants.maxLives) {
         _stopLifeTimer();
       }
     }
@@ -693,6 +711,17 @@ class UserProvider extends ChangeNotifier {
         difficultyBonus +
         firstTimeBonus +
         performanceBonus;
+
+    // Appliquer le multiplicateur de pièces des plantes de collection
+    if (_collectionProvider != null) {
+      try {
+        final bonuses = _collectionProvider!.getActiveBonuses();
+        final coinMultiplier = bonuses[BonusType.coinMultiplier] ?? 1.0;
+        totalReward = (totalReward * coinMultiplier).toInt();
+      } catch (e) {
+        // Si erreur, utiliser la valeur de base
+      }
+    }
 
     _coins += totalReward;
 

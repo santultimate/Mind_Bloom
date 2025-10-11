@@ -1314,7 +1314,7 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
-                                  plant.name,
+                                  _getPlantName(plant.nameKey),
                                   style: TextStyle(
                                     color: _getRarityColor(plant.rarity),
                                     fontWeight: FontWeight.bold,
@@ -1826,6 +1826,55 @@ Come and take up the challenge and discover this amazing puzzle game!
         return Colors.red;
       default:
         return Colors.grey;
+    }
+  }
+
+  String _getPlantName(String nameKey) {
+    switch (nameKey) {
+      case 'plant_tournesol_or_name':
+        return AppLocalizations.of(context)!.plant_tournesol_or_name;
+      case 'plant_rose_magique_name':
+        return AppLocalizations.of(context)!.plant_rose_magique_name;
+      case 'plant_lotus_cristal_name':
+        return AppLocalizations.of(context)!.plant_lotus_cristal_name;
+      case 'plant_tulipe_arc_name':
+        return AppLocalizations.of(context)!.plant_tulipe_arc_name;
+      case 'plant_orchidee_lune_name':
+        return AppLocalizations.of(context)!.plant_orchidee_lune_name;
+      case 'plant_marguerite_etoile_name':
+        return AppLocalizations.of(context)!.plant_marguerite_etoile_name;
+      case 'plant_violette_mystique_name':
+        return AppLocalizations.of(context)!.plant_violette_mystique_name;
+      case 'plant_jasmin_eternel_name':
+        return AppLocalizations.of(context)!.plant_jasmin_eternel_name;
+      case 'plant_petunia_cosmique_name':
+        return AppLocalizations.of(context)!.plant_petunia_cosmique_name;
+      case 'plant_lys_phoenix_name':
+        return AppLocalizations.of(context)!.plant_lys_phoenix_name;
+      case 'plant_cactus_temporel_name':
+        return AppLocalizations.of(context)!.plant_cactus_temporel_name;
+      case 'plant_rose_eternelle_name':
+        return AppLocalizations.of(context)!.plant_rose_eternelle_name;
+      case 'plant_lotus_paradis_name':
+        return AppLocalizations.of(context)!.plant_lotus_paradis_name;
+      case 'plant_orchidee_lunaire_name':
+        return AppLocalizations.of(context)!.plant_orchidee_lunaire_name;
+      case 'plant_tournesol_solaire_name':
+        return AppLocalizations.of(context)!.plant_tournesol_solaire_name;
+      case 'plant_cristal_vegetal_name':
+        return AppLocalizations.of(context)!.plant_cristal_vegetal_name;
+      case 'plant_nymphaea_mystique_name':
+        return AppLocalizations.of(context)!.plant_nymphaea_mystique_name;
+      case 'plant_flamme_vegetale_name':
+        return AppLocalizations.of(context)!.plant_flamme_vegetale_name;
+      case 'plant_glace_eternelle_name':
+        return AppLocalizations.of(context)!.plant_glace_eternelle_name;
+      case 'plant_arc_en_ciel_perdu_name':
+        return AppLocalizations.of(context)!.plant_arc_en_ciel_perdu_name;
+      case 'plant_jardin_celeste_name':
+        return AppLocalizations.of(context)!.plant_jardin_celeste_name;
+      default:
+        return nameKey; // Fallback vers la clé si pas trouvée
     }
   }
 }

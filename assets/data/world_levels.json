@@ -8,7 +8,7 @@
         "description": "Naviguez dans les eaux troubles de ce marécage mystique et collectez 24 dew, 22 crystal",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 21,
+        "maxMoves": 17,
         "targetScore": 3300,
         "objectives": [
           {
@@ -35,7 +35,7 @@
         "description": "Naviguez dans les eaux troubles de ce marécage mystique et collectez 26 dew, 24 crystal",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 22,
+        "maxMoves": 17,
         "targetScore": 3600,
         "objectives": [
           {
@@ -62,7 +62,7 @@
         "description": "Naviguez dans les eaux troubles de ce marécage mystique et collectez 28 dew, 26 crystal",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 23,
+        "maxMoves": 17,
         "targetScore": 3900,
         "objectives": [
           {
@@ -90,7 +90,7 @@
         "description": "Naviguez dans les eaux troubles de ce marécage mystique et collectez 30 dew, 28 crystal",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 24,
+        "maxMoves": 17,
         "targetScore": 4200,
         "objectives": [
           {
@@ -117,7 +117,7 @@
         "description": "Naviguez dans les eaux troubles de ce marécage mystique et collectez 32 dew, 30 crystal",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 25,
+        "maxMoves": 17,
         "targetScore": 4500,
         "objectives": [
           {
@@ -144,7 +144,7 @@
         "description": "Naviguez dans les eaux troubles de ce marécage mystique et collectez 34 dew, 32 crystal",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 26,
+        "maxMoves": 17,
         "targetScore": 4800,
         "objectives": [
           {
@@ -172,7 +172,7 @@
         "description": "Naviguez dans les eaux troubles de ce marécage mystique et collectez 36 dew, 34 crystal",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 27,
+        "maxMoves": 17,
         "targetScore": 5100,
         "objectives": [
           {
@@ -199,7 +199,7 @@
         "description": "Naviguez dans les eaux troubles de ce marécage mystique et collectez 38 dew, 36 crystal",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 28,
+        "maxMoves": 17,
         "targetScore": 5400,
         "objectives": [
           {
@@ -226,7 +226,7 @@
         "description": "Naviguez dans les eaux troubles de ce marécage mystique et collectez 40 dew, 38 crystal",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 29,
+        "maxMoves": 17,
         "targetScore": 5700,
         "objectives": [
           {
@@ -254,7 +254,7 @@
         "description": "Naviguez dans les eaux troubles de ce marécage mystique et collectez 42 dew, 40 crystal",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 30,
+        "maxMoves": 14,
         "targetScore": 6000,
         "objectives": [
           {
@@ -283,7 +283,7 @@
         "description": "Survivez à la chaleur intense de ces terres volcaniques et récupérez 20 sun, 27 flower",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 21,
+        "maxMoves": 17,
         "targetScore": 3300,
         "objectives": [
           {
@@ -310,7 +310,7 @@
         "description": "Survivez à la chaleur intense de ces terres volcaniques et récupérez 22 sun, 29 flower",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 22,
+        "maxMoves": 17,
         "targetScore": 3600,
         "objectives": [
           {
@@ -337,7 +337,7 @@
         "description": "Survivez à la chaleur intense de ces terres volcaniques et récupérez 24 sun, 31 flower",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 23,
+        "maxMoves": 17,
         "targetScore": 3900,
         "objectives": [
           {
@@ -365,7 +365,7 @@
         "description": "Survivez à la chaleur intense de ces terres volcaniques et récupérez 26 sun, 33 flower",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 24,
+        "maxMoves": 17,
         "targetScore": 4200,
         "objectives": [
           {
@@ -392,7 +392,7 @@
         "description": "Survivez à la chaleur intense de ces terres volcaniques et récupérez 28 sun, 35 flower",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 25,
+        "maxMoves": 17,
         "targetScore": 4500,
         "objectives": [
           {
@@ -419,7 +419,7 @@
         "description": "Survivez à la chaleur intense de ces terres volcaniques et récupérez 30 sun, 37 flower",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 26,
+        "maxMoves": 17,
         "targetScore": 4800,
         "objectives": [
           {
@@ -447,7 +447,7 @@
         "description": "Survivez à la chaleur intense de ces terres volcaniques et récupérez 32 sun, 39 flower",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 27,
+        "maxMoves": 17,
         "targetScore": 5100,
         "objectives": [
           {
@@ -474,7 +474,7 @@
         "description": "Survivez à la chaleur intense de ces terres volcaniques et récupérez 34 sun, 41 flower",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 28,
+        "maxMoves": 17,
         "targetScore": 5400,
         "objectives": [
           {
@@ -501,7 +501,7 @@
         "description": "Survivez à la chaleur intense de ces terres volcaniques et récupérez 36 sun, 43 flower",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 29,
+        "maxMoves": 17,
         "targetScore": 5700,
         "objectives": [
           {
@@ -529,7 +529,7 @@
         "description": "Survivez à la chaleur intense de ces terres volcaniques et récupérez 38 sun, 45 flower",
         "difficulty": "hard",
         "gridSize": 8,
-        "maxMoves": 30,
+        "maxMoves": 14,
         "targetScore": 6000,
         "objectives": [
           {
@@ -558,7 +558,7 @@
         "description": "Bravez le froid glacial de cette étendue blanche et collectez 22 crystal, 24 dew",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 23,
+        "maxMoves": 16,
         "targetScore": 3800,
         "objectives": [
           {
@@ -590,7 +590,7 @@
         "description": "Bravez le froid glacial de cette étendue blanche et collectez 24 crystal, 26 dew",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 24,
+        "maxMoves": 16,
         "targetScore": 4100,
         "objectives": [
           {
@@ -622,7 +622,7 @@
         "description": "Bravez le froid glacial de cette étendue blanche et collectez 26 crystal, 28 dew",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 25,
+        "maxMoves": 16,
         "targetScore": 4400,
         "objectives": [
           {
@@ -655,7 +655,7 @@
         "description": "Bravez le froid glacial de cette étendue blanche et collectez 28 crystal, 30 dew",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 26,
+        "maxMoves": 16,
         "targetScore": 4700,
         "objectives": [
           {
@@ -687,7 +687,7 @@
         "description": "Bravez le froid glacial de cette étendue blanche et collectez 30 crystal, 32 dew",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 27,
+        "maxMoves": 16,
         "targetScore": 5000,
         "objectives": [
           {
@@ -719,7 +719,7 @@
         "description": "Bravez le froid glacial de cette étendue blanche et collectez 32 crystal, 34 dew",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 28,
+        "maxMoves": 16,
         "targetScore": 5300,
         "objectives": [
           {
@@ -752,7 +752,7 @@
         "description": "Bravez le froid glacial de cette étendue blanche et collectez 34 crystal, 36 dew",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 29,
+        "maxMoves": 16,
         "targetScore": 5600,
         "objectives": [
           {
@@ -784,7 +784,7 @@
         "description": "Bravez le froid glacial de cette étendue blanche et collectez 36 crystal, 38 dew",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 30,
+        "maxMoves": 16,
         "targetScore": 5900,
         "objectives": [
           {
@@ -820,7 +820,7 @@
         "description": "Bravez le froid glacial de cette étendue blanche et collectez 38 crystal, 40 dew",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 31,
+        "maxMoves": 16,
         "targetScore": 6200,
         "objectives": [
           {
@@ -857,7 +857,7 @@
         "description": "Bravez le froid glacial de cette étendue blanche et collectez 40 crystal, 42 dew",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 32,
+        "maxMoves": 13,
         "targetScore": 6500,
         "objectives": [
           {
@@ -895,7 +895,7 @@
         "description": "Retrouvez les couleurs perdues de cet arc-en-ciel légendaire et récupérez 27 flower, 17 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 23,
+        "maxMoves": 16,
         "targetScore": 3800,
         "objectives": [
           {
@@ -927,7 +927,7 @@
         "description": "Retrouvez les couleurs perdues de cet arc-en-ciel légendaire et récupérez 29 flower, 19 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 24,
+        "maxMoves": 16,
         "targetScore": 4100,
         "objectives": [
           {
@@ -959,7 +959,7 @@
         "description": "Retrouvez les couleurs perdues de cet arc-en-ciel légendaire et récupérez 31 flower, 21 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 25,
+        "maxMoves": 16,
         "targetScore": 4400,
         "objectives": [
           {
@@ -992,7 +992,7 @@
         "description": "Retrouvez les couleurs perdues de cet arc-en-ciel légendaire et récupérez 33 flower, 23 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 26,
+        "maxMoves": 16,
         "targetScore": 4700,
         "objectives": [
           {
@@ -1024,7 +1024,7 @@
         "description": "Retrouvez les couleurs perdues de cet arc-en-ciel légendaire et récupérez 35 flower, 25 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 27,
+        "maxMoves": 16,
         "targetScore": 5000,
         "objectives": [
           {
@@ -1056,7 +1056,7 @@
         "description": "Retrouvez les couleurs perdues de cet arc-en-ciel légendaire et récupérez 37 flower, 27 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 28,
+        "maxMoves": 16,
         "targetScore": 5300,
         "objectives": [
           {
@@ -1089,7 +1089,7 @@
         "description": "Retrouvez les couleurs perdues de cet arc-en-ciel légendaire et récupérez 39 flower, 29 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 29,
+        "maxMoves": 16,
         "targetScore": 5600,
         "objectives": [
           {
@@ -1121,7 +1121,7 @@
         "description": "Retrouvez les couleurs perdues de cet arc-en-ciel légendaire et récupérez 41 flower, 31 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 30,
+        "maxMoves": 16,
         "targetScore": 5900,
         "objectives": [
           {
@@ -1157,7 +1157,7 @@
         "description": "Retrouvez les couleurs perdues de cet arc-en-ciel légendaire et récupérez 43 flower, 33 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 31,
+        "maxMoves": 16,
         "targetScore": 6200,
         "objectives": [
           {
@@ -1194,7 +1194,7 @@
         "description": "Retrouvez les couleurs perdues de cet arc-en-ciel légendaire et récupérez 45 flower, 35 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 32,
+        "maxMoves": 13,
         "targetScore": 6500,
         "objectives": [
           {
@@ -1232,7 +1232,7 @@
         "description": "Explorez ce jardin où les étoiles fleurissent et collectez 14 gem, 17 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 23,
+        "maxMoves": 16,
         "targetScore": 3800,
         "objectives": [
           {
@@ -1264,7 +1264,7 @@
         "description": "Explorez ce jardin où les étoiles fleurissent et collectez 16 gem, 19 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 24,
+        "maxMoves": 16,
         "targetScore": 4100,
         "objectives": [
           {
@@ -1296,7 +1296,7 @@
         "description": "Explorez ce jardin où les étoiles fleurissent et collectez 18 gem, 21 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 25,
+        "maxMoves": 16,
         "targetScore": 4400,
         "objectives": [
           {
@@ -1329,7 +1329,7 @@
         "description": "Explorez ce jardin où les étoiles fleurissent et collectez 20 gem, 23 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 26,
+        "maxMoves": 16,
         "targetScore": 4700,
         "objectives": [
           {
@@ -1361,7 +1361,7 @@
         "description": "Explorez ce jardin où les étoiles fleurissent et collectez 22 gem, 25 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 27,
+        "maxMoves": 16,
         "targetScore": 5000,
         "objectives": [
           {
@@ -1393,7 +1393,7 @@
         "description": "Explorez ce jardin où les étoiles fleurissent et collectez 24 gem, 27 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 28,
+        "maxMoves": 16,
         "targetScore": 5300,
         "objectives": [
           {
@@ -1426,7 +1426,7 @@
         "description": "Explorez ce jardin où les étoiles fleurissent et collectez 26 gem, 29 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 29,
+        "maxMoves": 16,
         "targetScore": 5600,
         "objectives": [
           {
@@ -1458,7 +1458,7 @@
         "description": "Explorez ce jardin où les étoiles fleurissent et collectez 28 gem, 31 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 30,
+        "maxMoves": 16,
         "targetScore": 5900,
         "objectives": [
           {
@@ -1494,7 +1494,7 @@
         "description": "Explorez ce jardin où les étoiles fleurissent et collectez 30 gem, 33 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 31,
+        "maxMoves": 16,
         "targetScore": 6200,
         "objectives": [
           {
@@ -1531,7 +1531,7 @@
         "description": "Explorez ce jardin où les étoiles fleurissent et collectez 32 gem, 35 moon",
         "difficulty": "expert",
         "gridSize": 9,
-        "maxMoves": 32,
+        "maxMoves": 13,
         "targetScore": 6500,
         "objectives": [
           {
@@ -1561,7 +1561,5 @@
         ]
       }
     ]
-  },
-  "totalLevels": 100,
-  "worldsCount": 10
+  }
 }

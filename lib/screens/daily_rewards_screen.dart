@@ -173,9 +173,9 @@ class _DailyRewardsScreenState extends State<DailyRewardsScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _buildRewardItem(Icons.monetization_on, AppColors.coins, '50+',
-                  AppLocalizations.of(context)!.coins(50)),
+                  AppLocalizations.of(context)!.coins),
               _buildRewardItem(Icons.diamond, AppColors.gems, '2+',
-                  AppLocalizations.of(context)!.gems(2)),
+                  AppLocalizations.of(context)!.gems),
             ],
           ),
           const SizedBox(height: 20),

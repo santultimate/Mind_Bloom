@@ -153,6 +153,109 @@ class _CollectionScreenState extends State<CollectionScreen> {
     return '$rarity★';
   }
 
+  String _getPlantName(String nameKey) {
+    switch (nameKey) {
+      case 'plant_tournesol_or_name':
+        return AppLocalizations.of(context)!.plant_tournesol_or_name;
+      case 'plant_rose_magique_name':
+        return AppLocalizations.of(context)!.plant_rose_magique_name;
+      case 'plant_lotus_cristal_name':
+        return AppLocalizations.of(context)!.plant_lotus_cristal_name;
+      case 'plant_tulipe_arc_name':
+        return AppLocalizations.of(context)!.plant_tulipe_arc_name;
+      case 'plant_orchidee_lune_name':
+        return AppLocalizations.of(context)!.plant_orchidee_lune_name;
+      case 'plant_marguerite_etoile_name':
+        return AppLocalizations.of(context)!.plant_marguerite_etoile_name;
+      case 'plant_violette_mystique_name':
+        return AppLocalizations.of(context)!.plant_violette_mystique_name;
+      case 'plant_jasmin_eternel_name':
+        return AppLocalizations.of(context)!.plant_jasmin_eternel_name;
+      case 'plant_petunia_cosmique_name':
+        return AppLocalizations.of(context)!.plant_petunia_cosmique_name;
+      case 'plant_lys_phoenix_name':
+        return AppLocalizations.of(context)!.plant_lys_phoenix_name;
+      case 'plant_cactus_temporel_name':
+        return AppLocalizations.of(context)!.plant_cactus_temporel_name;
+      case 'plant_rose_eternelle_name':
+        return AppLocalizations.of(context)!.plant_rose_eternelle_name;
+      case 'plant_lotus_paradis_name':
+        return AppLocalizations.of(context)!.plant_lotus_paradis_name;
+      case 'plant_orchidee_lunaire_name':
+        return AppLocalizations.of(context)!.plant_orchidee_lunaire_name;
+      case 'plant_tournesol_solaire_name':
+        return AppLocalizations.of(context)!.plant_tournesol_solaire_name;
+      case 'plant_cristal_vegetal_name':
+        return AppLocalizations.of(context)!.plant_cristal_vegetal_name;
+      case 'plant_nymphaea_mystique_name':
+        return AppLocalizations.of(context)!.plant_nymphaea_mystique_name;
+      case 'plant_flamme_vegetale_name':
+        return AppLocalizations.of(context)!.plant_flamme_vegetale_name;
+      case 'plant_glace_eternelle_name':
+        return AppLocalizations.of(context)!.plant_glace_eternelle_name;
+      case 'plant_arc_en_ciel_perdu_name':
+        return AppLocalizations.of(context)!.plant_arc_en_ciel_perdu_name;
+      case 'plant_jardin_celeste_name':
+        return AppLocalizations.of(context)!.plant_jardin_celeste_name;
+      default:
+        return nameKey; // Fallback vers la clé si pas trouvée
+    }
+  }
+
+  String _getPlantDescription(String descriptionKey) {
+    switch (descriptionKey) {
+      case 'plant_marguerite_etoile_description':
+        return AppLocalizations.of(context)!
+            .plant_marguerite_etoile_description;
+      case 'plant_petunia_cosmique_description':
+        return AppLocalizations.of(context)!.plant_petunia_cosmique_description;
+      case 'plant_lotus_cristal_description':
+        return AppLocalizations.of(context)!.plant_lotus_cristal_description;
+      case 'plant_tournesol_or_description':
+        return AppLocalizations.of(context)!.plant_tournesol_or_description;
+      case 'plant_violette_mystique_description':
+        return AppLocalizations.of(context)!
+            .plant_violette_mystique_description;
+      case 'plant_jasmin_eternel_description':
+        return AppLocalizations.of(context)!.plant_jasmin_eternel_description;
+      case 'plant_orchidee_lune_description':
+        return AppLocalizations.of(context)!.plant_orchidee_lune_description;
+      case 'plant_tulipe_arc_description':
+        return AppLocalizations.of(context)!.plant_tulipe_arc_description;
+      case 'plant_rose_magique_description':
+        return AppLocalizations.of(context)!.plant_rose_magique_description;
+      case 'plant_tournesol_solaire_description':
+        return AppLocalizations.of(context)!
+            .plant_tournesol_solaire_description;
+      case 'plant_cristal_vegetal_description':
+        return AppLocalizations.of(context)!.plant_cristal_vegetal_description;
+      case 'plant_nymphaea_mystique_description':
+        return AppLocalizations.of(context)!
+            .plant_nymphaea_mystique_description;
+      case 'plant_flamme_vegetale_description':
+        return AppLocalizations.of(context)!.plant_flamme_vegetale_description;
+      case 'plant_glace_eternelle_description':
+        return AppLocalizations.of(context)!.plant_glace_eternelle_description;
+      case 'plant_arc_en_ciel_perdu_description':
+        return AppLocalizations.of(context)!
+            .plant_arc_en_ciel_perdu_description;
+      case 'plant_jardin_celeste_description':
+        return AppLocalizations.of(context)!.plant_jardin_celeste_description;
+      case 'plant_lys_phoenix_description':
+        return AppLocalizations.of(context)!.plant_lys_phoenix_description;
+      case 'plant_cactus_temporel_description':
+        return AppLocalizations.of(context)!.plant_cactus_temporel_description;
+      case 'plant_rose_eternelle_description':
+        return AppLocalizations.of(context)!.plant_rose_eternelle_description;
+      case 'plant_lotus_paradis_description':
+        return AppLocalizations.of(context)!.plant_lotus_paradis_description;
+      case 'plant_orchidee_lunaire_description':
+        return AppLocalizations.of(context)!.plant_orchidee_lunaire_description;
+      default:
+        return descriptionKey; // Fallback vers la clé si pas trouvée
+    }
+  }
+
   List<Plant> _getFilteredPlants(CollectionProvider collectionProvider) {
     if (_selectedRarity == 'all') {
       return collectionProvider.plants;
@@ -241,7 +344,8 @@ class _CollectionScreenState extends State<CollectionScreen> {
                               errorBuilder: (context, error, stackTrace) {
                                 // Debug: afficher l'erreur
                                 if (kDebugMode) {
-                                  debugPrint('Erreur chargement image ${plant.imagePath}: $error');
+                                  debugPrint(
+                                      'Erreur chargement image ${plant.imagePath}: $error');
                                 }
                                 // Fallback vers l'icône si l'image n'existe pas
                                 return Icon(
@@ -314,7 +418,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
 
                 // Nom et niveau
                 Text(
-                  plant.name,
+                  _getPlantName(plant.nameKey),
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: plant.isUnlocked
@@ -358,7 +462,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                 // Description
                 Expanded(
                   child: Text(
-                    plant.description,
+                    _getPlantDescription(plant.descriptionKey),
                     style: TextStyle(
                       color: plant.isUnlocked
                           ? AppColors.textSecondary
@@ -456,7 +560,8 @@ class _CollectionScreenState extends State<CollectionScreen> {
                             errorBuilder: (context, error, stackTrace) {
                               // Debug: afficher l'erreur
                               if (kDebugMode) {
-                                debugPrint('Erreur chargement image modal ${plant.imagePath}: $error');
+                                debugPrint(
+                                    'Erreur chargement image modal ${plant.imagePath}: $error');
                               }
                               return Icon(
                                 Icons.eco,
@@ -512,7 +617,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          plant.name,
+                          _getPlantName(plant.nameKey),
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall
@@ -553,7 +658,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                plant.description,
+                _getPlantDescription(plant.descriptionKey),
                 style: TextStyle(
                   color: AppColors.textSecondary,
                   height: 1.5,
@@ -710,7 +815,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(AppLocalizations.of(context)!
-            .plantUpgraded(plant.name, plant.level + 1)),
+            .plantUpgraded(_getPlantName(plant.nameKey), plant.level + 1)),
         backgroundColor: AppColors.primary,
       ),
     );

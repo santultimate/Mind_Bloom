@@ -2994,5 +2994,194 @@
   "claim_error": "Erreur lors de la réclamation",
   "@claim_error": {
     "description": "Message d'erreur lors de la réclamation"
+  },
+
+  "plant_lotus_cristal_description": "Un lotus qui purifie l'eau et augmente la fortune",
+  "@plant_lotus_cristal_description": {
+    "description": "Description de la plante Lotus Cristal"
+  },
+
+  "plant_tournesol_or_name": "Tournesol Doré",
+  "@plant_tournesol_or_name": {
+    "description": "Nom de la plante Tournesol Doré"
+  },
+  "plant_rose_magique_name": "Rose Magique",
+  "@plant_rose_magique_name": {
+    "description": "Nom de la plante Rose Magique"
+  },
+  "plant_lotus_cristal_name": "Lotus de Cristal",
+  "@plant_lotus_cristal_name": {
+    "description": "Nom de la plante Lotus de Cristal"
+  },
+  "plant_tulipe_arc_name": "Tulipe Arc-en-ciel",
+  "@plant_tulipe_arc_name": {
+    "description": "Nom de la plante Tulipe Arc-en-ciel"
+  },
+  "plant_orchidee_lune_name": "Orchidée de Lune",
+  "@plant_orchidee_lune_name": {
+    "description": "Nom de la plante Orchidée de Lune"
+  },
+  "plant_marguerite_etoile_name": "Marguerite Étoilée",
+  "@plant_marguerite_etoile_name": {
+    "description": "Nom de la plante Marguerite Étoilée"
+  },
+  "plant_violette_mystique_name": "Violette Mystique",
+  "@plant_violette_mystique_name": {
+    "description": "Nom de la plante Violette Mystique"
+  },
+  "plant_jasmin_eternel_name": "Jasmin Éternel",
+  "@plant_jasmin_eternel_name": {
+    "description": "Nom de la plante Jasmin Éternel"
+  },
+  "plant_petunia_cosmique_name": "Pétunia Cosmique",
+  "@plant_petunia_cosmique_name": {
+    "description": "Nom de la plante Pétunia Cosmique"
+  },
+  "plant_lys_phoenix_name": "Lys du Phénix",
+  "@plant_lys_phoenix_name": {
+    "description": "Nom de la plante Lys du Phénix"
+  },
+  "plant_cactus_temporel_name": "Cactus Temporel",
+  "@plant_cactus_temporel_name": {
+    "description": "Nom de la plante Cactus Temporel"
+  },
+  "plant_rose_eternelle_name": "Rose Éternelle du Jardin",
+  "@plant_rose_eternelle_name": {
+    "description": "Nom de la plante Rose Éternelle du Jardin"
+  },
+  "plant_lotus_paradis_name": "Lotus du Paradis des Fleurs",
+  "@plant_lotus_paradis_name": {
+    "description": "Nom de la plante Lotus du Paradis des Fleurs"
+  },
+  "plant_orchidee_lunaire_name": "Orchidée Lunaire Mystique",
+  "@plant_orchidee_lunaire_name": {
+    "description": "Nom de la plante Orchidée Lunaire Mystique"
+  },
+  "plant_tournesol_solaire_name": "Tournesol du Pré Solaire",
+  "@plant_tournesol_solaire_name": {
+    "description": "Nom de la plante Tournesol du Pré Solaire"
+  },
+  "plant_cristal_vegetal_name": "Cristal Végétal des Cavernes",
+  "@plant_cristal_vegetal_name": {
+    "description": "Nom de la plante Cristal Végétal des Cavernes"
+  },
+  "plant_nymphaea_mystique_name": "Nymphaea des Marais Mystiques",
+  "@plant_nymphaea_mystique_name": {
+    "description": "Nom de la plante Nymphaea des Marais Mystiques"
+  },
+  "plant_flamme_vegetale_name": "Flamme Végétale des Terres Ardentes",
+  "@plant_flamme_vegetale_name": {
+    "description": "Nom de la plante Flamme Végétale des Terres Ardentes"
+  },
+  "plant_glace_eternelle_name": "Glace Éternelle du Glacier",
+  "@plant_glace_eternelle_name": {
+    "description": "Nom de la plante Glace Éternelle du Glacier"
+  },
+  "plant_arc_en_ciel_perdu_name": "Arc-en-ciel Perdu",
+  "@plant_arc_en_ciel_perdu_name": {
+    "description": "Nom de la plante Arc-en-ciel Perdu"
+  },
+  "plant_jardin_celeste_name": "Jardin Céleste Ultime",
+  "@plant_jardin_celeste_name": {
+    "description": "Nom de la plante Jardin Céleste Ultime"
+  },
+  "plant_tournesol_or_description": "Un tournesol qui suit le soleil",
+  "@plant_tournesol_or_description": {
+    "description": "Description de la plante Tournesol Doré"
+  },
+
+  "plant_marguerite_etoile_description": "Une marguerite qui brille comme une étoile et guide les débutants",
+  "@plant_marguerite_etoile_description": {
+    "description": "Description de la plante Marguerite Étoilée"
+  },
+
+  "plant_violette_mystique_description": "Une violette qui révèle les secrets cachés du jardin",
+  "@plant_violette_mystique_description": {
+    "description": "Description de la plante Violette Mystique"
+  },
+
+  "plant_jasmin_eternel_description": "Un jasmin dont le parfum transcende les dimensions temporelles",
+  "@plant_jasmin_eternel_description": {
+    "description": "Description de la plante Jasmin Éternel"
+  },
+
+  "plant_petunia_cosmique_description": "Un pétunia qui puise son énergie dans les étoiles",
+  "@plant_petunia_cosmique_description": {
+    "description": "Description de la plante Pétunia Cosmique"
+  },
+
+  "plant_orchidee_lune_description": "Une orchidée qui fleurit la nuit",
+  "@plant_orchidee_lune_description": {
+    "description": "Description de la plante Orchidée de Lune"
+  },
+
+  "plant_tulipe_arc_description": "Une tulipe aux couleurs changeantes",
+  "@plant_tulipe_arc_description": {
+    "description": "Description de la plante Tulipe Arc-en-ciel"
+  },
+
+  "plant_rose_magique_description": "Une rose magique qui pousse dans les jardins enchantés",
+  "@plant_rose_magique_description": {
+    "description": "Description de la plante Rose Magique"
+  },
+
+  "plant_tournesol_solaire_description": "Un tournesol qui absorbe l'énergie solaire",
+  "@plant_tournesol_solaire_description": {
+    "description": "Description de la plante Tournesol Solaire"
+  },
+
+  "plant_cristal_vegetal_description": "Un cristal végétal qui brille de mille feux",
+  "@plant_cristal_vegetal_description": {
+    "description": "Description de la plante Cristal Végétal"
+  },
+
+  "plant_nymphaea_mystique_description": "Un nénuphar mystique des eaux profondes",
+  "@plant_nymphaea_mystique_description": {
+    "description": "Description de la plante Nymphéa Mystique"
+  },
+
+  "plant_flamme_vegetale_description": "Une plante de feu qui résiste aux flammes",
+  "@plant_flamme_vegetale_description": {
+    "description": "Description de la plante Flamme Végétale"
+  },
+
+  "plant_glace_eternelle_description": "Une plante de glace éternelle",
+  "@plant_glace_eternelle_description": {
+    "description": "Description de la plante Glace Éternelle"
+  },
+
+  "plant_arc_en_ciel_perdu_description": "Un arc-en-ciel perdu dans le jardin",
+  "@plant_arc_en_ciel_perdu_description": {
+    "description": "Description de la plante Arc-en-ciel Perdu"
+  },
+
+  "plant_jardin_celeste_description": "Un jardin céleste dans une plante",
+  "@plant_jardin_celeste_description": {
+    "description": "Description de la plante Jardin Céleste"
+  },
+
+  "plant_lys_phoenix_description": "Un lys qui renaît de ses cendres",
+  "@plant_lys_phoenix_description": {
+    "description": "Description de la plante Lys Phénix"
+  },
+
+  "plant_cactus_temporel_description": "Un cactus qui voyage dans le temps",
+  "@plant_cactus_temporel_description": {
+    "description": "Description de la plante Cactus Temporel"
+  },
+
+  "plant_rose_eternelle_description": "Une rose éternelle qui ne se fane jamais",
+  "@plant_rose_eternelle_description": {
+    "description": "Description de la plante Rose Éternelle"
+  },
+
+  "plant_lotus_paradis_description": "Un lotus du paradis céleste",
+  "@plant_lotus_paradis_description": {
+    "description": "Description de la plante Lotus du Paradis"
+  },
+
+  "plant_orchidee_lunaire_description": "Une orchidée qui fleurit sous la lune",
+  "@plant_orchidee_lunaire_description": {
+    "description": "Description de la plante Orchidée Lunaire"
   }
 }
